@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--
+        Analytic plan used by the analytic accounts created automatically
+        for the branches. In Odoo 20 an analytic account requires a plan
+        (plan_id is required), and an analytic plan has no company field.
+    -->
+    <record id="analytic_plan_branches" model="account.analytic.plan">
+        <field name="name">Branches</field>
+        <field name="sequence">20</field>
+    </record>
+
+</odoo>

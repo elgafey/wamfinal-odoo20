@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ===================== SALES ANALYSIS (sale.report) ===================== -->
+    <!-- sale.report has no database view in Odoo 20: the branch column comes -->
+    <!-- from models/sale_report.py (``_select_dict``) and the views below only -->
+    <!-- expose it. -->
+
+    <record id="sale_report_view_tree_branch" model="ir.ui.view">
+        <field name="name">sale.report.list.branch</field>
+        <field name="model">sale.report</field>
+        <field name="inherit_id" ref="sale.sale_report_view_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//list/field[@name='user_id']" position="after">
+                <field name="branch_id" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_order_product_search_branch" model="ir.ui.view">
+        <field name="name">sale.report.search.branch</field>
+        <field name="model">sale.report</field>
+        <field name="inherit_id" ref="sale.view_order_product_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//search/field[@name='user_id']" position="after">
+                <field name="branch_id"/>
+            </xpath>
+            <xpath expr="//search/group/filter[@name='User']" position="after">
+                <filter string="Branch" name="branch"
+                        context="{'group_by': 'branch_id'}"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

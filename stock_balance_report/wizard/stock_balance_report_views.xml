@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Wizard: choose the period and display the balances -->
+    <record id="view_stock_balance_report_form" model="ir.ui.view">
+        <field name="name">stock.balance.report.form</field>
+        <field name="model">stock.balance.report</field>
+        <field name="arch" type="xml">
+            <form string="Stock Balance Report" create="false">
+                <header>
+                    <button name="action_show" type="object" string="Show Report"
+                            class="btn-primary" icon="fa-calculator"/>
+                    <button name="action_print_pdf" type="object" string="Print PDF"
+                            icon="fa-file-pdf-o" invisible="not line_ids"/>
+                    <button name="action_open_list" type="object"
+                            string="Open as List (Excel Export)" icon="fa-list"
+                            invisible="not line_ids"/>
+                </header>
+                <sheet>
+                    <div class="alert alert-info" role="alert" invisible="line_ids">
+                        Choose the period then click on "Show Report".
+                    </div>
+                    <group>
+                        <group string="Period">
+                            <field name="date_from"/>
+                            <field name="date_to"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                        <group string="Totals">
+                            <field name="product_count"/>
+                            <field name="total_opening"/>
+                            <field name="total_opening_value"/>
+                            <field name="total_in"/>
+                            <field name="total_in_value"/>
+                            <field name="total_out"/>
+                            <field name="total_out_value"/>
+                            <field name="total_closing"/>
+                            <field name="total_closing_value"/>
+                        </group>
+                    </group>
+                    <field name="line_ids">
+                        <list string="Lines" create="false" delete="false" edit="false">
+                            <field name="product_id"/>
+                            <field name="default_code"/>
+                            <field name="uom_id"/>
+                            <field name="opening_qty" sum="Total"/>
+                            <field name="opening_value" sum="Total"/>
+                            <field name="in_qty" sum="Total"/>
+                            <field name="in_value" sum="Total"/>
+                            <field name="out_qty" sum="Total"/>
+                            <field name="out_value" sum="Total"/>
+                            <field name="closing_qty" sum="Total"/>
+                            <field name="closing_value" sum="Total"/>
+                        </list>
+                    </field>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Standalone list (opened by "Open as List"), with Odoo's Export button -->
+    <record id="view_stock_balance_report_line_list" model="ir.ui.view">
+        <field name="name">stock.balance.report.line.list</field>
+        <field name="model">stock.balance.report.line</field>
+        <field name="arch" type="xml">
+            <list string="Stock Balance" create="false" delete="false" edit="false">
+                <field name="product_id"/>
+                <field name="default_code"/>
+                <field name="uom_id"/>
+                <field name="opening_qty" sum="Total"/>
+                <field name="opening_value" sum="Total"/>
+                <field name="in_qty" sum="Total"/>
+                <field name="in_value" sum="Total"/>
+                <field name="out_qty" sum="Total"/>
+                <field name="out_value" sum="Total"/>
+                <field name="closing_qty" sum="Total"/>
+                <field name="closing_value" sum="Total"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_stock_balance_report_line_form" model="ir.ui.view">
+        <field name="name">stock.balance.report.line.form</field>
+        <field name="model">stock.balance.report.line</field>
+        <field name="arch" type="xml">
+            <form string="Stock Balance" create="false" edit="false">
+                <sheet>
+                    <group>
+                        <field name="product_id"/>
+                        <field name="default_code"/>
+                        <field name="uom_id"/>
+                    </group>
+                    <group>
+                        <field name="opening_qty"/>
+                        <field name="opening_value"/>
+                        <field name="in_qty"/>
+                        <field name="in_value"/>
+                        <field name="out_qty"/>
+                        <field name="out_value"/>
+                        <field name="closing_qty"/>
+                        <field name="closing_value"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- ============================================================ -->
+        <!-- Contact form: the branches of the contact                     -->
+        <!-- ============================================================ -->
+        <record id="res_partner_form_branch" model="ir.ui.view">
+            <field name="name">res.partner.form.branch</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='category_id']" position="after">
+                    <field name="branch_ids" widget="many2many_tags"
+                           placeholder='e.g. "Riyadh", "Jeddah", ...'/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- ============================================================ -->
+        <!-- Contacts list: optional "Branches" column                     -->
+        <!-- ============================================================ -->
+        <record id="res_partner_tree_branch" model="ir.ui.view">
+            <field name="name">res.partner.list.branch</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//list/field[@name='category_id']" position="after">
+                    <field name="branch_ids" widget="many2many_tags"
+                           optional="hide"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- ============================================================ -->
+        <!-- Contacts search: look for a contact of a branch, group by it  -->
+        <!-- ============================================================ -->
+        <record id="res_partner_search_branch" model="ir.ui.view">
+            <field name="name">res.partner.search.branch</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_res_partner_filter"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='category_id']" position="after">
+                    <field name="branch_ids"/>
+                </xpath>
+                <xpath expr="//filter[@name='group_country']" position="after">
+                    <filter string="Branches" name="groupby_branches"
+                            domain="[]" context="{'group_by': 'branch_ids'}"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

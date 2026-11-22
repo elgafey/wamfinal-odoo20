@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- ============================================================ -->
+        <!-- Sales Order form: the branch (required while the order is     -->
+        <!-- still a quotation, read-only once it is confirmed).           -->
+        <!-- ============================================================ -->
+        <record id="view_order_form_branch" model="ir.ui.view">
+            <field name="name">sale.order.form.branch</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <group name="order_details" position="inside">
+                    <field name="branch_id"
+                           required="state in ['draft', 'sent']"
+                           readonly="state not in ['draft', 'sent']"/>
+                </group>
+            </field>
+        </record>
+
+        <!-- ============================================================ -->
+        <!-- Sales Order form: the price list of the branch cannot be     -->
+        <!-- changed by hand. As soon as the branch of the order carries  -->
+        <!-- a price list of its own, that price list is the one the      -->
+        <!-- order sells with and the field becomes read-only: the value   -->
+        <!-- keeps following the branch, exactly like the compute of      -->
+        <!-- Odoo puts the price list of the customer on a quotation.     -->
+        <!-- Both copies of the field are locked: the one Odoo shows when  -->
+        <!-- the "Pricelists" feature is on, and the one it keeps hidden   -->
+        <!-- behind that feature.                                          -->
+        <!-- ============================================================ -->
+        <record id="view_order_form_pricelist_branch" model="ir.ui.view">
+            <field name="name">sale.order.form.pricelist.branch</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='pricelist_id' and not(@invisible)]"
+                       position="attributes">
+                    <attribute name="readonly">state in ['cancel', 'sale'] or has_branch_pricelist</attribute>
+                </xpath>
+                <xpath expr="//field[@name='pricelist_id' and @invisible]"
+                       position="attributes">
+                    <attribute name="readonly">state in ['cancel', 'sale'] or has_branch_pricelist</attribute>
+                </xpath>
+                <group name="order_details" position="inside">
+                    <field name="has_branch_pricelist" invisible="1" readonly="1"/>
+                </group>
+            </field>
+        </record>
+
+        <!-- ============================================================ -->
+        <!-- Sales Order form: the journal of the branch, next to the      -->
+        <!-- fiscal position. Odoo puts it in the same "Invoicing" group   -->
+        <!-- but hides it behind the developer mode (groups=group_no_one):  -->
+        <!-- it is now chosen by the branch, so it has to be seen.         -->
+        <!-- ============================================================ -->
+        <record id="view_order_form_sale_journal" model="ir.ui.view">
+            <field name="name">sale.order.form.journal.branch</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <field name="journal_id" position="attributes">
+                    <attribute name="groups">base.group_user</attribute>
+                </field>
+            </field>
+        </record>
+
+        <!-- ============================================================ -->
+        <!-- Sales Order list: optional "Branch" column                    -->
+        <!-- ============================================================ -->
+        <record id="sale_order_tree_branch" model="ir.ui.view">
+            <field name="name">sale.order.list.branch</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.sale_order_tree"/>
+            <field name="arch" type="xml">
+                <field name="warehouse_id" position="after">
+                    <field name="branch_id" optional="show"/>
+                </field>
+            </field>
+        </record>
+
+        <!-- ============================================================ -->
+        <!-- Sales Order search: search on the branch + group by branch    -->
+        <!-- ============================================================ -->
+        <record id="view_sales_order_filter_branch" model="ir.ui.view">
+            <field name="name">sale.order.search.branch</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_sales_order_filter"/>
+            <field name="arch" type="xml">
+                <field name="user_id" position="after">
+                    <field name="branch_id"/>
+                </field>
+                <filter name="salesperson" position="after">
+                    <filter name="group_by_branch" string="Branch"
+                            context="{'group_by': 'branch_id'}"/>
+                </filter>
+            </field>
+        </record>
+
+    </data>
+</odoo>

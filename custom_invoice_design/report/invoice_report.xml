@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Paper format: A4 Portrait with small margins -->
+        <record id="paperformat_custom_invoice" model="report.paperformat">
+            <field name="name">Custom Invoice A4</field>
+            <field name="default" eval="False"/>
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">6</field>
+            <field name="margin_bottom">6</field>
+            <field name="margin_left">6</field>
+            <field name="margin_right">6</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">0</field>
+            <field name="dpi">96</field>
+        </record>
+
+        <!-- Custom Invoice Report Action bound to account.move -->
+        <record id="action_report_custom_invoice" model="ir.actions.report">
+            <field name="name">Custom Tax Invoice / فاتورة ضريبية</field>
+            <field name="model">account.move</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">custom_invoice_design.invoice_report_template</field>
+            <!-- Odoo 20: the `report_file` field was removed from ir.actions.report.
+                 The generated file name is now driven by `report_name` / `print_report_name`. -->
+            <field name="binding_model_id" ref="account.model_account_move"/>
+            <field name="binding_type">report</field>
+            <field name="paperformat_id" ref="paperformat_custom_invoice"/>
+            <field name="print_report_name">('Tax Invoice - %s' % (object.name or 'Draft'))</field>
+        </record>
+    </data>
+</odoo>

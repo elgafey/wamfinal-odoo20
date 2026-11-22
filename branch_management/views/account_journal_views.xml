@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- ============================================================ -->
+        <!-- Journal form: the branch of the journal                       -->
+        <!-- ============================================================ -->
+        <record id="account_journal_form_branch" model="ir.ui.view">
+            <field name="name">account.journal.form.branch</field>
+            <field name="model">account.journal</field>
+            <field name="inherit_id" ref="account.view_account_journal_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='country_code']" position="after">
+                    <field name="branch_id"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- ============================================================ -->
+        <!-- Journals list: optional "Branch" column                       -->
+        <!-- ============================================================ -->
+        <record id="account_journal_tree_branch" model="ir.ui.view">
+            <field name="name">account.journal.list.branch</field>
+            <field name="model">account.journal</field>
+            <field name="inherit_id" ref="account.view_account_journal_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//list/field[@name='type']" position="after">
+                    <field name="branch_id" optional="show"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- ============================================================ -->
+        <!-- Journals search: look for a journal of a branch, group by it -->
+        <!-- ============================================================ -->
+        <record id="account_journal_search_branch" model="ir.ui.view">
+            <field name="name">account.journal.search.branch</field>
+            <field name="model">account.journal</field>
+            <field name="inherit_id" ref="account.view_account_journal_search"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='activity_type_id']" position="after">
+                    <field name="branch_id"/>
+                </xpath>
+                <xpath expr="//filter[@name='inactive']" position="before">
+                    <separator/>
+                    <filter string="Branch" name="groupby_branch"
+                            context="{'group_by': 'branch_id'}"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

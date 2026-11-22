@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- ============================================================ -->
+        <!-- Settings &gt; Users: the branches allowed for the user       -->
+        <!-- and the branch proposed by default.                          -->
+        <!-- ============================================================ -->
+        <record id="view_users_form_branches" model="ir.ui.view">
+            <field name="name">res.users.form.branches</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="base.view_users_form"/>
+            <field name="arch" type="xml">
+                <notebook position="inside">
+                    <page name="user_branches" string="Branches">
+                        <group>
+                            <field name="branch_ids"
+                                   widget="many2many_tags"
+                                   options="{'no_create': True}"/>
+                        </group>
+                        <group>
+                            <field name="branch_visible_ids" invisible="1"/>
+                            <field name="default_branch_id"
+                                   domain="[('id', 'in', branch_visible_ids)]"
+                                   options="{'no_create': True}"/>
+                        </group>
+                    </page>
+                </notebook>
+            </field>
+        </record>
+
+    </data>
+</odoo>

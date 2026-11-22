@@ -1,0 +1,397 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_balance_report
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: stock_balance_report 20.0.2.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-26 13:52+0000\n"
+"PO-Revision-Date: 2026-09-26 13:52+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_balance_report
+#: model:ir.module.module,description:base.module_stock_balance_report
+msgid ""
+"\n"
+"Stock Balance Report\n"
+"====================\n"
+"\n"
+"Choose a period (From / To) and get, for every product that has a stock trace:\n"
+"\n"
+"* Opening Balance: quantity on hand before the From date\n"
+"* IN: incoming quantities inside the period\n"
+"* OUT: outgoing quantities inside the period\n"
+"* Closing Balance: Opening + IN - OUT\n"
+"\n"
+"Each of the four figures is displayed as two columns side by side: the\n"
+"quantity and its value.\n"
+"\n"
+"Notes:\n"
+"\n"
+"* Internal transfers between the locations of the same company are ignored,\n"
+"  because the report is computed on the whole company.\n"
+"* The data is read with a SQL query directly on ``stock.move``, the table\n"
+"  behind Inventory > Reporting > Moves Analysis.\n"
+"* Only done moves are taken into account and quantities are converted to\n"
+"  the unit of measure of the product.\n"
+"* The value columns come from the ``value`` field of ``stock.move``\n"
+"  (WMS Accounting) and follow exactly the same rules as the quantities:\n"
+"  same moves, same period, same in / out split. A product with no valued\n"
+"  move shows a value of 0.\n"
+"\n"
+"Outputs:\n"
+"\n"
+"* The screen view, with the totals of the period.\n"
+"* An Excel / CSV export through Odoo's standard \"Export\" (Open as List).\n"
+"* A PDF print (A4 landscape) with the key figures, the table and the\n"
+"  totals, available from the \"Print PDF\" button and from the Print menu.\n"
+msgstr ""
+"\n"
+"Stock Balance Report\n"
+"====================\n"
+"\n"
+"اختر فترة (من / إلى) واحصل، لكل منتج له تتبع مخزوني:\n"
+"\n"
+"* الرصيد الافتتاحي: الكمية الموجودة قبل تاريخ البداية\n"
+"* الدخول: الكميات الواردة داخل الفترة\n"
+"* الخروج: الكميات الخارجة داخل الفترة\n"
+"* الرصيد النهائي: الرصيد الافتتاحي + الدخول - الخروج\n"
+"\n"
+"يتم عرض كل رقم من الأرقام الأربعة كعمودين جنباً إلى جنب: الكمية وقيمتها.\n"
+"\n"
+"ملاحظات:\n"
+"\n"
+"* يتم تجاهل النقل الداخلي بين مواقع الشركة نفسها، لأن التقرير يُحسب على\n"
+"  مستوى الشركة كاملة.\n"
+"* تُقرأ البيانات عبر استعلام SQL مباشرة على ``stock.move``، وهو الجدول\n"
+"  خلف Inventory > Reporting > Moves Analysis.\n"
+"* تُحتسب فقط الحركات المؤكدة (Done) وتُحوَّل الكميات إلى وحدة قياس المنتج.\n"
+"* أعمدة القيمة تأتي من حقل ``value`` في ``stock.move`` (وحدة WMS\n"
+"  Accounting) وتتبع تماماً نفس قواعد الكميات: نفس الحركات ونفس الفترة\n"
+"  ونفس تقسيم الدخول والخروج. المنتج الذي لا توجد له حركة مقيَّمة تُعرض\n"
+"  قيمته 0.\n"
+"\n"
+"المخرجات:\n"
+"\n"
+"* شاشة العرض مع إجماليات الفترة.\n"
+"* تصدير Excel / CSV عبر أداة التصدير القياسية (فتح كقائمة).\n"
+"* طباعة PDF (أفقي A4) تتضمن المؤشرات الرئيسية والجدول والإجماليات، متاحة\n"
+"  من زر \"طباعة PDF\" ومن قائمة الطباعة.\n"
+
+#. module: stock_balance_report
+#: model:ir.actions.report,print_report_name:stock_balance_report.action_report_stock_balance
+msgid "'Stock Balance %s - %s' % (object.date_from, object.date_to)"
+msgstr ""
+
+#. module: stock_balance_report
+#: model_terms:ir.ui.view,arch_db:stock_balance_report.view_stock_balance_report_form
+msgid "Choose the period then click on \"Show Report\"."
+msgstr "اختر الفترة ثم اضغط على \"عرض التقرير\"."
+
+#. module: stock_balance_report
+#: model:ir.model.fields,field_description:stock_balance_report.field_stock_balance_report_line__closing_qty
+#: model_terms:ir.ui.view,arch_db:stock_balance_report.stock_balance_report_document
+msgid "Closing Balance"
+msgstr "الرصيد النهائي"
+
+#. module: stock_balance_report
+#: model:ir.model.fields,field_description:stock_balance_report.field_stock_balance_report_line__closing_value
+msgid "Closing Value"
+msgstr "قيمة الرصيد النهائي"
+
+#. module: stock_balance_report
+#: model:ir.model.fields,field_description:stock_balance_report.field_stock_balance_report__company_id
+msgid "Company"
+msgstr "الشركة"
+
+#. module: stock_balance_report
+#: model:ir.model.fields,field_description:stock_balance_report.field_stock_balance_report__create_uid
+#: model:ir.model.fields,field_description:stock_balance_report.field_stock_balance_report_line__create_uid
+msgid "Created by"
+msgstr "أنشأه"
+
+#. module: stock_balance_report
+#: model:ir.model.fields,field_description:stock_balance_report.field_stock_balance_report__create_date
+#: model:ir.model.fields,field_description:stock_balance_report.field_stock_balance_report_line__create_date
+msgid "Created on"
+msgstr "أنشأ في"
+
+#. module: stock_balance_report
+#: model:ir.model.fields,help:stock_balance_report.field_stock_balance_report_line__uom_id
+msgid "Default unit of measure used for all stock operations."
+msgstr "وحدة القياس الافتراضية المستخدمة لجميع عمليات المخزون."
+
+#. module: stock_balance_report
+#: model:ir.model.fields,field_description:stock_balance_report.field_report_stock_balance_report_stock_balance_report_document__display_name
+#: model:ir.model.fields,field_description:stock_balance_report.field_stock_balance_report__display_name
+#: model:ir.model.fields,field_description:stock_balance_report.field_stock_balance_report_line__display_name
+msgid "Display Name"
+msgstr "الاسم المعروض"
+
+#. module: stock_balance_report
+#: model:ir.model.fields,field_description:stock_balance_report.field_stock_balance_report__date_from
+msgid "From Date"
+msgstr "من تاريخ"
+
+#. module: stock_balance_report
+#: model_terms:ir.ui.view,arch_db:stock_balance_report.stock_balance_report_document
+msgid "Generated on"
+msgstr "تاريخ الإنشاء"
+
+#. module: stock_balance_report
+#: model:ir.model.fields,field_description:stock_balance_report.field_report_stock_balance_report_stock_balance_report_document__id
+#: model:ir.model.fields,field_description:stock_balance_report.field_stock_balance_report__id
+#: model:ir.model.fields,field_description:stock_balance_report.field_stock_balance_report_line__id
+msgid "ID"
+msgstr "المعرّف"
+
+#. module: stock_balance_report
+#: model:ir.model.fields,field_description:stock_balance_report.field_stock_balance_report_line__in_qty
+#: model_terms:ir.ui.view,arch_db:stock_balance_report.stock_balance_report_document
+msgid "IN"
+msgstr "الدخول"
+
+#. module: stock_balance_report
+#: model:ir.model.fields,field_description:stock_balance_report.field_stock_balance_report_line__in_value
+msgid "IN Value"
+msgstr "قيمة الدخول"
+
+#. module: stock_balance_report
+#: model:ir.model.fields,field_description:stock_balance_report.field_stock_balance_report_line__default_code
+#: model_terms:ir.ui.view,arch_db:stock_balance_report.stock_balance_report_document
+msgid "Internal Reference"
+msgstr "الكود الداخلي"
+
+#. module: stock_balance_report
+#: model:ir.model.fields,field_description:stock_balance_report.field_stock_balance_report__write_uid
+#: model:ir.model.fields,field_description:stock_balance_report.field_stock_balance_report_line__write_uid
+msgid "Last Updated by"
+msgstr "آخر تحديث بواسطة"
+
+#. module: stock_balance_report
+#: model:ir.model.fields,field_description:stock_balance_report.field_stock_balance_report__write_date
+#: model:ir.model.fields,field_description:stock_balance_report.field_stock_balance_report_line__write_date
+msgid "Last Updated on"
+msgstr "آخر تحديث في"
+
+#. module: stock_balance_report
+#: model:ir.model.fields,field_description:stock_balance_report.field_stock_balance_report__line_ids
+#: model_terms:ir.ui.view,arch_db:stock_balance_report.view_stock_balance_report_form
+msgid "Lines"
+msgstr "البنود"
+
+#. module: stock_balance_report
+#: model_terms:ir.ui.view,arch_db:stock_balance_report.stock_balance_report_document
+msgid "No stock movement was found for the selected period."
+msgstr "لم يتم العثور على أي حركة مخزون في الفترة المحددة۔"
+
+#. module: stock_balance_report
+#: model_terms:ir.ui.view,arch_db:stock_balance_report.stock_balance_report_document
+msgid "Note:"
+msgstr "ملاحظة؛"
+
+#. module: stock_balance_report
+#: model:ir.model.fields,field_description:stock_balance_report.field_stock_balance_report_line__out_qty
+#: model_terms:ir.ui.view,arch_db:stock_balance_report.stock_balance_report_document
+msgid "OUT"
+msgstr "الخروج"
+
+#. module: stock_balance_report
+#: model:ir.model.fields,field_description:stock_balance_report.field_stock_balance_report_line__out_value
+msgid "OUT Value"
+msgstr "قيمة الخروج"
+
+#. module: stock_balance_report
+#: model_terms:ir.ui.view,arch_db:stock_balance_report.view_stock_balance_report_form
+msgid "Open as List (Excel Export)"
+msgstr "فتح كقائمة (تصدير Excel)"
+
+#. module: stock_balance_report
+#: model:ir.model.fields,field_description:stock_balance_report.field_stock_balance_report_line__opening_qty
+#: model_terms:ir.ui.view,arch_db:stock_balance_report.stock_balance_report_document
+msgid "Opening Balance"
+msgstr "الرصيد الافتتاحي"
+
+#. module: stock_balance_report
+#: model:ir.model.fields,field_description:stock_balance_report.field_stock_balance_report_line__opening_value
+msgid "Opening Value"
+msgstr "قيمة الرصيد الافتتاحي"
+
+#. module: stock_balance_report
+#: model:ir.module.module,summary:base.module_stock_balance_report
+msgid "Opening balance, IN, OUT and closing balance for a chosen period"
+msgstr "الرصيد الافتتاحي، الدخول، الخروج والرصيد النهائي لفترة زمنية محددة"
+
+#. module: stock_balance_report
+#: model_terms:ir.ui.view,arch_db:stock_balance_report.view_stock_balance_report_form
+msgid "Period"
+msgstr "الفترة"
+
+#. module: stock_balance_report
+#. odoo-python
+#: code:addons/stock_balance_report/wizard/stock_balance_report.py:0
+msgid "Please display the report before opening it as a list."
+msgstr "يرجى عرض التقرير أولاً قبل فتحه كقائمة."
+
+#. module: stock_balance_report
+#: model_terms:ir.ui.view,arch_db:stock_balance_report.view_stock_balance_report_form
+msgid "Print PDF"
+msgstr "طباعة PDF"
+
+#. module: stock_balance_report
+#: model:ir.model.fields,field_description:stock_balance_report.field_stock_balance_report_line__product_id
+#: model_terms:ir.ui.view,arch_db:stock_balance_report.stock_balance_report_document
+msgid "Product"
+msgstr "المنتج"
+
+#. module: stock_balance_report
+#: model:ir.model.fields,field_description:stock_balance_report.field_stock_balance_report__product_count
+#: model_terms:ir.ui.view,arch_db:stock_balance_report.stock_balance_report_document
+msgid "Products"
+msgstr "عدد المنتجات"
+
+#. module: stock_balance_report
+#: model_terms:ir.ui.view,arch_db:stock_balance_report.stock_balance_report_document
+msgid ""
+"Quantities are expressed in the unit of measure of the product. Internal "
+"transfers between the locations of the company are not included: only stock "
+"entering or leaving the company is shown."
+msgstr ""
+"الكميات معروضة بوحدة قياس المنتج۔ لا يتم احتساب النقل الداخلي بين مواقع "
+"الشركة نفسها؛ يظهر فقط المخزون الداخل إلى الشركة أو الخارج منها۔"
+
+#. module: stock_balance_report
+#: model_terms:ir.ui.view,arch_db:stock_balance_report.stock_balance_report_document
+msgid "Quantity"
+msgstr "العدد"
+
+#. module: stock_balance_report
+#: model:ir.model.fields,field_description:stock_balance_report.field_stock_balance_report_line__report_id
+msgid "Report"
+msgstr "التقرير"
+
+#. module: stock_balance_report
+#: model_terms:ir.ui.view,arch_db:stock_balance_report.view_stock_balance_report_form
+msgid "Show Report"
+msgstr "عرض التقرير"
+
+#. module: stock_balance_report
+#. odoo-python
+#: code:addons/stock_balance_report/wizard/stock_balance_report.py:0
+#: model:ir.actions.act_window,name:stock_balance_report.action_stock_balance_report
+#: model:ir.actions.report,name:stock_balance_report.action_report_stock_balance
+#: model:ir.ui.menu,name:stock_balance_report.menu_stock_balance_report
+#: model_terms:ir.ui.view,arch_db:stock_balance_report.view_stock_balance_report_line_form
+#: model_terms:ir.ui.view,arch_db:stock_balance_report.view_stock_balance_report_line_list
+msgid "Stock Balance"
+msgstr "رصيد المخزون"
+
+#. module: stock_balance_report
+#: model:ir.model,name:stock_balance_report.model_stock_balance_report
+#: model:ir.module.module,shortdesc:base.module_stock_balance_report
+#: model_terms:ir.ui.view,arch_db:stock_balance_report.stock_balance_report_document
+#: model_terms:ir.ui.view,arch_db:stock_balance_report.view_stock_balance_report_form
+msgid "Stock Balance Report"
+msgstr "تقرير رصيد المخزون"
+
+#. module: stock_balance_report
+#: model:ir.model,name:stock_balance_report.model_stock_balance_report_line
+msgid "Stock Balance Report Line"
+msgstr "سطر تقرير رصيد المخزون"
+
+#. module: stock_balance_report
+#: model:ir.model,name:stock_balance_report.model_report_stock_balance_report_stock_balance_report_document
+msgid "Stock Balance Report PDF"
+msgstr "تقرير رصيد المخزون (PDF)"
+
+#. module: stock_balance_report
+#. odoo-python
+#: code:addons/stock_balance_report/wizard/stock_balance_report.py:0
+msgid "The \"To\" date must be greater than or equal to the \"From\" date."
+msgstr "يجب أن يكون تاريخ \"إلى\" أكبر من أو يساوي تاريخ \"من\"."
+
+#. module: stock_balance_report
+#. odoo-python
+#: code:addons/stock_balance_report/wizard/stock_balance_report.py:0
+msgid "There is no data to print. Please display the report first."
+msgstr "لا توجد بيانات للطباعة. يرجى عرض التقرير أولاً."
+
+#. module: stock_balance_report
+#: model:ir.model.fields,field_description:stock_balance_report.field_stock_balance_report__date_to
+msgid "To Date"
+msgstr "إلى تاريخ"
+
+#. module: stock_balance_report
+#: model_terms:ir.ui.view,arch_db:stock_balance_report.stock_balance_report_document
+#: model_terms:ir.ui.view,arch_db:stock_balance_report.view_stock_balance_report_form
+#: model_terms:ir.ui.view,arch_db:stock_balance_report.view_stock_balance_report_line_list
+msgid "Total"
+msgstr "الإجمالي"
+
+#. module: stock_balance_report
+#: model:ir.model.fields,field_description:stock_balance_report.field_stock_balance_report__total_closing
+msgid "Total Closing Balance"
+msgstr "إجمالي الرصيد النهائي"
+
+#. module: stock_balance_report
+#: model:ir.model.fields,field_description:stock_balance_report.field_stock_balance_report__total_closing_value
+msgid "Total Closing Value"
+msgstr "إجمالي قيمة الرصيد النهائي"
+
+#. module: stock_balance_report
+#: model:ir.model.fields,field_description:stock_balance_report.field_stock_balance_report__total_in
+msgid "Total IN"
+msgstr "إجمالي الدخول"
+
+#. module: stock_balance_report
+#: model:ir.model.fields,field_description:stock_balance_report.field_stock_balance_report__total_in_value
+msgid "Total IN Value"
+msgstr "إجمالي قيمة الدخول"
+
+#. module: stock_balance_report
+#: model:ir.model.fields,field_description:stock_balance_report.field_stock_balance_report__total_out
+msgid "Total OUT"
+msgstr "إجمالي الخروج"
+
+#. module: stock_balance_report
+#: model:ir.model.fields,field_description:stock_balance_report.field_stock_balance_report__total_out_value
+msgid "Total OUT Value"
+msgstr "إجمالي قيمة الخروج"
+
+#. module: stock_balance_report
+#: model:ir.model.fields,field_description:stock_balance_report.field_stock_balance_report__total_opening
+msgid "Total Opening Balance"
+msgstr "إجمالي الرصيد الافتتاحي"
+
+#. module: stock_balance_report
+#: model:ir.model.fields,field_description:stock_balance_report.field_stock_balance_report__total_opening_value
+msgid "Total Opening Value"
+msgstr "إجمالي قيمة الرصيد الافتتاحي"
+
+#. module: stock_balance_report
+#: model_terms:ir.ui.view,arch_db:stock_balance_report.view_stock_balance_report_form
+msgid "Totals"
+msgstr "الإجماليات"
+
+#. module: stock_balance_report
+#: model:ir.model.fields,field_description:stock_balance_report.field_stock_balance_report_line__uom_id
+#: model_terms:ir.ui.view,arch_db:stock_balance_report.stock_balance_report_document
+msgid "Unit"
+msgstr "الوحدة"
+
+#. module: stock_balance_report
+#: model_terms:ir.ui.view,arch_db:stock_balance_report.stock_balance_report_document
+msgid "Value"
+msgstr "القيمة"
+
+#. module: stock_balance_report
+#. odoo-python
+#: code:addons/stock_balance_report/wizard/stock_balance_report.py:0
+msgid "report_id"
+msgstr ""

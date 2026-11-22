@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- ============================================================ -->
+        <!-- Invoice / journal entry form: the branch of the document      -->
+        <!-- ============================================================ -->
+        <record id="account_move_form_branch" model="ir.ui.view">
+            <field name="name">account.move.form.branch</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@id='header_left_group']" position="inside">
+                    <field name="branch_id"
+                           readonly="state not in ('draft', 'cancel')"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- ============================================================ -->
+        <!-- Journal entries list: optional "Branch" column                 -->
+        <!-- ============================================================ -->
+        <record id="account_move_tree_branch" model="ir.ui.view">
+            <field name="name">account.move.list.branch</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//list/field[@name='ref']" position="after">
+                    <field name="branch_id" optional="show"
+                           readonly="state not in ('draft', 'cancel')"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

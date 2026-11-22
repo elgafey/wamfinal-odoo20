@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- ============================================================ -->
+        <!-- Transfer form: the branch of the transfer                     -->
+        <!-- ============================================================ -->
+        <record id="view_picking_form_branch" model="ir.ui.view">
+            <field name="name">stock.picking.form.branch</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group/field[@name='picking_type_id']" position="after">
+                    <field name="branch_id"
+                           readonly="state in ['done', 'cancel']"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- ============================================================ -->
+        <!-- Transfer list: optional "Branch" column                        -->
+        <!-- ============================================================ -->
+        <record id="vpicktree_branch" model="ir.ui.view">
+            <field name="name">stock.picking.list.branch</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.vpicktree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//list/field[@name='origin']" position="after">
+                    <field name="branch_id" optional="show"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- ============================================================ -->
+        <!-- Warehouse form: the branch of the warehouse (read-only)        -->
+        <!-- ============================================================ -->
+        <record id="view_warehouse_branch" model="ir.ui.view">
+            <field name="name">stock.warehouse.form.branch</field>
+            <field name="model">stock.warehouse</field>
+            <field name="inherit_id" ref="stock.view_warehouse"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group/group/field[@name='code']" position="after">
+                    <field name="branch_id" readonly="1"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- ============================================================ -->
+        <!-- Move list: optional "Branch" column                            -->
+        <!-- ============================================================ -->
+        <record id="view_move_tree_branch" model="ir.ui.view">
+            <field name="name">stock.move.list.branch</field>
+            <field name="model">stock.move</field>
+            <field name="inherit_id" ref="stock.view_move_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//list/field[@name='reference']" position="after">
+                    <field name="branch_id" optional="show"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

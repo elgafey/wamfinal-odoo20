@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- ============================================================ -->
+        <!-- Settings > Branches: the two switches of the company          -->
+        <!-- ============================================================ -->
+        <record id="res_config_settings_view_form_branch" model="ir.ui.view">
+            <field name="name">res.config.settings.view.form.branch</field>
+            <field name="model">res.config.settings</field>
+            <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form" position="inside">
+                    <app data-string="Branches" string="Branches"
+                         name="branch_management"
+                         groups="base.group_system,base.group_erp_manager">
+                        <block title="Branches" name="branch_setting_container">
+                            <setting id="branch_analytic_auto"
+                                     string="Analytic Distribution"
+                                     company_dependent="1"
+                                     help="Apply the analytic account of the branch to the journal items of the branch. The account is added to the distribution without changing the percentages already set.">
+                                <field name="branch_analytic_auto"/>
+                            </setting>
+                            <setting id="branch_warehouse_exclusive"
+                                     string="One Warehouse = One Branch"
+                                     company_dependent="1"
+                                     help="Prevent one warehouse from being linked to more than one branch.">
+                                <field name="branch_warehouse_exclusive"/>
+                            </setting>
+                        </block>
+                    </app>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

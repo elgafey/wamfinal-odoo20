@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="action_stock_balance_report" model="ir.actions.act_window">
+        <field name="name">Stock Balance</field>
+        <field name="res_model">stock.balance.report</field>
+        <field name="view_mode">form</field>
+        <field name="target">current</field>
+    </record>
+
+    <menuitem id="menu_stock_balance_report"
+              name="Stock Balance"
+              parent="stock.menu_warehouse_report"
+              action="action_stock_balance_report"
+              sequence="235"/>
+
+</odoo>

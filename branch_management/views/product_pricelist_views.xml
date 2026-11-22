@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ============================================================ -->
+    <!-- Price list form: the branches that sell with this price list.  -->
+    <!--                                                              -->
+    <!-- The link itself lives on the branch (``branch.branch.        -->
+    <!-- pricelist_id``, a Many2one), so a branch points at one price  -->
+    <!-- list at most and can never show up under two of them. This    -->
+    <!-- table is the other side of that same column: it shows which   -->
+    <!-- branches carry this price list. Its "Add" button is the one   -->
+    <!-- of a many2many, so it opens the search dialog and an          -->
+    <!-- **existing** branch is picked out of the list, nothing is     -->
+    <!-- created here. A branch that already sells with another price  -->
+    <!-- list simply moves to this one, which is how the rule above    -->
+    <!-- keeps holding while the table is what gets edited.            -->
+    <!--                                                              -->
+    <!-- The domain keeps the choice compatible with the companies: a  -->
+    <!-- price list with a company only takes the branches of that     -->
+    <!-- company, a price list with none is free to take them all.     -->
+    <!-- It is written as a conditional on purpose, because "no        -->
+    <!-- company" has to mean *every* branch and not *no* branch.      -->
+    <!-- ============================================================ -->
+    <record id="product_pricelist_view_branch" model="ir.ui.view">
+        <field name="name">product.pricelist.form.branch</field>
+        <field name="model">product.pricelist</field>
+        <field name="inherit_id" ref="product.product_pricelist_view"/>
+        <field name="arch" type="xml">
+            <page name="pricelist_rules" position="after">
+                <page name="branches" string="Branches">
+                    <field name="branch_ids" nolabel="1"
+                           domain="company_id and [('company_id', '=', company_id)] or []">
+                        <list string="Branches">
+                            <field name="code"/>
+                            <field name="name"/>
+                            <field name="warehouse_id" optional="show"/>
+                            <field name="company_id"
+                                   groups="base.group_multi_company"
+                                   optional="hide"/>
+                        </list>
+                    </field>
+                </page>
+            </page>
+        </field>
+    </record>
+
+</odoo>

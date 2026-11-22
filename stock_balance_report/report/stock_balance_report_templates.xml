@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ===================================================================
+         Paper format: A4 landscape so the seven columns get some air.
+
+         header_line / header_spacing are deliberately off: the wkhtmltopdf
+         binary shipped here has an unpatched Qt and ignores (or breaks on)
+         header &amp; footer switches, so the report title band and the closing
+         band are rendered inside the page body instead of using the
+         external header / footer html mechanism.
+         =================================================================== -->
+    <record id="paperformat_stock_balance_report" model="report.paperformat">
+        <field name="name">Stock Balance Report (A4 Landscape)</field>
+        <field name="default" eval="False"/>
+        <field name="format">A4</field>
+        <field name="orientation">Landscape</field>
+        <field name="margin_top">14</field>
+        <field name="margin_bottom">14</field>
+        <field name="margin_left">10</field>
+        <field name="margin_right">10</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing" eval="0"/>
+        <field name="dpi">90</field>
+    </record>
+
+    <record id="action_report_stock_balance" model="ir.actions.report">
+        <field name="name">Stock Balance</field>
+        <field name="model">stock.balance.report</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">stock_balance_report.stock_balance_report_document</field>
+        <field name="print_report_name">'Stock Balance %s - %s' % (object.date_from, object.date_to)</field>
+        <field name="binding_model_id" ref="model_stock_balance_report"/>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="paperformat_stock_balance_report"/>
+    </record>
+
+    <!-- ===================================================================
+         The document. Everything (title band, key figures, table, note and
+         closing band) lives inside the single .article node, because only
+         that node is kept in the page body by ir.actions.report.
+         =================================================================== -->
+    <template id="stock_balance_report_document">
+        <t t-set="title">Stock Balance Report</t>
+        <t t-call="web.report_layout">
+            <t t-foreach="docs" t-as="doc">
+
+                <div class="article sbr-doc"
+                     t-att-data-oe-model="doc._name"
+                     t-att-data-oe-id="doc.id"
+                     t-att-data-oe-lang="doc.env.context.get('lang')">
+                    <style>
+                        .sbr-doc {
+                            font-family: Arial, "Liberation Sans", "Noto Sans Arabic",
+                                         "DejaVu Sans", sans-serif;
+                            font-size: 8.5pt; color: #2b3440;
+                        }
+
+                        /* web.report_layout forces `html, body { direction: ltr }`,
+                           so the rtl direction has to be set again on the document
+                           itself; every table below then mirrors correctly. */
+                        [dir="rtl"] .sbr-doc { direction: rtl; }
+
+                        /* ================= title band ================= */
+                        .sbr-band {
+                            width: 100%; border-collapse: collapse;
+                            table-layout: fixed; margin-bottom: 1.5mm;
+                        }
+                        .sbr-band td { vertical-align: bottom; padding: 0; }
+                        .sbr-band-logo { width: 66mm; }
+                        .sbr-band-logo img { max-height: 15mm; max-width: 62mm; }
+                        .sbr-band-title {
+                            color: #1f3a5f; font-size: 18pt; font-weight: bold;
+                            line-height: 1.05; letter-spacing: -0.3pt;
+                        }
+                        .sbr-band-sub {
+                            font-size: 8.5pt; color: #5b6675; margin-top: 1.8mm;
+                        }
+                        .sbr-band-sub .sbr-period {
+                            display: inline-block; background: #eaf0f7;
+                            color: #1f3a5f; border: 0.4pt solid #c9d5e3;
+                            border-radius: 2pt; padding: 0.7mm 2.2mm;
+                            font-weight: bold; margin: 0 2mm;
+                        }
+                        /* date ranges and timestamps must keep their ltr order
+                           even when the surrounding document is rtl */
+                        .sbr-period, .sbr-meta-value, .sbr-closing-value {
+                            direction: ltr; unicode-bidi: embed;
+                        }
+                        .sbr-band-meta {
+                            width: 74mm; text-align: right;
+                            font-size: 7.5pt; color: #7a8493;
+                        }
+                        .sbr-band-meta .sbr-meta-value {
+                            font-size: 8.5pt; color: #1f3a5f;
+                            font-weight: bold; margin-top: 0.8mm;
+                        }
+                        [dir="rtl"] .sbr-band-meta { text-align: left; }
+                        .sbr-rule {
+                            border: none; border-top: 2.4pt solid #1f3a5f;
+                            margin: 0 0 4.5mm 0;
+                        }
+
+                        /* ================= key figures ================= */
+                        .sbr-kpis {
+                            width: 100%; border-collapse: separate;
+                            border-spacing: 2.5mm 0; table-layout: fixed;
+                            margin: 0 0 4.5mm 0;
+                        }
+                        .sbr-kpi {
+                            width: 20%; background: #fbfcfe;
+                            border: 0.4pt solid #d7dee7;
+                            border-top: 3pt solid #8a97a8;
+                            padding: 2mm 3mm 2.4mm 3mm;
+                        }
+                        .sbr-kpi-label {
+                            font-size: 7pt; color: #77828f;
+                            text-transform: uppercase; letter-spacing: 0.5pt;
+                            white-space: nowrap;
+                        }
+                        .sbr-kpi-value {
+                            font-size: 15pt; font-weight: bold; color: #1f3a5f;
+                            margin-top: 1.2mm; white-space: nowrap;
+                        }
+                        .sbr-kpi-products { border-top-color: #1f3a5f; }
+                        .sbr-kpi-opening { border-top-color: #9a7b25; }
+                        .sbr-kpi-in { border-top-color: #1f7a4d; }
+                        .sbr-kpi-out { border-top-color: #b3382c; }
+                        .sbr-kpi-closing { border-top-color: #0b6e78; }
+                        .sbr-kpi-closing .sbr-kpi-value { color: #0b6e78; }
+
+                        /* ================= table ================= */
+                        .sbr-table {
+                            width: 100%; border-collapse: collapse;
+                            table-layout: fixed; font-size: 8.5pt;
+                        }
+                        .sbr-table thead th {
+                            background-color: #1f3a5f; color: #ffffff;
+                            font-size: 7.5pt; font-weight: bold;
+                            text-transform: uppercase; letter-spacing: 0.4pt;
+                            padding: 2mm 2.4mm; border: 0.4pt solid #1f3a5f;
+                            text-align: left;
+                        }
+                        .sbr-table tbody td {
+                            padding: 1.5mm 2.4mm; border: 0.4pt solid #dfe4ea;
+                            vertical-align: top;
+                        }
+                        .sbr-table tbody tr:nth-child(even) td {
+                            background-color: #f5f8fb;
+                        }
+                        .sbr-idx { width: 9mm; text-align: center; color: #939dab; }
+                        .sbr-ref { color: #5b6675; }
+                        .sbr-uom { color: #5b6675; white-space: nowrap; }
+                        .sbr-num { text-align: right; white-space: nowrap; }
+                        .sbr-close { font-weight: bold; color: #0b6e78; }
+                        /* value cell: sits right after its quantity cell and is
+                           tinted a shade cooler, so the two columns of one figure
+                           read as a pair. Declared after :nth-child(even) so it
+                           wins, and the total row still wins over it (important). */
+                        .sbr-table tbody tr td.sbr-val {
+                            background-color: #eef2f8;
+                        }
+                        .sbr-table tbody tr.sbr-total td {
+                            background-color: #e6ecf4 !important;
+                            border-top: 1.6pt solid #1f3a5f; font-weight: bold;
+                            font-size: 9pt; color: #1f3a5f;
+                            padding-top: 2mm; padding-bottom: 2mm;
+                        }
+                        .sbr-table tbody tr { page-break-inside: avoid; }
+
+                        /* alignment rules last so they win in both directions */
+                        .sbr-table thead th.sbr-num { text-align: right; }
+                        [dir="rtl"] .sbr-table thead th { text-align: right; }
+                        .sbr-table thead th.sbr-idx { text-align: center; }
+
+                        /* ================= note + closing band ================= */
+                        /* plain stacked blocks: floats and fixed table columns are
+                           positioned incorrectly by this wkhtmltopdf build in rtl */
+                        .sbr-note {
+                            margin-top: 4mm; font-size: 7.5pt; color: #77828f;
+                            background: #f7f9fc; border: 0.4pt solid #e2e8f0;
+                            border-left: 2.5pt solid #1f3a5f;
+                            padding: 2.4mm 3mm 2.6mm 3mm; line-height: 1.45;
+                            border-radius: 1pt;
+                        }
+                        /* This wkhtmltopdf build anchors a rtl line that contains
+                           bidi-neutral characters (punctuation, digits, latin) to the
+                           right edge of the *page* instead of the right edge of its own
+                           box, ignoring the box padding as well, so such a line spills
+                           out of the tinted band. Running the note in ltr with an
+                           explicit right alignment anchors it to its box again. The
+                           punctuation used in i18n/ar_001.po is bidi class AL, which
+                           resolves to the same bidi levels in both directions, so with
+                           the shipped translation the output stays pixel-identical to
+                           rtl. */
+                        [dir="rtl"] .sbr-note {
+                            direction: ltr;
+                            text-align: right;
+                            border-left: 0.4pt solid #e2e8f0;
+                            border-right: 2.5pt solid #1f3a5f;
+                        }
+                        .sbr-note-label {
+                            color: #1f3a5f; font-weight: bold;
+                            margin: 0 0 0.8mm 0;
+                        }
+                        .sbr-note-text { margin: 0; white-space: normal; }
+                        .sbr-empty {
+                            border: 0.6pt dashed #b6c0cd; background: #f7f9fc;
+                            color: #5b6675; text-align: center;
+                            padding: 9mm 4mm; font-size: 10pt; border-radius: 2pt;
+                        }
+                        .sbr-closing {
+                            width: 100%; border-collapse: collapse;
+                            table-layout: auto; margin-top: 4.5mm;
+                        }
+                        .sbr-closing td {
+                            border-top: 0.6pt solid #ccd6e2; padding-top: 1.8mm;
+                            font-size: 7.5pt; color: #7a8493;
+                        }
+                        .sbr-closing td + td {
+                            border-left: 0.6pt solid #e4e9ef;
+                            padding-left: 3mm; padding-right: 0;
+                        }
+                        [dir="rtl"] .sbr-closing td + td {
+                            border-left: 0; padding-left: 0;
+                            padding-right: 3mm; border-right: 0.6pt solid #e4e9ef;
+                        }
+                        .sbr-closing td.sbr-closing-company { color: #1f3a5f; font-weight: bold; white-space: nowrap; }
+                        .sbr-closing td.sbr-closing-title {
+                            color: #1f3a5f; text-transform: uppercase;
+                            letter-spacing: 0.4pt; white-space: nowrap;
+                        }
+                        .sbr-closing td.sbr-closing-label { color: #93a0ae; white-space: nowrap; }
+                        .sbr-closing td.sbr-closing-value { color: #5b6675; white-space: nowrap; }
+                        .sbr-closing-spacer { width: 100%; }
+                    </style>
+
+                    <!-- ============ title band ============ -->
+                    <table class="sbr-band">
+                        <tr>
+                            <td class="sbr-band-logo" t-if="doc.company_id.logo">
+                                <img t-att-src="image_data_uri(doc.company_id.logo)" alt=""/>
+                            </td>
+                            <td>
+                                <div class="sbr-band-title">Stock Balance Report</div>
+                                <div class="sbr-band-sub">
+                                    <span class="sbr-period"><span t-out="doc.date_from"/> → <span t-out="doc.date_to"/></span>
+                                    <span t-out="doc.company_id.name"/>
+                                </div>
+                            </td>
+                            <td class="sbr-band-meta">
+                                <div>Generated on</div>
+                                <div class="sbr-meta-value"><span t-out="printed_at"/> · <span t-out="printed_by"/></div>
+                            </td>
+                        </tr>
+                    </table>
+                    <hr class="sbr-rule"/>
+
+                    <t t-set="sbr_lines" t-value="doc.line_ids"/>
+
+                    <t t-if="sbr_lines">
+
+                        <!-- ============ key figures ============ -->
+                        <table class="sbr-kpis">
+                            <tr>
+                                <td class="sbr-kpi sbr-kpi-products">
+                                    <div class="sbr-kpi-label">Products</div>
+                                    <div class="sbr-kpi-value" t-out="doc.product_count"/>
+                                </td>
+                                <td class="sbr-kpi sbr-kpi-opening">
+                                    <div class="sbr-kpi-label">Opening Balance</div>
+                                    <div class="sbr-kpi-value" t-out="'%.2f' % doc.total_opening"/>
+                                </td>
+                                <td class="sbr-kpi sbr-kpi-in">
+                                    <div class="sbr-kpi-label">IN</div>
+                                    <div class="sbr-kpi-value" t-out="'%.2f' % doc.total_in"/>
+                                </td>
+                                <td class="sbr-kpi sbr-kpi-out">
+                                    <div class="sbr-kpi-label">OUT</div>
+                                    <div class="sbr-kpi-value" t-out="'%.2f' % doc.total_out"/>
+                                </td>
+                                <td class="sbr-kpi sbr-kpi-closing">
+                                    <div class="sbr-kpi-label">Closing Balance</div>
+                                    <div class="sbr-kpi-value" t-out="'%.2f' % doc.total_closing"/>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <!-- ============ table ============ -->
+                        <table class="sbr-table">
+                            <colgroup>
+                                <col class="sbr-idx"/>
+                                <col/>
+                                <col style="width: 24mm"/>
+                                <col style="width: 16mm"/>
+                                <col style="width: 19mm"/>
+                                <col style="width: 22mm"/>
+                                <col style="width: 19mm"/>
+                                <col style="width: 22mm"/>
+                                <col style="width: 19mm"/>
+                                <col style="width: 22mm"/>
+                                <col style="width: 19mm"/>
+                                <col style="width: 22mm"/>
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th class="sbr-idx" rowspan="2">#</th>
+                                    <th rowspan="2">Product</th>
+                                    <th rowspan="2">Internal Reference</th>
+                                    <th rowspan="2">Unit</th>
+                                    <th class="sbr-num" colspan="2">Opening Balance</th>
+                                    <th class="sbr-num" colspan="2">IN</th>
+                                    <th class="sbr-num" colspan="2">OUT</th>
+                                    <th class="sbr-num" colspan="2">Closing Balance</th>
+                                </tr>
+                                <tr>
+                                    <th class="sbr-num">Quantity</th>
+                                    <th class="sbr-num">Value</th>
+                                    <th class="sbr-num">Quantity</th>
+                                    <th class="sbr-num">Value</th>
+                                    <th class="sbr-num">Quantity</th>
+                                    <th class="sbr-num">Value</th>
+                                    <th class="sbr-num">Quantity</th>
+                                    <th class="sbr-num">Value</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="sbr_lines" t-as="line">
+                                    <td class="sbr-idx" t-out="line_index + 1"/>
+                                    <td t-out="line.product_id.name"/>
+                                    <td class="sbr-ref" t-out="line.default_code or ''"/>
+                                    <td class="sbr-uom" t-out="line.uom_id.name"/>
+                                    <td class="sbr-num" t-out="'%.2f' % line.opening_qty"/>
+                                    <td class="sbr-num sbr-val" t-out="'%.2f' % line.opening_value"/>
+                                    <td class="sbr-num" t-out="'%.2f' % line.in_qty"/>
+                                    <td class="sbr-num sbr-val" t-out="'%.2f' % line.in_value"/>
+                                    <td class="sbr-num" t-out="'%.2f' % line.out_qty"/>
+                                    <td class="sbr-num sbr-val" t-out="'%.2f' % line.out_value"/>
+                                    <td class="sbr-num sbr-close" t-out="'%.2f' % line.closing_qty"/>
+                                    <td class="sbr-num sbr-close sbr-val" t-out="'%.2f' % line.closing_value"/>
+                                </tr>
+                                <tr class="sbr-total">
+                                    <td class="sbr-idx"/>
+                                    <td>Total</td>
+                                    <td/>
+                                    <td/>
+                                    <td class="sbr-num" t-out="'%.2f' % doc.total_opening"/>
+                                    <td class="sbr-num sbr-val" t-out="'%.2f' % doc.total_opening_value"/>
+                                    <td class="sbr-num" t-out="'%.2f' % doc.total_in"/>
+                                    <td class="sbr-num sbr-val" t-out="'%.2f' % doc.total_in_value"/>
+                                    <td class="sbr-num" t-out="'%.2f' % doc.total_out"/>
+                                    <td class="sbr-num sbr-val" t-out="'%.2f' % doc.total_out_value"/>
+                                    <td class="sbr-num" t-out="'%.2f' % doc.total_closing"/>
+                                    <td class="sbr-num sbr-val" t-out="'%.2f' % doc.total_closing_value"/>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="sbr-note">
+                            <div class="sbr-note-label">Note:</div>
+                            <div class="sbr-note-text">Quantities are expressed in the unit of measure of the product. Internal transfers between the locations of the company are not included: only stock entering or leaving the company is shown.</div>
+                        </div>
+                    </t>
+                    <t t-else="">
+                        <div class="sbr-empty">
+                            No stock movement was found for the selected period.
+                        </div>
+                    </t>
+
+                    <!-- ============ closing band ============ -->
+                    <table class="sbr-closing">
+                        <tr>
+                            <td class="sbr-closing-company"><t t-out="doc.company_id.name"/></td>
+                            <td class="sbr-closing-title">Stock Balance Report</td>
+                            <td class="sbr-closing-spacer"></td>
+                            <td class="sbr-closing-label">Generated on</td>
+                            <td class="sbr-closing-value"><t t-out="printed_at"/></td>
+                            <td class="sbr-closing-value"><t t-out="printed_by"/></td>
+                        </tr>
+                    </table>
+
+                </div>
+
+            </t>
+        </t>
+    </template>
+
+</odoo>

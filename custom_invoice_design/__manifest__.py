@@ -22,7 +22,7 @@ Ported to Odoo 20.0:
 - Invoice lines: `display_type` is now an explicit value ('product' / 'line_subsection')
 - ZATCA QR taken from `l10n_sa_qr_code_str` and URL-encoded with `quote_plus`
     """,
-    'author': 'Custom Development',
+    'author': 'Islam Elgafey',
     'category': 'Accounting/Accounting',
     'license': 'LGPL-3',
     'depends': ['base', 'account'],

@@ -5,7 +5,7 @@
     'category': 'Sales/Sales',
     'summary': 'Branches as master data linked to warehouses, analytic accounts, '
                'sales, inventory and accounting',
-    'author': 'Custom Development',
+    'author': 'Islam Elgafey',
     'description': """
 Branch Management
 =================

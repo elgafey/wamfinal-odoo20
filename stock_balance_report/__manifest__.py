@@ -4,7 +4,7 @@
     'version': '20.0.2.0.0',
     'category': 'Inventory/Inventory',
     'summary': 'Opening balance, IN, OUT and closing balance for a chosen period',
-    'author': 'Custom Development',
+    'author': 'Islam Elgafey',
     'description': """
 Stock Balance Report
 ====================

@@ -4,7 +4,7 @@
     'version': '20.0.1.0.0',
     'category': 'Accounting/Accounting',
     'summary': 'Show only the account itself in account dropdowns, without its parent path',
-    'author': 'Custom Development',
+    'author': 'Islam Elgafey',
     'license': 'LGPL-3',
     'depends': ['account'],
     'data': [],

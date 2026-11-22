@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ==================== Search wizard ==================== -->
+    <record id="action_branch_low_stock_wizard" model="ir.actions.act_window">
+        <field name="name">Low Stock</field>
+        <field name="res_model">branch.low.stock.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="group_ids" eval="[(6, 0, [ref('branch_request.group_branch_request_procurement')])]"/>
+    </record>
+
+    <record id="view_branch_low_stock_wizard_form" model="ir.ui.view">
+        <field name="name">branch.low.stock.wizard.form</field>
+        <field name="model">branch.low.stock.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Low Stock">
+                <group>
+                    <field name="threshold"/>
+                    <div class="text-muted small">
+                        Products with an on hand quantity below this value are
+                        shown. Set 0 to show every storable product.
+                    </div>
+                    <field name="location_id" options="{'no_create': True}"/>
+                    <div class="text-muted small">
+                        Leave empty to include all internal locations.
+                    </div>
+                </group>
+                <footer>
+                    <button name="action_search" type="object" string="Search"
+                            class="btn-primary" data-hotkey="q"/>
+                    <button string="Cancel" special="cancel" data-hotkey="x"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- ==================== Result list ==================== -->
+    <record id="view_branch_low_stock_line_list" model="ir.ui.view">
+        <field name="name">branch.low.stock.line.list</field>
+        <field name="model">branch.low.stock.line</field>
+        <field name="arch" type="xml">
+            <list create="false" delete="false" editable="bottom"
+                  decoration-danger="qty_available &lt;= 0"
+                  decoration-warning="qty_available &gt; 0 and shortage &gt; 0">
+                <field name="image_128" widget="image"
+                       options="{'size': [32, 32]}" width="40" readonly="1"/>
+                <field name="product_id" readonly="1"/>
+                <field name="default_code" readonly="1"/>
+                <field name="categ_id" readonly="1" optional="show"/>
+                <field name="location_display" readonly="1" optional="show"/>
+                <field name="qty_available" readonly="1"/>
+                <field name="shortage" readonly="1" optional="hide"/>
+                <field name="uom_id" readonly="1"/>
+                <field name="qty_to_order"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_branch_low_stock_line_search" model="ir.ui.view">
+        <field name="name">branch.low.stock.line.search</field>
+        <field name="model">branch.low.stock.line</field>
+        <field name="arch" type="xml">
+            <search string="Low Stock">
+                <field name="product_id"/>
+                <field name="default_code"/>
+                <field name="categ_id"/>
+                <separator/>
+                <filter name="filter_out_of_stock" string="Out of Stock"
+                        domain="[('qty_available', '&lt;=', 0)]"/>
+                <filter name="filter_shortage" string="Below Threshold"
+                        domain="[('shortage', '&gt;', 0)]"/>
+                <separator/>
+                <group>
+                    <filter name="group_by_location" string="Location"
+                            context="{'group_by': 'location_display'}"/>
+                    <filter name="group_by_category" string="Category"
+                            context="{'group_by': 'categ_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_branch_low_stock_list" model="ir.actions.act_window">
+        <field name="name">Low Stock</field>
+        <field name="res_model">branch.low.stock.line</field>
+        <field name="view_mode">list</field>
+        <field name="search_view_id" ref="view_branch_low_stock_line_search"/>
+        <field name="group_ids" eval="[(6, 0, [ref('branch_request.group_branch_request_procurement')])]"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">No low stock products</p>
+            <p>No product matches the search criteria. Run the search again
+               with a higher threshold.</p>
+        </field>
+    </record>
+
+    <!-- Actions menu entry of the result list: reuses the request RFQ
+         wizard in "low stock" mode (its product lines are pre-filled). -->
+    <record id="action_branch_low_stock_create_po" model="ir.actions.act_window">
+        <field name="name">Create RFQ</field>
+        <field name="res_model">branch.request.create.po.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="model_branch_low_stock_line"/>
+        <field name="binding_view_types">list</field>
+        <field name="group_ids" eval="[(6, 0, [ref('branch_request.group_branch_request_procurement')])]"/>
+    </record>
+
+    <!-- ==================== Menu ==================== -->
+    <menuitem id="menu_branch_request_low_stock" name="Low Stock"
+              parent="menu_branch_request_root" action="action_branch_low_stock_wizard"
+              sequence="30"
+              groups="branch_request.group_branch_request_procurement"/>
+
+</odoo>

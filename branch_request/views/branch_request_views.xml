@@ -16,6 +16,8 @@
                         domain="[('state', '=', 'submitted')]"/>
                 <filter name="filter_approved" string="Approved"
                         domain="[('state', '=', 'approved')]"/>
+                <filter name="filter_cancelled" string="Cancelled"
+                        domain="[('state', '=', 'cancelled')]"/>
                 <filter name="filter_urgent" string="Urgent"
                         domain="[('priority', '=', 'urgent')]"/>
                 <separator/>
@@ -41,7 +43,8 @@
                 <field name="state" widget="badge"
                        decoration-success="state in ('approved', 'done')"
                        decoration-info="state in ('draft', 'submitted')"
-                       decoration-danger="state == 'rejected'"/>
+                       decoration-danger="state == 'rejected'"
+                       decoration-muted="state == 'cancelled'"/>
             </list>
         </field>
     </record>
@@ -70,6 +73,12 @@
                             class="btn-primary"
                             groups="branch_request.group_branch_request_procurement"
                             invisible="state != 'approved'"/>
+                    <button name="action_cancel" type="object" string="Cancel"
+                            groups="branch_request.group_branch_request_procurement"
+                            invisible="state in ('done', 'cancelled')"/>
+                    <button name="action_reset_to_draft" type="object" string="Reset to Draft"
+                            groups="branch_request.group_branch_request_procurement"
+                            invisible="state == 'draft'"/>
                     <field name="state" widget="statusbar"
                            statusbar_visible="draft,submitted,approved,done"/>
                 </header>

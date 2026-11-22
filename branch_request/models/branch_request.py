@@ -24,7 +24,8 @@ class BranchRequest(models.Model):
         string='Priority', default='normal', tracking=True)
     state = fields.Selection(
         [('draft', 'Draft'), ('submitted', 'Submitted'),
-         ('approved', 'Approved'), ('rejected', 'Rejected'), ('done', 'Done')],
+         ('approved', 'Approved'), ('rejected', 'Rejected'),
+         ('done', 'Done'), ('cancelled', 'Cancelled')],
         string='Status', default='draft', required=True, tracking=True, copy=False)
     line_ids = fields.One2many(
         'branch.request.line', 'request_id', string='Products', copy=True)
@@ -121,4 +122,26 @@ class BranchRequest(models.Model):
                 raise UserError(_('Only an approved request can be marked as done.'))
             rec.state = 'done'
             rec.message_post(body=_('Request marked as done.'))
+        return True
+
+    def action_cancel(self):
+        self._check_procurement()
+        for rec in self:
+            if rec.state in ('done', 'cancelled'):
+                raise UserError(_(
+                    'A done or already cancelled request cannot be cancelled.'))
+            rec.state = 'cancelled'
+            rec.message_post(
+                body=_('Request cancelled by %s.', self.env.user.name))
+        return True
+
+    def action_reset_to_draft(self):
+        self._check_procurement()
+        for rec in self:
+            if rec.state == 'draft':
+                raise UserError(_('This request is already a draft.'))
+            rec.state = 'draft'
+            rec.rejection_reason = False
+            rec.message_post(
+                body=_('Request reset to draft by %s.', self.env.user.name))
         return True

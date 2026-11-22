@@ -9,7 +9,6 @@
             <search string="Branch Requests">
                 <field name="name"/>
                 <field name="requester_id"/>
-                <field name="department_id"/>
                 <separator/>
                 <filter name="filter_mine" string="My Requests"
                         domain="[('requester_id', '=', uid)]"/>
@@ -24,8 +23,6 @@
                 <group>
                     <filter name="group_by_state" string="Status"
                             context="{'group_by': 'state'}"/>
-                    <filter name="group_by_department" string="Department"
-                            context="{'group_by': 'department_id'}"/>
                 </group>
             </search>
         </field>
@@ -39,9 +36,7 @@
             <list string="Branch Requests">
                 <field name="name"/>
                 <field name="requester_id" widget="many2one_avatar_user"/>
-                <field name="department_id"/>
                 <field name="request_date"/>
-                <field name="required_date"/>
                 <field name="priority" widget="priority"/>
                 <field name="state" widget="badge"
                        decoration-success="state in ('approved', 'done')"
@@ -85,10 +80,7 @@
                     <group>
                         <group string="Request">
                             <field name="requester_id"/>
-                            <field name="department_id"/>
                             <field name="request_date"
-                                   readonly="state != 'draft' and not is_procurement"/>
-                            <field name="required_date"
                                    readonly="state != 'draft' and not is_procurement"/>
                             <field name="priority" widget="priority"
                                    readonly="state != 'draft' and not is_procurement"/>
@@ -100,11 +92,6 @@
                                    placeholder="Why is the request refused?"/>
                             <field name="is_procurement" invisible="1"/>
                         </group>
-                    </group>
-                    <group string="Justification">
-                        <field name="reason" nolabel="1"
-                               placeholder="Why are these goods needed?"
-                               readonly="state != 'draft' and not is_procurement"/>
                     </group>
                     <notebook>
                         <page string="Products" name="products">

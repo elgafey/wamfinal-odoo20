@@ -16,14 +16,10 @@
                             <tr>
                                 <th>Requester</th>
                                 <td><span t-field="doc.requester_id"/></td>
-                                <th>Department</th>
-                                <td><span t-field="doc.department_id"/></td>
                             </tr>
                             <tr>
                                 <th>Request Date</th>
                                 <td><span t-field="doc.request_date"/></td>
-                                <th>Needed By</th>
-                                <td><span t-field="doc.required_date"/></td>
                             </tr>
                             <tr>
                                 <th>Priority</th>
@@ -32,10 +28,6 @@
                                 <td><span t-field="doc.state"/></td>
                             </tr>
                         </table>
-                        <div t-if="doc.reason">
-                            <h3>Reason</h3>
-                            <p t-field="doc.reason"/>
-                        </div>
                         <div t-if="doc.rejection_reason">
                             <h3>Rejection Reason</h3>
                             <p t-field="doc.rejection_reason"/>

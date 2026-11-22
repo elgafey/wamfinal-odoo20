@@ -17,16 +17,11 @@ class BranchRequest(models.Model):
     requester_id = fields.Many2one(
         'res.users', string='Requester', readonly=True,
         default=lambda self: self.env.user, index=True, tracking=True)
-    department_id = fields.Many2one(
-        'hr.department', string='Department',
-        compute='_compute_department_id', store=True, readonly=True)
     request_date = fields.Date(
         string='Request Date', default=fields.Date.context_today, tracking=True)
-    required_date = fields.Date(string='Needed By', tracking=True)
     priority = fields.Selection(
         [('low', 'Low'), ('normal', 'Normal'), ('urgent', 'Urgent')],
         string='Priority', default='normal', tracking=True)
-    reason = fields.Text(string='Reason')
     state = fields.Selection(
         [('draft', 'Draft'), ('submitted', 'Submitted'),
          ('approved', 'Approved'), ('rejected', 'Rejected'), ('done', 'Done')],
@@ -36,11 +31,6 @@ class BranchRequest(models.Model):
     rejection_reason = fields.Text(string='Rejection Reason', copy=False)
     is_procurement = fields.Boolean(
         string='Is Procurement Team', compute='_compute_is_procurement')
-
-    @api.depends('requester_id')
-    def _compute_department_id(self):
-        for rec in self:
-            rec.department_id = rec.requester_id.department_id
 
     @api.depends_context('uid')
     def _compute_is_procurement(self):

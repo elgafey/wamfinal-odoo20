@@ -13,9 +13,9 @@ them and approves, rejects or completes them.
 Prices are deliberately out of scope: employees never enter nor see prices.
 Pricing is handled by the procurement team outside this application.
 """,
-    'author': 'Custom Development',
+    'author': 'Islam Elgafey',
     'license': 'LGPL-3',
-    'depends': ['base', 'mail', 'hr', 'product'],
+    'depends': ['base', 'mail', 'product'],
     'data': [
         'security/branch_request_security.xml',
         'security/ir.access.csv',

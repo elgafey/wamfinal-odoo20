@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Odoo 20: groups are attached to a "privilege" (res.groups.privilege,
+         which replaced res.groups.category_id), and the privilege belongs to
+         an application category (ir.module.category) so the scope appears as
+         its own section in Settings > Users. -->
+    <record id="module_category_branch_request" model="ir.module.category">
+        <field name="name">Branch Requests</field>
+        <field name="sequence">30</field>
+    </record>
+
+    <record id="res_groups_privilege_branch_request" model="res.groups.privilege">
+        <field name="name">Branch Requests</field>
+        <field name="category_id" ref="module_category_branch_request"/>
+        <field name="sequence">30</field>
+    </record>
+
+    <!-- The requester: submits his own requests and sees only those. -->
+    <record id="group_branch_requester" model="res.groups">
+        <field name="name">Requester</field>
+        <field name="sequence">10</field>
+        <field name="privilege_id" ref="res_groups_privilege_branch_request"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        <field name="comment">Submits requests for goods and sees his own
+            requests only.</field>
+    </record>
+
+    <!-- The procurement team: sees every request and drives the workflow. -->
+    <record id="group_branch_request_procurement" model="res.groups">
+        <field name="name">Procurement Team</field>
+        <field name="sequence">20</field>
+        <field name="privilege_id" ref="res_groups_privilege_branch_request"/>
+        <field name="implied_ids" eval="[(4, ref('group_branch_requester'))]"/>
+        <field name="comment">Sees every request and approves, rejects or
+            completes it.</field>
+    </record>
+
+</odoo>

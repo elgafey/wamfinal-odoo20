@@ -31,7 +31,7 @@
         <field name="name">Procurement Team</field>
         <field name="sequence">20</field>
         <field name="privilege_id" ref="res_groups_privilege_branch_request"/>
-        <field name="implied_ids" eval="[(4, ref('group_branch_requester'))]"/>
+        <field name="implied_ids" eval="[(4, ref('group_branch_requester')), (4, ref('purchase.group_purchase_user'))]"/>
         <field name="comment">Sees every request and approves, rejects or
             completes it.</field>
     </record>

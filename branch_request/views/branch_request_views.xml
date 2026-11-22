@@ -79,10 +79,23 @@
                     <button name="action_reset_to_draft" type="object" string="Reset to Draft"
                             groups="branch_request.group_branch_request_procurement"
                             invisible="state == 'draft'"/>
+                    <button name="%(action_branch_request_create_po_wizard)d"
+                            type="action" string="Create RFQ"
+                            class="btn-primary"
+                            groups="branch_request.group_branch_request_procurement"
+                            invisible="state != 'approved'"/>
                     <field name="state" widget="statusbar"
                            statusbar_visible="draft,submitted,approved,done"/>
                 </header>
                 <sheet>
+                    <div class="oe_button_box" name="button_box"
+                         groups="branch_request.group_branch_request_procurement">
+                        <button name="action_view_purchase_orders" type="object"
+                                class="oe_stat_button" icon="credit_card">
+                            <field name="purchase_order_count" widget="statinfo"
+                                   string="Purchase Orders"/>
+                        </button>
+                    </div>
                     <div class="oe_title">
                         <h1><field name="name" readonly="1"/></h1>
                     </div>

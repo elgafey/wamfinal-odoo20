@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- One action used twice: referenced by the form header button, and
+         bound to the list view so it shows in the Actions menu for a
+         multi-record selection (group restricted to Procurement Team). -->
+    <record id="action_branch_request_create_po_wizard" model="ir.actions.act_window">
+        <field name="name">Create RFQ</field>
+        <field name="res_model">branch.request.create.po.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="model_branch_request"/>
+        <field name="binding_view_types">list</field>
+        <field name="group_ids" eval="[(6, 0, [ref('branch_request.group_branch_request_procurement')])]"/>
+    </record>
+
+    <record id="view_branch_request_create_po_wizard_form" model="ir.ui.view">
+        <field name="name">branch.request.create.po.wizard.form</field>
+        <field name="model">branch.request.create.po.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Create RFQ">
+                <div class="alert alert-warning" role="alert"
+                     invisible="not warning_message">
+                    <field name="warning_message" readonly="1" nolabel="1"/>
+                </div>
+                <group>
+                    <field name="partner_id"/>
+                    <field name="merge_lines"/>
+                    <field name="request_ids" widget="many2many_tags"/>
+                </group>
+                <footer>
+                    <button name="action_create_rfq" type="object"
+                            string="Create RFQ" class="btn-primary"
+                            data-hotkey="q"/>
+                    <button string="Cancel" special="cancel" data-hotkey="x"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>

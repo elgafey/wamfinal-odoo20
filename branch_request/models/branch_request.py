@@ -32,12 +32,22 @@ class BranchRequest(models.Model):
     rejection_reason = fields.Text(string='Rejection Reason', copy=False)
     is_procurement = fields.Boolean(
         string='Is Procurement Team', compute='_compute_is_procurement')
+    purchase_order_ids = fields.Many2many(
+        'purchase.order', string='Purchase Orders',
+        copy=False, readonly=True, groups=PROCUREMENT_GROUP)
+    purchase_order_count = fields.Integer(
+        compute='_compute_purchase_order_count', groups=PROCUREMENT_GROUP)
 
     @api.depends_context('uid')
     def _compute_is_procurement(self):
         is_procurement = self.env.user.has_group(PROCUREMENT_GROUP)
         for rec in self:
             rec.is_procurement = is_procurement
+
+    @api.depends('purchase_order_ids')
+    def _compute_purchase_order_count(self):
+        for rec in self:
+            rec.purchase_order_count = len(rec.purchase_order_ids)
 
     # ------------------------------------------------------------------
     # Create
@@ -145,3 +155,13 @@ class BranchRequest(models.Model):
             rec.message_post(
                 body=_('Request reset to draft by %s.', self.env.user.name))
         return True
+
+    def action_view_purchase_orders(self):
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_window',
+            'name': _('Purchase Orders'),
+            'res_model': 'purchase.order',
+            'view_mode': 'list,form',
+            'domain': [('id', 'in', self.purchase_order_ids.ids)],
+        }

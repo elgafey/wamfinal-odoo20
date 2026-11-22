@@ -3,3 +3,7 @@ access_branch_request_requester,branch.request requester,branch.request,branch_r
 access_branch_request_procurement,branch.request procurement,branch.request,branch_request.group_branch_request_procurement,crud,
 access_branch_request_line_requester,branch.request.line requester,branch.request.line,branch_request.group_branch_requester,crud,"[('request_id.requester_id', '=', user.id)]"
 access_branch_request_line_procurement,branch.request.line procurement,branch.request.line,branch_request.group_branch_request_procurement,crud,
+access_branch_request_create_po_wizard_create,branch.request.create.po.wizard create,branch.request.create.po.wizard,branch_request.group_branch_request_procurement,c,
+access_branch_request_create_po_wizard_read,branch.request.create.po.wizard read,branch.request.create.po.wizard,branch_request.group_branch_request_procurement,r,
+access_branch_request_create_po_wizard_write,branch.request.create.po.wizard write,branch.request.create.po.wizard,branch_request.group_branch_request_procurement,u,
+access_branch_request_create_po_wizard_unlink,branch.request.create.po.wizard unlink,branch.request.create.po.wizard,branch_request.group_branch_request_procurement,d,

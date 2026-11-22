@@ -15,11 +15,12 @@ Pricing is handled by the procurement team outside this application.
 """,
     'author': 'Islam Elgafey',
     'license': 'LGPL-3',
-    'depends': ['base', 'mail', 'product'],
+    'depends': ['base', 'mail', 'product', 'purchase'],
     'data': [
         'security/branch_request_security.xml',
         'security/ir.access.csv',
         'data/ir_sequence_data.xml',
+        'wizard/branch_request_create_po_wizard_views.xml',
         'views/branch_request_views.xml',
         'report/branch_request_report.xml',
         'report/branch_request_report_templates.xml',

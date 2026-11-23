@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ==================== Search ==================== -->
+    <record id="view_branch_store_keeper_search" model="ir.ui.view">
+        <field name="name">branch.store.keeper.search</field>
+        <field name="model">branch.store.keeper</field>
+        <field name="arch" type="xml">
+            <search string="Store Keepers">
+                <field name="location_id"/>
+                <field name="user_ids"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- ==================== List ==================== -->
+    <record id="view_branch_store_keeper_list" model="ir.ui.view">
+        <field name="name">branch.store.keeper.list</field>
+        <field name="model">branch.store.keeper</field>
+        <field name="arch" type="xml">
+            <list string="Store Keepers" editable="bottom">
+                <field name="location_id"
+                       options="{'no_create': True, 'no_open': True}"/>
+                <field name="user_ids" widget="many2many_tags"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- ==================== Form ==================== -->
+    <record id="view_branch_store_keeper_form" model="ir.ui.view">
+        <field name="name">branch.store.keeper.form</field>
+        <field name="model">branch.store.keeper</field>
+        <field name="arch" type="xml">
+            <form string="Store Keeper">
+                <sheet>
+                    <group>
+                        <field name="location_id"
+                               options="{'no_create': True, 'no_open': True}"/>
+                        <field name="user_ids" widget="many2many_tags"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- ==================== Action ==================== -->
+    <record id="action_branch_store_keeper" model="ir.actions.act_window">
+        <field name="name">Store Keepers</field>
+        <field name="res_model">branch.store.keeper</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_branch_store_keeper_search"/>
+        <field name="group_ids" eval="[(6, 0, [ref('branch_request.group_branch_request_procurement'), ref('base.group_system')])]"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Define who is responsible for a branch</p>
+            <p>Every internal location gets one record listing the users that
+               may act on the transfers of that location.  A location without
+               a record cannot be used in a branch transfer.</p>
+        </field>
+    </record>
+
+</odoo>

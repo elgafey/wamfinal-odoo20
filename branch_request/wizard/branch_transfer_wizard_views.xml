@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ==================== Reject ==================== -->
+    <record id="view_branch_transfer_reject_wizard_form" model="ir.ui.view">
+        <field name="name">branch.transfer.reject.wizard.form</field>
+        <field name="model">branch.transfer.reject.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Reject Branch Transfer">
+                <group>
+                    <field name="transfer_id" invisible="1"/>
+                    <field name="reason" required="1"
+                           placeholder="Why is this request refused?"/>
+                </group>
+                <footer>
+                    <button name="action_reject" type="object" string="Reject"
+                            class="btn-primary" data-hotkey="q"/>
+                    <button string="Cancel" special="cancel" data-hotkey="x"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- ==================== Approve &amp; Send ==================== -->
+    <record id="view_branch_transfer_send_wizard_form" model="ir.ui.view">
+        <field name="name">branch.transfer.send.wizard.form</field>
+        <field name="model">branch.transfer.send.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Approve and Send">
+                <group>
+                    <field name="transfer_id" invisible="1"/>
+                    <div class="text-muted small">
+                        The goods are moved to the branch transit location.
+                        You may send more than what is available; any
+                        inventory mismatch is yours to explain. A quantity of
+                        0 cancels the remainder of that line: no backorder is
+                        created.
+                    </div>
+                </group>
+                <field name="line_ids" nolabel="1">
+                    <list string="Products" create="false" delete="false"
+                          editable="bottom">
+                        <field name="product_id" readonly="1"/>
+                        <field name="requested_qty" readonly="1"/>
+                        <field name="available_qty" readonly="1"/>
+                        <field name="qty_to_send"/>
+                    </list>
+                </field>
+                <footer>
+                    <button name="action_send" type="object" string="Send"
+                            class="btn-primary" data-hotkey="q"/>
+                    <button string="Cancel" special="cancel" data-hotkey="x"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- ==================== Receive ==================== -->
+    <record id="view_branch_transfer_receive_wizard_form" model="ir.ui.view">
+        <field name="name">branch.transfer.receive.wizard.form</field>
+        <field name="model">branch.transfer.receive.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Receive">
+                <group>
+                    <field name="transfer_id" invisible="1"/>
+                    <div class="text-muted small">
+                        The whole sent quantity leaves the branch transit
+                        location, whatever you count here. The counted
+                        quantity is kept for accountability: any difference
+                        against the sent quantity is highlighted in red.
+                    </div>
+                </group>
+                <field name="line_ids" nolabel="1">
+                    <list string="Products" create="false" delete="false"
+                          editable="bottom">
+                        <field name="product_id" readonly="1"/>
+                        <field name="sent_qty" readonly="1"/>
+                        <field name="qty_counted"/>
+                    </list>
+                </field>
+                <footer>
+                    <button name="action_receive" type="object" string="Receive"
+                            class="btn-primary" data-hotkey="q"/>
+                    <button string="Cancel" special="cancel" data-hotkey="x"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>

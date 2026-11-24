@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ==================== Allocation history ==================== -->
+    <record id="view_bank_fees_allocation_list" model="ir.ui.view">
+        <field name="name">bank.fees.allocation.list</field>
+        <field name="model">bank.fees.allocation</field>
+        <field name="arch" type="xml">
+            <list string="Bank Fees Allocations" create="false" edit="false"
+                  decoration-muted="state == 'cancelled'">
+                <field name="name" string="Reference"/>
+                <field name="date"/>
+                <field name="bank_account_id"/>
+                <field name="total_amount" sum="Total Amount"/>
+                <field name="net_amount" sum="Total Net"/>
+                <field name="fee_amount" sum="Total Fees"/>
+                <field name="fee_ratio" optional="hide"/>
+                <field name="user_id" optional="show"/>
+                <field name="source_account_ids" widget="many2many_tags" optional="hide"/>
+                <field name="move_id" optional="show"/>
+                <field name="state" widget="badge"
+                       decoration-success="state == 'done'"
+                       decoration-danger="state == 'cancelled'"/>
+                <field name="company_id" groups="base.group_multi_company" optional="hide"/>
+                <field name="currency_id" column_invisible="True"/>
+                <field name="id" column_invisible="True"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_bank_fees_allocation_form" model="ir.ui.view">
+        <field name="name">bank.fees.allocation.form</field>
+        <field name="model">bank.fees.allocation</field>
+        <field name="arch" type="xml">
+            <form string="Bank Fees Allocation" create="false" edit="false">
+                <header>
+                    <button name="action_view_move" type="object" string="Journal Entry"
+                            icon="fa-book" invisible="not move_id"/>
+                    <button name="action_cancel" type="object" string="Cancel &amp; Reverse"
+                            class="btn-secondary" icon="fa-undo"
+                            invisible="state != 'done'"
+                            groups="bank_fees_allocation.group_bank_fees_allocation_administrator"/>
+                    <button name="action_view_lines" type="object" string="Journal Items"
+                            icon="fa-list" invisible="not line_ids"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="done,cancelled"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_move" type="object" class="oe_stat_info" icon="fa-book"
+                                invisible="not move_id">
+                            <field name="move_id" widget="statinfo" string="Entry"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1><field name="name" readonly="1"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="date"/>
+                            <field name="bank_account_id"/>
+                            <field name="journal_id" invisible="1"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                        <group>
+                            <field name="user_id"/>
+                            <field name="move_id"/>
+                            <field name="total_amount"/>
+                            <field name="net_amount"/>
+                            <field name="fee_amount"/>
+                            <field name="fee_ratio"/>
+                            <field name="currency_id" invisible="1"/>
+                        </group>
+                    </group>
+                    <group string="Allocated Journal Items">
+                        <field name="line_ids" nolabel="1" readonly="1">
+                            <list create="false" edit="false" delete="false">
+                                <field name="date"/>
+                                <field name="move_id"/>
+                                <field name="partner_id"/>
+                                <field name="account_id"/>
+                                <field name="name" string="Label"/>
+                                <field name="balance" sum="Total Balance"/>
+                                <field name="company_currency_id" column_invisible="True"/>
+                            </list>
+                        </field>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_bank_fees_allocation_search" model="ir.ui.view">
+        <field name="name">bank.fees.allocation.search</field>
+        <field name="model">bank.fees.allocation</field>
+        <field name="arch" type="xml">
+            <search string="Search Bank Fees Allocations">
+                <field name="name" string="Reference" filter_domain="[
+                    '|', ('name', 'ilike', self), ('move_id.name', 'ilike', self)]"/>
+                <field name="move_id"/>
+                <field name="bank_account_id"/>
+                <field name="user_id"/>
+                <field name="source_account_ids" string="Source Account"/>
+                <field name="total_amount" string="Total Amount" filter_domain="[
+                    '|', ('total_amount', '=', raw_value), ('fee_amount', '=', raw_value)]"/>
+                <separator/>
+                <filter string="Date" name="date" date="date"/>
+                <filter string="Report Dates" name="date_between"
+                        domain="[('date', '&gt;=', context.get('date_from')), ('date', '&lt;=', context.get('date_to'))]"
+                        invisible="1"/>
+                <filter string="Done" name="done" domain="[('state', '=', 'done')]"/>
+                <filter string="Cancelled" name="cancelled" domain="[('state', '=', 'cancelled')]"/>
+                <group>
+                    <filter string="Bank Account" name="group_by_bank_account" domain="[]" context="{'group_by': 'bank_account_id'}"/>
+                    <filter string="Period" name="group_by_date" domain="[]" context="{'group_by': 'date'}"/>
+                    <filter string="Source Account" name="group_by_account" domain="[]" context="{'group_by': 'source_account_ids'}"/>
+                    <filter string="User" name="group_by_user" domain="[]" context="{'group_by': 'user_id'}"/>
+                    <filter string="Status" name="group_by_state" domain="[]" context="{'group_by': 'state'}"/>
+                    <filter string="Company" name="group_by_company" domain="[]" context="{'group_by': 'company_id'}"
+                            groups="base.group_multi_company"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Pivot view: fees by bank account, by period, by source account, by user. -->
+    <record id="view_bank_fees_allocation_pivot" model="ir.ui.view">
+        <field name="name">bank.fees.allocation.pivot</field>
+        <field name="model">bank.fees.allocation</field>
+        <field name="arch" type="xml">
+            <pivot string="Bank Fees Allocations" sample="1">
+                <field name="bank_account_id" type="row"/>
+                <field name="date" type="col"/>
+                <field name="total_amount" type="measure"/>
+                <field name="net_amount" type="measure"/>
+                <field name="fee_amount" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <!-- Graph view: fees over time. -->
+    <record id="view_bank_fees_allocation_graph" model="ir.ui.view">
+        <field name="name">bank.fees.allocation.graph</field>
+        <field name="model">bank.fees.allocation</field>
+        <field name="arch" type="xml">
+            <graph string="Bank Fees Allocations" sample="1">
+                <field name="date"/>
+                <field name="fee_amount" type="measure"/>
+                <field name="net_amount" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <!-- Action of the history view. -->
+    <record id="action_bank_fees_allocation_history" model="ir.actions.act_window">
+        <field name="name">Allocations</field>
+        <field name="res_model">bank.fees.allocation</field>
+        <field name="view_mode">list,pivot,graph,form</field>
+        <field name="search_view_id" ref="view_bank_fees_allocation_search"/>
+        <field name="domain">[]</field>
+        <field name="context">{'search_default_group_by_bank_account': 1}</field>
+    </record>
+
+</odoo>

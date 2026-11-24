@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--
+        The settings of the module, in the Accounting block of the standard
+        Accounting settings page.
+
+        The block is only visible to the *Bank Fees Allocation /
+        Administrator* group: the accountant (User group) never sees it, and
+        cannot change it.
+    -->
+    <record id="res_config_settings_view_form_bank_fees_allocation" model="ir.ui.view">
+        <field name="name">res.config.settings.form.bank.fees.allocation</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="account.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//app[@name='account']" position="inside">
+                <block title="Bank Fees Allocation" name="bank_fees_allocation_setting_container"
+                       groups="bank_fees_allocation.group_bank_fees_allocation_administrator">
+                    <setting id="bank_fees_allocation_accounts_setting"
+                             string="Allocation Accounts"
+                             help="Accounts the accountant works on: the Visa/card clearing accounts. Only the journal items of these accounts show up in the Bank Fees Allocation view. A branch may configure several accounts.">
+                        <field name="bank_fees_allocation_account_ids"
+                               widget="many2many_tags"
+                               placeholder="Pick the clearing accounts..."
+                               options="{'no_create': True}"/>
+                    </setting>
+                    <setting id="bank_fees_expense_account_setting"
+                             string="Bank Fees Expense Account"
+                             help="Account where the bank fees are booked. It must be configured, otherwise the allocation cannot be confirmed.">
+                        <field name="bank_fees_expense_account_id"
+                               placeholder="Pick an expense account..."
+                               options="{'no_create': True}"/>
+                    </setting>
+                    <setting id="bank_fees_bank_accounts_setting"
+                             string="Bank Accounts"
+                             help="Bank accounts offered in the allocation wizard. The amount credited by the bank is booked on the account picked there.">
+                        <field name="bank_fees_bank_account_ids"
+                               widget="many2many_tags"
+                               placeholder="Pick the bank accounts..."
+                               options="{'no_create': True}"/>
+                    </setting>
+                    <setting id="bank_fees_allocation_journal_setting"
+                             string="Allocation Journal"
+                             help="Journal used by the generated allocation entries. Defaults to the Miscellaneous journal of the company.">
+                        <field name="bank_fees_allocation_journal_id"
+                               placeholder="Pick a miscellaneous journal..."
+                               options="{'no_create': True}"/>
+                    </setting>
+                </block>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

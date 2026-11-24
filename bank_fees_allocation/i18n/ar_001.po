@@ -1,0 +1,1134 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* bank_fees_allocation
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 20.0+e-20260925\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-24 09:14+0000\n"
+"PO-Revision-Date: 2026-11-24 09:14+0000\n"
+"Last-Translator: \n"
+"Language: ar_001\n"
+"Language-Team: Arabic\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: bank_fees_allocation
+#: model:ir.module.module,description:base.module_bank_fees_allocation
+msgid ""
+"\n"
+"Bank Fees Allocation\n"
+"====================\n"
+"\n"
+"Salespeople record card (Visa) sales, e.g. 100.00.  The bank settles the\n"
+"card transactions of the day in **one single aggregated line**, net of the\n"
+"fees (95.00 deposited, 5.00 of fees).  The accountant has to group the\n"
+"original sales journal items, type the amount the bank really deposited\n"
+"and post **one** entry that splits the fee and reconciles everything.\n"
+"\n"
+"What the module does\n"
+"---------------------\n"
+"\n"
+"* A dedicated view (*Accounting > Bank Fees Allocation*) lists the journal\n"
+"  items of the configured allocation accounts: posted entries only, not\n"
+"  fully reconciled, restricted to the company of the user.  The list is\n"
+"  grouped by account (the group header shows the balance sum) and can be\n"
+"  grouped by date, partner, journal, analytic distribution or entry.\n"
+"* The *Bank Fees Allocation* button of the list header opens a wizard on\n"
+"  the selected lines, **whatever their number**: the lines may come from\n"
+"  several days and from several accounts.\n"
+"* The wizard computes the total of the selection and keeps two amounts\n"
+"  consistent both ways: typing the **Net Amount** recomputes the\n"
+"  **Fee Amount**, typing the **Fee Amount** recomputes the **Net Amount**.\n"
+"* On confirmation, **one** journal entry is created and posted:\n"
+"\n"
+"      Debit  Bank Account                95.00   (net amount)\n"
+"      Debit  Bank Fees Expense Account     5.00   (fee, analytic carried over)\n"
+"      Credit Visa / Card clearing       100.00   (one line per source account)\n"
+"\n"
+"  The analytic distribution of the source journal items is carried over\n"
+"  **proportionally** to the fee line and to the credit lines, so the cost\n"
+"  centre (or the branch) of every sale is preserved.\n"
+"* Every credit line is then reconciled with the journal items it comes\n"
+"  from, through Odoo's own reconciliation (``account.move.line.reconcile()``).\n"
+"\n"
+"History\n"
+"-------\n"
+"\n"
+"Every confirmation stores a ``bank.fees.allocation`` record: its reference,\n"
+"its date, its company, its user, the bank account, the total, the net\n"
+"amount, the fee, the generated journal entry and the source journal items.\n"
+"The *Cancel* button unreconciles the entry, posts its reversal and frees\n"
+"the original journal items: they can be allocated again.\n"
+"\n"
+"Reports\n"
+"-------\n"
+"\n"
+"* List, pivot and graph views of the allocations: fees by bank account, by\n"
+"  period (day / month), by source account (branch) and by user.\n"
+"* Filters on the date range, the bank account, the source account and the\n"
+"  state.\n"
+"* The XLSX export is the **standard list export** of Odoo.\n"
+"* A printable QWeb PDF summary (total sales, total fees, net, per bank\n"
+"  account, per period, per source account).\n"
+"\n"
+"Configuration\n"
+"-------------\n"
+"\n"
+"The settings live in *Accounting > Configuration > Settings > Accounting >\n"
+"Bank Fees Allocation* and are **company dependent**:\n"
+"\n"
+"* *Allocation Accounts*: the accounts the accountant works on (the\n"
+"  Visa/card clearing accounts).  A branch may have several of them.\n"
+"* *Bank Fees Expense Account*: where the fee is booked.\n"
+"* *Bank Accounts*: the bank accounts offered **only** inside the wizard.\n"
+"* *Allocation Journal*: defaults to the Miscellaneous journal of the\n"
+"  company.\n"
+"\n"
+"Security\n"
+"--------\n"
+"\n"
+"Two groups are created:\n"
+"\n"
+"* *Bank Fees Allocation / Administrator*: everything, including the\n"
+"  settings.\n"
+"* *Bank Fees Allocation / User* (the accountant): can open the allocation\n"
+"  view and run the wizard; the settings stay read-only for them.\n"
+"\n"
+"Record rules restrict the allocations to the companies of the user.\n"
+"\n"
+"Odoo 20\n"
+"-------\n"
+"\n"
+"The module follows the real Odoo 20 APIs: ``<list>`` views (never\n"
+"``<tree>``), the ``parent_state`` / ``reconciled`` / ``full_reconcile_id``\n"
+"fields of ``account.move.line``, the ``action_post()`` workflow of\n"
+"``account.move``, the ``sequence.mixin`` mechanism of Odoo 20 and the\n"
+"``res.groups.privilege`` group format of Odoo 20.\n"
+"\n"
+"It depends on ``account`` **only**: it installs and runs on the Community\n"
+"*and* on the Enterprise edition.\n"
+msgstr ""
+
+#. module: bank_fees_allocation
+#: model:ir.actions.report,print_report_name:bank_fees_allocation.action_bank_fees_allocation_summary
+msgid "'Bank Fees Allocation Summary'"
+msgstr ""
+
+#. module: bank_fees_allocation
+#. odoo-python
+#: code:addons/bank_fees_allocation/wizard/bank_fees_allocation_wizard.py:0
+msgid ""
+"A Miscellaneous journal is required. No journal of type 'Miscellaneous' was "
+"found for this company."
+msgstr ""
+
+#. module: bank_fees_allocation
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.report_bank_fees_allocation_summary
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_move_line_search
+msgid "Account"
+msgstr "الحساب"
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,help:bank_fees_allocation.field_res_config_settings__bank_fees_expense_account_id
+msgid "Account where the bank fees are booked."
+msgstr "الحساب الذي تُقيَّد عليه رسوم البنك."
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,help:bank_fees_allocation.field_res_company__bank_fees_expense_account_id
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.res_config_settings_view_form_bank_fees_allocation
+msgid ""
+"Account where the bank fees are booked. It must be configured, otherwise the"
+" allocation cannot be confirmed."
+msgstr ""
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,help:bank_fees_allocation.field_bank_fees_allocation_wizard__fee_account_id
+msgid ""
+"Account where the bank fees are booked. Pre-filled from the company "
+"settings."
+msgstr ""
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,help:bank_fees_allocation.field_bank_fees_allocation__branch_ids
+#: model:ir.model.fields,help:bank_fees_allocation.field_bank_fees_allocation__source_account_ids
+msgid "Accounts (branches) of the source journal items."
+msgstr "الحسابات (الفروع) الخاصة بقيود المصدر."
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,help:bank_fees_allocation.field_res_company__bank_fees_allocation_account_ids
+msgid ""
+"Accounts the accountant works on: the Visa/card clearing accounts the "
+"aggregated bank settlements are booked against. Only the journal items of "
+"these accounts show up in the Bank Fees Allocation view. A branch may "
+"configure several accounts."
+msgstr ""
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,help:bank_fees_allocation.field_res_config_settings__bank_fees_allocation_account_ids
+msgid ""
+"Accounts the accountant works on: the Visa/card clearing accounts. Only the "
+"journal items of these accounts show up in the Bank Fees Allocation view."
+msgstr ""
+
+#. module: bank_fees_allocation
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.res_config_settings_view_form_bank_fees_allocation
+msgid ""
+"Accounts the accountant works on: the Visa/card clearing accounts. Only the "
+"journal items of these accounts show up in the Bank Fees Allocation view. A "
+"branch may configure several accounts."
+msgstr ""
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation__message_needaction
+msgid "Action Needed"
+msgstr ""
+
+#. module: bank_fees_allocation
+#: model:res.groups,name:bank_fees_allocation.group_bank_fees_allocation_administrator
+msgid "Administrator"
+msgstr "مدير"
+
+#. module: bank_fees_allocation
+#. odoo-python
+#: code:addons/bank_fees_allocation/models/account_move_line.py:0
+msgid ""
+"All selected journal items must use the same currency.\n"
+"Selected currencies: %s"
+msgstr ""
+
+#. module: bank_fees_allocation
+#. odoo-python
+#: code:addons/bank_fees_allocation/models/bank_fees_allocation.py:0
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation__line_ids
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_form
+msgid "Allocated Journal Items"
+msgstr "القيود الموزعة"
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation__account_ids
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_res_company__bank_fees_allocation_account_ids
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_res_config_settings__bank_fees_allocation_account_ids
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.res_config_settings_view_form_bank_fees_allocation
+msgid "Allocation Accounts"
+msgstr "حسابات التوزيع"
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_res_company__bank_fees_allocation_journal_id
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_res_config_settings__bank_fees_allocation_journal_id
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.res_config_settings_view_form_bank_fees_allocation
+msgid "Allocation Journal"
+msgstr "دفتر التوزيع"
+
+#. module: bank_fees_allocation
+#: model:ir.actions.report,name:bank_fees_allocation.action_bank_fees_allocation_summary
+msgid "Allocation Summary"
+msgstr "ملخص التوزيع"
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,help:bank_fees_allocation.field_bank_fees_allocation__account_ids
+msgid "Allocation accounts the source journal items belong to."
+msgstr "حسابات التوزيع التي تنتمي إليها قيود المصدر."
+
+#. module: bank_fees_allocation
+#: model:ir.actions.act_window,name:bank_fees_allocation.action_bank_fees_allocation_history
+#: model:ir.ui.menu,name:bank_fees_allocation.menu_bank_fees_allocation_history
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.report_bank_fees_allocation_summary
+msgid "Allocations"
+msgstr "التوزيعات"
+
+#. module: bank_fees_allocation
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_move_line_search
+msgid "Amount"
+msgstr "المبلغ"
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,help:bank_fees_allocation.field_bank_fees_allocation__net_amount
+msgid "Amount actually credited by the bank (total minus fees)."
+msgstr "المبلغ الذي قيّده البنك فعليًا (الإجمالي ناقص الرسوم)."
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,help:bank_fees_allocation.field_bank_fees_allocation_wizard__net_amount
+msgid ""
+"Amount actually credited by the bank. Editing it recomputes the fee amount."
+msgstr "المبلغ الذي قيّده البنك فعليًا. تعديله يعيد حساب مبلغ الرسوم."
+
+#. module: bank_fees_allocation
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.bank_fees_allocation_wizard_form
+msgid "Amounts"
+msgstr "المبالغ"
+
+#. module: bank_fees_allocation
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_move_line_list
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_move_line_search
+msgid "Analytic"
+msgstr "تحليلي"
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation__message_attachment_count
+msgid "Attachment Count"
+msgstr ""
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation__bank_account_id
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation_wizard__bank_account_id
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.report_bank_fees_allocation_summary
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_search
+msgid "Bank Account"
+msgstr "الحساب البنكي"
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_res_company__bank_fees_bank_account_ids
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_res_config_settings__bank_fees_bank_account_ids
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.res_config_settings_view_form_bank_fees_allocation
+msgid "Bank Accounts"
+msgstr "الحسابات البنكية"
+
+#. module: bank_fees_allocation
+#. odoo-python
+#: code:addons/bank_fees_allocation/wizard/bank_fees_allocation_wizard.py:0
+msgid "Bank Fees"
+msgstr "رسوم البنك"
+
+#. module: bank_fees_allocation
+#. odoo-python
+#: code:addons/bank_fees_allocation/models/account_move_line.py:0
+#: code:addons/bank_fees_allocation/models/bank_fees_allocation_line_action.py:0
+#: code:addons/bank_fees_allocation/wizard/bank_fees_allocation_wizard.py:0
+#: model:ir.actions.act_window,name:bank_fees_allocation.action_bank_fees_allocation_wizard
+#: model:ir.actions.server,name:bank_fees_allocation.action_bank_fees_allocation_lines
+#: model:ir.model,name:bank_fees_allocation.model_bank_fees_allocation
+#: model:ir.model,name:bank_fees_allocation.model_bank_fees_allocation_wizard
+#: model:ir.module.module,shortdesc:base.module_bank_fees_allocation
+#: model:ir.ui.menu,name:bank_fees_allocation.menu_bank_fees_allocation
+#: model:res.groups.privilege,name:bank_fees_allocation.res_groups_privilege_bank_fees_allocation
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.bank_fees_allocation_wizard_form
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.res_config_settings_view_form_bank_fees_allocation
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_form
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_move_line_list
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_move_line_tree_bank_fees_allocation
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_move_line_tree_bank_fees_allocation_header
+msgid "Bank Fees Allocation"
+msgstr "توزيع رسوم البنك"
+
+#. module: bank_fees_allocation
+#: model:ir.model,name:bank_fees_allocation.model_bank_fees_allocation_report
+msgid "Bank Fees Allocation Report"
+msgstr "تقرير توزيع رسوم البنك"
+
+#. module: bank_fees_allocation
+#. odoo-python
+#: code:addons/bank_fees_allocation/reports/bank_fees_allocation_report.py:0
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.report_bank_fees_allocation_summary
+msgid "Bank Fees Allocation Summary"
+msgstr "ملخص توزيع رسوم البنك"
+
+#. module: bank_fees_allocation
+#: model:ir.model,name:bank_fees_allocation.model_bank_fees_allocation_line_action
+msgid "Bank Fees Allocation View Action"
+msgstr "إجراء عرض توزيع رسوم البنك"
+
+#. module: bank_fees_allocation
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_graph
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_list
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_pivot
+msgid "Bank Fees Allocations"
+msgstr "توزيعات رسوم البنك"
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_res_company__bank_fees_expense_account_id
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_res_config_settings__bank_fees_expense_account_id
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.res_config_settings_view_form_bank_fees_allocation
+msgid "Bank Fees Expense Account"
+msgstr "حساب مصروف رسوم البنك"
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,help:bank_fees_allocation.field_bank_fees_allocation_wizard__bank_account_id
+msgid "Bank account the aggregated settlement is credited to."
+msgstr "الحساب البنكي الذي تُقيَّد عليه التسوية المجمعة."
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,help:bank_fees_allocation.field_bank_fees_allocation__bank_account_id
+msgid "Bank account the aggregated settlement was credited to."
+msgstr "الحساب البنكي الذي credite به التسوية المجمعة."
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,help:bank_fees_allocation.field_res_config_settings__bank_fees_bank_account_ids
+msgid "Bank accounts offered in the allocation wizard."
+msgstr "الحسابات البنكية المعروضة في معالج التوزيع."
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,help:bank_fees_allocation.field_res_company__bank_fees_bank_account_ids
+msgid ""
+"Bank accounts offered in the allocation wizard. The amount credited by the "
+"bank is booked on the account picked here."
+msgstr ""
+
+#. module: bank_fees_allocation
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.res_config_settings_view_form_bank_fees_allocation
+msgid ""
+"Bank accounts offered in the allocation wizard. The amount credited by the "
+"bank is booked on the account picked there."
+msgstr ""
+
+#. module: bank_fees_allocation
+#. odoo-python
+#: code:addons/bank_fees_allocation/wizard/bank_fees_allocation_wizard.py:0
+msgid "Bank fees allocation for %s journal item(s): %s"
+msgstr "توزيع رسوم بنك لـ %s قيد: %s"
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,help:bank_fees_allocation.field_bank_fees_allocation__fee_amount
+msgid "Bank fees charged on the settlement."
+msgstr "رسوم البنك المحصّلة على التسوية."
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,help:bank_fees_allocation.field_bank_fees_allocation_wizard__fee_amount
+msgid "Bank fees kept by the bank. Editing it recomputes the net amount."
+msgstr "رسوم البنك التي تحتفظ بها. تعديلها يعيد حساب المبلغ الصافي."
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation__branch_ids
+msgid "Branches"
+msgstr "الفروع"
+
+#. module: bank_fees_allocation
+#: model:res.groups,comment:bank_fees_allocation.group_bank_fees_allocation_user
+msgid "Can open the Bank Fees Allocation view and run the allocation wizard."
+msgstr "يمكنه فتح عرض توزيع رسوم البنك وتشغيل معالج التوزيع."
+
+#. module: bank_fees_allocation
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.bank_fees_allocation_wizard_form
+msgid "Cancel"
+msgstr "إلغاء"
+
+#. module: bank_fees_allocation
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_form
+msgid "Cancel & Reverse"
+msgstr "إلغاء وعكس القيد"
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields.selection,name:bank_fees_allocation.selection__bank_fees_allocation__state__cancelled
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_search
+msgid "Cancelled"
+msgstr "ملغى"
+
+#. module: bank_fees_allocation
+#: model:ir.model,name:bank_fees_allocation.model_res_company
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation__company_id
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation_wizard__company_id
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_search
+msgid "Company"
+msgstr "الشركة"
+
+#. module: bank_fees_allocation
+#: model:ir.model,name:bank_fees_allocation.model_res_config_settings
+msgid "Config Settings"
+msgstr ""
+
+#. module: bank_fees_allocation
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.bank_fees_allocation_wizard_form
+msgid "Confirm"
+msgstr "تأكيد"
+
+#. module: bank_fees_allocation
+#. odoo-python
+#: code:addons/bank_fees_allocation/wizard/bank_fees_allocation_wizard.py:0
+msgid ""
+"Could not identify the counterpart of the journal items of the account %s in"
+" the created journal entry."
+msgstr ""
+
+#. module: bank_fees_allocation
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.report_bank_fees_allocation_summary
+msgid "Count"
+msgstr "العدد"
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation__create_uid
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation_wizard__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation__create_date
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation_wizard__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation__currency_id
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation_wizard__currency_id
+msgid "Currency"
+msgstr "العملة"
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation__currency_note
+msgid "Currency Note"
+msgstr "ملاحظة العملة"
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation__date
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation_wizard__date
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.report_bank_fees_allocation_summary
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_move_line_search
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_search
+msgid "Date"
+msgstr "التاريخ"
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_account_move_line__display_name
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation__display_name
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation_line_action__display_name
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation_report__display_name
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation_wizard__display_name
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_res_company__display_name
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_res_config_settings__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,help:bank_fees_allocation.field_bank_fees_allocation__name
+msgid "Document number of the allocation."
+msgstr "رقم مستند التوزيع."
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields.selection,name:bank_fees_allocation.selection__bank_fees_allocation__state__done
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_search
+msgid "Done"
+msgstr "منتهٍ"
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation__user_id
+msgid "Done By"
+msgstr "نفذها"
+
+#. module: bank_fees_allocation
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_form
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_move_line_list
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_move_line_search
+msgid "Entry"
+msgstr "القيد"
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation_wizard__fee_account_id
+msgid "Fee Account"
+msgstr "حساب الرسوم"
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation__fee_amount
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation_wizard__fee_amount
+msgid "Fee Amount"
+msgstr "مبلغ الرسوم"
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation__fee_ratio
+msgid "Fee Ratio (%)"
+msgstr "نسبة الرسوم (%)"
+
+#. module: bank_fees_allocation
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.report_bank_fees_allocation_summary
+msgid "Fees"
+msgstr "الرسوم"
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,help:bank_fees_allocation.field_bank_fees_allocation__fee_ratio
+msgid "Fees expressed as a percentage of the allocated total."
+msgstr "الرسوم معبَّرة كنسبة مئوية من المبلغ الموزع."
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation__message_follower_ids
+msgid "Followers"
+msgstr ""
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation__message_partner_ids
+msgid "Followers (Partners)"
+msgstr ""
+
+#. module: bank_fees_allocation
+#: model:res.groups,comment:bank_fees_allocation.group_bank_fees_allocation_administrator
+msgid "Full access to the Bank Fees Allocation, including its settings."
+msgstr "صلاحية كاملة على توزيع رسوم البنك، بما في ذلك إعداداته."
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation__has_message
+msgid "Has Message"
+msgstr ""
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_account_move_line__id
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation__id
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation_line_action__id
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation_report__id
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation_wizard__id
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_res_company__id
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_res_config_settings__id
+msgid "ID"
+msgstr ""
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,help:bank_fees_allocation.field_bank_fees_allocation__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr ""
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,help:bank_fees_allocation.field_bank_fees_allocation__message_has_error
+#: model:ir.model.fields,help:bank_fees_allocation.field_bank_fees_allocation__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr ""
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation__message_is_follower
+msgid "Is Follower"
+msgstr ""
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation__journal_id
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation_wizard__journal_id
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_move_line_search
+msgid "Journal"
+msgstr "الدفتر"
+
+#. module: bank_fees_allocation
+#. odoo-python
+#: code:addons/bank_fees_allocation/models/bank_fees_allocation.py:0
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation__move_id
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation_wizard__move_id
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_form
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_move_line_search
+msgid "Journal Entry"
+msgstr "قيد يومية"
+
+#. module: bank_fees_allocation
+#: model:ir.model,name:bank_fees_allocation.model_account_move_line
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.bank_fees_allocation_wizard_form
+msgid "Journal Item"
+msgstr "القيد"
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation_wizard__line_ids
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_form
+msgid "Journal Items"
+msgstr "القيود"
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,help:bank_fees_allocation.field_bank_fees_allocation__move_id
+msgid "Journal entry generated by this allocation."
+msgstr "قيد اليومية الناتج عن هذا التوزيع."
+
+#. module: bank_fees_allocation
+#. odoo-python
+#: code:addons/bank_fees_allocation/models/account_move_line.py:0
+#: code:addons/bank_fees_allocation/wizard/bank_fees_allocation_wizard.py:0
+msgid "Journal item: %s"
+msgstr "قيد: %s"
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,help:bank_fees_allocation.field_bank_fees_allocation_wizard__line_ids
+msgid "Journal items selected in the Bank Fees Allocation view."
+msgstr "القيود المختارة في عرض توزيع رسوم البنك."
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,help:bank_fees_allocation.field_bank_fees_allocation__journal_id
+msgid "Journal of the generated allocation entry."
+msgstr "دفتر قيد التوزيع الناتج."
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,help:bank_fees_allocation.field_res_config_settings__bank_fees_allocation_journal_id
+msgid "Journal used by the generated allocation entries."
+msgstr "الدفتر المستخدم في قيود التوزيع الناتجة."
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,help:bank_fees_allocation.field_res_company__bank_fees_allocation_journal_id
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.res_config_settings_view_form_bank_fees_allocation
+msgid ""
+"Journal used by the generated allocation entries. Defaults to the "
+"Miscellaneous journal of the company."
+msgstr ""
+
+#. module: bank_fees_allocation
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.bank_fees_allocation_wizard_form
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_form
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_move_line_list
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_move_line_search
+msgid "Label"
+msgstr "البيان"
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation__write_uid
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation_wizard__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation__write_date
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation_wizard__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation__message_has_error
+msgid "Message Delivery error"
+msgstr ""
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation__message_ids
+msgid "Messages"
+msgstr ""
+
+#. module: bank_fees_allocation
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.report_bank_fees_allocation_summary
+msgid "Month"
+msgstr "الشهر"
+
+#. module: bank_fees_allocation
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.report_bank_fees_allocation_summary
+msgid "Net"
+msgstr "الصافي"
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation__net_amount
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation_wizard__net_amount
+msgid "Net Amount"
+msgstr "المبلغ الصافي"
+
+#. module: bank_fees_allocation
+#. odoo-python
+#: code:addons/bank_fees_allocation/models/bank_fees_allocation.py:0
+msgid "New"
+msgstr "جديد"
+
+#. module: bank_fees_allocation
+#: model:res.groups.privilege,placeholder:bank_fees_allocation.res_groups_privilege_bank_fees_allocation
+msgid "No"
+msgstr "لا"
+
+#. module: bank_fees_allocation
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_move_line_search
+msgid "Not Reconciled"
+msgstr "غير مسوّى"
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation__message_needaction_counter
+msgid "Number of Actions"
+msgstr ""
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation__message_has_error_counter
+msgid "Number of errors"
+msgstr ""
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,help:bank_fees_allocation.field_bank_fees_allocation__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr ""
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,help:bank_fees_allocation.field_bank_fees_allocation__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr ""
+
+#. module: bank_fees_allocation
+#. odoo-python
+#: code:addons/bank_fees_allocation/models/bank_fees_allocation.py:0
+msgid "On allocation %s, the fee amount cannot be negative."
+msgstr "في التوزيع %s، لا يمكن أن يكون مبلغ الرسوم سالبًا."
+
+#. module: bank_fees_allocation
+#. odoo-python
+#: code:addons/bank_fees_allocation/models/bank_fees_allocation.py:0
+msgid "On allocation %s, the net amount cannot be negative."
+msgstr "في التوزيع %s، لا يمكن أن يكون المبلغ الصافي سالبًا."
+
+#. module: bank_fees_allocation
+#. odoo-python
+#: code:addons/bank_fees_allocation/models/bank_fees_allocation.py:0
+msgid ""
+"On allocation %s, the net amount plus the fees (%s) must equal the total "
+"amount (%s)."
+msgstr ""
+
+#. module: bank_fees_allocation
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.bank_fees_allocation_wizard_form
+msgid ""
+"One single journal entry will be created, posted and reconciled with the\n"
+"                        selected journal items: the bank receives the net amount, the fee is booked\n"
+"                        on the fee account and every source account is credited."
+msgstr ""
+
+#. module: bank_fees_allocation
+#. odoo-python
+#: code:addons/bank_fees_allocation/models/account_move_line.py:0
+msgid "Only posted journal items can be allocated."
+msgstr "يمكن توزيع القيود المرحلة فقط."
+
+#. module: bank_fees_allocation
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_move_line_search
+msgid "Partner"
+msgstr "العميل"
+
+#. module: bank_fees_allocation
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.report_bank_fees_allocation_summary
+msgid "Per Bank Account"
+msgstr "حسب الحساب البنكي"
+
+#. module: bank_fees_allocation
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.report_bank_fees_allocation_summary
+msgid "Per Day"
+msgstr "حسب اليوم"
+
+#. module: bank_fees_allocation
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.report_bank_fees_allocation_summary
+msgid "Per Month"
+msgstr "حسب الشهر"
+
+#. module: bank_fees_allocation
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.report_bank_fees_allocation_summary
+msgid "Per Source Account"
+msgstr "حسب الحساب المصدر"
+
+#. module: bank_fees_allocation
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_search
+msgid "Period"
+msgstr "الفترة"
+
+#. module: bank_fees_allocation
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.res_config_settings_view_form_bank_fees_allocation
+msgid "Pick a miscellaneous journal..."
+msgstr "اختر دفتر متنوع..."
+
+#. module: bank_fees_allocation
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.res_config_settings_view_form_bank_fees_allocation
+msgid "Pick an expense account..."
+msgstr "اختر حساب مصروف..."
+
+#. module: bank_fees_allocation
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.res_config_settings_view_form_bank_fees_allocation
+msgid "Pick the bank accounts..."
+msgstr "اختر الحسابات البنكية..."
+
+#. module: bank_fees_allocation
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.res_config_settings_view_form_bank_fees_allocation
+msgid "Pick the clearing accounts..."
+msgstr "اختر حسابات التصفية..."
+
+#. module: bank_fees_allocation
+#. odoo-python
+#: code:addons/bank_fees_allocation/models/account_move_line.py:0
+#: code:addons/bank_fees_allocation/wizard/bank_fees_allocation_wizard.py:0
+msgid "Please select at least one journal item to allocate."
+msgstr "يرجى اختيار قيد واحد على الأقل للتوزيع."
+
+#. module: bank_fees_allocation
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_move_line_search
+msgid "Posted"
+msgstr "مرحَّل"
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation__rating_ids
+msgid "Ratings"
+msgstr ""
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation__name
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation_wizard__ref
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.report_bank_fees_allocation_summary
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_list
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_search
+msgid "Reference"
+msgstr "المرجع"
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,help:bank_fees_allocation.field_bank_fees_allocation_wizard__ref
+msgid "Reference written on the generated journal entry."
+msgstr "المرجع المدوَّن على قيد اليومية الناتج."
+
+#. module: bank_fees_allocation
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_move_line_search
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_search
+msgid "Report Dates"
+msgstr "تواريخ التقرير"
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr ""
+
+#. module: bank_fees_allocation
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_search
+msgid "Search Bank Fees Allocations"
+msgstr "ابحث في توزيعات رسوم البنك"
+
+#. module: bank_fees_allocation
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_move_line_search
+msgid "Search Journal Items to Allocate"
+msgstr "ابحث في القيود المطلوب توزيعها"
+
+#. module: bank_fees_allocation
+#. odoo-python
+#: code:addons/bank_fees_allocation/models/account_move_line.py:0
+msgid "Sections and notes cannot be allocated."
+msgstr "لا يمكن توزيع الأقسام والملاحظات."
+
+#. module: bank_fees_allocation
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.bank_fees_allocation_wizard_form
+msgid "Selected Journal Items"
+msgstr "القيود المختارة"
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation__sequence_number
+msgid "Sequence Number"
+msgstr ""
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation__sequence_prefix
+msgid "Sequence Prefix"
+msgstr ""
+
+#. module: bank_fees_allocation
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_search
+msgid "Source Account"
+msgstr "الحساب المصدر"
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation__source_account_ids
+msgid "Source Accounts"
+msgstr "الحسابات المصدر"
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,help:bank_fees_allocation.field_bank_fees_allocation__line_ids
+msgid "Source journal items that were allocated."
+msgstr "قيود المصدر التي تم توزيعها."
+
+#. module: bank_fees_allocation
+#: model:ir.module.module,summary:base.module_bank_fees_allocation
+msgid ""
+"Split the bank fees of an aggregated card settlement over the original sales"
+" journal items."
+msgstr ""
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation__state
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.report_bank_fees_allocation_summary
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_search
+msgid "Status"
+msgstr "الحالة"
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,help:bank_fees_allocation.field_bank_fees_allocation__total_amount
+msgid "Sum of the balances of the allocated source journal items."
+msgstr "مجموع أرصدة قيود المصدر الموزعة."
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,help:bank_fees_allocation.field_bank_fees_allocation_wizard__total_amount
+msgid "Sum of the balances of the selected journal items."
+msgstr "مجموع أرصدة القيود المختارة."
+
+#. module: bank_fees_allocation
+#. odoo-python
+#: code:addons/bank_fees_allocation/wizard/bank_fees_allocation_wizard.py:0
+msgid ""
+"The Bank Fees Expense Account is not configured.\n"
+"\n"
+"Please configure it in Accounting > Configuration > Settings > Accounting > Bank Fees Allocation."
+msgstr ""
+
+#. module: bank_fees_allocation
+#. odoo-python
+#: code:addons/bank_fees_allocation/models/account_move_line.py:0
+msgid "The account %s does not allow reconciliation."
+msgstr "الحساب %s لا يسمح بالتسوية."
+
+#. module: bank_fees_allocation
+#. odoo-python
+#: code:addons/bank_fees_allocation/wizard/bank_fees_allocation_wizard.py:0
+msgid ""
+"The bank account %s is not one of the configured bank accounts.\n"
+"\n"
+"Please configure the bank accounts in Accounting > Configuration > Settings > Accounting > Bank Fees Allocation."
+msgstr ""
+
+#. module: bank_fees_allocation
+#. odoo-python
+#: code:addons/bank_fees_allocation/wizard/bank_fees_allocation_wizard.py:0
+msgid "The bank account is required."
+msgstr "الحساب البنكي مطلوب."
+
+#. module: bank_fees_allocation
+#. odoo-python
+#: code:addons/bank_fees_allocation/wizard/bank_fees_allocation_wizard.py:0
+msgid "The fee amount cannot be negative."
+msgstr "لا يمكن أن يكون مبلغ الرسوم سالبًا."
+
+#. module: bank_fees_allocation
+#. odoo-python
+#: code:addons/bank_fees_allocation/models/bank_fees_allocation.py:0
+msgid "The journal entry %s has been reversed by %s."
+msgstr "تم عكس قيد اليومية %s بواسطة %s."
+
+#. module: bank_fees_allocation
+#. odoo-python
+#: code:addons/bank_fees_allocation/wizard/bank_fees_allocation_wizard.py:0
+msgid "The journal entry date is required."
+msgstr "تاريخ قيد اليومية مطلوب."
+
+#. module: bank_fees_allocation
+#. odoo-python
+#: code:addons/bank_fees_allocation/models/bank_fees_allocation.py:0
+msgid "The journal entry of this allocation is already cancelled."
+msgstr "قيد اليومية الخاص بهذا التوزيع ملغى بالفعل."
+
+#. module: bank_fees_allocation
+#. odoo-python
+#: code:addons/bank_fees_allocation/wizard/bank_fees_allocation_wizard.py:0
+msgid ""
+"The journal item %s is not on a configured allocation account.\n"
+"Account: %s\n"
+"\n"
+"Please configure the allocation accounts in Accounting > Configuration > Settings > Accounting > Bank Fees Allocation."
+msgstr ""
+
+#. module: bank_fees_allocation
+#. odoo-python
+#: code:addons/bank_fees_allocation/wizard/bank_fees_allocation_wizard.py:0
+msgid "The net amount cannot be negative."
+msgstr "لا يمكن أن يكون المبلغ الصافي سالبًا."
+
+#. module: bank_fees_allocation
+#. odoo-python
+#: code:addons/bank_fees_allocation/wizard/bank_fees_allocation_wizard.py:0
+msgid ""
+"The net amount plus the fee amount (%s) must equal the total amount (%s)."
+msgstr ""
+
+#. module: bank_fees_allocation
+#. odoo-python
+#: code:addons/bank_fees_allocation/models/account_move_line.py:0
+msgid "The selected journal items belong to different companies."
+msgstr "القيود المختارة تنتمي إلى شركات مختلفة."
+
+#. module: bank_fees_allocation
+#. odoo-python
+#: code:addons/bank_fees_allocation/wizard/bank_fees_allocation_wizard.py:0
+msgid ""
+"The selected journal items cannot be allocated in one go: their amounts do not add up to the total amount of the selection (%s against %s).\n"
+"\n"
+"Please select journal items of the same direction."
+msgstr ""
+
+#. module: bank_fees_allocation
+#. odoo-python
+#: code:addons/bank_fees_allocation/wizard/bank_fees_allocation_wizard.py:0
+msgid ""
+"The selected journal items cannot be allocated in one go: they mix debits and credits.\n"
+"\n"
+"Please select journal items of the same direction."
+msgstr ""
+
+#. module: bank_fees_allocation
+#. odoo-python
+#: code:addons/bank_fees_allocation/wizard/bank_fees_allocation_wizard.py:0
+msgid "The selected journal items must add up to a positive amount (%s)."
+msgstr "يجب أن يكون مجموع القيود المختارة مبلغًا موجبًا (%s)."
+
+#. module: bank_fees_allocation
+#. odoo-python
+#: code:addons/bank_fees_allocation/models/bank_fees_allocation.py:0
+msgid "This allocation has already been cancelled."
+msgstr "تم إلغاء هذا التوزيع بالفعل."
+
+#. module: bank_fees_allocation
+#. odoo-python
+#: code:addons/bank_fees_allocation/wizard/bank_fees_allocation_wizard.py:0
+msgid ""
+"This allocation has already been posted.\n"
+"Journal entry: %s"
+msgstr ""
+
+#. module: bank_fees_allocation
+#. odoo-python
+#: code:addons/bank_fees_allocation/models/bank_fees_allocation.py:0
+msgid "This allocation has no journal entry to cancel."
+msgstr "لا يوجد قيد يومية لهذا التوزيع لإلغائه."
+
+#. module: bank_fees_allocation
+#. odoo-python
+#: code:addons/bank_fees_allocation/models/account_move_line.py:0
+msgid "This journal item has already been reconciled."
+msgstr "هذا القيد مسوّى بالفعل."
+
+#. module: bank_fees_allocation
+#. odoo-python
+#: code:addons/bank_fees_allocation/models/account_move_line.py:0
+msgid "This journal item has nothing left to allocate."
+msgstr "لا يوجد شيء متبقٍ في هذا القيد للتوزيع."
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation__total_amount
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation_wizard__total_amount
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_list
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_search
+msgid "Total Amount"
+msgstr "المبلغ الإجمالي"
+
+#. module: bank_fees_allocation
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.bank_fees_allocation_wizard_form
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_form
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_move_line_list
+msgid "Total Balance"
+msgstr "إجمالي الرصيد"
+
+#. module: bank_fees_allocation
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_move_line_list
+msgid "Total Credit"
+msgstr "إجمالي الدائن"
+
+#. module: bank_fees_allocation
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_move_line_list
+msgid "Total Debit"
+msgstr "إجمالي المدين"
+
+#. module: bank_fees_allocation
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.report_bank_fees_allocation_summary
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_list
+msgid "Total Fees"
+msgstr "إجمالي الرسوم"
+
+#. module: bank_fees_allocation
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.report_bank_fees_allocation_summary
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_list
+msgid "Total Net"
+msgstr "إجمالي الصافي"
+
+#. module: bank_fees_allocation
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.report_bank_fees_allocation_summary
+msgid "Total Sales"
+msgstr "إجمالي المبيعات"
+
+#. module: bank_fees_allocation
+#: model:res.groups,name:bank_fees_allocation.group_bank_fees_allocation_user
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_search
+msgid "User"
+msgstr "مستخدم"
+
+#. module: bank_fees_allocation
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_move_line_search
+msgid "With Residual"
+msgstr "له رصيد متبقٍ"
+
+#. module: bank_fees_allocation
+#. odoo-python
+#: code:addons/bank_fees_allocation/models/account_move_line.py:0
+msgid "You cannot use a cancelled journal item."
+msgstr "لا يمكن استخدام قيد ملغى."
+
+#. module: bank_fees_allocation
+#. odoo-python
+#: code:addons/bank_fees_allocation/models/bank_fees_allocation.py:0
+msgid "id"
+msgstr ""
+

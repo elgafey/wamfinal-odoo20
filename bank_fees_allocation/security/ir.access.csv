@@ -1,0 +1,6 @@
+id,name,model_id,group_id/id,operation,domain
+access_bank_fees_allocation_user,bank fees allocation user,bank.fees.allocation,bank_fees_allocation.group_bank_fees_allocation_user,r,
+access_bank_fees_allocation_administrator,bank fees allocation administrator,bank.fees.allocation,bank_fees_allocation.group_bank_fees_allocation_administrator,crud,
+access_bank_fees_allocation_wizard_user,bank fees allocation wizard user,bank.fees.allocation.wizard,bank_fees_allocation.group_bank_fees_allocation_user,crud,
+access_bank_fees_allocation_wizard_administrator,bank fees allocation wizard administrator,bank.fees.allocation.wizard,bank_fees_allocation.group_bank_fees_allocation_administrator,crud,
+bank_fees_allocation_comp_rule,Bank fees allocation multi-company,bank.fees.allocation,,crud,"[('company_id', 'in', company_ids)]"

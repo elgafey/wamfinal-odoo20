@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--
+        The main view of the module: a journal-items style list of the
+        `account.move.line` records the accountant has to allocate.
+
+        It is a brand new list view (nothing of the core views is modified)
+        so that the domain, the grouping and the columns are exactly what
+        the allocation needs:
+
+        * grouped by account by default (the group header shows the sum);
+        * the sum of the selected lines is shown in the footer;
+        * the *Bank Fees Allocation* button opens the wizard.
+    -->
+    <record id="view_bank_fees_allocation_move_line_list" model="ir.ui.view">
+        <field name="name">bank.fees.allocation.move.line.list</field>
+        <field name="model">account.move.line</field>
+        <field name="arch" type="xml">
+            <list string="Bank Fees Allocation" create="false" edit="false"
+                  decoration-info="parent_state != 'posted'"
+                  decoration-muted="reconciled == True">
+                <header>
+                    <button name="action_bank_fees_allocation" type="object"
+                            string="Bank Fees Allocation" class="btn-success"
+                            groups="bank_fees_allocation.group_bank_fees_allocation_user"/>
+                </header>
+                <field name="date"/>
+                <field name="move_id" column_invisible="True"/>
+                <field name="move_name" string="Entry" widget="open_move_widget"/>
+                <field name="partner_id" optional="show"/>
+                <field name="name" string="Label"/>
+                <field name="account_id" options="{'no_open': True, 'no_create': True}"/>
+                <field name="analytic_distribution"
+                       string="Analytic"
+                       widget="analytic_distribution"
+                       groups="analytic.group_analytic_accounting"
+                       optional="show"
+                       options="{'product_field': 'product_id', 'account_field': 'account_id', 'force_applicability': 'optional', 'multi_edit': true}"/>
+                <field name="journal_id" optional="hide" options="{'no_open': True}"/>
+                <field name="debit" sum="Total Debit" readonly="1" decoration-muted="debit == 0"/>
+                <field name="credit" sum="Total Credit" readonly="1" decoration-muted="credit == 0"/>
+                <field name="balance" sum="Total Balance" readonly="1"/>
+                <field name="reconciled" column_invisible="True"/>
+                <field name="parent_state" column_invisible="True"/>
+                <field name="company_id" column_invisible="True"/>
+                <field name="company_currency_id" column_invisible="True"/>
+                <field name="currency_id" column_invisible="True"/>
+                <field name="amount_currency" column_invisible="True"/>
+                <field name="display_type" column_invisible="True"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Search view: filters on the date range, the account, the partner and
+         the amount, and the extra groupings (date, partner, journal,
+         analytic). -->
+    <record id="view_bank_fees_allocation_move_line_search" model="ir.ui.view">
+        <field name="name">bank.fees.allocation.move.line.search</field>
+        <field name="model">account.move.line</field>
+        <field name="arch" type="xml">
+            <search string="Search Journal Items to Allocate">
+                <field name="name" string="Label" filter_domain="[
+                    '|', '|', '|',
+                    ('name', 'ilike', self), ('ref', 'ilike', self),
+                    ('account_id', 'ilike', self), ('partner_id', 'ilike', self)]"/>
+                <field name="move_id" string="Journal Entry" filter_domain="[
+                    '|', ('move_id.name', 'ilike', self), ('move_id.ref', 'ilike', self)]"/>
+                <field name="account_id" context="{'active_test': False}"/>
+                <field name="partner_id"/>
+                <field name="journal_id"/>
+                <field name="balance" string="Amount" filter_domain="[
+                    '|', ('credit', '=', raw_value), ('debit', '=', raw_value)]"/>
+                <separator/>
+                <filter string="Posted" name="posted" domain="[('parent_state', '=', 'posted')]"/>
+                <filter string="Not Reconciled" name="not_reconciled"
+                        domain="[('reconciled', '=', False), ('full_reconcile_id', '=', False)]"/>
+                <filter string="With Residual" name="unreconciled"
+                        domain="[('amount_residual', '!=', 0)]"/>
+                <separator/>
+                <filter string="Date" name="date" date="date"/>
+                <filter string="Report Dates" name="date_between"
+                        domain="[('date', '&gt;=', context.get('date_from')), ('date', '&lt;=', context.get('date_to'))]"
+                        invisible="1"/>
+                <group>
+                    <filter string="Account" name="group_by_account" domain="[]" context="{'group_by': 'account_id'}"/>
+                    <filter string="Date" name="group_by_date" domain="[]" context="{'group_by': 'date'}"/>
+                    <filter string="Partner" name="group_by_partner" domain="[]" context="{'group_by': 'partner_id'}"/>
+                    <filter string="Journal" name="group_by_journal" domain="[]" context="{'group_by': 'journal_id'}"/>
+                    <filter string="Analytic" name="group_by_analytic"
+                            domain="[]" context="{'group_by': 'analytic_distribution'}"
+                            groups="analytic.group_analytic_accounting"/>
+                    <filter string="Entry" name="group_by_move" domain="[]" context="{'group_by': 'move_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!--
+        The window action of the main view.
+
+        The domain cannot be static: it depends on the accounts configured
+        by the administrator (and on the company of the user).  The action
+        is therefore built by a server action that returns an
+        `ir.actions.act_window` with the domain computed from the settings.
+    -->
+    <record id="action_bank_fees_allocation_lines" model="ir.actions.server">
+        <field name="name">Bank Fees Allocation</field>
+        <field name="model_id" ref="account.model_account_move_line"/>
+        <field name="binding_model_id" ref="account.model_account_move_line"/>
+        <field name="binding_view_types">list</field>
+        <field name="state">code</field>
+        <field name="code">action = env['bank.fees.allocation.line.action'].action_bank_fees_allocation_lines()</field>
+    </record>
+
+</odoo>

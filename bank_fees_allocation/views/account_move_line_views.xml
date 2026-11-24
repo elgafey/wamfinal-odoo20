@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--
+        The *Bank Fees Allocation* button of the list header.
+
+        The core *Journal Items* list of the Community edition has no
+        header at all: it is added here, with the button in it.
+
+        On the Enterprise edition the core list already has a header (the
+        *Reconcile* button): the button is then added **to** that header
+        instead of replacing it.  Both cases are covered by the two
+        inheritances below, and the priority of the second one is lower so
+        that it is always applied after the core extensions.
+
+        The button is only clickable when at least one line is selected,
+        exactly like the core *Reconcile* button.
+    -->
+    <record id="view_move_line_tree_bank_fees_allocation" model="ir.ui.view">
+        <field name="name">account.move.line.list.bank.fees.allocation</field>
+        <field name="model">account.move.line</field>
+        <field name="inherit_id" ref="account.view_move_line_tree"/>
+        <field name="priority">20</field>
+        <field name="arch" type="xml">
+            <xpath expr="//list" position="inside">
+                <header>
+                    <button name="action_bank_fees_allocation" type="object"
+                            string="Bank Fees Allocation" class="btn-success"
+                            groups="bank_fees_allocation.group_bank_fees_allocation_user"/>
+                </header>
+            </xpath>
+        </field>
+    </record>
+
+    <!--
+        When the list already has a header (the Enterprise edition adds
+        the *Reconcile* button to it), the button is added **inside** that
+        header instead of creating a second one.
+
+        The priority is lower than the one of the inheritance above, so
+        this one is always applied **after** it: the header it finds is
+        then the final one.
+    -->
+    <record id="view_move_line_tree_bank_fees_allocation_header" model="ir.ui.view">
+        <field name="name">account.move.line.list.bank.fees.allocation.header</field>
+        <field name="model">account.move.line</field>
+        <field name="inherit_id" ref="account.view_move_line_tree"/>
+        <field name="priority">30</field>
+        <field name="arch" type="xml">
+            <xpath expr="//list/header" position="inside">
+                <button name="action_bank_fees_allocation" type="object"
+                        string="Bank Fees Allocation" class="btn-success"
+                        groups="bank_fees_allocation.group_bank_fees_allocation_user"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!--
+        The same button on the *Journal Items to Reconcile* list of the
+        Enterprise edition.
+
+        The view only exists when `account_accountant` is installed: the
+        module itself depends on `account` only, so the inheritance is
+        declared in a data file that is only loaded when the Enterprise
+        module is present (see the manifest).
+    -->
+
+</odoo>

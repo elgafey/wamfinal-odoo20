@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--
+        Menu: Accounting > Bank Fees Allocation.
+
+        The item points to the server action that builds the window action
+        with the domain computed from the settings (allocated accounts,
+        posted items, not reconciled, company of the user).
+    -->
+    <menuitem id="menu_bank_fees_allocation"
+              name="Bank Fees Allocation"
+              parent="account.menu_finance_entries"
+              action="action_bank_fees_allocation_lines"
+              groups="bank_fees_allocation.group_bank_fees_allocation_user"
+              sequence="30"/>
+
+    <menuitem id="menu_bank_fees_allocation_history"
+              name="Allocations"
+              parent="account.menu_finance_entries"
+              action="action_bank_fees_allocation_history"
+              groups="bank_fees_allocation.group_bank_fees_allocation_user"
+              sequence="31"/>
+
+</odoo>

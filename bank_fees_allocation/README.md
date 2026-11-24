@@ -24,13 +24,12 @@ post **one** entry that splits the fee and reconciles everything.
 - [Security](#security)
 - [Technical notes (Odoo 20 APIs)](#technical-notes-odoo-20-apis)
 - [Folder structure](#folder-structure)
-- [Tests](#tests)
 
 ---
 
 ## What it does
 
-* A dedicated view (*Accounting > Bank Fees Allocation*) lists the journal
+* A dedicated view (*Bank Fees Allocation > Allocation*) lists the journal
   items of the configured allocation accounts: **posted** entries only, **not
   fully reconciled**, restricted to the company of the user. The list is
   grouped by account (the group header shows the balance sum) and can be
@@ -67,8 +66,8 @@ post **one** entry that splits the fee and reconciles everything.
 1. Copy the `bank_fees_allocation` folder into your addons path
    (for this server: `/home/admin/custom_addons`).
 2. Make sure the folder is readable by the user that runs Odoo.
-3. Restart Odoo and install the module from *Apps > Accounting > Bank Fees
-   Allocation*, or from the command line:
+3. Restart Odoo and install the module from the *Apps* menu (it is a
+   standalone application, with its own icon), or from the command line:
 
    ```bash
    odoo -d <your_database> -i bank_fees_allocation --stop-after-init
@@ -84,7 +83,7 @@ post **one** entry that splits the fee and reconciles everything.
 
 ## Configuration
 
-*Accounting > Configuration > Settings > Accounting > Bank Fees Allocation*
+*Bank Fees Allocation > Configuration > Settings*
 (only visible to the **Bank Fees Allocation / Administrator** group).
 
 | Setting | Meaning |
@@ -101,7 +100,7 @@ configuration.
 
 ## Usage
 
-1. Open *Accounting > Bank Fees Allocation*.
+1. Open the **Bank Fees Allocation** app and go to *Allocation*.
 2. Filter (date range, account, partner, amount) and group the list as you
    need — by account, by day, by branch…
 3. Select the journal items of the settlement (they may come from several
@@ -138,8 +137,8 @@ Credit  Visa / Card clearing         100.00    <- one credit line per source acc
 
 ## Cancellation
 
-*Accounting > Bank Fees Allocation > Allocations*: open an allocation and
-click **Cancel & Reverse**.
+*Bank Fees Allocation > History*: open an allocation and click
+**Cancel & Reverse**.
 
 * the reconciliation links are removed (through Odoo's own
   `remove_move_reconcile()`);
@@ -172,8 +171,32 @@ Two groups are created (Odoo 20 `res.groups.privilege` format):
 
 | Group | Rights |
 |---|---|
-| **Bank Fees Allocation / Administrator** | Everything, including the settings. |
-| **Bank Fees Allocation / User** | The accountant: opens the allocation view and runs the wizard. The settings stay read-only (the block is hidden). |
+| **Bank Fees Allocation / Administrator** | Everything, including the settings of the application. |
+| **Bank Fees Allocation / User** | The accountant: opens the allocation view and runs the wizard. The settings stay read-only (the *Configuration* menu is hidden). |
+
+The module is a **standalone application**: its users are not accountants by
+trade, so the groups do **not** imply the accounting features.
+
+* The *User* group implies `account.group_account_invoice`, the **minimum**
+  accounting group. It is required by Odoo itself: `account.move._post()`
+  refuses to post an entry when the user is not in that group. That group
+  grants CRUD on the journal entries, the journal items and the partial
+  reconciliations — exactly what the wizard needs — but not the accounting
+  features (journal entries list, reports, reconciliation screens,
+  configuration), which require `account.group_account_user`.
+* The *Administrator* group implies `account.group_account_manager` and
+  `base.group_system` (the latter is what gives access to the
+  `res.config.settings` page of the application).
+
+The wizard also has its own access rules, so that the accountant can work
+with the accounting records it needs:
+
+| Model | Rights |
+|---|---|
+| `account.move` | read, create, write |
+| `account.move.line` | read, create, write |
+| `account.account` | read |
+| `account.partial.reconcile` | full |
 
 A multi-company record rule restricts the allocations to the companies of
 the user.
@@ -238,38 +261,12 @@ bank_fees_allocation/
 ├── security/
 │   ├── bank_fees_allocation_security.xml  # the two groups
 │   └── ir.access.csv                    # the rights + the multi-company rule
+├── static/
+│   └── description/
+│       ├── icon.png                     # the icon of the application
+│       └── icon.svg
 ├── i18n/
-│   ├── bank_fees_allocation.pot
-│   └── ar_001.po                        # Arabic
-└── tests/
-    ├── __init__.py
-    └── test_bank_fees_allocation.py
+│   └── bank_fees_allocation.pot
 ```
 
 ---
-
-## Tests
-
-The module ships a `TransactionCase` suite covering:
-
-* a single account allocation;
-* several accounts (one credit line per account);
-* a selection spanning several days;
-* the two-way computation of the net amount and the fee;
-* the carry-over of the analytic distribution (and its proportionality);
-* the reconciliation of every source group;
-* the cancel / reverse, and the allocation of the freed lines again;
-* the validations (negative amounts, reconciled lines, draft lines, an
-  account that is not configured, a missing fee account);
-* the access rights (the accountant cannot reach the settings);
-* the multi-company rule;
-* the report helpers;
-* the domain of the allocation view;
-* the button of the list header.
-
-Run them with:
-
-```bash
-odoo -d <your_database> --stop-after-init --test-enable \
-     --test-tags /bank_fees_allocation
-```

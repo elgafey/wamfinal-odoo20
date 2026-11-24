@@ -6,11 +6,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 20.0+e-20260925\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-24 09:14+0000\n"
-"PO-Revision-Date: 2026-11-24 09:14+0000\n"
+"POT-Creation-Date: 2026-11-24 09:59+0000\n"
+"PO-Revision-Date: 2026-11-24 09:59+0000\n"
 "Last-Translator: \n"
-"Language: en_US\n"
-"Language-Team: English\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -109,8 +108,9 @@ msgid ""
 "``account.move``, the ``sequence.mixin`` mechanism of Odoo 20 and the\n"
 "``res.groups.privilege`` group format of Odoo 20.\n"
 "\n"
-"It depends on ``account`` **only**: it installs and runs on the Community\n"
-"*and* on the Enterprise edition.\n"
+"It depends on ``account`` (and on ``mail``, which ``account`` already\n"
+"brings) **only**: it installs and runs on the Community *and* on the\n"
+"Enterprise edition.\n"
 msgstr ""
 
 #. module: bank_fees_allocation
@@ -130,7 +130,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:bank_fees_allocation.report_bank_fees_allocation_summary
 #: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_move_line_search
 msgid "Account"
-msgstr "Account"
+msgstr ""
 
 #. module: bank_fees_allocation
 #: model:ir.model.fields,help:bank_fees_allocation.field_res_config_settings__bank_fees_expense_account_id
@@ -190,7 +190,7 @@ msgstr ""
 #. module: bank_fees_allocation
 #: model:res.groups,name:bank_fees_allocation.group_bank_fees_allocation_administrator
 msgid "Administrator"
-msgstr "Administrator"
+msgstr ""
 
 #. module: bank_fees_allocation
 #. odoo-python
@@ -206,7 +206,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation__line_ids
 #: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_form
 msgid "Allocated Journal Items"
-msgstr "Allocated Journal Items"
+msgstr ""
+
+#. module: bank_fees_allocation
+#: model:ir.ui.menu,name:bank_fees_allocation.menu_bank_fees_allocation
+msgid "Allocation"
+msgstr ""
 
 #. module: bank_fees_allocation
 #: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation__account_ids
@@ -214,19 +219,19 @@ msgstr "Allocated Journal Items"
 #: model:ir.model.fields,field_description:bank_fees_allocation.field_res_config_settings__bank_fees_allocation_account_ids
 #: model_terms:ir.ui.view,arch_db:bank_fees_allocation.res_config_settings_view_form_bank_fees_allocation
 msgid "Allocation Accounts"
-msgstr "Allocation Accounts"
+msgstr ""
 
 #. module: bank_fees_allocation
 #: model:ir.model.fields,field_description:bank_fees_allocation.field_res_company__bank_fees_allocation_journal_id
 #: model:ir.model.fields,field_description:bank_fees_allocation.field_res_config_settings__bank_fees_allocation_journal_id
 #: model_terms:ir.ui.view,arch_db:bank_fees_allocation.res_config_settings_view_form_bank_fees_allocation
 msgid "Allocation Journal"
-msgstr "Allocation Journal"
+msgstr ""
 
 #. module: bank_fees_allocation
 #: model:ir.actions.report,name:bank_fees_allocation.action_bank_fees_allocation_summary
 msgid "Allocation Summary"
-msgstr "Allocation Summary"
+msgstr ""
 
 #. module: bank_fees_allocation
 #: model:ir.model.fields,help:bank_fees_allocation.field_bank_fees_allocation__account_ids
@@ -235,15 +240,14 @@ msgstr ""
 
 #. module: bank_fees_allocation
 #: model:ir.actions.act_window,name:bank_fees_allocation.action_bank_fees_allocation_history
-#: model:ir.ui.menu,name:bank_fees_allocation.menu_bank_fees_allocation_history
 #: model_terms:ir.ui.view,arch_db:bank_fees_allocation.report_bank_fees_allocation_summary
 msgid "Allocations"
-msgstr "Allocations"
+msgstr ""
 
 #. module: bank_fees_allocation
 #: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_move_line_search
 msgid "Amount"
-msgstr "Amount"
+msgstr ""
 
 #. module: bank_fees_allocation
 #: model:ir.model.fields,help:bank_fees_allocation.field_bank_fees_allocation__net_amount
@@ -259,13 +263,13 @@ msgstr ""
 #. module: bank_fees_allocation
 #: model_terms:ir.ui.view,arch_db:bank_fees_allocation.bank_fees_allocation_wizard_form
 msgid "Amounts"
-msgstr "Amounts"
+msgstr ""
 
 #. module: bank_fees_allocation
 #: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_move_line_list
 #: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_move_line_search
 msgid "Analytic"
-msgstr "Analytic"
+msgstr ""
 
 #. module: bank_fees_allocation
 #: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation__message_attachment_count
@@ -278,20 +282,20 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:bank_fees_allocation.report_bank_fees_allocation_summary
 #: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_search
 msgid "Bank Account"
-msgstr "Bank Account"
+msgstr ""
 
 #. module: bank_fees_allocation
 #: model:ir.model.fields,field_description:bank_fees_allocation.field_res_company__bank_fees_bank_account_ids
 #: model:ir.model.fields,field_description:bank_fees_allocation.field_res_config_settings__bank_fees_bank_account_ids
 #: model_terms:ir.ui.view,arch_db:bank_fees_allocation.res_config_settings_view_form_bank_fees_allocation
 msgid "Bank Accounts"
-msgstr "Bank Accounts"
+msgstr ""
 
 #. module: bank_fees_allocation
 #. odoo-python
 #: code:addons/bank_fees_allocation/wizard/bank_fees_allocation_wizard.py:0
 msgid "Bank Fees"
-msgstr "Bank Fees"
+msgstr ""
 
 #. module: bank_fees_allocation
 #. odoo-python
@@ -303,7 +307,7 @@ msgstr "Bank Fees"
 #: model:ir.model,name:bank_fees_allocation.model_bank_fees_allocation
 #: model:ir.model,name:bank_fees_allocation.model_bank_fees_allocation_wizard
 #: model:ir.module.module,shortdesc:base.module_bank_fees_allocation
-#: model:ir.ui.menu,name:bank_fees_allocation.menu_bank_fees_allocation
+#: model:ir.ui.menu,name:bank_fees_allocation.menu_bank_fees_allocation_root
 #: model:res.groups.privilege,name:bank_fees_allocation.res_groups_privilege_bank_fees_allocation
 #: model_terms:ir.ui.view,arch_db:bank_fees_allocation.bank_fees_allocation_wizard_form
 #: model_terms:ir.ui.view,arch_db:bank_fees_allocation.res_config_settings_view_form_bank_fees_allocation
@@ -312,7 +316,7 @@ msgstr "Bank Fees"
 #: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_move_line_tree_bank_fees_allocation
 #: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_move_line_tree_bank_fees_allocation_header
 msgid "Bank Fees Allocation"
-msgstr "Bank Fees Allocation"
+msgstr ""
 
 #. module: bank_fees_allocation
 #: model:ir.model,name:bank_fees_allocation.model_bank_fees_allocation_report
@@ -324,7 +328,7 @@ msgstr ""
 #: code:addons/bank_fees_allocation/reports/bank_fees_allocation_report.py:0
 #: model_terms:ir.ui.view,arch_db:bank_fees_allocation.report_bank_fees_allocation_summary
 msgid "Bank Fees Allocation Summary"
-msgstr "Bank Fees Allocation Summary"
+msgstr ""
 
 #. module: bank_fees_allocation
 #: model:ir.model,name:bank_fees_allocation.model_bank_fees_allocation_line_action
@@ -343,7 +347,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:bank_fees_allocation.field_res_config_settings__bank_fees_expense_account_id
 #: model_terms:ir.ui.view,arch_db:bank_fees_allocation.res_config_settings_view_form_bank_fees_allocation
 msgid "Bank Fees Expense Account"
-msgstr "Bank Fees Expense Account"
+msgstr ""
 
 #. module: bank_fees_allocation
 #: model:ir.model.fields,help:bank_fees_allocation.field_bank_fees_allocation_wizard__bank_account_id
@@ -393,7 +397,7 @@ msgstr ""
 #. module: bank_fees_allocation
 #: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation__branch_ids
 msgid "Branches"
-msgstr "Branches"
+msgstr ""
 
 #. module: bank_fees_allocation
 #: model:res.groups,comment:bank_fees_allocation.group_bank_fees_allocation_user
@@ -403,18 +407,18 @@ msgstr ""
 #. module: bank_fees_allocation
 #: model_terms:ir.ui.view,arch_db:bank_fees_allocation.bank_fees_allocation_wizard_form
 msgid "Cancel"
-msgstr "Cancel"
+msgstr ""
 
 #. module: bank_fees_allocation
 #: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_form
 msgid "Cancel & Reverse"
-msgstr "Cancel & Reverse"
+msgstr ""
 
 #. module: bank_fees_allocation
 #: model:ir.model.fields.selection,name:bank_fees_allocation.selection__bank_fees_allocation__state__cancelled
 #: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_search
 msgid "Cancelled"
-msgstr "Cancelled"
+msgstr ""
 
 #. module: bank_fees_allocation
 #: model:ir.model,name:bank_fees_allocation.model_res_company
@@ -422,7 +426,7 @@ msgstr "Cancelled"
 #: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation_wizard__company_id
 #: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_search
 msgid "Company"
-msgstr "Company"
+msgstr ""
 
 #. module: bank_fees_allocation
 #: model:ir.model,name:bank_fees_allocation.model_res_config_settings
@@ -430,9 +434,14 @@ msgid "Config Settings"
 msgstr ""
 
 #. module: bank_fees_allocation
+#: model:ir.ui.menu,name:bank_fees_allocation.menu_bank_fees_allocation_configuration
+msgid "Configuration"
+msgstr ""
+
+#. module: bank_fees_allocation
 #: model_terms:ir.ui.view,arch_db:bank_fees_allocation.bank_fees_allocation_wizard_form
 msgid "Confirm"
-msgstr "Confirm"
+msgstr ""
 
 #. module: bank_fees_allocation
 #. odoo-python
@@ -463,7 +472,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation__currency_id
 #: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation_wizard__currency_id
 msgid "Currency"
-msgstr "Currency"
+msgstr ""
 
 #. module: bank_fees_allocation
 #: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation__currency_note
@@ -477,7 +486,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_move_line_search
 #: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_search
 msgid "Date"
-msgstr "Date"
+msgstr ""
 
 #. module: bank_fees_allocation
 #: model:ir.model.fields,field_description:bank_fees_allocation.field_account_move_line__display_name
@@ -499,19 +508,19 @@ msgstr ""
 #: model:ir.model.fields.selection,name:bank_fees_allocation.selection__bank_fees_allocation__state__done
 #: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_search
 msgid "Done"
-msgstr "Done"
+msgstr ""
 
 #. module: bank_fees_allocation
 #: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation__user_id
 msgid "Done By"
-msgstr "Done By"
+msgstr ""
 
 #. module: bank_fees_allocation
 #: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_form
 #: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_move_line_list
 #: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_move_line_search
 msgid "Entry"
-msgstr "Entry"
+msgstr ""
 
 #. module: bank_fees_allocation
 #: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation_wizard__fee_account_id
@@ -522,12 +531,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation__fee_amount
 #: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation_wizard__fee_amount
 msgid "Fee Amount"
-msgstr "Fee Amount"
+msgstr ""
 
 #. module: bank_fees_allocation
 #: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation__fee_ratio
 msgid "Fee Ratio (%)"
-msgstr "Fee Ratio (%)"
+msgstr ""
 
 #. module: bank_fees_allocation
 #: model_terms:ir.ui.view,arch_db:bank_fees_allocation.report_bank_fees_allocation_summary
@@ -557,6 +566,11 @@ msgstr ""
 #. module: bank_fees_allocation
 #: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation__has_message
 msgid "Has Message"
+msgstr ""
+
+#. module: bank_fees_allocation
+#: model:ir.ui.menu,name:bank_fees_allocation.menu_bank_fees_allocation_history
+msgid "History"
 msgstr ""
 
 #. module: bank_fees_allocation
@@ -591,7 +605,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation_wizard__journal_id
 #: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_move_line_search
 msgid "Journal"
-msgstr "Journal"
+msgstr ""
 
 #. module: bank_fees_allocation
 #. odoo-python
@@ -601,19 +615,19 @@ msgstr "Journal"
 #: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_form
 #: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_move_line_search
 msgid "Journal Entry"
-msgstr "Journal Entry"
+msgstr ""
 
 #. module: bank_fees_allocation
 #: model:ir.model,name:bank_fees_allocation.model_account_move_line
 #: model_terms:ir.ui.view,arch_db:bank_fees_allocation.bank_fees_allocation_wizard_form
 msgid "Journal Item"
-msgstr "Journal Item"
+msgstr ""
 
 #. module: bank_fees_allocation
 #: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation_wizard__line_ids
 #: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_form
 msgid "Journal Items"
-msgstr "Journal Items"
+msgstr ""
 
 #. module: bank_fees_allocation
 #: model:ir.model.fields,help:bank_fees_allocation.field_bank_fees_allocation__move_id
@@ -656,7 +670,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_move_line_list
 #: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_move_line_search
 msgid "Label"
-msgstr "Label"
+msgstr ""
 
 #. module: bank_fees_allocation
 #: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation__write_uid
@@ -694,7 +708,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation__net_amount
 #: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation_wizard__net_amount
 msgid "Net Amount"
-msgstr "Net Amount"
+msgstr ""
 
 #. module: bank_fees_allocation
 #. odoo-python
@@ -769,7 +783,7 @@ msgstr ""
 #. module: bank_fees_allocation
 #: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_move_line_search
 msgid "Partner"
-msgstr "Partner"
+msgstr ""
 
 #. module: bank_fees_allocation
 #: model_terms:ir.ui.view,arch_db:bank_fees_allocation.report_bank_fees_allocation_summary
@@ -799,22 +813,22 @@ msgstr ""
 #. module: bank_fees_allocation
 #: model_terms:ir.ui.view,arch_db:bank_fees_allocation.res_config_settings_view_form_bank_fees_allocation
 msgid "Pick a miscellaneous journal..."
-msgstr "Pick a miscellaneous journal..."
+msgstr ""
 
 #. module: bank_fees_allocation
 #: model_terms:ir.ui.view,arch_db:bank_fees_allocation.res_config_settings_view_form_bank_fees_allocation
 msgid "Pick an expense account..."
-msgstr "Pick an expense account..."
+msgstr ""
 
 #. module: bank_fees_allocation
 #: model_terms:ir.ui.view,arch_db:bank_fees_allocation.res_config_settings_view_form_bank_fees_allocation
 msgid "Pick the bank accounts..."
-msgstr "Pick the bank accounts..."
+msgstr ""
 
 #. module: bank_fees_allocation
 #: model_terms:ir.ui.view,arch_db:bank_fees_allocation.res_config_settings_view_form_bank_fees_allocation
 msgid "Pick the clearing accounts..."
-msgstr "Pick the clearing accounts..."
+msgstr ""
 
 #. module: bank_fees_allocation
 #. odoo-python
@@ -840,7 +854,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_list
 #: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_search
 msgid "Reference"
-msgstr "Reference"
+msgstr ""
 
 #. module: bank_fees_allocation
 #: model:ir.model.fields,help:bank_fees_allocation.field_bank_fees_allocation_wizard__ref
@@ -854,6 +868,11 @@ msgid "Report Dates"
 msgstr ""
 
 #. module: bank_fees_allocation
+#: model:ir.ui.menu,name:bank_fees_allocation.menu_bank_fees_allocation_reports
+msgid "Reports"
+msgstr ""
+
+#. module: bank_fees_allocation
 #: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation__message_has_sms_error
 msgid "SMS Delivery error"
 msgstr ""
@@ -861,12 +880,12 @@ msgstr ""
 #. module: bank_fees_allocation
 #: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_search
 msgid "Search Bank Fees Allocations"
-msgstr "Search Bank Fees Allocations"
+msgstr ""
 
 #. module: bank_fees_allocation
 #: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_move_line_search
 msgid "Search Journal Items to Allocate"
-msgstr "Search Journal Items to Allocate"
+msgstr ""
 
 #. module: bank_fees_allocation
 #. odoo-python
@@ -877,7 +896,7 @@ msgstr ""
 #. module: bank_fees_allocation
 #: model_terms:ir.ui.view,arch_db:bank_fees_allocation.bank_fees_allocation_wizard_form
 msgid "Selected Journal Items"
-msgstr "Selected Journal Items"
+msgstr ""
 
 #. module: bank_fees_allocation
 #: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation__sequence_number
@@ -890,6 +909,12 @@ msgid "Sequence Prefix"
 msgstr ""
 
 #. module: bank_fees_allocation
+#: model:ir.actions.act_window,name:bank_fees_allocation.action_bank_fees_allocation_settings
+#: model:ir.ui.menu,name:bank_fees_allocation.menu_bank_fees_allocation_settings
+msgid "Settings"
+msgstr ""
+
+#. module: bank_fees_allocation
 #: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_search
 msgid "Source Account"
 msgstr ""
@@ -897,7 +922,7 @@ msgstr ""
 #. module: bank_fees_allocation
 #: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation__source_account_ids
 msgid "Source Accounts"
-msgstr "Source Accounts"
+msgstr ""
 
 #. module: bank_fees_allocation
 #: model:ir.model.fields,help:bank_fees_allocation.field_bank_fees_allocation__line_ids
@@ -916,7 +941,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:bank_fees_allocation.report_bank_fees_allocation_summary
 #: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_search
 msgid "Status"
-msgstr "Status"
+msgstr ""
 
 #. module: bank_fees_allocation
 #: model:ir.model.fields,help:bank_fees_allocation.field_bank_fees_allocation__total_amount
@@ -1073,7 +1098,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_list
 #: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_search
 msgid "Total Amount"
-msgstr "Total Amount"
+msgstr ""
 
 #. module: bank_fees_allocation
 #: model_terms:ir.ui.view,arch_db:bank_fees_allocation.bank_fees_allocation_wizard_form
@@ -1096,24 +1121,24 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:bank_fees_allocation.report_bank_fees_allocation_summary
 #: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_list
 msgid "Total Fees"
-msgstr "Total Fees"
+msgstr ""
 
 #. module: bank_fees_allocation
 #: model_terms:ir.ui.view,arch_db:bank_fees_allocation.report_bank_fees_allocation_summary
 #: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_list
 msgid "Total Net"
-msgstr "Total Net"
+msgstr ""
 
 #. module: bank_fees_allocation
 #: model_terms:ir.ui.view,arch_db:bank_fees_allocation.report_bank_fees_allocation_summary
 msgid "Total Sales"
-msgstr "Total Sales"
+msgstr ""
 
 #. module: bank_fees_allocation
 #: model:res.groups,name:bank_fees_allocation.group_bank_fees_allocation_user
 #: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_search
 msgid "User"
-msgstr "User"
+msgstr ""
 
 #. module: bank_fees_allocation
 #: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_move_line_search
@@ -1131,4 +1156,3 @@ msgstr ""
 #: code:addons/bank_fees_allocation/models/bank_fees_allocation.py:0
 msgid "id"
 msgstr ""
-

@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1a3a8f"/>
+      <stop offset="1" stop-color="#0b1d5c"/>
+    </linearGradient>
+    <linearGradient id="card" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2f6bff"/>
+      <stop offset="1" stop-color="#1237b8"/>
+    </linearGradient>
+    <linearGradient id="chip" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffe28a"/>
+      <stop offset="1" stop-color="#e0a92b"/>
+    </linearGradient>
+    <linearGradient id="badge" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffb347"/>
+      <stop offset="1" stop-color="#f06a1d"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#000" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <!-- app background -->
+  <rect width="512" height="512" rx="104" fill="url(#bg)"/>
+
+  <!-- card -->
+  <g filter="url(#shadow)" transform="rotate(-8 256 256)">
+    <rect x="56" y="120" width="400" height="256" rx="30" fill="url(#card)"/>
+    <!-- magnetic stripe highlight -->
+    <rect x="56" y="160" width="400" height="44" fill="#0a1f6b" opacity="0.55"/>
+    <!-- chip -->
+    <rect x="86" y="236" width="68" height="52" rx="10" fill="url(#chip)"/>
+    <path d="M86 262h68M120 236v52" stroke="#b9851a" stroke-width="3" fill="none" opacity="0.7"/>
+    <!-- card number dots -->
+    <g fill="#ffffff" opacity="0.9">
+      <circle cx="96" cy="326" r="6"/><circle cx="118" cy="326" r="6"/><circle cx="140" cy="326" r="6"/><circle cx="162" cy="326" r="6"/>
+      <circle cx="196" cy="326" r="6"/><circle cx="218" cy="326" r="6"/><circle cx="240" cy="326" r="6"/><circle cx="262" cy="326" r="6"/>
+    </g>
+    <!-- generic overlapping circles (no brand mark) -->
+    <circle cx="384" cy="326" r="26" fill="#ffffff" opacity="0.85"/>
+    <circle cx="410" cy="326" r="26" fill="#9fc0ff" opacity="0.85"/>
+  </g>
+
+  <!-- percent badge -->
+  <g filter="url(#shadow)">
+    <circle cx="384" cy="150" r="74" fill="url(#badge)"/>
+    <circle cx="384" cy="150" r="74" fill="none" stroke="#fff" stroke-width="6" opacity="0.9"/>
+    <circle cx="362" cy="128" r="12" fill="#fff"/>
+    <circle cx="406" cy="172" r="12" fill="#fff"/>
+    <path d="M404 118L364 182" stroke="#fff" stroke-width="12" stroke-linecap="round"/>
+  </g>
+</svg>

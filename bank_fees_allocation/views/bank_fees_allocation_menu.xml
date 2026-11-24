@@ -2,24 +2,68 @@
 <odoo>
 
     <!--
-        Menu: Accounting > Bank Fees Allocation.
+        The module is a **standalone application**: it has its own icon on
+        the home screen / app drawer, next to the other apps.
+
+        The root menu has no parent: it is the entry point of the
+        application.  Its ``web_icon`` points to the icon of the module, so
+        the web client shows it as an application of its own.
+
+        Every menu of the module lives under this root menu:
+
+        * *Allocation*  : the journal items to allocate (the default
+          entry of the application).
+        * *History*     : the allocations that were already posted.
+        * *Reports*     : the PDF summary of the allocations.
+        * *Configuration* : the settings of the application (Administrator
+          group only).
+    -->
+    <menuitem id="menu_bank_fees_allocation_root"
+              name="Bank Fees Allocation"
+              web_icon="bank_fees_allocation,static/description/icon.png"
+              sequence="35"
+              groups="bank_fees_allocation.group_bank_fees_allocation_user"/>
+
+    <!--
+        The default entry of the application: the journal items to
+        allocate.
 
         The item points to the server action that builds the window action
         with the domain computed from the settings (allocated accounts,
         posted items, not reconciled, company of the user).
     -->
     <menuitem id="menu_bank_fees_allocation"
-              name="Bank Fees Allocation"
-              parent="account.menu_finance_entries"
+              name="Allocation"
+              parent="menu_bank_fees_allocation_root"
               action="action_bank_fees_allocation_lines"
+              groups="bank_fees_allocation.group_bank_fees_allocation_user"
+              sequence="10"/>
+
+    <menuitem id="menu_bank_fees_allocation_history"
+              name="History"
+              parent="menu_bank_fees_allocation_root"
+              action="action_bank_fees_allocation_history"
+              groups="bank_fees_allocation.group_bank_fees_allocation_user"
+              sequence="20"/>
+
+    <menuitem id="menu_bank_fees_allocation_reports"
+              name="Reports"
+              parent="menu_bank_fees_allocation_root"
+              action="action_bank_fees_allocation_summary"
               groups="bank_fees_allocation.group_bank_fees_allocation_user"
               sequence="30"/>
 
-    <menuitem id="menu_bank_fees_allocation_history"
-              name="Allocations"
-              parent="account.menu_finance_entries"
-              action="action_bank_fees_allocation_history"
-              groups="bank_fees_allocation.group_bank_fees_allocation_user"
-              sequence="31"/>
+    <menuitem id="menu_bank_fees_allocation_configuration"
+              name="Configuration"
+              parent="menu_bank_fees_allocation_root"
+              groups="bank_fees_allocation.group_bank_fees_allocation_administrator"
+              sequence="90"/>
+
+    <menuitem id="menu_bank_fees_allocation_settings"
+              name="Settings"
+              parent="menu_bank_fees_allocation_configuration"
+              action="action_bank_fees_allocation_settings"
+              groups="bank_fees_allocation.group_bank_fees_allocation_administrator"
+              sequence="10"/>
 
 </odoo>

@@ -1,0 +1,244 @@
+# Arabic translation of the Bank Fees Allocation module.
+# This file contains the translation of the following modules:
+# 	* bank_fees_allocation
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 20.0+e-20260925\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-24 11:54+0000\n"
+"PO-Revision-Date: 2026-11-24 11:54+0000\n"
+"Last-Translator: \n"
+"Language-Team: Arabic\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 ? 4 : 5);\n"
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,help:bank_fees_allocation.field_res_config_settings__bank_fees_expense_account_id
+msgid "Account where the bank fees are booked."
+msgstr "الحساب الذي تُسجَّل فيه رسوم البنك."
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,help:bank_fees_allocation.field_res_company__bank_fees_expense_account_id
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.res_config_settings_view_form_bank_fees_allocation
+msgid ""
+"Account where the bank fees are booked. It must be configured, otherwise the"
+" allocation cannot be confirmed."
+msgstr "الحساب الذي تُسجَّل فيه رسوم البنك. يجب إعداده، وإلا فلا يمكن تأكيد التوزيع."
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,help:bank_fees_allocation.field_bank_fees_allocation_wizard__fee_account_id
+msgid ""
+"Account where the bank fees are booked. Only the expense accounts of the "
+"company are proposed. Pre-filled from the company settings."
+msgstr "الحساب الذي تُسجَّل فيه رسوم البنك. تُقترح حسابات المصروفات الخاصة بالشركة فقط. يُملأ مسبقًا من إعدادات الشركة."
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,help:bank_fees_allocation.field_res_company__bank_fees_allocation_account_ids
+msgid ""
+"Accounts the accountant works on: the Visa/card clearing accounts the "
+"aggregated bank settlements are booked against. Only the journal items of "
+"these accounts show up in the Bank Fees Allocation view. A branch may "
+"configure several accounts."
+msgstr "الحسابات التي يعمل عليها المحاسب: حسابات تسوية بطاقات فيزا التي تُسجَّل عليها تسويات البنك المجمّعة. تظهر بنود القيود الخاصة بهذه الحسابات فقط في عرض توزيع رسوم البنك. يمكن للفرع إعداد عدة حسابات."
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,help:bank_fees_allocation.field_res_config_settings__bank_fees_allocation_account_ids
+msgid ""
+"Accounts the accountant works on: the Visa/card clearing accounts. Only the "
+"journal items of these accounts show up in the Bank Fees Allocation view."
+msgstr "الحسابات التي يعمل عليها المحاسب: حسابات تسوية بطاقات فيزا. تظهر بنود القيود الخاصة بهذه الحسابات فقط في عرض توزيع رسوم البنك."
+
+#. module: bank_fees_allocation
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.res_config_settings_view_form_bank_fees_allocation
+msgid ""
+"Accounts the accountant works on: the Visa/card clearing accounts. Only the "
+"journal items of these accounts show up in the Bank Fees Allocation view. A "
+"branch may configure several accounts."
+msgstr "الحسابات التي يعمل عليها المحاسب: حسابات تسوية بطاقات فيزا. تظهر بنود القيود الخاصة بهذه الحسابات فقط في عرض توزيع رسوم البنك. يمكن للفرع إعداد عدة حسابات."
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_res_config_settings__allowed_allocation_account_ids
+msgid "Allowed Allocation Accounts"
+msgstr "حسابات التوزيع المسموح بها"
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation_wizard__allowed_bank_account_ids
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_res_config_settings__allowed_bank_account_ids
+msgid "Allowed Bank Accounts"
+msgstr "الحسابات البنكية المسموح بها"
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_res_config_settings__allowed_expense_account_ids
+msgid "Allowed Expense Accounts"
+msgstr "حسابات المصروفات المسموح بها"
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation_wizard__allowed_fee_account_ids
+msgid "Allowed Fee Accounts"
+msgstr "حسابات الرسوم المسموح بها"
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation_wizard__allowed_journal_ids
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_res_config_settings__allowed_journal_ids
+msgid "Allowed Journals"
+msgstr "دفاتر اليومية المسموح بها"
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,help:bank_fees_allocation.field_bank_fees_allocation_wizard__bank_account_id
+msgid ""
+"Bank account the aggregated settlement is credited to. Only the bank "
+"accounts configured in the settings are proposed."
+msgstr "الحساب البنكي الذي يُقيَّد فيه مبلغ التسوية المجمّع. تُقترح الحسابات البنكية المعدّة في الإعدادات فقط."
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,help:bank_fees_allocation.field_bank_fees_allocation_wizard__allowed_bank_account_ids
+msgid ""
+"Bank accounts the user may pick, for the drop-down of the bank account."
+msgstr "الحسابات البنكية التي يمكن للمستخدم اختيارها، لقائمة الحساب البنكي المنسدلة."
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,field_description:branch_management.field_account_move_line__branch_id
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.report_bank_fees_allocation_summary
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_move_line_list
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_move_line_search
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_search
+msgid "Branch"
+msgstr "الفرع"
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation__branch_ids
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation_wizard__branch_ids
+msgid "Branches"
+msgstr "الفروع"
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,help:bank_fees_allocation.field_bank_fees_allocation__branch_ids
+msgid "Branches of the allocated source journal items."
+msgstr "فروع بنود القيود المصدرية المخصصة."
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,help:bank_fees_allocation.field_bank_fees_allocation_wizard__branch_ids
+msgid "Branches of the selected journal items."
+msgstr "فروع بنود القيود المحددة."
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,help:bank_fees_allocation.field_bank_fees_allocation_wizard__move_ids
+msgid ""
+"Every journal entry generated by the allocation: one per branch of the "
+"selection."
+msgstr "كل قيد يومية ينشئه التوزيع: قيد واحد لكل فرع من الفروع المحددة."
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,help:bank_fees_allocation.field_bank_fees_allocation__move_ids
+msgid ""
+"Every journal entry generated by this allocation: one per branch of the "
+"allocated journal items."
+msgstr "كل قيد يومية ينشئه هذا التوزيع: قيد واحد لكل فرع من فروع بنود القيود المخصصة."
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,help:bank_fees_allocation.field_bank_fees_allocation_wizard__allowed_fee_account_ids
+msgid ""
+"Expense accounts the user may pick, for the drop-down of the fee account."
+msgstr "حسابات المصروفات التي يمكن للمستخدم اختيارها، لقائمة حساب الرسوم المنسدلة."
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,help:bank_fees_allocation.field_bank_fees_allocation_wizard__move_id
+msgid ""
+"First journal entry generated by the allocation (the entries are split per "
+"branch)."
+msgstr "أول قيد يومية ينشئه التوزيع (تُقسَّم القيود حسب الفرع)."
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,help:bank_fees_allocation.field_bank_fees_allocation__move_id
+msgid "First journal entry generated by this allocation."
+msgstr "أول قيد يومية ينشئه هذا التوزيع."
+
+#. module: bank_fees_allocation
+#. odoo-python
+#: code:addons/bank_fees_allocation/models/bank_fees_allocation.py:0
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation__move_ids
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation_wizard__move_ids
+msgid "Journal Entries"
+msgstr "قيود اليومية"
+
+#. module: bank_fees_allocation
+#. odoo-python
+#: code:addons/bank_fees_allocation/models/bank_fees_allocation.py:0
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation__move_id
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation_wizard__move_id
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_form
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_move_line_search
+msgid "Journal Entry"
+msgstr "قيد اليومية"
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,help:bank_fees_allocation.field_bank_fees_allocation_wizard__allowed_journal_ids
+msgid "Journals the user may pick, for the drop-down of the journal."
+msgstr "دفاتر اليومية التي يمكن للمستخدم اختيارها، لقائمة دفتر اليومية المنسدلة."
+
+#. module: bank_fees_allocation
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.report_bank_fees_allocation_summary
+msgid "No branch"
+msgstr "بدون فرع"
+
+#. module: bank_fees_allocation
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.bank_fees_allocation_wizard_form
+msgid ""
+"One journal entry is created per branch, posted and reconciled with the\n"
+"                        selected journal items: the bank receives the net amount, the fee is booked\n"
+"                        on the fee account and every source account is credited."
+msgstr "يُنشأ قيد يومية واحد لكل فرع، ثم يُرحَّل ويُسوَّى مع بنود القيود المحددة: يستلم البنك صافي المبلغ، وتُسجَّل الرسوم على حساب الرسوم، ويُقيَّد كل حساب مصدر."
+
+#. module: bank_fees_allocation
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.report_bank_fees_allocation_summary
+msgid "Per Bank Account"
+msgstr "حسب الحساب البنكي"
+
+#. module: bank_fees_allocation
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.report_bank_fees_allocation_summary
+msgid "Per Branch"
+msgstr "حسب الفرع"
+
+#. module: bank_fees_allocation
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.report_bank_fees_allocation_summary
+msgid "Per Day"
+msgstr "حسب اليوم"
+
+#. module: bank_fees_allocation
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.report_bank_fees_allocation_summary
+msgid "Per Month"
+msgstr "حسب الشهر"
+
+#. module: bank_fees_allocation
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.report_bank_fees_allocation_summary
+msgid "Per Source Account"
+msgstr "حسب الحساب المصدر"
+
+#. module: bank_fees_allocation
+#. odoo-python
+#: code:addons/bank_fees_allocation/wizard/bank_fees_allocation_wizard.py:0
+msgid ""
+"The journal %(journal)s belongs to the branch %(branch)s, but the selected journal items belong to %(branches)s.\n"
+"\n"
+"Choose a journal without a branch to allocate items of several branches, or select only the items of the branch of the journal."
+msgstr "دفتر اليومية %(journal)s يتبع الفرع %(branch)s، لكن بنود القيود المحددة تتبع %(branches)s.\n\nاختر دفتر يومية بدون فرع لتوزيع بنود قيود عدة فروع، أو حدد بنود القيود الخاصة بفرع دفتر اليومية فقط."
+
+#. module: bank_fees_allocation
+#. odoo-python
+#: code:addons/bank_fees_allocation/wizard/bank_fees_allocation_wizard.py:0
+msgid ""
+"The selected journal items cannot be allocated in one go: their amounts, grouped by branch, do not add up to the total amount of the selection (%s against %s).\n"
+"\n"
+"Please select journal items of the same direction."
+msgstr "لا يمكن توزيع بنود القيود المحددة دفعة واحدة: مبالغها، مجمّعة حسب الفرع، لا تساوي إجمالي المبلغ المحدد (%s مقابل %s).\n\nيرجى تحديد بنود قيود من نفس الاتجاه."
+
+#. module: bank_fees_allocation
+#. odoo-python
+#: code:addons/bank_fees_allocation/wizard/bank_fees_allocation_wizard.py:0
+msgid "no branch"
+msgstr "بدون فرع"
+

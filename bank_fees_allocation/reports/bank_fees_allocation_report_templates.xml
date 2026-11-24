@@ -62,6 +62,32 @@
                     </tbody>
                 </table>
 
+                <!-- ================= per branch ================= -->
+                <h3>Per Branch</h3>
+                <table class="table table-sm bfa-summary">
+                    <thead>
+                        <tr>
+                            <th>Branch</th>
+                            <th>Total Sales</th>
+                            <th>Total Fees</th>
+                            <th>Total Net</th>
+                            <th>Count</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr t-foreach="report._report_by_branch(docs)" t-as="row">
+                            <td>
+                                <span t-if="row['branch']" t-out="row['branch'].display_name"/>
+                                <span t-else="">No branch</span>
+                            </td>
+                            <td><span t-out="currency.format(row['total_sales'])"/></td>
+                            <td><span t-out="currency.format(row['total_fees'])"/></td>
+                            <td><span t-out="currency.format(row['total_net'])"/></td>
+                            <td><span t-out="row['count']"/></td>
+                        </tr>
+                    </tbody>
+                </table>
+
                 <!-- ================= per bank account ================= -->
                 <h3>Per Bank Account</h3>
                 <table class="table table-sm bfa-summary">
@@ -160,6 +186,7 @@
                         <tr>
                             <th>Reference</th>
                             <th>Date</th>
+                            <th>Branch</th>
                             <th>Bank Account</th>
                             <th>Total Sales</th>
                             <th>Fees</th>
@@ -171,6 +198,7 @@
                         <tr t-foreach="docs" t-as="doc">
                             <td><span t-out="doc.name"/></td>
                             <td><span t-out="doc.date"/></td>
+                            <td><span t-out="', '.join(doc.branch_ids.mapped('display_name'))"/></td>
                             <td><span t-out="doc.bank_account_id.display_name"/></td>
                             <td><span t-out="doc.currency_id.format(doc.total_amount)"/></td>
                             <td><span t-out="doc.currency_id.format(doc.fee_amount)"/></td>

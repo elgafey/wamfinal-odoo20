@@ -17,10 +17,11 @@
                 <field name="allowed_bank_account_ids" invisible="1"/>
                 <field name="allowed_fee_account_ids" invisible="1"/>
                 <field name="allowed_journal_ids" invisible="1"/>
+                <field name="move_ids" invisible="1"/>
 
                 <div class="alert alert-info" role="alert">
                     <p>
-                        One single journal entry will be created, posted and reconciled with the
+                        One journal entry is created per branch, posted and reconciled with the
                         selected journal items: the bank receives the net amount, the fee is booked
                         on the fee account and every source account is credited.
                     </p>
@@ -32,6 +33,7 @@
                                domain="[('id', 'in', allowed_journal_ids)]"/>
                         <field name="date"/>
                         <field name="ref"/>
+                        <field name="branch_ids" widget="many2many_tags" readonly="1"/>
                     </group>
                     <group string="Amounts">
                         <field name="total_amount" readonly="1"/>
@@ -49,6 +51,7 @@
                         <list create="false" edit="false" delete="false">
                             <field name="date"/>
                             <field name="move_id"/>
+                            <field name="branch_id"/>
                             <field name="partner_id"/>
                             <field name="account_id"/>
                             <field name="name" string="Label"/>

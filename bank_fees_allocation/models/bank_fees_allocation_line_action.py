@@ -74,7 +74,7 @@ class BankFeesAllocationLineAction(models.AbstractModel):
             ).id,
             'domain': self._allocation_domain(),
             'context': {
-                'search_default_group_by_account': 1,
+                'search_default_group_by_branch': 1,
                 'search_default_posted': 1,
                 'search_default_not_reconciled': 1,
             },

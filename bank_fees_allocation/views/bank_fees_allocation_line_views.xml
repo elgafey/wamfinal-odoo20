@@ -9,7 +9,8 @@
         so that the domain, the grouping and the columns are exactly what
         the allocation needs:
 
-        * grouped by account by default (the group header shows the sum);
+        * grouped by branch by default (the group header shows the balance
+          sum);
         * the sum of the selected lines is shown in the footer;
         * the *Bank Fees Allocation* button opens the wizard.
     -->
@@ -26,6 +27,7 @@
                             groups="bank_fees_allocation.group_bank_fees_allocation_user"/>
                 </header>
                 <field name="date"/>
+                <field name="branch_id" string="Branch" optional="show" options="{'no_open': True}"/>
                 <field name="move_id" column_invisible="True"/>
                 <field name="move_name" string="Entry" widget="open_move_widget"/>
                 <field name="partner_id" optional="show"/>
@@ -67,6 +69,7 @@
                 <field name="move_id" string="Journal Entry" filter_domain="[
                     '|', ('move_id.name', 'ilike', self), ('move_id.ref', 'ilike', self)]"/>
                 <field name="account_id" context="{'active_test': False}"/>
+                <field name="branch_id"/>
                 <field name="partner_id"/>
                 <field name="journal_id"/>
                 <field name="balance" string="Amount" filter_domain="[
@@ -83,6 +86,7 @@
                         domain="[('date', '&gt;=', context.get('date_from')), ('date', '&lt;=', context.get('date_to'))]"
                         invisible="1"/>
                 <group>
+                    <filter string="Branch" name="group_by_branch" domain="[]" context="{'group_by': 'branch_id'}"/>
                     <filter string="Account" name="group_by_account" domain="[]" context="{'group_by': 'account_id'}"/>
                     <filter string="Date" name="group_by_date" domain="[]" context="{'group_by': 'date'}"/>
                     <filter string="Partner" name="group_by_partner" domain="[]" context="{'group_by': 'partner_id'}"/>

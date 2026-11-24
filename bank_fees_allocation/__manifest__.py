@@ -14,7 +14,8 @@ Salespeople record card (Visa) sales, e.g. 100.00.  The bank settles the
 card transactions of the day in **one single aggregated line**, net of the
 fees (95.00 deposited, 5.00 of fees).  The accountant has to group the
 original sales journal items, type the amount the bank really deposited
-and post **one** entry that splits the fee and reconciles everything.
+and post one entry **per branch** that splits the fee and reconciles
+everything.
 
 What the module does
 ---------------------
@@ -22,19 +23,25 @@ What the module does
 * A dedicated view (*Accounting > Bank Fees Allocation*) lists the journal
   items of the configured allocation accounts: posted entries only, not
   fully reconciled, restricted to the company of the user.  The list is
-  grouped by account (the group header shows the balance sum) and can be
-  grouped by date, partner, journal, analytic distribution or entry.
+  grouped by branch (the group header shows the balance sum) and can be
+  grouped by account, date, partner, journal, analytic distribution or
+  entry.
 * The *Bank Fees Allocation* button of the list header opens a wizard on
   the selected lines, **whatever their number**: the lines may come from
-  several days and from several accounts.
+  several days, several accounts and several branches.
 * The wizard computes the total of the selection and keeps two amounts
   consistent both ways: typing the **Net Amount** recomputes the
   **Fee Amount**, typing the **Fee Amount** recomputes the **Net Amount**.
-* On confirmation, **one** journal entry is created and posted:
+* On confirmation, **one journal entry per branch** is created and posted:
 
-      Debit  Bank Account                95.00   (net amount)
-      Debit  Bank Fees Expense Account     5.00   (fee, analytic carried over)
+      Debit  Bank Account                95.00   (net amount of the branch)
+      Debit  Bank Fees Expense Account     5.00   (fee of the branch)
       Credit Visa / Card clearing       100.00   (one line per source account)
+
+  The branch of the source journal items is carried over to every generated
+  line.  The fees and the net amount are split over the branches
+  proportionally to the amount of each branch, with a rounding that keeps
+  every entry balanced.
 
   The analytic distribution of the source journal items is carried over
   **proportionally** to the fee line and to the credit lines, so the cost
@@ -46,21 +53,22 @@ History
 -------
 
 Every confirmation stores a ``bank.fees.allocation`` record: its reference,
-its date, its company, its user, the bank account, the total, the net
-amount, the fee, the generated journal entry and the source journal items.
-The *Cancel* button unreconciles the entry, posts its reversal and frees
+its date, its company, its branches, its user, the bank account, the total,
+the net amount, the fee, the generated journal entries and the source
+journal items.
+The *Cancel* button unreconciles the entries, posts their reversal and frees
 the original journal items: they can be allocated again.
 
 Reports
 -------
 
-* List, pivot and graph views of the allocations: fees by bank account, by
-  period (day / month), by source account (branch) and by user.
-* Filters on the date range, the bank account, the source account and the
-  state.
+* List, pivot and graph views of the allocations: fees by branch, by bank
+  account, by period (day / month), by source account and by user.
+* Filters on the date range, the branch, the bank account, the source
+  account and the state.
 * The XLSX export is the **standard list export** of Odoo.
-* A printable QWeb PDF summary (total sales, total fees, net, per bank
-  account, per period, per source account).
+* A printable QWeb PDF summary (total sales, total fees, net, per branch,
+  per bank account, per period, per source account).
 
 Configuration
 -------------
@@ -96,14 +104,13 @@ fields of ``account.move.line``, the ``action_post()`` workflow of
 ``account.move``, the ``sequence.mixin`` mechanism of Odoo 20 and the
 ``res.groups.privilege`` group format of Odoo 20.
 
-It depends on ``account`` (and on ``mail``, which ``account`` already
-brings) **only**: it installs and runs on the Community *and* on the
-Enterprise edition.
+It depends on ``account``, ``mail`` and ``branch_management``: it installs
+and runs on the Community *and* on the Enterprise edition.
     """,
     'author': 'Islam Elgafey',
     'website': '',
     'license': 'LGPL-3',
-    'depends': ['account', 'mail'],
+    'depends': ['account', 'mail', 'branch_management'],
     'data': [
         'security/bank_fees_allocation_security.xml',
         'security/ir.access.csv',

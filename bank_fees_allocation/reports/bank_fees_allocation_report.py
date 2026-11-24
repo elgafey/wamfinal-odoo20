@@ -111,6 +111,49 @@ class BankFeesAllocationReport(models.AbstractModel):
         return [buckets[key] for key in sorted(buckets)]
 
     # ------------------------------------------------------------------
+    # Breakdown per branch
+    # ------------------------------------------------------------------
+    def _report_by_branch(self, allocations):
+        """ Breakdown of the fees per branch.
+
+        The generated entries are created **one per branch**, so the branch
+        of the fees is read from them: the fee line of an entry is the line
+        that is neither the bank line nor one of the source-account lines.
+        The items without a branch (and the allocations created before the
+        branch support) are grouped under an empty branch.
+
+        :return: a list of dictionaries sorted by the total fees.
+        """
+        allocations = allocations.exists()
+        rows = {}
+        for allocation in allocations:
+            moves = allocation.move_ids or allocation.move_id
+            if not moves:
+                continue
+            source_accounts = allocation.line_ids.account_id
+            for move in moves:
+                branch = move.branch_id
+                row = rows.setdefault(branch.id or 0, {
+                    'branch': branch,
+                    'total_sales': 0.0,
+                    'total_fees': 0.0,
+                    'total_net': 0.0,
+                    'count': 0,
+                })
+                bank_lines = move.line_ids.filtered(
+                    lambda line: line.account_id == allocation.bank_account_id)
+                credit_lines = move.line_ids.filtered(
+                    lambda line: line.account_id in source_accounts)
+                fee_lines = move.line_ids - bank_lines - credit_lines
+                row['total_sales'] += sum(abs(line.balance) for line in credit_lines)
+                row['total_fees'] += sum(abs(line.balance) for line in fee_lines)
+                row['total_net'] += sum(abs(line.balance) for line in bank_lines)
+                row['count'] += 1
+        result = list(rows.values())
+        result.sort(key=lambda row: row['total_fees'], reverse=True)
+        return result
+
+    # ------------------------------------------------------------------
     # Breakdown per source account (branch)
     # ------------------------------------------------------------------
     def _report_by_account(self, allocations):

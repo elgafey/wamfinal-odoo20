@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 20.0+e-20260925\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-24 09:59+0000\n"
-"PO-Revision-Date: 2026-11-24 09:59+0000\n"
+"POT-Creation-Date: 2026-11-24 11:54+0000\n"
+"PO-Revision-Date: 2026-11-24 11:54+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -26,7 +26,8 @@ msgid ""
 "card transactions of the day in **one single aggregated line**, net of the\n"
 "fees (95.00 deposited, 5.00 of fees).  The accountant has to group the\n"
 "original sales journal items, type the amount the bank really deposited\n"
-"and post **one** entry that splits the fee and reconciles everything.\n"
+"and post one entry **per branch** that splits the fee and reconciles\n"
+"everything.\n"
 "\n"
 "What the module does\n"
 "---------------------\n"
@@ -34,19 +35,25 @@ msgid ""
 "* A dedicated view (*Accounting > Bank Fees Allocation*) lists the journal\n"
 "  items of the configured allocation accounts: posted entries only, not\n"
 "  fully reconciled, restricted to the company of the user.  The list is\n"
-"  grouped by account (the group header shows the balance sum) and can be\n"
-"  grouped by date, partner, journal, analytic distribution or entry.\n"
+"  grouped by branch (the group header shows the balance sum) and can be\n"
+"  grouped by account, date, partner, journal, analytic distribution or\n"
+"  entry.\n"
 "* The *Bank Fees Allocation* button of the list header opens a wizard on\n"
 "  the selected lines, **whatever their number**: the lines may come from\n"
-"  several days and from several accounts.\n"
+"  several days, several accounts and several branches.\n"
 "* The wizard computes the total of the selection and keeps two amounts\n"
 "  consistent both ways: typing the **Net Amount** recomputes the\n"
 "  **Fee Amount**, typing the **Fee Amount** recomputes the **Net Amount**.\n"
-"* On confirmation, **one** journal entry is created and posted:\n"
+"* On confirmation, **one journal entry per branch** is created and posted:\n"
 "\n"
-"      Debit  Bank Account                95.00   (net amount)\n"
-"      Debit  Bank Fees Expense Account     5.00   (fee, analytic carried over)\n"
+"      Debit  Bank Account                95.00   (net amount of the branch)\n"
+"      Debit  Bank Fees Expense Account     5.00   (fee of the branch)\n"
 "      Credit Visa / Card clearing       100.00   (one line per source account)\n"
+"\n"
+"  The branch of the source journal items is carried over to every generated\n"
+"  line.  The fees and the net amount are split over the branches\n"
+"  proportionally to the amount of each branch, with a rounding that keeps\n"
+"  every entry balanced.\n"
 "\n"
 "  The analytic distribution of the source journal items is carried over\n"
 "  **proportionally** to the fee line and to the credit lines, so the cost\n"
@@ -58,21 +65,22 @@ msgid ""
 "-------\n"
 "\n"
 "Every confirmation stores a ``bank.fees.allocation`` record: its reference,\n"
-"its date, its company, its user, the bank account, the total, the net\n"
-"amount, the fee, the generated journal entry and the source journal items.\n"
-"The *Cancel* button unreconciles the entry, posts its reversal and frees\n"
+"its date, its company, its branches, its user, the bank account, the total,\n"
+"the net amount, the fee, the generated journal entries and the source\n"
+"journal items.\n"
+"The *Cancel* button unreconciles the entries, posts their reversal and frees\n"
 "the original journal items: they can be allocated again.\n"
 "\n"
 "Reports\n"
 "-------\n"
 "\n"
-"* List, pivot and graph views of the allocations: fees by bank account, by\n"
-"  period (day / month), by source account (branch) and by user.\n"
-"* Filters on the date range, the bank account, the source account and the\n"
-"  state.\n"
+"* List, pivot and graph views of the allocations: fees by branch, by bank\n"
+"  account, by period (day / month), by source account and by user.\n"
+"* Filters on the date range, the branch, the bank account, the source\n"
+"  account and the state.\n"
 "* The XLSX export is the **standard list export** of Odoo.\n"
-"* A printable QWeb PDF summary (total sales, total fees, net, per bank\n"
-"  account, per period, per source account).\n"
+"* A printable QWeb PDF summary (total sales, total fees, net, per branch,\n"
+"  per bank account, per period, per source account).\n"
 "\n"
 "Configuration\n"
 "-------------\n"
@@ -108,9 +116,8 @@ msgid ""
 "``account.move``, the ``sequence.mixin`` mechanism of Odoo 20 and the\n"
 "``res.groups.privilege`` group format of Odoo 20.\n"
 "\n"
-"It depends on ``account`` (and on ``mail``, which ``account`` already\n"
-"brings) **only**: it installs and runs on the Community *and* on the\n"
-"Enterprise edition.\n"
+"It depends on ``account``, ``mail`` and ``branch_management``: it installs\n"
+"and runs on the Community *and* on the Enterprise edition.\n"
 msgstr ""
 
 #. module: bank_fees_allocation
@@ -148,12 +155,11 @@ msgstr ""
 #. module: bank_fees_allocation
 #: model:ir.model.fields,help:bank_fees_allocation.field_bank_fees_allocation_wizard__fee_account_id
 msgid ""
-"Account where the bank fees are booked. Pre-filled from the company "
-"settings."
+"Account where the bank fees are booked. Only the expense accounts of the "
+"company are proposed. Pre-filled from the company settings."
 msgstr ""
 
 #. module: bank_fees_allocation
-#: model:ir.model.fields,help:bank_fees_allocation.field_bank_fees_allocation__branch_ids
 #: model:ir.model.fields,help:bank_fees_allocation.field_bank_fees_allocation__source_account_ids
 msgid "Accounts (branches) of the source journal items."
 msgstr ""
@@ -242,6 +248,33 @@ msgstr ""
 #: model:ir.actions.act_window,name:bank_fees_allocation.action_bank_fees_allocation_history
 #: model_terms:ir.ui.view,arch_db:bank_fees_allocation.report_bank_fees_allocation_summary
 msgid "Allocations"
+msgstr ""
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_res_config_settings__allowed_allocation_account_ids
+msgid "Allowed Allocation Accounts"
+msgstr ""
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation_wizard__allowed_bank_account_ids
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_res_config_settings__allowed_bank_account_ids
+msgid "Allowed Bank Accounts"
+msgstr ""
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_res_config_settings__allowed_expense_account_ids
+msgid "Allowed Expense Accounts"
+msgstr ""
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation_wizard__allowed_fee_account_ids
+msgid "Allowed Fee Accounts"
+msgstr ""
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation_wizard__allowed_journal_ids
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_res_config_settings__allowed_journal_ids
+msgid "Allowed Journals"
 msgstr ""
 
 #. module: bank_fees_allocation
@@ -351,7 +384,9 @@ msgstr ""
 
 #. module: bank_fees_allocation
 #: model:ir.model.fields,help:bank_fees_allocation.field_bank_fees_allocation_wizard__bank_account_id
-msgid "Bank account the aggregated settlement is credited to."
+msgid ""
+"Bank account the aggregated settlement is credited to. Only the bank "
+"accounts configured in the settings are proposed."
 msgstr ""
 
 #. module: bank_fees_allocation
@@ -379,6 +414,12 @@ msgid ""
 msgstr ""
 
 #. module: bank_fees_allocation
+#: model:ir.model.fields,help:bank_fees_allocation.field_bank_fees_allocation_wizard__allowed_bank_account_ids
+msgid ""
+"Bank accounts the user may pick, for the drop-down of the bank account."
+msgstr ""
+
+#. module: bank_fees_allocation
 #. odoo-python
 #: code:addons/bank_fees_allocation/wizard/bank_fees_allocation_wizard.py:0
 msgid "Bank fees allocation for %s journal item(s): %s"
@@ -395,8 +436,28 @@ msgid "Bank fees kept by the bank. Editing it recomputes the net amount."
 msgstr ""
 
 #. module: bank_fees_allocation
+#: model:ir.model.fields,field_description:branch_management.field_account_move_line__branch_id
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.report_bank_fees_allocation_summary
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_move_line_list
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_move_line_search
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_search
+msgid "Branch"
+msgstr ""
+
+#. module: bank_fees_allocation
 #: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation__branch_ids
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation_wizard__branch_ids
 msgid "Branches"
+msgstr ""
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,help:bank_fees_allocation.field_bank_fees_allocation__branch_ids
+msgid "Branches of the allocated source journal items."
+msgstr ""
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,help:bank_fees_allocation.field_bank_fees_allocation_wizard__branch_ids
+msgid "Branches of the selected journal items."
 msgstr ""
 
 #. module: bank_fees_allocation
@@ -523,6 +584,26 @@ msgid "Entry"
 msgstr ""
 
 #. module: bank_fees_allocation
+#: model:ir.model.fields,help:bank_fees_allocation.field_bank_fees_allocation_wizard__move_ids
+msgid ""
+"Every journal entry generated by the allocation: one per branch of the "
+"selection."
+msgstr ""
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,help:bank_fees_allocation.field_bank_fees_allocation__move_ids
+msgid ""
+"Every journal entry generated by this allocation: one per branch of the "
+"allocated journal items."
+msgstr ""
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,help:bank_fees_allocation.field_bank_fees_allocation_wizard__allowed_fee_account_ids
+msgid ""
+"Expense accounts the user may pick, for the drop-down of the fee account."
+msgstr ""
+
+#. module: bank_fees_allocation
 #: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation_wizard__fee_account_id
 msgid "Fee Account"
 msgstr ""
@@ -546,6 +627,18 @@ msgstr ""
 #. module: bank_fees_allocation
 #: model:ir.model.fields,help:bank_fees_allocation.field_bank_fees_allocation__fee_ratio
 msgid "Fees expressed as a percentage of the allocated total."
+msgstr ""
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,help:bank_fees_allocation.field_bank_fees_allocation_wizard__move_id
+msgid ""
+"First journal entry generated by the allocation (the entries are split per "
+"branch)."
+msgstr ""
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,help:bank_fees_allocation.field_bank_fees_allocation__move_id
+msgid "First journal entry generated by this allocation."
 msgstr ""
 
 #. module: bank_fees_allocation
@@ -610,6 +703,14 @@ msgstr ""
 #. module: bank_fees_allocation
 #. odoo-python
 #: code:addons/bank_fees_allocation/models/bank_fees_allocation.py:0
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation__move_ids
+#: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation_wizard__move_ids
+msgid "Journal Entries"
+msgstr ""
+
+#. module: bank_fees_allocation
+#. odoo-python
+#: code:addons/bank_fees_allocation/models/bank_fees_allocation.py:0
 #: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation__move_id
 #: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation_wizard__move_id
 #: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_form
@@ -627,11 +728,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:bank_fees_allocation.field_bank_fees_allocation_wizard__line_ids
 #: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_form
 msgid "Journal Items"
-msgstr ""
-
-#. module: bank_fees_allocation
-#: model:ir.model.fields,help:bank_fees_allocation.field_bank_fees_allocation__move_id
-msgid "Journal entry generated by this allocation."
 msgstr ""
 
 #. module: bank_fees_allocation
@@ -662,6 +758,11 @@ msgstr ""
 msgid ""
 "Journal used by the generated allocation entries. Defaults to the "
 "Miscellaneous journal of the company."
+msgstr ""
+
+#. module: bank_fees_allocation
+#: model:ir.model.fields,help:bank_fees_allocation.field_bank_fees_allocation_wizard__allowed_journal_ids
+msgid "Journals the user may pick, for the drop-down of the journal."
 msgstr ""
 
 #. module: bank_fees_allocation
@@ -722,6 +823,11 @@ msgid "No"
 msgstr ""
 
 #. module: bank_fees_allocation
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.report_bank_fees_allocation_summary
+msgid "No branch"
+msgstr ""
+
+#. module: bank_fees_allocation
 #: model_terms:ir.ui.view,arch_db:bank_fees_allocation.view_bank_fees_allocation_move_line_search
 msgid "Not Reconciled"
 msgstr ""
@@ -769,7 +875,7 @@ msgstr ""
 #. module: bank_fees_allocation
 #: model_terms:ir.ui.view,arch_db:bank_fees_allocation.bank_fees_allocation_wizard_form
 msgid ""
-"One single journal entry will be created, posted and reconciled with the\n"
+"One journal entry is created per branch, posted and reconciled with the\n"
 "                        selected journal items: the bank receives the net amount, the fee is booked\n"
 "                        on the fee account and every source account is credited."
 msgstr ""
@@ -788,6 +894,11 @@ msgstr ""
 #. module: bank_fees_allocation
 #: model_terms:ir.ui.view,arch_db:bank_fees_allocation.report_bank_fees_allocation_summary
 msgid "Per Bank Account"
+msgstr ""
+
+#. module: bank_fees_allocation
+#: model_terms:ir.ui.view,arch_db:bank_fees_allocation.report_bank_fees_allocation_summary
+msgid "Per Branch"
 msgstr ""
 
 #. module: bank_fees_allocation
@@ -991,6 +1102,15 @@ msgstr ""
 
 #. module: bank_fees_allocation
 #. odoo-python
+#: code:addons/bank_fees_allocation/wizard/bank_fees_allocation_wizard.py:0
+msgid ""
+"The journal %(journal)s belongs to the branch %(branch)s, but the selected journal items belong to %(branches)s.\n"
+"\n"
+"Choose a journal without a branch to allocate items of several branches, or select only the items of the branch of the journal."
+msgstr ""
+
+#. module: bank_fees_allocation
+#. odoo-python
 #: code:addons/bank_fees_allocation/models/bank_fees_allocation.py:0
 msgid "The journal entry %s has been reversed by %s."
 msgstr ""
@@ -1041,6 +1161,15 @@ msgstr ""
 #: code:addons/bank_fees_allocation/wizard/bank_fees_allocation_wizard.py:0
 msgid ""
 "The selected journal items cannot be allocated in one go: their amounts do not add up to the total amount of the selection (%s against %s).\n"
+"\n"
+"Please select journal items of the same direction."
+msgstr ""
+
+#. module: bank_fees_allocation
+#. odoo-python
+#: code:addons/bank_fees_allocation/wizard/bank_fees_allocation_wizard.py:0
+msgid ""
+"The selected journal items cannot be allocated in one go: their amounts, grouped by branch, do not add up to the total amount of the selection (%s against %s).\n"
 "\n"
 "Please select journal items of the same direction."
 msgstr ""
@@ -1155,4 +1284,10 @@ msgstr ""
 #. odoo-python
 #: code:addons/bank_fees_allocation/models/bank_fees_allocation.py:0
 msgid "id"
+msgstr ""
+
+#. module: bank_fees_allocation
+#. odoo-python
+#: code:addons/bank_fees_allocation/wizard/bank_fees_allocation_wizard.py:0
+msgid "no branch"
 msgstr ""

@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ==================== Search ==================== -->
+    <record id="view_branch_request_search" model="ir.ui.view">
+        <field name="name">branch.request.search</field>
+        <field name="model">branch.request</field>
+        <field name="arch" type="xml">
+            <search string="Branch Requests">
+                <field name="name"/>
+                <field name="requester_id"/>
+                <separator/>
+                <filter name="filter_mine" string="My Requests"
+                        domain="[('requester_id', '=', uid)]"/>
+                <filter name="filter_submitted" string="Submitted"
+                        domain="[('state', '=', 'submitted')]"/>
+                <filter name="filter_approved" string="Approved"
+                        domain="[('state', '=', 'approved')]"/>
+                <filter name="filter_urgent" string="Urgent"
+                        domain="[('priority', '=', 'urgent')]"/>
+                <separator/>
+                <!-- Group By -->
+                <group>
+                    <filter name="group_by_state" string="Status"
+                            context="{'group_by': 'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- ==================== List ==================== -->
+    <record id="view_branch_request_list" model="ir.ui.view">
+        <field name="name">branch.request.list</field>
+        <field name="model">branch.request</field>
+        <field name="arch" type="xml">
+            <list string="Branch Requests">
+                <field name="name"/>
+                <field name="requester_id" widget="many2one_avatar_user"/>
+                <field name="request_date"/>
+                <field name="priority" widget="priority"/>
+                <field name="state" widget="badge"
+                       decoration-success="state in ('approved', 'done')"
+                       decoration-info="state in ('draft', 'submitted')"
+                       decoration-danger="state == 'rejected'"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- ==================== Form ==================== -->
+    <record id="view_branch_request_form" model="ir.ui.view">
+        <field name="name">branch.request.form</field>
+        <field name="model">branch.request</field>
+        <field name="arch" type="xml">
+            <form string="Branch Request">
+                <header>
+                    <!-- Submit: only the requester of a draft request. -->
+                    <button name="action_submit" type="object" string="Submit"
+                            class="btn-primary"
+                            invisible="state != 'draft' or requester_id != uid"/>
+                    <!-- Approve / Reject / Mark as Done: procurement team only
+                         (the groups attribute hides them for anybody else). -->
+                    <button name="action_approve" type="object" string="Approve"
+                            class="btn-primary"
+                            groups="branch_request.group_branch_request_procurement"
+                            invisible="state != 'submitted'"/>
+                    <button name="action_reject" type="object" string="Reject"
+                            groups="branch_request.group_branch_request_procurement"
+                            invisible="state != 'submitted'"/>
+                    <button name="action_mark_done" type="object" string="Mark as Done"
+                            class="btn-primary"
+                            groups="branch_request.group_branch_request_procurement"
+                            invisible="state != 'approved'"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,submitted,approved,done"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name" readonly="1"/></h1>
+                    </div>
+                    <group>
+                        <group string="Request">
+                            <field name="requester_id"/>
+                            <field name="request_date"
+                                   readonly="state != 'draft' and not is_procurement"/>
+                            <field name="priority" widget="priority"
+                                   readonly="state != 'draft' and not is_procurement"/>
+                        </group>
+                        <group string="Review">
+                            <field name="rejection_reason"
+                                   invisible="state not in ('submitted', 'rejected')"
+                                   readonly="not is_procurement or state != 'submitted'"
+                                   placeholder="Why is the request refused?"/>
+                            <field name="is_procurement" invisible="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Products" name="products">
+                            <field name="line_ids"
+                                   readonly="state != 'draft'">
+                                <list editable="bottom">
+                                    <field name="product_id"/>
+                                    <field name="name"/>
+                                    <field name="quantity"/>
+                                    <field name="uom_id"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!-- ==================== Actions ==================== -->
+    <record id="action_branch_request_all" model="ir.actions.act_window">
+        <field name="name">All Requests</field>
+        <field name="res_model">branch.request</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_branch_request_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Create a branch request</p>
+            <p>Select the goods your branch needs and send the request to the
+               procurement team.</p>
+        </field>
+    </record>
+
+    <record id="action_branch_request_my" model="ir.actions.act_window">
+        <field name="name">My Requests</field>
+        <field name="res_model">branch.request</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_branch_request_search"/>
+        <field name="domain">[('requester_id', '=', uid)]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Create your first branch request</p>
+            <p>Select the goods your branch needs and send the request to the
+               procurement team.</p>
+        </field>
+    </record>
+
+    <!-- ==================== Menus ==================== -->
+    <menuitem id="menu_branch_request_root" name="Branch Requests"
+              sequence="46" groups="base.group_user"
+              web_icon="branch_request,static/description/icon.png"/>
+
+    <menuitem id="menu_branch_request_my" name="My Requests"
+              parent="menu_branch_request_root"
+              action="action_branch_request_my" sequence="10"/>
+
+    <menuitem id="menu_branch_request_all" name="All Requests"
+              parent="menu_branch_request_root"
+              action="action_branch_request_all" sequence="20"
+              groups="branch_request.group_branch_request_procurement"/>
+
+</odoo>

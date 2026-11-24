@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="tag_examples" model="sql.query.tag">
+            <field name="name">Examples</field>
+            <field name="color">4</field>
+        </record>
+        <record id="tag_database" model="sql.query.tag">
+            <field name="name">Database</field>
+            <field name="color">2</field>
+        </record>
+        <record id="tag_contacts" model="sql.query.tag">
+            <field name="name">Contacts</field>
+            <field name="color">10</field>
+        </record>
+        <record id="tag_admin" model="sql.query.tag">
+            <field name="name">Administration</field>
+            <field name="color">7</field>
+        </record>
+
+        <record id="example_largest_tables" model="sql.query">
+            <field name="name">Largest tables</field>
+            <field name="sequence">1</field>
+            <field name="example" eval="True"/>
+            <field name="state">valid</field>
+            <field name="company_id" eval="False"/>
+            <field name="user_id" ref="base.user_admin"/>
+            <field name="tag_ids" eval="[(6, 0, [ref('tag_examples'), ref('tag_database')])]"/>
+            <field name="description">Tables by total size on disk (data, indexes and TOAST), with the planner's row estimate.</field>
+            <field name="sql">SELECT c.relname AS table_name,
+       c.reltuples::bigint AS estimated_rows,
+       pg_size_pretty(pg_total_relation_size(c.oid)) AS total_size,
+       pg_total_relation_size(c.oid) AS total_bytes
+  FROM pg_class c
+  JOIN pg_namespace n ON n.oid = c.relnamespace
+ WHERE n.nspname = 'public'
+   AND c.relkind = 'r'
+ ORDER BY total_bytes DESC
+ LIMIT :top</field>
+        </record>
+        <record id="example_largest_tables_top" model="sql.query.param">
+            <field name="query_id" ref="example_largest_tables"/>
+            <field name="name">top</field>
+            <field name="label">How many tables</field>
+            <field name="ptype">integer</field>
+            <field name="required" eval="True"/>
+            <field name="default_kind">fixed</field>
+            <field name="default_value">25</field>
+        </record>
+
+        <record id="example_installed_modules" model="sql.query">
+            <field name="name">Installed modules</field>
+            <field name="sequence">2</field>
+            <field name="example" eval="True"/>
+            <field name="state">valid</field>
+            <field name="company_id" eval="False"/>
+            <field name="user_id" ref="base.user_admin"/>
+            <field name="tag_ids" eval="[(6, 0, [ref('tag_examples'), ref('tag_admin')])]"/>
+            <field name="description">Every installed module with its title in your language, version and author.</field>
+            <field name="sql">SELECT m.id,
+       m.name AS technical_name,
+       COALESCE(m.shortdesc ->> :lang, m.shortdesc ->> 'en_US') AS title,
+       m.latest_version,
+       m.author
+  FROM ir_module_module m
+ WHERE m.state = 'installed'
+ ORDER BY m.name</field>
+        </record>
+
+        <record id="example_users_last_login" model="sql.query">
+            <field name="name">Users and last login</field>
+            <field name="sequence">3</field>
+            <field name="example" eval="True"/>
+            <field name="state">valid</field>
+            <field name="company_id" eval="False"/>
+            <field name="user_id" ref="base.user_admin"/>
+            <field name="tag_ids" eval="[(6, 0, [ref('tag_examples'), ref('tag_admin')])]"/>
+            <field name="description">Internal users with their last login, newest first. Users who never logged in come last.</field>
+            <field name="sql">SELECT u.id,
+       p.name,
+       u.login,
+       u.active,
+       MAX(l.create_date) AS last_login
+  FROM res_users u
+  JOIN res_partner p ON p.id = u.partner_id
+  LEFT JOIN res_users_log l ON l.create_uid = u.id
+ WHERE u.share IS NOT TRUE
+ GROUP BY u.id, p.name, u.login, u.active
+ ORDER BY last_login DESC NULLS LAST</field>
+        </record>
+
+        <record id="example_new_contacts" model="sql.query">
+            <field name="name">Contacts created since a date</field>
+            <field name="sequence">4</field>
+            <field name="example" eval="True"/>
+            <field name="state">valid</field>
+            <field name="company_id" eval="False"/>
+            <field name="user_id" ref="base.user_admin"/>
+            <field name="tag_ids" eval="[(6, 0, [ref('tag_examples'), ref('tag_contacts')])]"/>
+            <field name="description">New contacts in your allowed companies. The date defaults to the start of this month.</field>
+            <field name="sql">SELECT p.id,
+       p.name,
+       p.email,
+       COALESCE(c.name ->> :lang, c.name ->> 'en_US') AS country,
+       p.create_date
+  FROM res_partner p
+  LEFT JOIN res_country c ON c.id = p.country_id
+ WHERE p.create_date >= :date_from
+   AND (p.company_id IS NULL OR p.company_id = ANY(:company_ids))
+ ORDER BY p.create_date DESC</field>
+        </record>
+        <record id="example_new_contacts_date" model="sql.query.param">
+            <field name="query_id" ref="example_new_contacts"/>
+            <field name="name">date_from</field>
+            <field name="label">Created since</field>
+            <field name="ptype">date</field>
+            <field name="required" eval="True"/>
+            <field name="default_kind">start_of_month</field>
+        </record>
+
+        <record id="example_contacts_by_country" model="sql.query">
+            <field name="name">Contacts by country</field>
+            <field name="sequence">5</field>
+            <field name="example" eval="True"/>
+            <field name="state">valid</field>
+            <field name="company_id" eval="False"/>
+            <field name="user_id" ref="base.user_admin"/>
+            <field name="tag_ids" eval="[(6, 0, [ref('tag_examples'), ref('tag_contacts')])]"/>
+            <field name="description">Active contacts per country. Companies only when "Companies only" is on.</field>
+            <field name="sql">SELECT COALESCE(c.name ->> :lang, c.name ->> 'en_US', 'No country') AS country,
+       COUNT(*) AS contacts
+  FROM res_partner p
+  LEFT JOIN res_country c ON c.id = p.country_id
+ WHERE p.active
+   AND (NOT :companies_only OR p.is_company)
+ GROUP BY 1
+ ORDER BY contacts DESC</field>
+        </record>
+        <record id="example_contacts_by_country_flag" model="sql.query.param">
+            <field name="query_id" ref="example_contacts_by_country"/>
+            <field name="name">companies_only</field>
+            <field name="label">Companies only</field>
+            <field name="ptype">boolean</field>
+            <field name="default_kind">fixed</field>
+            <field name="default_value">false</field>
+        </record>
+
+        <record id="example_company_contacts" model="sql.query">
+            <field name="name">Contacts of a company</field>
+            <field name="sequence">6</field>
+            <field name="example" eval="True"/>
+            <field name="state">valid</field>
+            <field name="company_id" eval="False"/>
+            <field name="user_id" ref="base.user_admin"/>
+            <field name="tag_ids" eval="[(6, 0, [ref('tag_examples'), ref('tag_contacts')])]"/>
+            <field name="description">Pick a company: its contacts with email, phone and job position. The id column opens the contact.</field>
+            <field name="sql">SELECT p.id,
+       p.name,
+       p.function AS job_position,
+       p.email,
+       p.phone
+  FROM res_partner p
+ WHERE p.parent_id = :company
+ ORDER BY p.name</field>
+        </record>
+        <record id="example_company_contacts_company" model="sql.query.param">
+            <field name="query_id" ref="example_company_contacts"/>
+            <field name="name">company</field>
+            <field name="label">Company</field>
+            <field name="ptype">many2one</field>
+            <field name="model_id" ref="base.model_res_partner"/>
+            <field name="required" eval="True"/>
+        </record>
+
+        <record id="example_user_groups" model="sql.query">
+            <field name="name">Access groups of users</field>
+            <field name="sequence">7</field>
+            <field name="example" eval="True"/>
+            <field name="state">valid</field>
+            <field name="company_id" eval="False"/>
+            <field name="user_id" ref="base.user_admin"/>
+            <field name="tag_ids" eval="[(6, 0, [ref('tag_examples'), ref('tag_admin')])]"/>
+            <field name="description">The groups explicitly given to the selected users.</field>
+            <field name="sql">SELECT p.name AS user_name,
+       COALESCE(g.name ->> :lang, g.name ->> 'en_US') AS group_name
+  FROM res_groups_users_rel r
+  JOIN res_users u ON u.id = r.uid
+  JOIN res_partner p ON p.id = u.partner_id
+  JOIN res_groups g ON g.id = r.gid
+ WHERE r.uid = ANY(:users)
+ ORDER BY 1, 2</field>
+        </record>
+        <record id="example_user_groups_users" model="sql.query.param">
+            <field name="query_id" ref="example_user_groups"/>
+            <field name="name">users</field>
+            <field name="label">Users</field>
+            <field name="ptype">many2many</field>
+            <field name="model_id" ref="base.model_res_users"/>
+            <field name="required" eval="True"/>
+        </record>
+
+        <record id="example_scheduled_actions" model="sql.query">
+            <field name="name">Scheduled actions</field>
+            <field name="sequence">8</field>
+            <field name="example" eval="True"/>
+            <field name="state">valid</field>
+            <field name="company_id" eval="False"/>
+            <field name="user_id" ref="base.user_admin"/>
+            <field name="tag_ids" eval="[(6, 0, [ref('tag_examples'), ref('tag_admin')])]"/>
+            <field name="description">Scheduled actions with their interval, next and last run and consecutive failures.</field>
+            <field name="sql">SELECT c.id,
+       c.cron_name,
+       c.active,
+       c.interval_number || ' ' || c.interval_type AS every,
+       c.nextcall,
+       c.lastcall,
+       c.failure_count
+  FROM ir_cron c
+ ORDER BY c.active DESC, c.nextcall</field>
+        </record>
+
+        <record id="example_mail_queue" model="sql.query">
+            <field name="name">Outgoing email queue</field>
+            <field name="sequence">9</field>
+            <field name="example" eval="True"/>
+            <field name="state">valid</field>
+            <field name="company_id" eval="False"/>
+            <field name="user_id" ref="base.user_admin"/>
+            <field name="tag_ids" eval="[(6, 0, [ref('tag_examples'), ref('tag_admin')])]"/>
+            <field name="description">Emails waiting, sent or failed, with the oldest one per state.</field>
+            <field name="sql">SELECT m.state,
+       COUNT(*) AS emails,
+       MIN(m.create_date) AS oldest
+  FROM mail_mail m
+ GROUP BY m.state
+ ORDER BY emails DESC</field>
+        </record>
+
+        <record id="example_messages_per_model" model="sql.query">
+            <field name="name">Chatter activity per model</field>
+            <field name="sequence">10</field>
+            <field name="example" eval="True"/>
+            <field name="state">valid</field>
+            <field name="company_id" eval="False"/>
+            <field name="user_id" ref="base.user_admin"/>
+            <field name="tag_ids" eval="[(6, 0, [ref('tag_examples'), ref('tag_admin')])]"/>
+            <field name="description">Messages and notes logged per document type since a date and time.</field>
+            <field name="sql">SELECT m.model,
+       COUNT(*) AS messages,
+       COUNT(DISTINCT m.res_id) AS documents,
+       MAX(m.date) AS latest
+  FROM mail_message m
+ WHERE m.date >= :since
+   AND m.model IS NOT NULL
+ GROUP BY m.model
+ ORDER BY messages DESC</field>
+        </record>
+        <record id="example_messages_per_model_since" model="sql.query.param">
+            <field name="query_id" ref="example_messages_per_model"/>
+            <field name="name">since</field>
+            <field name="label">Since</field>
+            <field name="ptype">datetime</field>
+            <field name="required" eval="True"/>
+            <field name="default_kind">start_of_year</field>
+        </record>
+    </data>
+</odoo>

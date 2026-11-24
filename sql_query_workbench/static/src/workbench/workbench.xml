@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="sql_query_workbench.Workbench">
+        <Layout display="this.display" className="'o_sqlw d-flex flex-column'">
+            <t t-set-slot="control-panel-buttons">
+                <div class="d-flex flex-wrap gap-1 align-items-center">
+                    <button class="btn btn-primary o_sqlw_run" t-att-disabled="this.state.running" t-on-click="() => this.run('run')"
+                            title="Run (Ctrl+Enter). Runs only the selected text when there is a selection.">
+                        <i t-attf-class="fa {{ this.state.running ? 'fa-spinner fa-spin' : 'fa-play' }} me-1"/>Run
+                    </button>
+                    <Dropdown t-if="!this.isRun or this.state.screen.sql">
+                        <button class="btn btn-secondary o_sqlw_explain_btn"><i class="fa fa-sitemap me-1"/>Explain</button>
+                        <t t-set-slot="content">
+                            <DropdownItem onSelected="() => this.run('explain')">Plan (estimates)</DropdownItem>
+                            <DropdownItem onSelected="() => this.run('explain_analyze')">Plan with actual times (EXPLAIN ANALYZE)</DropdownItem>
+                        </t>
+                    </Dropdown>
+                    <t t-if="!this.isRun">
+                        <button class="btn btn-secondary o_sqlw_save" t-on-click="this.save"><i class="fa fa-floppy-o me-1"/>Save</button>
+                        <Dropdown>
+                            <button class="btn btn-secondary o_sqlw_saved_btn"><i class="fa fa-folder-open-o me-1"/>Open</button>
+                            <t t-set-slot="content">
+                                <div class="o_sqlw_dropdown_scroll">
+                                    <DropdownItem onSelected="() => this.newQuery()" class="'o_sqlw_new_query'"><i class="fa fa-file-o me-2"/>New query</DropdownItem>
+                                    <div class="dropdown-divider"/>
+                                    <div class="dropdown-header d-flex align-items-center gap-2">
+                                        <span class="flex-grow-1">Saved queries</span>
+                                        <select t-if="this.state.boot.tags.length" class="form-select form-select-sm w-auto" t-on-change="(ev) => this.state.tagFilter = ev.target.value">
+                                            <option value="">All tags</option>
+                                            <t t-foreach="this.state.boot.tags" t-as="tag" t-key="tag">
+                                                <option t-att-value="tag" t-att-selected="this.state.tagFilter === tag" t-out="tag"/>
+                                            </t>
+                                        </select>
+                                    </div>
+                                    <t t-foreach="this.savedFiltered" t-as="q" t-key="q.id">
+                                        <DropdownItem onSelected="() => this.loadQuery(q.id)">
+                                            <span t-out="q.name"/>
+                                            <span t-foreach="q.tags" t-as="tag" t-key="tag" class="badge text-bg-light ms-1" t-out="tag"/>
+                                            <span t-if="q.state === 'draft'" class="badge text-bg-info ms-1">draft</span>
+                                        </DropdownItem>
+                                    </t>
+                                    <div t-if="!this.savedFiltered.length" class="px-3 py-1 text-muted">No saved queries</div>
+                                    <div class="dropdown-divider"/>
+                                    <div class="dropdown-header">Recent</div>
+                                    <t t-foreach="this.state.boot.recent.slice(0, 10)" t-as="item" t-key="item.id">
+                                        <DropdownItem onSelected="() => this.loadRecent(item)" class="'o_sqlw_recent_item'">
+                                            <div class="o_sqlw_recent_sql text-truncate" t-out="item.sql"/>
+                                            <div class="small text-muted"><t t-out="item.date"/> · <t t-out="item.status"/></div>
+                                        </DropdownItem>
+                                    </t>
+                                    <div t-if="!this.state.boot.recent.length" class="px-3 py-1 text-muted">No history yet</div>
+                                </div>
+                            </t>
+                        </Dropdown>
+                        <button class="btn btn-light" t-on-click="this.toggleSchema" title="Show or hide the schema browser"><i class="fa fa-database"/></button>
+                    </t>
+                    <Dropdown>
+                        <button class="btn btn-secondary o_sqlw_export_btn"><i class="fa fa-download me-1"/>Export</button>
+                        <t t-set-slot="content">
+                            <DropdownItem onSelected="() => this.exportCsv()">CSV...</DropdownItem>
+                            <DropdownItem onSelected="() => this.exportXlsx()">Excel (XLSX)</DropdownItem>
+                            <DropdownItem onSelected="() => this.printPdf('portrait')">PDF portrait</DropdownItem>
+                            <DropdownItem onSelected="() => this.printPdf('landscape')">PDF landscape</DropdownItem>
+                            <DropdownItem t-if="!this.isRun or this.state.screen.sql" onSelected="() => this.copySql()">Copy SQL</DropdownItem>
+                        </t>
+                    </Dropdown>
+                    <button t-if="this.state.query and this.state.query.can_edit" class="btn btn-light o_sqlw_open_form" t-on-click="this.openQueryForm"
+                            t-att-title="'Open the saved query: ' + this.state.query.name">
+                        <i class="fa fa-pencil"/>
+                    </button>
+                </div>
+            </t>
+            <div class="o_sqlw_body d-flex flex-grow-1">
+                <aside t-if="!this.isRun and this.state.showSchema" class="o_sqlw_schema border-end">
+                    <SchemaBrowser onInsert.bind="this.insertText"/>
+                </aside>
+                <section class="o_sqlw_main flex-grow-1 d-flex flex-column p-3">
+                    <t t-if="this.isRun">
+                        <div class="o_sqlw_run_head mb-3">
+                            <h2 class="mb-1" t-out="this.state.screen.name"/>
+                            <div t-if="this.state.screen.tags.length" class="mb-1">
+                                <span t-foreach="this.state.screen.tags" t-as="tag" t-key="tag" class="badge text-bg-light me-1" t-out="tag"/>
+                            </div>
+                            <p t-if="this.state.screen.description" class="text-muted mb-0 o_sqlw_description" t-out="this.state.screen.description"/>
+                        </div>
+                    </t>
+                    <t t-else="">
+                        <div class="o_sqlw_editor border rounded" t-ref="this.editorRef">
+                            <CodeEditor mode="'sql'" value="this.state.sql" onChange.bind="this.onSqlChange" class="'o_sqlw_ace'"/>
+                        </div>
+                        <div class="small text-muted mt-1 d-flex flex-wrap gap-3">
+                            <span>Ctrl+Enter runs, selection runs alone</span>
+                            <span>Read-only · timeout <t t-out="this.state.boot.limits.timeout"/> s · up to <t t-out="this.state.boot.limits.row_limit"/> rows</span>
+                            <span class="text-warning-emphasis o_sqlw_raw_warning" title="SQL reads the database directly: Odoo record rules, field groups and multi-company filters are not applied. Only the blocked tables, protected columns and masking settings protect data.">
+                                <i class="fa fa-exclamation-triangle me-1"/>Raw data: record rules and access rights do not apply
+                            </span>
+                            <span t-if="this.state.query">Editing: <b t-out="this.state.query.name"/><t t-if="!this.state.query.can_edit"> (read only)</t></span>
+                        </div>
+                    </t>
+                    <div t-if="this.params.length" class="o_sqlw_param_box border rounded p-2 mt-2">
+                        <ParamForm params="this.params" values="this.state.values" onEnter="() => this.run('run')"/>
+                    </div>
+                    <t t-set="r" t-value="this.state.result"/>
+                    <div t-if="r" class="o_sqlw_status d-flex flex-wrap align-items-center gap-2 mt-2">
+                        <t t-if="r.ok">
+                            <span class="badge text-bg-success o_sqlw_ok"><i class="fa fa-check me-1"/><t t-out="this.statusText"/></span>
+                            <span t-if="r.truncated" class="badge text-bg-warning">Cut at the row cap (<t t-out="r.limit"/>)</span>
+                        </t>
+                    </div>
+                    <div t-if="r and !r.ok" class="alert mt-2 mb-0 o_sqlw_error" t-att-class="r.status === 'blocked' ? 'alert-warning' : 'alert-danger'" role="alert">
+                        <div class="fw-bold mb-1">
+                            <t t-if="r.status === 'blocked'">Not run</t>
+                            <t t-elif="r.status === 'timeout'">Timeout</t>
+                            <t t-else="">PostgreSQL error</t>
+                            <t t-if="this.errorLine"> · line <t t-out="this.errorLine"/></t>
+                        </div>
+                        <pre class="mb-0 o_sqlw_error_text" t-out="r.message"/>
+                    </div>
+                    <div t-if="r and r.ok" class="o_sqlw_result flex-grow-1 mt-2">
+                        <ResultGrid t-if="r.kind === 'rows'" result="r"/>
+                        <PlanView t-if="r.kind === 'plan'" plan="r.plan" analyze="r.analyze"/>
+                    </div>
+                    <div t-if="!r and this.isRun" class="text-muted mt-3">Fill in the parameters and press Run.</div>
+                </section>
+            </div>
+        </Layout>
+    </t>
+</templates>

@@ -1,0 +1,177 @@
+.o_sqlw {
+    height: 100%;
+
+    .o_content {
+        overflow: hidden;
+    }
+
+    .o_sqlw_body {
+        min-height: 0;
+        height: 100%;
+    }
+
+    .o_sqlw_schema {
+        width: 300px;
+        min-width: 240px;
+        background-color: $o-gray-100;
+        height: 100%;
+    }
+
+    .o_sqlw_schema_inner {
+        min-height: 0;
+    }
+
+    .o_sqlw_schema_list {
+        overflow-y: auto;
+        min-height: 0;
+    }
+
+    .o_sqlw_table_item,
+    .o_sqlw_column_item {
+        border-bottom: 1px solid $o-gray-200;
+        &:hover {
+            background-color: $o-gray-200;
+        }
+    }
+
+    .o_sqlw_main {
+        min-width: 0;
+        overflow-y: auto;
+    }
+
+    .o_sqlw_ace {
+        height: 220px;
+        font-size: 14px;
+    }
+
+    .o_sqlw_result {
+        min-height: 260px;
+    }
+
+    .o_sqlw_table_wrap {
+        overflow: auto;
+        max-height: 62vh;
+        border: 1px solid $o-gray-300;
+        border-radius: 4px;
+    }
+
+    .o_sqlw_table {
+        font-size: 13px;
+        white-space: nowrap;
+
+        thead th {
+            position: sticky;
+            top: 0;
+            z-index: 2;
+            background-color: $o-gray-100;
+            cursor: pointer;
+            user-select: none;
+            border-bottom: 2px solid $o-gray-300;
+        }
+
+        tfoot td {
+            position: sticky;
+            bottom: 0;
+            background-color: $o-gray-100;
+            font-weight: 600;
+        }
+
+        .o_sqlw_rownum {
+            color: $o-gray-500;
+            text-align: right;
+            width: 1%;
+            background-color: $o-gray-100;
+        }
+
+        .o_sqlw_coltype {
+            font-weight: normal;
+            font-size: 11px;
+            color: $o-gray-500;
+        }
+
+        .o_sqlw_null {
+            color: $o-gray-400;
+            font-style: italic;
+        }
+
+        .o_sqlw_null_on {
+            background-color: rgba(255, 193, 7, 0.12);
+        }
+
+        .o_sqlw_long {
+            max-width: 420px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
+
+    .o_sqlw_filter {
+        max-width: 260px;
+    }
+
+    .o_sqlw_error_text {
+        white-space: pre-wrap;
+        font-size: 13px;
+    }
+
+    .o_sqlw_plan_table {
+        font-size: 13px;
+
+        .o_sqlw_seqscan td {
+            background-color: rgba(255, 193, 7, 0.18);
+        }
+
+        .o_sqlw_share_col {
+            width: 180px;
+        }
+
+        .o_sqlw_share {
+            display: inline-block;
+            width: 110px;
+            height: 8px;
+            background-color: $o-gray-200;
+            border-radius: 4px;
+            margin-right: 6px;
+            vertical-align: middle;
+        }
+
+        .o_sqlw_share_bar {
+            height: 8px;
+            background-color: $o-action;
+            border-radius: 4px;
+        }
+
+        .o_sqlw_cond {
+            white-space: normal;
+            max-width: 520px;
+        }
+    }
+
+    .o_sqlw_description {
+        white-space: pre-wrap;
+    }
+}
+
+.o_sqlw_dropdown_scroll {
+    max-height: 360px;
+    overflow-y: auto;
+    min-width: 320px;
+}
+
+.o_sqlw_recent_sql {
+    max-width: 420px;
+    font-family: $font-family-monospace;
+    font-size: 12px;
+}
+
+.o_sqlw_colmenu {
+    min-width: 240px;
+    max-height: 360px;
+    overflow-y: auto;
+}
+
+@include media-breakpoint-down(md) {
+    .o_sqlw .o_sqlw_schema {
+        display: none;
+    }
+}

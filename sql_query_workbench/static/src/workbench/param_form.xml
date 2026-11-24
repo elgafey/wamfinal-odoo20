@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="sql_query_workbench.ParamForm">
+        <div class="o_sqlw_params row g-2">
+            <t t-foreach="this.props.params" t-as="p" t-key="p.name">
+                <div class="col-12 col-md-6 col-xl-4 o_sqlw_param" t-att-data-param="p.name">
+                    <label class="form-label small fw-semibold mb-1">
+                        <t t-out="p.label or p.name"/><span t-if="p.required" class="text-danger"> *</span>
+                        <code class="ms-1 fw-normal text-muted">:<t t-out="p.name"/></code>
+                    </label>
+                    <t t-if="p.ptype === 'boolean'">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" t-att-checked="this.props.values[p.name]" t-on-change="(ev) => this.onInput(p, ev)"/>
+                        </div>
+                    </t>
+                    <t t-elif="p.ptype === 'selection'">
+                        <select class="form-select form-select-sm" t-on-change="(ev) => this.onInput(p, ev)">
+                            <option value="" t-att-selected="!this.props.values[p.name]"/>
+                            <t t-foreach="p.options" t-as="opt" t-key="opt[0]">
+                                <option t-att-value="opt[0]" t-att-selected="this.props.values[p.name] === opt[0]" t-out="opt[1]"/>
+                            </t>
+                        </select>
+                    </t>
+                    <t t-elif="p.ptype === 'many2one' and p.model">
+                        <div class="o_sqlw_record_input border rounded px-2 py-1">
+                            <RecordSelector resModel="p.model" resId="this.recordId(p)" update="(id) => this.set(p.name, id)"/>
+                        </div>
+                    </t>
+                    <t t-elif="p.ptype === 'many2many' and p.model">
+                        <div class="o_sqlw_record_input border rounded px-2 py-1">
+                            <MultiRecordSelector resModel="p.model" resIds="this.recordIds(p)" update="(ids) => this.set(p.name, ids)"/>
+                        </div>
+                    </t>
+                    <t t-else="">
+                        <input class="form-control form-control-sm" t-att-type="this.inputType(p)" t-att-step="p.ptype === 'float' ? 'any' : false"
+                               t-att-value="this.props.values[p.name] ?? ''" t-on-input="(ev) => this.onInput(p, ev)" t-on-keydown="this.onKeydown"/>
+                    </t>
+                    <div t-if="p.help" class="form-text small mt-0" t-out="p.help"/>
+                </div>
+            </t>
+        </div>
+    </t>
+</templates>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="sql_query_workbench.PlanView">
+        <div class="o_sqlw_plan">
+            <div class="d-flex flex-wrap gap-3 small text-muted py-2">
+                <span>Total cost <b t-out="this.num(this.props.plan.total_cost, 2)"/></span>
+                <span t-if="this.props.plan.planning_ms !== null and this.props.plan.planning_ms !== undefined">Planning <b t-out="this.num(this.props.plan.planning_ms, 2)"/> ms</span>
+                <span t-if="this.props.analyze and this.props.plan.execution_ms !== null and this.props.plan.execution_ms !== undefined">Execution <b t-out="this.num(this.props.plan.execution_ms, 2)"/> ms</span>
+                <span t-if="this.warnings" class="text-warning fw-bold"><i class="fa fa-exclamation-triangle me-1"/><t t-out="this.warnings"/> sequential scan(s) on large tables</span>
+            </div>
+            <div class="o_sqlw_table_wrap">
+                <table class="table table-sm o_sqlw_plan_table mb-0">
+                    <thead>
+                        <tr>
+                            <th>Step</th>
+                            <th>Table / index</th>
+                            <th class="text-end">Est. rows</th>
+                            <th t-if="this.props.analyze" class="text-end">Actual rows</th>
+                            <th t-if="this.props.analyze" class="text-end">Time (ms)</th>
+                            <th class="text-end">Cost</th>
+                            <th class="o_sqlw_share_col">Cost share</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr t-foreach="this.props.plan.nodes" t-as="n" t-key="n_index" t-att-class="{'o_sqlw_seqscan': n.seq_scan_warning}">
+                            <td>
+                                <span t-attf-style="padding-left: {{ n.depth * 18 }}px"/>
+                                <i t-if="n.depth" class="fa fa-level-up fa-rotate-90 text-muted me-1"/>
+                                <b t-out="n.node_type"/>
+                                <span t-if="n.join_type" class="text-muted"> (<t t-out="n.join_type"/>)</span>
+                                <span t-if="n.strategy" class="text-muted"> <t t-out="n.strategy"/></span>
+                                <div t-if="n.condition" class="small text-muted o_sqlw_cond" t-attf-style="padding-left: {{ n.depth * 18 + 18 }}px" t-out="n.condition"/>
+                            </td>
+                            <td>
+                                <t t-out="n.relation"/><span t-if="n.alias" class="text-muted"> <t t-out="n.alias"/></span>
+                                <div t-if="n.index" class="small text-muted"><i class="fa fa-bolt me-1"/><t t-out="n.index"/></div>
+                                <div t-if="n.seq_scan_warning" class="small text-warning fw-bold">Full scan of ~<t t-out="this.num(n.table_rows)"/> rows</div>
+                            </td>
+                            <td class="text-end" t-out="this.num(n.est_rows)"/>
+                            <td t-if="this.props.analyze" class="text-end"><t t-out="this.num(n.actual_rows)"/><span t-if="n.loops > 1" class="text-muted small"> ×<t t-out="n.loops"/></span></td>
+                            <td t-if="this.props.analyze" class="text-end" t-out="this.num(n.actual_ms, 3)"/>
+                            <td class="text-end" t-out="this.num(n.total_cost, 2)"/>
+                            <td class="o_sqlw_share_col">
+                                <div class="o_sqlw_share"><div class="o_sqlw_share_bar" t-attf-style="width: {{ this.share(n) }}%"/></div>
+                                <span class="small text-muted"><t t-out="n.cost_share"/>%</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </t>
+</templates>

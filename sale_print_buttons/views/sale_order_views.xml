@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--
+        زراير الطباعة في هيدر أمر البيع — زراير بس، بدون أي تعديل على
+        المكوّنات الأخرى (custom_invoice_design / sale / stock).
+
+        المرساة: زر «Create Invoice» الأساسي id="create_invoice"
+        في sale.view_order_form (sale/views/sale_order_views.xml، سطر 282).
+        نفس المرساة اللي بتستخدمها وحداتنا الثانية، ومسموح بها في Odoo 20.
+
+        ملاحظات Odoo 20:
+        • بدون attrs / states — نستخدم invisible بتعبير مباشر.
+        • "id" متاح في شاشة الـ form ومستخدم في النواة نفسها
+          (invisible="... or not id").
+        • التسميات إنجليزي زي باقي أزرار الهيدر.
+    -->
+    <record id="view_order_form_sale_print_buttons" model="ir.ui.view">
+        <field name="name">sale.order.form.sale.print.buttons</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <button id="create_invoice" position="after">
+                <button name="action_print_custom_invoice"
+                        type="object"
+                        string="Print Invoice"
+                        class="btn-secondary"
+                        invisible="not id"
+                        help="Print the customer invoice(s) of this order — invoice and credit notes — with the custom ZATCA design."/>
+                <button name="action_print_delivery_slip"
+                        type="object"
+                        string="Print Delivery"
+                        class="btn-secondary"
+                        invisible="not id"
+                        help="Print the delivery slip of this order's outgoing transfers."/>
+            </button>
+        </field>
+    </record>
+</odoo>

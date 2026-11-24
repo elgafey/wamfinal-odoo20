@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="sql_query_workbench.CsvExportDialog">
+        <Dialog title.translate="Export CSV" size="'md'">
+            <div class="row g-3 o_sqlw_csv_dialog">
+                <div class="col-12">
+                    <label class="form-label">File name</label>
+                    <input class="form-control" t-custom-model="this.state.filename"/>
+                </div>
+                <div class="col-6">
+                    <label class="form-label">Separator</label>
+                    <select class="form-select" t-custom-model="this.state.separator">
+                        <option value="comma">Comma ,</option>
+                        <option value="semicolon">Semicolon ;</option>
+                        <option value="tab">Tab</option>
+                        <option value="pipe">Pipe |</option>
+                    </select>
+                </div>
+                <div class="col-6">
+                    <label class="form-label">Quote character</label>
+                    <select class="form-select" t-custom-model="this.state.quote">
+                        <option value="double">Double quote "</option>
+                        <option value="single">Single quote '</option>
+                    </select>
+                </div>
+                <div class="col-6">
+                    <label class="form-label">Line endings</label>
+                    <select class="form-select" t-custom-model="this.state.line_ending">
+                        <option value="crlf">Windows (CRLF)</option>
+                        <option value="lf">Unix (LF)</option>
+                    </select>
+                </div>
+                <div class="col-6">
+                    <div class="form-check mt-4">
+                        <input class="form-check-input" type="checkbox" id="sqlw_csv_header" t-custom-model="this.state.header"/>
+                        <label class="form-check-label" for="sqlw_csv_header">Header row</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="sqlw_csv_bom" t-custom-model="this.state.bom"/>
+                        <label class="form-check-label" for="sqlw_csv_bom">UTF-8 BOM (for Excel)</label>
+                    </div>
+                </div>
+            </div>
+            <t t-set-slot="footer">
+                <button class="btn btn-primary o_sqlw_csv_confirm" t-on-click="this.confirm">Download</button>
+                <button class="btn btn-secondary" t-on-click="this.props.close">Cancel</button>
+            </t>
+        </Dialog>
+    </t>
+
+    <t t-name="sql_query_workbench.SaveQueryDialog">
+        <Dialog title.translate="Save query" size="'md'">
+            <label class="form-label">Name</label>
+            <input class="form-control o_sqlw_save_name" t-custom-model="this.state.name" placeholder="e.g. Partners created this month" t-on-keydown="(ev) => ev.key === 'Enter' and this.confirm()"/>
+            <div class="form-text">Saved as your draft. Validate it from the saved query to share it.</div>
+            <t t-set-slot="footer">
+                <button class="btn btn-primary o_sqlw_save_confirm" t-on-click="this.confirm">Save</button>
+                <button class="btn btn-secondary" t-on-click="this.props.close">Cancel</button>
+            </t>
+        </Dialog>
+    </t>
+</templates>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Journal Items to Reconcile list: add 'Closing Fees' right after the
+         standard 'Reconcile' button. The standard button is not touched. -->
+    <record id="view_move_line_reconcile_tree_bank_fees" model="ir.ui.view">
+        <field name="name">account.move.line.list.reconcile.bank.fees</field>
+        <field name="model">account.move.line</field>
+        <field name="inherit_id" ref="account_accountant.view_move_line_reconcile_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header/button[@name='action_reconcile']" position="after">
+                <button name="action_bank_fees_allocation" type="object" string="Closing Fees"
+                        class="btn-success"
+                        groups="account.group_account_user"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Same button on the regular Journal Items list, which also exposes the
+         standard 'Reconcile' button. -->
+    <record id="view_move_line_tree_bank_fees" model="ir.ui.view">
+        <field name="name">account.move.line.list.bank.fees</field>
+        <field name="model">account.move.line</field>
+        <field name="inherit_id" ref="account_accountant.view_move_line_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header/button[@name='action_reconcile']" position="after">
+                <button name="action_bank_fees_allocation" type="object" string="Closing Fees"
+                        class="btn-success"
+                        groups="account.group_account_user"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

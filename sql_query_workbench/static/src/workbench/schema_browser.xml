@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="sql_query_workbench.SchemaBrowser">
+        <div class="o_sqlw_schema_inner d-flex flex-column h-100">
+            <t t-if="!this.state.detail">
+                <div class="p-2">
+                    <input type="search" class="form-control form-control-sm o_sqlw_schema_search" placeholder="Table or model..."
+                           t-att-value="this.state.search" t-on-input="(ev) => this.state.search = ev.target.value"/>
+                </div>
+                <div class="o_sqlw_schema_list flex-grow-1">
+                    <t t-foreach="this.filtered" t-as="t" t-key="t.name">
+                        <div class="o_sqlw_table_item d-flex align-items-start gap-2 px-2 py-1" t-att-class="{'opacity-50': t.denied}">
+                            <div class="flex-grow-1 text-truncate" role="button" t-on-click="() => this.open(t.name)">
+                                <i t-if="t.denied" class="fa fa-lock text-danger me-1" title="Blocked by the denylist"/>
+                                <span class="fw-semibold" t-out="t.name"/>
+                                <div class="small text-muted text-truncate">
+                                    <t t-if="t.model"><t t-out="t.model_name || t.model"/> · </t>
+                                    <t t-out="this.formatRows(t.rows)"/> rows · <t t-out="t.size_pretty"/>
+                                    <t t-if="t.kind !== 'table'"> · <t t-out="t.kind"/></t>
+                                </div>
+                            </div>
+                            <button class="btn btn-link btn-sm p-0" title="Insert the table name" t-on-click="() => this.insert(t.name)"><i class="fa fa-plus-square-o"/></button>
+                        </div>
+                    </t>
+                    <button t-if="!this.state.showAll and !this.state.search and this.state.tables.length > 150" class="btn btn-link btn-sm" t-on-click="() => this.state.showAll = true">
+                        Show all <t t-out="this.state.tables.length"/> tables
+                    </button>
+                </div>
+            </t>
+            <t t-else="">
+                <t t-set="d" t-value="this.state.detail"/>
+                <div class="p-2 border-bottom">
+                    <button class="btn btn-link btn-sm p-0 mb-1" t-on-click="this.back"><i class="fa fa-arrow-left me-1"/>All tables</button>
+                    <div class="fw-bold o_sqlw_detail_name" t-out="d.name"/>
+                    <div t-if="d.model" class="small text-muted" t-out="d.model"/>
+                    <div class="d-flex flex-wrap gap-1 mt-2">
+                        <button class="btn btn-sm btn-secondary" t-on-click="() => this.insert(d.name)">Insert name</button>
+                        <button class="btn btn-sm btn-secondary o_sqlw_insert_select" t-on-click="this.insertColumns">Insert SELECT</button>
+                    </div>
+                </div>
+                <div class="o_sqlw_schema_list flex-grow-1">
+                    <div class="small fw-bold text-uppercase text-muted px-2 pt-2">Columns</div>
+                    <t t-foreach="d.columns" t-as="c" t-key="c.name">
+                        <div class="o_sqlw_column_item px-2 py-1" role="button" t-on-click="() => this.insert(c.name)" t-att-class="{'opacity-50': c.denied}" title="Insert into the editor">
+                            <div class="d-flex justify-content-between gap-2">
+                                <span class="text-truncate"><i t-if="c.denied" class="fa fa-lock text-danger me-1"/><t t-out="c.name"/></span>
+                                <span class="small text-muted text-nowrap" t-out="c.type"/>
+                            </div>
+                            <div t-if="c.label" class="small text-muted text-truncate">
+                                <t t-out="c.label"/> · <t t-out="c.field_type"/><t t-if="c.relation"> → <t t-out="c.relation"/></t>
+                            </div>
+                        </div>
+                    </t>
+                    <t t-if="d.foreign_keys.length">
+                        <div class="small fw-bold text-uppercase text-muted px-2 pt-3">Foreign keys</div>
+                        <t t-foreach="d.foreign_keys" t-as="fk" t-key="fk.name + fk.column">
+                            <div class="px-2 py-1 small">
+                                <t t-out="fk.column"/> →
+                                <a href="#" t-on-click.prevent="() => this.open(fk.ref_table)" t-out="fk.ref_table + '.' + fk.ref_column"/>
+                            </div>
+                        </t>
+                    </t>
+                    <t t-if="d.indexes.length">
+                        <div class="small fw-bold text-uppercase text-muted px-2 pt-3">Indexes</div>
+                        <t t-foreach="d.indexes" t-as="ix" t-key="ix.name">
+                            <div class="px-2 py-1 small text-muted o_sqlw_index" t-att-title="ix.definition"><t t-out="ix.name"/></div>
+                        </t>
+                    </t>
+                </div>
+            </t>
+        </div>
+    </t>
+</templates>

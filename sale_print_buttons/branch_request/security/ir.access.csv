@@ -1,0 +1,5 @@
+id,name,model_id,group_id/id,operation,domain
+access_branch_request_requester,branch.request requester,branch.request,branch_request.group_branch_requester,cru,"[('requester_id', '=', user.id)]"
+access_branch_request_procurement,branch.request procurement,branch.request,branch_request.group_branch_request_procurement,crud,
+access_branch_request_line_requester,branch.request.line requester,branch.request.line,branch_request.group_branch_requester,crud,"[('request_id.requester_id', '=', user.id)]"
+access_branch_request_line_procurement,branch.request.line procurement,branch.request.line,branch_request.group_branch_request_procurement,crud,

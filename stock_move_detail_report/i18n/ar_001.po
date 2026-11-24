@@ -1,0 +1,438 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_move_detail_report
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: stock_move_detail_report 20.0.1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-26 15:33+0000\n"
+"PO-Revision-Date: 2026-09-26 15:33+0000\n"
+"Last-Translator: \n"
+"Language-Team: ar_001\n"
+"Language: ar_001\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_move_detail_report
+#: model:ir.module.module,description:base.module_stock_move_detail_report
+msgid ""
+"\n"
+"Stock Move Detail Report\n"
+"========================\n"
+"\n"
+"Pick an internal location, a period and (optionally) a product, and get one\n"
+"line per stock move instead of one line per product:\n"
+"\n"
+"* Date\n"
+"* Move (document / reference of the move)\n"
+"* Product and unit of measure\n"
+"* IN: quantity entering the location during the period\n"
+"* OUT: quantity leaving the location during the period\n"
+"* Counterpart location: the location on the other side of the move\n"
+"* Balance: stock of the location *after* that move\n"
+"\n"
+"The opening balance of every product (stock of the location before the From\n"
+"date) is displayed as the first line of the product, so the balance column\n"
+"always reconciles: opening + IN - OUT = balance of the last line.\n"
+"\n"
+"Notes:\n"
+"\n"
+"* The location must be an internal location. Its sub-locations are included:\n"
+"  a move is IN when it enters the location from outside and OUT when it\n"
+"  leaves it. Transfers staying inside the location are not shown.\n"
+"* Only done moves are taken into account and quantities are converted to\n"
+"  the unit of measure of the product.\n"
+"* Only the products that have at least one move inside the period are listed.\n"
+"* The data is read with a SQL query directly on ``stock.move``, the table\n"
+"  behind Inventory > Reporting > Moves Analysis.\n"
+"\n"
+"Outputs:\n"
+"\n"
+"* The screen view, with the totals of the period.\n"
+"* An Excel / CSV export through Odoo's standard \"Export\" (Open as List).\n"
+"* A PDF print (A4 landscape), available from the \"Print PDF\" button and\n"
+"  from the Print menu.\n"
+msgstr ""
+"\n"
+"Stock Move Detail Report\n"
+"========================\n"
+"\n"
+"اختر موقعاً داخلياً وفترة زمنية ومنتجاً (اختيارياً) واحصل على سطر لكل حركة\n"
+"مخزون بدلاً من سطر لكل منتج:\n"
+"\n"
+"* التاريخ\n"
+"* الحركة (مستند الحركة أو الرقم المرجعي لها)\n"
+"* المنتج ووحدة القياس\n"
+"* الدخول: الكمية الداخلة إلى الموقع خلال الفترة\n"
+"* الخروج: الكمية الخارجة من الموقع خلال الفترة\n"
+"* الموقع المقابل: الموقع الذي يقع على الطرف الآخر من الحركة\n"
+"* الرصيد: مخزون الموقع *بعد* تلك الحركة\n"
+"\n"
+"يُعرض الرصيد الافتتاحي لكل منتج (مخزون الموقع قبل تاريخ البداية) كأول سطر\n"
+"له، لذلك يتطابق عمود الرصيد دائماً: الرصيد الافتتاحي + الدخول - الخروج =\n"
+"رصيد السطر الأخير.\n"
+"\n"
+"ملاحظات:\n"
+"\n"
+"* يجب أن يكون الموقع موقعاً داخلياً، وتُحتسب مواقعه الفرعية معه: تكون\n"
+"  الحركة دخولاً عندما تدخل الموقع من خارجه، وخروجاً عندما تغادره، لذلك لا\n"
+"  تظهر النقلات التي تبقى داخل الموقع.\n"
+"* تُحتسب فقط الحركات المؤكدة (Done) وتُحوَّل الكميات إلى وحدة قياس المنتج.\n"
+"* يُدرج فقط المنتجات التي لها حركة واحدة على الأقل داخل الفترة.\n"
+"* تُقرأ البيانات عبر استعلام SQL مباشرة على ``stock.move``، وهو الجدول\n"
+"  خلف Inventory > Reporting > Moves Analysis.\n"
+"\n"
+"المخرجات:\n"
+"\n"
+"* شاشة العرض مع إجماليات الفترة.\n"
+"* تصدير Excel / CSV عبر أداة التصدير القياسية (فتح كقائمة).\n"
+"* طباعة PDF (أفقي A4) متاحة من زر \"طباعة PDF\" ومن قائمة الطباعة.\n"
+
+#. module: stock_move_detail_report
+#: model:ir.actions.report,print_report_name:stock_move_detail_report.action_report_stock_move_detail
+msgid "'Stock Move Detail %s - %s' % (object.date_from, object.date_to)"
+msgstr ""
+
+#. module: stock_move_detail_report
+#: model_terms:ir.ui.view,arch_db:stock_move_detail_report.document
+msgid "Balance"
+msgstr "الرصيد"
+
+#. module: stock_move_detail_report
+#: model:ir.model.fields,field_description:stock_move_detail_report.field_stock_move_detail_report_line__balance
+msgid "Balance After Move"
+msgstr "الرصيد بعد الحركة"
+
+#. module: stock_move_detail_report
+#: model_terms:ir.ui.view,arch_db:stock_move_detail_report.view_stock_move_detail_report_form
+msgid "Choose the location and the period then click on \"Show Report\"."
+msgstr "اختر الموقع والفترة ثم اضغط على \"عرض التقرير\"."
+
+#. module: stock_move_detail_report
+#: model_terms:ir.ui.view,arch_db:stock_move_detail_report.document
+msgid "Closing Balance"
+msgstr "الرصيد النهائي"
+
+#. module: stock_move_detail_report
+#: model:ir.model.fields,field_description:stock_move_detail_report.field_stock_move_detail_report__company_id
+msgid "Company"
+msgstr "الشركة"
+
+#. module: stock_move_detail_report
+#: model:ir.model.fields,field_description:stock_move_detail_report.field_stock_move_detail_report_line__counterpart
+#: model_terms:ir.ui.view,arch_db:stock_move_detail_report.document
+msgid "Counterpart Location"
+msgstr "الموقع المقابل"
+
+#. module: stock_move_detail_report
+#: model:ir.model.fields,field_description:stock_move_detail_report.field_stock_move_detail_report__create_uid
+#: model:ir.model.fields,field_description:stock_move_detail_report.field_stock_move_detail_report_line__create_uid
+msgid "Created by"
+msgstr "أنشأه"
+
+#. module: stock_move_detail_report
+#: model:ir.model.fields,field_description:stock_move_detail_report.field_stock_move_detail_report__create_date
+#: model:ir.model.fields,field_description:stock_move_detail_report.field_stock_move_detail_report_line__create_date
+msgid "Created on"
+msgstr "أنشأ في"
+
+#. module: stock_move_detail_report
+#: model:ir.model.fields,field_description:stock_move_detail_report.field_stock_move_detail_report_line__date
+#: model_terms:ir.ui.view,arch_db:stock_move_detail_report.document
+msgid "Date"
+msgstr "التاريخ"
+
+#. module: stock_move_detail_report
+#: model:ir.model.fields,help:stock_move_detail_report.field_stock_move_detail_report_line__uom_id
+msgid "Default unit of measure used for all stock operations."
+msgstr "وحدة القياس الافتراضية المستخدمة لجميع عمليات المخزون."
+
+#. module: stock_move_detail_report
+#: model:ir.module.module,summary:base.module_stock_move_detail_report
+msgid "Detailed moves of a location with opening balance and running balance"
+msgstr "حركات تفصيلية لموقع محدد مع الرصيد الافتتاحي والرصيد بعد كل حركة"
+
+#. module: stock_move_detail_report
+#: model:ir.model.fields,field_description:stock_move_detail_report.field_report_stock_move_detail_report_document__display_name
+#: model:ir.model.fields,field_description:stock_move_detail_report.field_stock_move_detail_report__display_name
+#: model:ir.model.fields,field_description:stock_move_detail_report.field_stock_move_detail_report_line__display_name
+msgid "Display Name"
+msgstr "الاسم المعروض"
+
+#. module: stock_move_detail_report
+#: model_terms:ir.ui.view,arch_db:stock_move_detail_report.view_stock_move_detail_report_form
+msgid "Filters"
+msgstr "الفلاتر"
+
+#. module: stock_move_detail_report
+#: model:ir.model.fields,field_description:stock_move_detail_report.field_stock_move_detail_report__date_from
+msgid "From Date"
+msgstr "من تاريخ"
+
+#. module: stock_move_detail_report
+#: model_terms:ir.ui.view,arch_db:stock_move_detail_report.document
+msgid "Generated on"
+msgstr "تاريخ الإنشاء"
+
+#. module: stock_move_detail_report
+#: model:ir.model.fields,field_description:stock_move_detail_report.field_report_stock_move_detail_report_document__id
+#: model:ir.model.fields,field_description:stock_move_detail_report.field_stock_move_detail_report__id
+#: model:ir.model.fields,field_description:stock_move_detail_report.field_stock_move_detail_report_line__id
+msgid "ID"
+msgstr "المعرّف"
+
+#. module: stock_move_detail_report
+#: model:ir.model.fields,field_description:stock_move_detail_report.field_stock_move_detail_report_line__qty_in
+#: model_terms:ir.ui.view,arch_db:stock_move_detail_report.document
+msgid "IN"
+msgstr "الدخول"
+
+#. module: stock_move_detail_report
+#: model:ir.model.fields,field_description:stock_move_detail_report.field_stock_move_detail_report_line__default_code
+msgid "Internal Reference"
+msgstr "الكود الداخلي"
+
+#. module: stock_move_detail_report
+#: model:ir.model.fields,field_description:stock_move_detail_report.field_stock_move_detail_report__write_uid
+#: model:ir.model.fields,field_description:stock_move_detail_report.field_stock_move_detail_report_line__write_uid
+msgid "Last Updated by"
+msgstr "آخر تحديث بواسطة"
+
+#. module: stock_move_detail_report
+#: model:ir.model.fields,field_description:stock_move_detail_report.field_stock_move_detail_report__write_date
+#: model:ir.model.fields,field_description:stock_move_detail_report.field_stock_move_detail_report_line__write_date
+msgid "Last Updated on"
+msgstr "آخر تحديث في"
+
+#. module: stock_move_detail_report
+#: model:ir.model.fields,help:stock_move_detail_report.field_stock_move_detail_report__product_id
+msgid "Leave it empty to get every product of the location."
+msgstr "اتركه فارغاً لعرض جميع منتجات الموقع."
+
+#. module: stock_move_detail_report
+#: model:ir.model.fields,field_description:stock_move_detail_report.field_stock_move_detail_report__line_ids
+#: model_terms:ir.ui.view,arch_db:stock_move_detail_report.view_stock_move_detail_report_form
+msgid "Lines"
+msgstr "البنود"
+
+#. module: stock_move_detail_report
+#: model:ir.model.fields,field_description:stock_move_detail_report.field_stock_move_detail_report__location_id
+msgid "Location"
+msgstr "الموقع"
+
+#. module: stock_move_detail_report
+#: model:ir.model.fields,field_description:stock_move_detail_report.field_stock_move_detail_report_line__name
+#: model_terms:ir.ui.view,arch_db:stock_move_detail_report.document
+msgid "Move"
+msgstr "الحركة"
+
+#. module: stock_move_detail_report
+#: model:ir.model.fields,field_description:stock_move_detail_report.field_stock_move_detail_report__move_count
+#: model_terms:ir.ui.view,arch_db:stock_move_detail_report.document
+msgid "Moves"
+msgstr "الحركات"
+
+#. module: stock_move_detail_report
+#: model_terms:ir.ui.view,arch_db:stock_move_detail_report.document
+msgid "No stock movement was found for the selected location and period."
+msgstr "لم يتم العثور على أي حركة مخزون للموقع والفترة المحددين۔"
+
+#. module: stock_move_detail_report
+#: model_terms:ir.ui.view,arch_db:stock_move_detail_report.document
+msgid "Note:"
+msgstr "ملاحظة؛"
+
+#. module: stock_move_detail_report
+#: model:ir.model.fields,field_description:stock_move_detail_report.field_stock_move_detail_report_line__qty_out
+#: model_terms:ir.ui.view,arch_db:stock_move_detail_report.document
+msgid "OUT"
+msgstr "الخروج"
+
+#. module: stock_move_detail_report
+#: model_terms:ir.ui.view,arch_db:stock_move_detail_report.view_stock_move_detail_report_form
+msgid "Open as List (Excel Export)"
+msgstr "فتح كقائمة (تصدير Excel)"
+
+#. module: stock_move_detail_report
+#. odoo-python
+#: code:addons/stock_move_detail_report/wizard/stock_move_detail_report.py:0
+#: model_terms:ir.ui.view,arch_db:stock_move_detail_report.document
+msgid "Opening Balance"
+msgstr "الرصيد الافتتاحي"
+
+#. module: stock_move_detail_report
+#: model:ir.model.fields,field_description:stock_move_detail_report.field_stock_move_detail_report_line__is_opening
+msgid "Opening Balance Line"
+msgstr "سطر الرصيد الافتتاحي"
+
+#. module: stock_move_detail_report
+#. odoo-python
+#: code:addons/stock_move_detail_report/wizard/stock_move_detail_report.py:0
+msgid "Please display the report before opening it as a list."
+msgstr "يرجى عرض التقرير أولاً قبل فتحه كقائمة."
+
+#. module: stock_move_detail_report
+#: model_terms:ir.ui.view,arch_db:stock_move_detail_report.view_stock_move_detail_report_form
+msgid "Print PDF"
+msgstr "طباعة PDF"
+
+#. module: stock_move_detail_report
+#: model:ir.model.fields,field_description:stock_move_detail_report.field_stock_move_detail_report__product_id
+#: model:ir.model.fields,field_description:stock_move_detail_report.field_stock_move_detail_report_line__product_id
+#: model_terms:ir.ui.view,arch_db:stock_move_detail_report.document
+msgid "Product"
+msgstr "المنتج"
+
+#. module: stock_move_detail_report
+#: model:ir.model.fields,field_description:stock_move_detail_report.field_stock_move_detail_report__product_count
+#: model_terms:ir.ui.view,arch_db:stock_move_detail_report.document
+msgid "Products"
+msgstr "عدد المنتجات"
+
+#. module: stock_move_detail_report
+#: model_terms:ir.ui.view,arch_db:stock_move_detail_report.document
+msgid ""
+"Quantities are expressed in the unit of measure of the product. The report "
+"covers the selected location and its sub-locations: a move is IN when it "
+"enters the location from outside and OUT when it leaves it; transfers "
+"staying inside the location are not shown."
+msgstr ""
+"الكميات بوحدة قياس المنتج۔ التقرير يشمل الموقع ومواقعه الفرعية؛ دخول من "
+"خارجه وخروج إليه۔ ولا تظهر النقلات داخله۔"
+
+#. module: stock_move_detail_report
+#: model_terms:ir.ui.view,arch_db:stock_move_detail_report.document
+msgid "Quantity"
+msgstr "العدد"
+
+#. module: stock_move_detail_report
+#: model:ir.model.fields,field_description:stock_move_detail_report.field_stock_move_detail_report_line__report_id
+msgid "Report"
+msgstr "التقرير"
+
+#. module: stock_move_detail_report
+#: model_terms:ir.ui.view,arch_db:stock_move_detail_report.view_stock_move_detail_report_form
+msgid "Show Report"
+msgstr "عرض التقرير"
+
+#. module: stock_move_detail_report
+#. odoo-python
+#: code:addons/stock_move_detail_report/wizard/stock_move_detail_report.py:0
+#: model:ir.actions.act_window,name:stock_move_detail_report.action_stock_move_detail_report
+#: model:ir.actions.report,name:stock_move_detail_report.action_report_stock_move_detail
+#: model:ir.ui.menu,name:stock_move_detail_report.menu_stock_move_detail_report
+#: model_terms:ir.ui.view,arch_db:stock_move_detail_report.view_stock_move_detail_report_line_form
+#: model_terms:ir.ui.view,arch_db:stock_move_detail_report.view_stock_move_detail_report_line_list
+msgid "Stock Move Detail"
+msgstr "تفاصيل الحركات"
+
+#. module: stock_move_detail_report
+#: model:ir.model,name:stock_move_detail_report.model_stock_move_detail_report
+#: model:ir.module.module,shortdesc:base.module_stock_move_detail_report
+#: model_terms:ir.ui.view,arch_db:stock_move_detail_report.document
+#: model_terms:ir.ui.view,arch_db:stock_move_detail_report.view_stock_move_detail_report_form
+msgid "Stock Move Detail Report"
+msgstr "تقرير تفصيل حركات المخزون"
+
+#. module: stock_move_detail_report
+#: model:ir.model,name:stock_move_detail_report.model_stock_move_detail_report_line
+msgid "Stock Move Detail Report Line"
+msgstr "سطر تقرير تفصيل حركات المخزون"
+
+#. module: stock_move_detail_report
+#: model:ir.model,name:stock_move_detail_report.model_report_stock_move_detail_report_document
+msgid "Stock Move Detail Report PDF"
+msgstr "تقرير تفصيل حركات المخزون (PDF)"
+
+#. module: stock_move_detail_report
+#. odoo-python
+#: code:addons/stock_move_detail_report/wizard/stock_move_detail_report.py:0
+msgid "The \"To\" date must be greater than or equal to the \"From\" date."
+msgstr "يجب أن يكون تاريخ \"إلى\" أكبر من أو يساوي تاريخ \"من\"."
+
+#. module: stock_move_detail_report
+#: model_terms:ir.ui.view,arch_db:stock_move_detail_report.document
+msgid ""
+"The first line of every product is its opening balance (stock of the "
+"location before the From date), and the balance column is the stock of the "
+"location after each move."
+msgstr ""
+"أول سطر لكل منتج هو رصيده الافتتاحي۔ وعمود الرصيد هو المخزون بعد كل حركة۔"
+
+#. module: stock_move_detail_report
+#. odoo-python
+#: code:addons/stock_move_detail_report/wizard/stock_move_detail_report.py:0
+msgid ""
+"The location \"%s\" is not an internal location. Please choose a location "
+"whose usage is \"Internal Storage\"."
+msgstr ""
+"الموقع \"%s\" ليس موقعاً داخلياً. الرجاء اختيار موقع تكون قيمة استخدامه "
+"\"تخزين داخلي\"."
+
+#. module: stock_move_detail_report
+#. odoo-python
+#: code:addons/stock_move_detail_report/wizard/stock_move_detail_report.py:0
+msgid ""
+"The selected criteria match %s moves, which is more than the %s moves this "
+"report can display. Please shorten the period or select a product."
+msgstr ""
+"عدد الحركات المطابقة %s، وهو أكبر من الحد الأقصى %s حركة يستطيع هذا التقرير "
+"عرضها. يرجى تقصر الفترة أو اختيار منتج."
+
+#. module: stock_move_detail_report
+#. odoo-python
+#: code:addons/stock_move_detail_report/wizard/stock_move_detail_report.py:0
+msgid "There is no data to print. Please display the report first."
+msgstr "لا توجد بيانات للطباعة. يرجى عرض التقرير أولاً."
+
+#. module: stock_move_detail_report
+#: model:ir.model.fields,field_description:stock_move_detail_report.field_stock_move_detail_report__date_to
+msgid "To Date"
+msgstr "إلى تاريخ"
+
+#. module: stock_move_detail_report
+#: model_terms:ir.ui.view,arch_db:stock_move_detail_report.document
+#: model_terms:ir.ui.view,arch_db:stock_move_detail_report.view_stock_move_detail_report_form
+#: model_terms:ir.ui.view,arch_db:stock_move_detail_report.view_stock_move_detail_report_line_list
+msgid "Total"
+msgstr "الإجمالي"
+
+#. module: stock_move_detail_report
+#: model:ir.model.fields,field_description:stock_move_detail_report.field_stock_move_detail_report__total_closing
+msgid "Total Closing Balance"
+msgstr "إجمالي الرصيد النهائي"
+
+#. module: stock_move_detail_report
+#: model:ir.model.fields,field_description:stock_move_detail_report.field_stock_move_detail_report__total_in
+msgid "Total IN"
+msgstr "إجمالي الدخول"
+
+#. module: stock_move_detail_report
+#: model:ir.model.fields,field_description:stock_move_detail_report.field_stock_move_detail_report__total_out
+msgid "Total OUT"
+msgstr "إجمالي الخروج"
+
+#. module: stock_move_detail_report
+#: model:ir.model.fields,field_description:stock_move_detail_report.field_stock_move_detail_report__total_opening
+msgid "Total Opening Balance"
+msgstr "إجمالي الرصيد الافتتاحي"
+
+#. module: stock_move_detail_report
+#: model_terms:ir.ui.view,arch_db:stock_move_detail_report.view_stock_move_detail_report_form
+msgid "Totals"
+msgstr "الإجماليات"
+
+#. module: stock_move_detail_report
+#: model:ir.model.fields,field_description:stock_move_detail_report.field_stock_move_detail_report_line__uom_id
+#: model_terms:ir.ui.view,arch_db:stock_move_detail_report.document
+msgid "Unit"
+msgstr "الوحدة"
+
+#. module: stock_move_detail_report
+#. odoo-python
+#: code:addons/stock_move_detail_report/wizard/stock_move_detail_report.py:0
+msgid "report_id"
+msgstr ""

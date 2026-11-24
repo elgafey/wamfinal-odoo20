@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_groups_privilege_sql_workbench" model="res.groups.privilege">
+        <field name="name">SQL Query Workbench</field>
+        <field name="category_id" ref="base.module_category_administration"/>
+        <field name="sequence">90</field>
+    </record>
+
+    <record id="group_sqlw_user" model="res.groups">
+        <field name="name">User: run read-only SQL</field>
+        <field name="sequence">10</field>
+        <field name="privilege_id" ref="res_groups_privilege_sql_workbench"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        <field name="comment">Console, schema browser and own saved queries. SQL reads every table outside the denylist, record rules do not apply: grant to trusted people only.</field>
+    </record>
+
+    <record id="group_sqlw_manager" model="res.groups">
+        <field name="name">Administrator</field>
+        <field name="sequence">20</field>
+        <field name="privilege_id" ref="res_groups_privilege_sql_workbench"/>
+        <field name="implied_ids" eval="[(4, ref('group_sqlw_user'))]"/>
+        <field name="comment">Edit every saved query, share and publish queries, schedule digests, see the full run log and the settings.</field>
+    </record>
+
+    <!-- admin-only by default: every Settings administrator is a workbench administrator -->
+    <record id="base.group_system" model="res.groups">
+        <field name="implied_ids" eval="[(4, ref('group_sqlw_manager'))]"/>
+    </record>
+
+    <!-- access: permissions (with group) are OR-ed per operation, restrictions (no group) are AND-ed -->
+    <record id="access_sql_query_company" model="ir.access">
+        <field name="name">SQL query: multi-company</field>
+        <field name="model_id" ref="model_sql_query"/>
+        <field name="operation">crud</field>
+        <field name="domain">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+    </record>
+    <record id="access_sql_query_shared" model="ir.access">
+        <field name="name">SQL query: shared with me (run only)</field>
+        <field name="model_id" ref="model_sql_query"/>
+        <field name="group_id" ref="base.group_user"/>
+        <field name="operation">r</field>
+        <field name="domain">[('state', '=', 'valid'), '|', ('user_ids', 'in', [user.id]), ('group_ids', 'in', user.all_group_ids.ids)]</field>
+    </record>
+    <record id="access_sql_query_owner" model="ir.access">
+        <field name="name">SQL query: my own queries</field>
+        <field name="model_id" ref="model_sql_query"/>
+        <field name="group_id" ref="group_sqlw_user"/>
+        <field name="operation">crud</field>
+        <field name="domain">[('user_id', '=', user.id)]</field>
+    </record>
+    <record id="access_sql_query_manager" model="ir.access">
+        <field name="name">SQL query: all (administrators)</field>
+        <field name="model_id" ref="model_sql_query"/>
+        <field name="group_id" ref="group_sqlw_manager"/>
+        <field name="operation">crud</field>
+    </record>
+    <record id="access_sql_query_param_read" model="ir.access">
+        <field name="name">SQL parameter: read</field>
+        <field name="model_id" ref="model_sql_query_param"/>
+        <field name="group_id" ref="group_sqlw_user"/>
+        <field name="operation">r</field>
+    </record>
+    <record id="access_sql_query_param_owner" model="ir.access">
+        <field name="name">SQL parameter: edit own queries</field>
+        <field name="model_id" ref="model_sql_query_param"/>
+        <field name="group_id" ref="group_sqlw_user"/>
+        <field name="operation">cud</field>
+        <field name="domain">[('query_id.user_id', '=', user.id)]</field>
+    </record>
+    <record id="access_sql_query_param_manager" model="ir.access">
+        <field name="name">SQL parameter: all (administrators)</field>
+        <field name="model_id" ref="model_sql_query_param"/>
+        <field name="group_id" ref="group_sqlw_manager"/>
+        <field name="operation">crud</field>
+    </record>
+    <record id="access_sql_query_column_model_read" model="ir.access">
+        <field name="name">SQL column link: read</field>
+        <field name="model_id" ref="model_sql_query_column_model"/>
+        <field name="group_id" ref="group_sqlw_user"/>
+        <field name="operation">r</field>
+    </record>
+    <record id="access_sql_query_column_model_owner" model="ir.access">
+        <field name="name">SQL column link: edit own queries</field>
+        <field name="model_id" ref="model_sql_query_column_model"/>
+        <field name="group_id" ref="group_sqlw_user"/>
+        <field name="operation">cud</field>
+        <field name="domain">[('query_id.user_id', '=', user.id)]</field>
+    </record>
+    <record id="access_sql_query_column_model_manager" model="ir.access">
+        <field name="name">SQL column link: all (administrators)</field>
+        <field name="model_id" ref="model_sql_query_column_model"/>
+        <field name="group_id" ref="group_sqlw_manager"/>
+        <field name="operation">crud</field>
+    </record>
+    <record id="access_sql_query_tag_employee" model="ir.access">
+        <field name="name">SQL tag: employee</field>
+        <field name="model_id" ref="model_sql_query_tag"/>
+        <field name="group_id" ref="base.group_user"/>
+        <field name="operation">r</field>
+    </record>
+    <record id="access_sql_query_tag_user" model="ir.access">
+        <field name="name">SQL tag: user</field>
+        <field name="model_id" ref="model_sql_query_tag"/>
+        <field name="group_id" ref="group_sqlw_user"/>
+        <field name="operation">cru</field>
+    </record>
+    <record id="access_sql_query_tag_manager" model="ir.access">
+        <field name="name">SQL tag: manager</field>
+        <field name="model_id" ref="model_sql_query_tag"/>
+        <field name="group_id" ref="group_sqlw_manager"/>
+        <field name="operation">crud</field>
+    </record>
+    <record id="access_sql_query_run_company" model="ir.access">
+        <field name="name">SQL run log: multi-company</field>
+        <field name="model_id" ref="model_sql_query_run"/>
+        <field name="operation">crud</field>
+        <field name="domain">[('company_id', 'in', company_ids)]</field>
+    </record>
+    <record id="access_sql_query_run_own" model="ir.access">
+        <field name="name">SQL run log: my runs</field>
+        <field name="model_id" ref="model_sql_query_run"/>
+        <field name="group_id" ref="group_sqlw_user"/>
+        <field name="operation">r</field>
+        <field name="domain">[('user_id', '=', user.id)]</field>
+    </record>
+    <record id="access_sql_query_run_manager" model="ir.access">
+        <field name="name">SQL run log: all (administrators)</field>
+        <field name="model_id" ref="model_sql_query_run"/>
+        <field name="group_id" ref="group_sqlw_manager"/>
+        <field name="operation">rd</field>
+    </record>
+    <record id="access_sql_query_limit_manager" model="ir.access">
+        <field name="name">SQL limits: manager</field>
+        <field name="model_id" ref="model_sql_query_limit"/>
+        <field name="group_id" ref="group_sqlw_manager"/>
+        <field name="operation">crud</field>
+    </record>
+    <record id="access_sql_query_print_employee" model="ir.access">
+        <field name="name">SQL print: employee</field>
+        <field name="model_id" ref="model_sql_query_print"/>
+        <field name="group_id" ref="base.group_user"/>
+        <field name="operation">crud</field>
+    </record>
+    <record id="access_sql_query_print_own" model="ir.access">
+        <field name="name">SQL print: own</field>
+        <field name="model_id" ref="model_sql_query_print"/>
+        <field name="operation">crud</field>
+        <field name="domain">[('create_uid', '=', user.id)]</field>
+    </record>
+    <record id="access_sql_query_library_user" model="ir.access">
+        <field name="name">SQL library: user</field>
+        <field name="model_id" ref="model_sql_query_library"/>
+        <field name="group_id" ref="group_sqlw_user"/>
+        <field name="operation">crud</field>
+    </record>
+    <record id="access_ir_model_sqlw_user" model="ir.access">
+        <field name="name">ir.model read for workbench users</field>
+        <field name="model_id" ref="base.model_ir_model"/>
+        <field name="group_id" ref="group_sqlw_user"/>
+        <field name="operation">r</field>
+    </record>
+</odoo>

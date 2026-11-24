@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- The cost center IS written on the Bank Fees line of the generated
+         journal entry (see tests), but core hides that column in the Journal
+         Items tab behind analytic.group_analytic_accounting and labels it
+         "Analytic". Make it visible for accountants and label it exactly like
+         the wizard does, so the value can actually be seen in the entry. -->
+    <record id="view_move_form_bank_fees_cost_center" model="ir.ui.view">
+        <field name="name">account.move.form.bank.fees.cost.center</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@id='aml_tab']//list/field[@name='analytic_distribution']"
+                   position="attributes">
+                <attribute name="string">Cost Center</attribute>
+                <attribute name="groups">account.group_account_readonly</attribute>
+                <attribute name="optional">show</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Same column in the standalone "Journal Items" list (core: optional="hide"). -->
+    <record id="view_move_line_tree_bank_fees_cost_center" model="ir.ui.view">
+        <field name="name">account.move.line.list.bank.fees.cost.center</field>
+        <field name="model">account.move.line</field>
+        <field name="inherit_id" ref="account.view_move_line_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//list/field[@name='analytic_distribution']" position="attributes">
+                <attribute name="string">Cost Center</attribute>
+                <attribute name="groups">account.group_account_readonly</attribute>
+                <attribute name="optional">show</attribute>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

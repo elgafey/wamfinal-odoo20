@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="ir_cron_sqlw_digests" model="ir.cron">
+            <field name="name">SQL Workbench: send email digests</field>
+            <field name="model_id" ref="model_sql_query"/>
+            <field name="state">code</field>
+            <field name="code">model._cron_send_digests()</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">hours</field>
+        </record>
+        <record id="ir_cron_sqlw_purge" model="ir.cron">
+            <field name="name">SQL Workbench: purge old run log</field>
+            <field name="model_id" ref="model_sql_query_run"/>
+            <field name="state">code</field>
+            <field name="code">model._cron_purge()</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+        </record>
+    </data>
+
+    <record id="paperformat_sqlw_portrait" model="report.paperformat">
+        <field name="name">SQL result (portrait)</field>
+        <field name="default" eval="False"/>
+        <field name="format">A4</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">20</field>
+        <field name="margin_bottom">12</field>
+        <field name="margin_left">8</field>
+        <field name="margin_right">8</field>
+        <field name="header_spacing">12</field>
+        <field name="dpi">90</field>
+    </record>
+    <record id="paperformat_sqlw_landscape" model="report.paperformat">
+        <field name="name">SQL result (landscape)</field>
+        <field name="default" eval="False"/>
+        <field name="format">A4</field>
+        <field name="orientation">Landscape</field>
+        <field name="margin_top">20</field>
+        <field name="margin_bottom">12</field>
+        <field name="margin_left">8</field>
+        <field name="margin_right">8</field>
+        <field name="header_spacing">12</field>
+        <field name="dpi">90</field>
+    </record>
+
+    <record id="action_report_result_portrait" model="ir.actions.report">
+        <field name="name">SQL result</field>
+        <field name="model">sql.query.print</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">sql_query_workbench.report_sql_result</field>
+        <field name="print_report_name">(object.name or 'SQL result')</field>
+        <field name="paperformat_id" ref="paperformat_sqlw_portrait"/>
+    </record>
+    <record id="action_report_result_landscape" model="ir.actions.report">
+        <field name="name">SQL result (landscape)</field>
+        <field name="model">sql.query.print</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">sql_query_workbench.report_sql_result_landscape</field>
+        <field name="print_report_name">(object.name or 'SQL result')</field>
+        <field name="paperformat_id" ref="paperformat_sqlw_landscape"/>
+    </record>
+
+    <template id="report_sql_result">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.internal_layout">
+                    <div class="page" style="font-size: 10px;">
+                        <h4 t-out="doc.name"/>
+                        <p class="text-muted mb-2">
+                            <t t-foreach="doc._params().items()" t-as="kv"><span class="me-3"><t t-out="kv[0]"/>: <t t-out="kv[1]"/></span></t>
+                            <span><t t-out="doc.row_count"/> rows</span>
+                            <span t-if="doc.truncated"> (cut at the row cap)</span>
+                        </p>
+                        <table class="table table-sm table-bordered">
+                            <thead>
+                                <tr><th>#</th><t t-foreach="doc._columns()" t-as="col"><th t-out="col"/></t></tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="doc._rows()" t-as="row">
+                                    <td class="text-muted" t-out="row_index + 1"/>
+                                    <t t-foreach="row" t-as="cell">
+                                        <td t-att-class="'text-end' if isinstance(cell, (int, float)) and not isinstance(cell, bool) else ''">
+                                            <t t-if="cell is None"><span class="text-muted">NULL</span></t>
+                                            <t t-else="" t-out="cell"/>
+                                        </td>
+                                    </t>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <template id="report_sql_result_landscape">
+        <t t-call="sql_query_workbench.report_sql_result"/>
+    </template>
+
+    <template id="digest_mail_body">
+        <div style="font-family: Arial, sans-serif; font-size: 14px; color: #1b2a41;">
+            <p>Hello,</p>
+            <p>Here is the result of <strong t-out="query.name"/>: <t t-out="rows"/> rows<t t-if="truncated"> (cut at the export limit)</t>. The file is attached.</p>
+            <p t-if="query.description" style="color: #5b6475;" t-out="query.description"/>
+            <p style="color: #5b6475; font-size: 12px;">Sent by SQL Workbench. Ask the query owner to change the schedule or the recipients.</p>
+        </div>
+    </template>
+</odoo>

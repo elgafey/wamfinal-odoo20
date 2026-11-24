@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="action_report_branch_request" model="ir.actions.report">
+        <field name="name">Branch Request</field>
+        <field name="model">branch.request</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">branch_request.report_branch_request</field>
+        <field name="print_report_name">'%s' % (object.name)</field>
+        <field name="binding_model_id" ref="model_branch_request"/>
+        <field name="binding_type">report</field>
+    </record>
+
+</odoo>

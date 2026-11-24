@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <!-- rounded-square background -->
+  <rect x="0" y="0" width="256" height="256" rx="56" fill="#2563EB"/>
+  <!-- delivery box: lid -->
+  <rect x="52" y="64" width="152" height="37" rx="10" fill="#FFFFFF"/>
+  <!-- delivery box: body -->
+  <rect x="64" y="100" width="128" height="104" rx="10" fill="#FFFFFF"/>
+  <!-- checkmark -->
+  <path d="M100 155 L122 177 L166 128"
+        fill="none" stroke="#2563EB" stroke-width="18"
+        stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

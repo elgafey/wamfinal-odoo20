@@ -1,0 +1,2466 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* sql_query_workbench
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 20.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-09 16:39+0000\n"
+"PO-Revision-Date: 2026-10-09 00:00+0000\n"
+"Last-Translator: Viyug Infotech\n"
+"Language-Team: German\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: sql_query_workbench
+#: model:ir.module.module,description:base.module_sql_query_workbench
+msgid ""
+"\n"
+"SQL Query Workbench (read-only)\n"
+"===============================\n"
+"\n"
+"Run SQL against your Odoo database from the browser, without ever writing to it.\n"
+"\n"
+"* Read-only by design: one SELECT, WITH or EXPLAIN statement, run on a separate connection\n"
+"  in a READ ONLY transaction with a statement timeout and a row cap, always rolled back.\n"
+"  Write keywords, server-side file and backend functions and denylisted tables are refused.\n"
+"* Console with SQL highlighting, Ctrl+Enter to run, run the selected text only, recent\n"
+"  queries, saved-query quick pick by tag and a draft kept per user.\n"
+"* Results grid: row numbers, sticky header, sorting, pagination, filter box, hide and\n"
+"  reorder columns, NULL highlighting, sum and average of numeric columns, links to the\n"
+"  Odoo records behind id and many2one columns.\n"
+"* Schema browser from the PostgreSQL catalog joined to Odoo models: tables, row estimates,\n"
+"  sizes, columns with SQL type and Odoo field label, indexes and foreign keys.\n"
+"* EXPLAIN plan view with cost share and sequential scans on large tables flagged;\n"
+"  EXPLAIN ANALYZE inside the same read-only, timed-out, rolled-back transaction.\n"
+"* Saved queries with notes, tags and typed parameters (date, date and time, number, text,\n"
+"  yes/no, selection, record, record list) with dynamic defaults; values are bound by the\n"
+"  database driver, never pasted into the SQL. Built-in :user_id, :company_id,\n"
+"  :company_ids, :today and :lang.\n"
+"* Validation (dry run) before sharing. Share with groups or users: they run, they do not\n"
+"  edit. Publish a query as a menu entry with a parameter form and export buttons.\n"
+"* Export CSV (separator, quote, header, BOM, line endings, file name), Excel with typed\n"
+"  cells, frozen header and autofilter, PDF portrait or landscape. Copy result or SQL.\n"
+"* Scheduled email digests (daily, weekly, monthly) with the CSV or Excel file.\n"
+"* Run log with user, duration, rows, status, error and parameters; list, pivot and graph\n"
+"  analysis; retention job. SQL changes tracked in the chatter.\n"
+"* Settings: row cap, timeout, export limit, limits per group, blocked tables and columns,\n"
+"  masking of credential-like columns. Administrators only by default.\n"
+"* Query library import and export as JSON. Ten example queries included.\n"
+msgstr ""
+"\n"
+"SQL-Abfrage-Werkbank (schreibgeschützt)\n"
+"=======================================\n"
+"\n"
+"Führen Sie SQL im Browser gegen Ihre Odoo-Datenbank aus, ohne jemals zu schreiben.\n"
+"\n"
+"* Von Grund auf schreibgeschützt: eine SELECT-, WITH- oder EXPLAIN-Anweisung, ausgeführt über eine separate Verbindung\n"
+"  in einer READ ONLY-Transaktion mit Anweisungs-Timeout und Zeilenobergrenze, immer zurückgerollt.\n"
+"  Schreibbefehle, serverseitige Datei- und Backend-Funktionen sowie gesperrte Tabellen werden abgelehnt.\n"
+"* Konsole mit SQL-Hervorhebung, Strg+Eingabe zum Ausführen, nur markierten Text ausführen, letzte\n"
+"  Abfragen, Schnellauswahl gespeicherter Abfragen nach Tag und ein Entwurf pro Benutzer.\n"
+"* Ergebnisraster: Zeilennummern, fixierte Kopfzeile, Sortierung, Seitenaufteilung, Filterfeld, Spalten ausblenden und\n"
+"  umordnen, NULL-Hervorhebung, Summe und Durchschnitt numerischer Spalten, Links zu den\n"
+"  Odoo-Datensätzen hinter id- und many2one-Spalten.\n"
+"* Schema-Browser aus dem PostgreSQL-Katalog, verknüpft mit Odoo-Modellen: Tabellen, Zeilenschätzungen,\n"
+"  Größen, Spalten mit SQL-Typ und Odoo-Feldbezeichnung, Indizes und Fremdschlüssel.\n"
+"* EXPLAIN-Planansicht mit Kostenanteil und Markierung sequenzieller Scans großer Tabellen;\n"
+"  EXPLAIN ANALYZE in derselben schreibgeschützten, zeitlich begrenzten, zurückgerollten Transaktion.\n"
+"* Gespeicherte Abfragen mit Notizen, Tags und typisierten Parametern (Datum, Datum und Uhrzeit, Zahl, Text,\n"
+"  Ja/Nein, Auswahl, Datensatz, Datensatzliste) mit dynamischen Vorgabewerten; Werte werden vom\n"
+"  Datenbanktreiber gebunden, nie in das SQL eingefügt. Eingebaut: :user_id, :company_id,\n"
+"  :company_ids, :today und :lang.\n"
+"* Validierung (Probelauf) vor dem Teilen. Mit Gruppen oder Benutzern teilen: sie führen aus, sie\n"
+"  bearbeiten nicht. Eine Abfrage als Menüeintrag mit Parameterformular und Export-Schaltflächen veröffentlichen.\n"
+"* Export als CSV (Trennzeichen, Anführungszeichen, Kopfzeile, BOM, Zeilenenden, Dateiname), Excel mit typisierten\n"
+"  Zellen, fixierter Kopfzeile und Autofilter, PDF im Hoch- oder Querformat. Ergebnis oder SQL kopieren.\n"
+"* Geplante E-Mail-Zusammenfassungen (täglich, wöchentlich, monatlich) mit der CSV- oder Excel-Datei.\n"
+"* Ausführungsprotokoll mit Benutzer, Dauer, Zeilen, Status, Fehler und Parametern; Listen-, Pivot- und Diagramm-\n"
+"  analyse; Aufbewahrungsjob. SQL-Änderungen werden im Chatter protokolliert.\n"
+"* Einstellungen: Zeilenobergrenze, Timeout, Exportlimit, Limits pro Gruppe, gesperrte Tabellen und Spalten,\n"
+"  Maskierung zugangsdatenähnlicher Spalten. Standardmäßig nur für Administratoren.\n"
+"* Import und Export der Abfragebibliothek als JSON. Zehn Beispielabfragen enthalten.\n"
+
+#. module: sql_query_workbench
+#. odoo-python
+#: code:addons/sql_query_workbench/models/sql_query.py:0
+msgid "%(name)s - %(date)s"
+msgstr "%(name)s - %(date)s"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.js:0
+msgid "%(rows)s rows in %(ms)s ms"
+msgstr "%(rows)s Zeilen in %(ms)s ms"
+
+#. module: sql_query_workbench
+#. odoo-python
+#: code:addons/sql_query_workbench/models/sql_query.py:0
+msgid "%s (copy)"
+msgstr "%s (Kopie)"
+
+#. module: sql_query_workbench
+#. odoo-python
+#: code:addons/sql_query_workbench/models/sql_query.py:0
+msgid "%s (my draft)"
+msgstr "%s (mein Entwurf)"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/result_grid.js:0
+msgid "%s rows copied (tab separated)."
+msgstr "%s Zeilen kopiert (tabulatorgetrennt)."
+
+#. module: sql_query_workbench
+#. odoo-python
+#: code:addons/sql_query_workbench/models/sql_workbench.py:0
+msgid "'%(value)s' is not a valid %(type)s for %(param)s."
+msgstr "\"%(value)s\" ist kein gültiger Wert vom Typ %(type)s für %(param)s."
+
+#. module: sql_query_workbench
+#. odoo-python
+#: code:addons/sql_query_workbench/models/sql_query.py:0
+msgid "'%s' is not a valid placeholder name (letters, digits, _)."
+msgstr "\"%s\" ist kein gültiger Platzhaltername (Buchstaben, Ziffern, _)."
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.digest_mail_body
+msgid "(cut at the export limit)"
+msgstr "(am Exportlimit abgeschnitten)"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.report_sql_result
+msgid "(cut at the row cap)"
+msgstr "(an der Zeilenobergrenze abgeschnitten)"
+
+#. module: sql_query_workbench
+#: model:ir.actions.report,print_report_name:sql_query_workbench.action_report_result_landscape
+#: model:ir.actions.report,print_report_name:sql_query_workbench.action_report_result_portrait
+msgid "(object.name or 'SQL result')"
+msgstr "(object.name or 'SQL-Ergebnis')"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.xml:0
+msgid "(read only)"
+msgstr "(schreibgeschützt)"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.digest_mail_body
+msgid ". The file is attached."
+msgstr ". Die Datei ist angehängt."
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/result_grid.xml:0
+msgid "/ page"
+msgstr "/ Seite"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,help:sql_query_workbench.field_sql_query_limit__export_limit
+#: model:ir.model.fields,help:sql_query_workbench.field_sql_query_limit__row_limit
+#: model:ir.model.fields,help:sql_query_workbench.field_sql_query_limit__timeout
+msgid "0 = use the global setting."
+msgstr "0 = globale Einstellung verwenden."
+
+#. module: sql_query_workbench
+#. odoo-python
+#: code:addons/sql_query_workbench/models/sql_query.py:0
+msgid ":%s is a built-in value and cannot be redeclared."
+msgstr ":%s ist ein eingebauter Wert und kann nicht neu deklariert werden."
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.res_config_settings_view_form_sqlw
+msgid "<span class=\"ms-1\">days</span>"
+msgstr "<span class=\"ms-1\">Tage</span>"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.res_config_settings_view_form_sqlw
+msgid "<span class=\"ms-1\">rows</span>"
+msgstr "<span class=\"ms-1\">Zeilen</span>"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.res_config_settings_view_form_sqlw
+msgid "<span class=\"ms-1\">seconds</span>"
+msgstr "<span class=\"ms-1\">Sekunden</span>"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.report_sql_result
+msgid "<span class=\"text-muted\">NULL</span>"
+msgstr "<span class=\"text-muted\">NULL</span>"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__message_needaction
+msgid "Action Needed"
+msgstr "Aktion erforderlich"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__active
+msgid "Active"
+msgstr "Aktiv"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/plan_view.xml:0
+msgid "Actual rows"
+msgstr "Tatsächliche Zeilen"
+
+#. module: sql_query_workbench
+#. odoo-python
+#: code:addons/sql_query_workbench/models/sql_query.py:0
+msgid "Add at least one option to the selection parameter :%s."
+msgstr "Fügen Sie dem Auswahlparameter :%s mindestens eine Option hinzu."
+
+#. module: sql_query_workbench
+#: model:sql.query.tag,name:sql_query_workbench.tag_admin
+msgid "Administration"
+msgstr "Administration"
+
+#. module: sql_query_workbench
+#: model:res.groups,name:sql_query_workbench.group_sqlw_manager
+msgid "Administrator"
+msgstr "Administrator"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_library_view_form
+msgid "All queries I can see"
+msgstr "Alle Abfragen, die ich sehen kann"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/schema_browser.xml:0
+msgid "All tables"
+msgstr "Alle Tabellen"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.xml:0
+msgid "All tags"
+msgstr "Alle Tags"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_form
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_search
+msgid "Archived"
+msgstr "Archiviert"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__message_attachment_count
+msgid "Attachment Count"
+msgstr "Anzahl Anhänge"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/result_grid.xml:0
+msgid "Avg"
+msgstr "Durchschn."
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_form
+msgid "Back to draft"
+msgstr "Zurück zum Entwurf"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_form
+msgid ""
+"Back to draft removes sharing, the published menu and the digest. Continue?"
+msgstr ""
+"Zurück zum Entwurf entfernt die Freigabe, das veröffentlichte Menü und die "
+"Zusammenfassung. Fortfahren?"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query_run__status__blocked
+msgid "Blocked"
+msgstr "Gesperrt"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/schema_browser.xml:0
+msgid "Blocked by the denylist"
+msgstr "Durch die Sperrliste blockiert"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_res_config_settings__sqlw_denied_columns
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.res_config_settings_view_form_sqlw
+msgid "Blocked columns"
+msgstr "Gesperrte Spalten"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_res_config_settings__sqlw_denied_tables
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.res_config_settings_view_form_sqlw
+msgid "Blocked tables"
+msgstr "Gesperrte Tabellen"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_library_view_form
+msgid "Build file"
+msgstr "Datei erstellen"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query__digest_format__csv
+msgid "CSV"
+msgstr "CSV"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.xml:0
+msgid "CSV..."
+msgstr "CSV..."
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__can_edit
+msgid "Can Edit"
+msgstr "Kann bearbeiten"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/dialogs.xml:0
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#. module: sql_query_workbench
+#. odoo-python
+#: code:addons/sql_query_workbench/wizard/sql_query_library.py:0
+msgid "Choose a library file to import."
+msgstr "Wählen Sie eine Bibliotheksdatei zum Importieren."
+
+#. module: sql_query_workbench
+#. odoo-python
+#: code:addons/sql_query_workbench/models/sql_query.py:0
+msgid "Choose the model of the record parameter :%s."
+msgstr "Wählen Sie das Modell des Datensatzparameters :%s."
+
+#. module: sql_query_workbench
+#. odoo-python
+#: code:addons/sql_query_workbench/models/sql_query.py:0
+msgid "Choose who receives the email digest."
+msgstr "Wählen Sie, wer die E-Mail-Zusammenfassung erhält."
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__client_action_id
+msgid "Client Action"
+msgstr "Client-Aktion"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_library_view_form
+msgid "Close"
+msgstr "Schließen"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_tag__color
+msgid "Color"
+msgstr "Farbe"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_column_model__column_name
+msgid "Column"
+msgstr "Spalte"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__column_model_ids
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_form
+msgid "Column links"
+msgstr "Spaltenlinks"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/result_grid.xml:0
+#: code:addons/sql_query_workbench/static/src/workbench/schema_browser.xml:0
+msgid "Columns"
+msgstr "Spalten"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_print__columns_json
+msgid "Columns Json"
+msgstr "Spalten-JSON"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_form
+msgid ""
+"Columns read straight from a table (an id or a many2one column) already open their record.\n"
+"                                Add a line for computed or aliased columns, for example <code>customer</code> opens Contact."
+msgstr ""
+"Spalten, die direkt aus einer Tabelle gelesen werden (eine id- oder many2one-Spalte), öffnen ihren Datensatz bereits.\n"
+"                                Fügen Sie eine Zeile für berechnete Spalten oder Spalten mit Alias hinzu, zum Beispiel öffnet <code>customer</code> den Kontakt."
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/dialogs.xml:0
+msgid "Comma ,"
+msgstr "Komma ,"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__company_id
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_run__company_id
+msgid "Company"
+msgstr "Unternehmen"
+
+#. module: sql_query_workbench
+#: model:ir.model,name:sql_query_workbench.model_res_config_settings
+msgid "Config Settings"
+msgstr "Konfigurationseinstellungen"
+
+#. module: sql_query_workbench
+#: model:ir.ui.menu,name:sql_query_workbench.menu_sqlw_config
+msgid "Configuration"
+msgstr "Konfiguration"
+
+#. module: sql_query_workbench
+#. odoo-python
+#: code:addons/sql_query_workbench/models/sql_query_run.py:0
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query_run__origin__console
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_run_view_search
+msgid "Console"
+msgstr "Konsole"
+
+#. module: sql_query_workbench
+#: model:res.groups,comment:sql_query_workbench.group_sqlw_user
+msgid ""
+"Console, schema browser and own saved queries. SQL reads every table outside"
+" the denylist, record rules do not apply: grant to trusted people only."
+msgstr ""
+"Konsole, Schema-Browser und eigene gespeicherte Abfragen. SQL liest jede "
+"Tabelle außerhalb der Sperrliste, Datensatzregeln gelten nicht: Nur an "
+"vertrauenswürdige Personen vergeben."
+
+#. module: sql_query_workbench
+#: model:sql.query.tag,name:sql_query_workbench.tag_contacts
+msgid "Contacts"
+msgstr "Kontakte"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/result_grid.xml:0
+msgid "Copy"
+msgstr "Kopieren"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.xml:0
+msgid "Copy SQL"
+msgstr "SQL kopieren"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/plan_view.xml:0
+msgid "Cost"
+msgstr "Kosten"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/plan_view.xml:0
+msgid "Cost share"
+msgstr "Kostenanteil"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_library__created_count
+msgid "Created Count"
+msgstr "Anzahl Erstellungen"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__create_uid
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_column_model__create_uid
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_library__create_uid
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_limit__create_uid
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_param__create_uid
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_print__create_uid
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_run__create_uid
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_tag__create_uid
+msgid "Created by"
+msgstr "Erstellt von"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__create_date
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_column_model__create_date
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_library__create_date
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_limit__create_date
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_param__create_date
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_print__create_date
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_run__create_date
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_tag__create_date
+msgid "Created on"
+msgstr "Erstellt am"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.xml:0
+msgid "Ctrl+Enter runs, selection runs alone"
+msgstr "Strg+Eingabe führt aus, Auswahl wird allein ausgeführt"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query_param__default_kind__current_company
+msgid "Current company"
+msgstr "Aktuelles Unternehmen"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query_param__default_kind__current_user
+msgid "Current user"
+msgstr "Aktueller Benutzer"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.xml:0
+msgid "Cut at the row cap ("
+msgstr "An der Zeilenobergrenze abgeschnitten ("
+
+#. module: sql_query_workbench
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query__digest_interval__daily
+msgid "Daily"
+msgstr "Täglich"
+
+#. module: sql_query_workbench
+#: model:sql.query.tag,name:sql_query_workbench.tag_database
+msgid "Database"
+msgstr "Datenbank"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query_param__ptype__date
+msgid "Date"
+msgstr "Datum"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query_param__ptype__datetime
+msgid "Date and time"
+msgstr "Datum und Uhrzeit"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,help:sql_query_workbench.field_sql_query_param__default_value
+msgid ""
+"Date as YYYY-MM-DD, numbers as 12.5, records as an ID (record lists: 3,7,9),"
+" booleans as true/false."
+msgstr ""
+"Datum als JJJJ-MM-TT, Zahlen wie 12.5, Datensätze als ID (Datensatzlisten: "
+"3,7,9), Wahrheitswerte als true/false."
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_run_view_search
+msgid "Day"
+msgstr "Tag"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query_param__ptype__float
+msgid "Decimal number"
+msgstr "Dezimalzahl"
+
+#. module: sql_query_workbench
+#. odoo-python
+#: code:addons/sql_query_workbench/models/sql_query.py:0
+msgid "Declare these parameters first: %s"
+msgstr "Deklarieren Sie zuerst diese Parameter: %s"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_param__default_kind
+msgid "Default"
+msgstr "Standard"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_form
+msgid "Detect placeholders"
+msgstr "Platzhalter erkennen"
+
+#. module: sql_query_workbench
+#. odoo-python
+#: code:addons/sql_query_workbench/models/sql_query.py:0
+msgid "Digest queued for sending."
+msgstr "Zusammenfassung zum Versand eingereiht."
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_run__display_label
+msgid "Display Label"
+msgstr "Anzeigebezeichnung"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_res_config_settings__display_name
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__display_name
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_column_model__display_name
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_library__display_name
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_limit__display_name
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_param__display_name
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_print__display_name
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_run__display_name
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_tag__display_name
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_workbench__display_name
+msgid "Display Name"
+msgstr "Anzeigename"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/dialogs.xml:0
+msgid "Double quote \""
+msgstr "Doppeltes Anführungszeichen \""
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/dialogs.xml:0
+msgid "Download"
+msgstr "Herunterladen"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query__state__draft
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_search
+msgid "Draft"
+msgstr "Entwurf"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_form
+msgid "Duplicate as my draft"
+msgstr "Als meinen Entwurf duplizieren"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_run__duration_ms
+msgid "Duration (ms)"
+msgstr "Dauer (ms)"
+
+#. module: sql_query_workbench
+#: model:ir.model.constraint,message:sql_query_workbench.constraint_sql_query_column_model_column_uniq
+msgid "Each column can be linked once."
+msgstr "Jede Spalte kann nur einmal verknüpft werden."
+
+#. module: sql_query_workbench
+#: model:ir.model.constraint,message:sql_query_workbench.constraint_sql_query_param_name_uniq
+msgid "Each placeholder can be declared once per query."
+msgstr "Jeder Platzhalter kann pro Abfrage nur einmal deklariert werden."
+
+#. module: sql_query_workbench
+#. odoo-python
+#: code:addons/sql_query_workbench/models/sql_query.py:0
+msgid "Each query needs a name and SQL."
+msgstr "Jede Abfrage benötigt einen Namen und SQL."
+
+#. module: sql_query_workbench
+#: model:res.groups,comment:sql_query_workbench.group_sqlw_manager
+msgid ""
+"Edit every saved query, share and publish queries, schedule digests, see the"
+" full run log and the settings."
+msgstr ""
+"Alle gespeicherten Abfragen bearbeiten, Abfragen teilen und veröffentlichen,"
+" Zusammenfassungen planen, das vollständige Ausführungsprotokoll und die "
+"Einstellungen sehen."
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.xml:0
+msgid "Editing:"
+msgstr "Bearbeitung:"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__digest_active
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query_run__origin__digest
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_form
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_search
+msgid "Email digest"
+msgstr "E-Mail-Zusammenfassung"
+
+#. module: sql_query_workbench
+#. odoo-python
+#: code:addons/sql_query_workbench/models/sql_query.py:0
+msgid "Email digest not sent: %s"
+msgstr "E-Mail-Zusammenfassung nicht gesendet: %s"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query_param__default_kind__end_of_month
+msgid "End of this month"
+msgstr "Ende dieses Monats"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_run__error
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query_run__status__error
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_run_view_form
+msgid "Error"
+msgstr "Fehler"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/plan_view.xml:0
+msgid "Est. rows"
+msgstr "Gesch. Zeilen"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__digest_interval
+msgid "Every"
+msgstr "Alle"
+
+#. module: sql_query_workbench
+#: model_terms:ir.actions.act_window,help:sql_query_workbench.action_sql_query_run
+msgid ""
+"Every run, export, validation and digest is logged here with duration, rows "
+"and status."
+msgstr ""
+"Jede Ausführung, jeder Export, jede Validierung und jede Zusammenfassung "
+"wird hier mit Dauer, Zeilen und Status protokolliert."
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__example
+msgid "Example"
+msgstr "Beispiel"
+
+#. module: sql_query_workbench
+#: model:sql.query.tag,name:sql_query_workbench.tag_examples
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_search
+msgid "Examples"
+msgstr "Beispiele"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.xml:0
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query__digest_format__xlsx
+msgid "Excel (XLSX)"
+msgstr "Excel (XLSX)"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/plan_view.xml:0
+msgid "Execution"
+msgstr "Ausführung"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.xml:0
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query_run__origin__explain
+msgid "Explain"
+msgstr "Erklären"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.xml:0
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query_library__mode__export
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query_run__origin__export
+msgid "Export"
+msgstr "Exportieren"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/dialogs.xml:0
+msgid "Export CSV"
+msgstr "CSV exportieren"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.js:0
+msgid "Export failed."
+msgstr "Export fehlgeschlagen."
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_run_view_search
+msgid "Failed"
+msgstr "Fehlgeschlagen"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_run__failed
+msgid "Failures"
+msgstr "Fehler"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__digest_format
+msgid "File"
+msgstr "Datei"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/dialogs.xml:0
+msgid "File name"
+msgstr "Dateiname"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_library__filename
+msgid "Filename"
+msgstr "Dateiname"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.xml:0
+msgid "Fill in the parameters and press Run."
+msgstr "Füllen Sie die Parameter aus und klicken Sie auf Ausführen."
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/result_grid.xml:0
+msgid "Filter rows..."
+msgstr "Zeilen filtern..."
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_param__default_value
+msgid "Fixed default"
+msgstr "Fester Standardwert"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query_param__default_kind__fixed
+msgid "Fixed value"
+msgstr "Fester Wert"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.res_config_settings_view_form_sqlw
+msgid "Flag sequential scans"
+msgstr "Sequenzielle Scans markieren"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_res_config_settings__sqlw_seq_scan_rows
+msgid "Flag sequential scans from (rows)"
+msgstr "Sequenzielle Scans markieren ab (Zeilen)"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__message_follower_ids
+msgid "Followers"
+msgstr "Follower"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Follower (Partner)"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/schema_browser.xml:0
+msgid "Foreign keys"
+msgstr "Fremdschlüssel"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/plan_view.xml:0
+msgid "Full scan of ~"
+msgstr "Vollständiger Scan von ca."
+
+#. module: sql_query_workbench
+#: model_terms:ir.actions.act_window,help:sql_query_workbench.action_sql_query_limit
+msgid "Give a group higher or lower limits"
+msgstr "Einer Gruppe höhere oder niedrigere Limits geben"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.res_config_settings_view_form_sqlw
+msgid ""
+"Give some groups other limits. Members get the largest value among their "
+"groups."
+msgstr ""
+"Einigen Gruppen andere Limits geben. Mitglieder erhalten den größten Wert "
+"ihrer Gruppen."
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_limit__group_id
+msgid "Group"
+msgstr "Gruppe"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__has_message
+msgid "Has Message"
+msgstr "Hat eine Nachricht"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/dialogs.xml:0
+msgid "Header row"
+msgstr "Kopfzeile"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.digest_mail_body
+msgid "Hello,"
+msgstr "Hallo, "
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.digest_mail_body
+msgid "Here is the result of"
+msgstr "Hier ist das Ergebnis von"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/result_grid.xml:0
+msgid "Highlight NULL"
+msgstr "NULL hervorheben"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_param__help
+msgid "Hint"
+msgstr "Hinweis"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_res_config_settings__id
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__id
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_column_model__id
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_library__id
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_limit__id
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_param__id
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_print__id
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_run__id
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_tag__id
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_workbench__id
+msgid "ID"
+msgstr "ID"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,help:sql_query_workbench.field_sql_query__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "Falls markiert, erfordern neue Nachrichten Ihre Aufmerksamkeit."
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,help:sql_query_workbench.field_sql_query__message_has_error
+msgid "If checked, some messages have a delivery error."
+msgstr ""
+"Falls markiert, weisen einige Nachrichten einen Zustellungsfehler auf."
+
+#. module: sql_query_workbench
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query_library__mode__import
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_library_view_form
+msgid "Import"
+msgstr "Importieren"
+
+#. module: sql_query_workbench
+#: model:ir.actions.act_window,name:sql_query_workbench.action_sql_query_library
+#: model:ir.ui.menu,name:sql_query_workbench.menu_sqlw_library
+msgid "Import / Export Library"
+msgstr "Bibliothek importieren / exportieren"
+
+#. module: sql_query_workbench
+#: model:ir.model,name:sql_query_workbench.model_sql_query_library
+msgid "Import or export saved SQL queries"
+msgstr "Gespeicherte SQL-Abfragen importieren oder exportieren"
+
+#. module: sql_query_workbench
+#. odoo-python
+#: code:addons/sql_query_workbench/wizard/sql_query_library.py:0
+msgid "Imported queries"
+msgstr "Importierte Abfragen"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_library_view_form
+msgid ""
+"Imported queries are created as your drafts. Sharing groups found in this "
+"database are applied once the query validates."
+msgstr ""
+"Importierte Abfragen werden als Ihre Entwürfe erstellt. In dieser Datenbank "
+"gefundene Freigabegruppen werden angewendet, sobald die Abfrage validiert "
+"ist."
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/schema_browser.xml:0
+msgid "Indexes"
+msgstr "Indizes"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/schema_browser.xml:0
+msgid "Insert SELECT"
+msgstr "SELECT einfügen"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/schema_browser.xml:0
+msgid "Insert into the editor"
+msgstr "In den Editor einfügen"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/schema_browser.xml:0
+msgid "Insert name"
+msgstr "Namen einfügen"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/schema_browser.xml:0
+msgid "Insert the table name"
+msgstr "Tabellennamen einfügen"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query_param__ptype__integer
+msgid "Integer"
+msgstr "Ganzzahl"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__message_is_follower
+msgid "Is Follower"
+msgstr "Ist Follower"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.res_config_settings_view_form_sqlw
+msgid "Keep run log"
+msgstr "Ausführungsprotokoll behalten"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_res_config_settings__sqlw_retention_days
+msgid "Keep run log (days)"
+msgstr "Ausführungsprotokoll behalten (Tage)"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_param__label
+msgid "Label"
+msgstr "Bezeichnung"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query_print__orientation__landscape
+msgid "Landscape"
+msgstr "Querformat"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__last_run_date
+msgid "Last Run Date"
+msgstr "Datum der letzten Ausführung"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__last_run_status
+msgid "Last Run Status"
+msgstr "Status der letzten Ausführung"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__write_uid
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_column_model__write_uid
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_library__write_uid
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_limit__write_uid
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_param__write_uid
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_print__write_uid
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_run__write_uid
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_tag__write_uid
+msgid "Last Updated by"
+msgstr "Zuletzt aktualisiert von"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__write_date
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_column_model__write_date
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_library__write_date
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_limit__write_date
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_param__write_date
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_print__write_date
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_run__write_date
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_tag__write_date
+msgid "Last Updated on"
+msgstr "Zuletzt aktualisiert am"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__digest_last
+msgid "Last digest"
+msgstr "Letzte Zusammenfassung"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,help:sql_query_workbench.field_sql_query__company_id
+msgid "Leave empty to make the query available in every company."
+msgstr "Leer lassen, um die Abfrage in jedem Unternehmen verfügbar zu machen."
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_library__file
+msgid "Library file"
+msgstr "Bibliotheksdatei"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.res_config_settings_view_form_sqlw
+msgid "Limits"
+msgstr "Limits"
+
+#. module: sql_query_workbench
+#: model:ir.model.constraint,message:sql_query_workbench.constraint_sql_query_limit_positive
+msgid "Limits cannot be negative."
+msgstr "Limits dürfen nicht negativ sein."
+
+#. module: sql_query_workbench
+#: model:ir.actions.act_window,name:sql_query_workbench.action_sql_query_limit
+#: model:ir.ui.menu,name:sql_query_workbench.menu_sqlw_limits
+msgid "Limits per Group"
+msgstr "Limits pro Gruppe"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.res_config_settings_view_form_sqlw
+msgid "Limits per group"
+msgstr "Limits pro Gruppe"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/dialogs.xml:0
+msgid "Line endings"
+msgstr "Zeilenenden"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_res_config_settings__sqlw_mask_enabled
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.res_config_settings_view_form_sqlw
+msgid "Mask credential-like columns"
+msgstr "Zugangsdatenähnliche Spalten maskieren"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/result_grid.xml:0
+msgid "Masked"
+msgstr "Maskiert"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_res_config_settings__sqlw_mask_patterns
+msgid "Masked column names"
+msgstr "Maskierte Spaltennamen"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_res_config_settings__sqlw_export_limit
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_limit__export_limit
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.res_config_settings_view_form_sqlw
+msgid "Max export rows"
+msgstr "Max. Exportzeilen"
+
+#. module: sql_query_workbench
+#: model_terms:ir.actions.act_window,help:sql_query_workbench.action_sql_query_limit
+msgid ""
+"Members get the largest value among their groups; 0 keeps the global "
+"setting."
+msgstr ""
+"Mitglieder erhalten den größten Wert ihrer Gruppen; 0 behält die globale "
+"Einstellung."
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,help:sql_query_workbench.field_sql_query__group_ids
+msgid "Members of these groups can run the query (not edit it)."
+msgstr ""
+"Mitglieder dieser Gruppen können die Abfrage ausführen (nicht bearbeiten)."
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__menu_id
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_form
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_list
+msgid "Menu"
+msgstr "Menü"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__menu_parent_id
+msgid "Menu under"
+msgstr "Menü unter"
+
+#. module: sql_query_workbench
+#. odoo-python
+#: code:addons/sql_query_workbench/models/sql_query.py:0
+msgid "Menus are shown per group: add a group in Sharing."
+msgstr ""
+"Menüs werden pro Gruppe angezeigt: Fügen Sie unter Freigabe eine Gruppe "
+"hinzu."
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__message_has_error
+msgid "Message Delivery error"
+msgstr "Nachricht mit Zustellungsfehler"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__message_ids
+msgid "Messages"
+msgstr "Nachrichten"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_library__mode
+msgid "Mode"
+msgstr "Modus"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_param__model_id
+msgid "Model"
+msgstr "Modell"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,help:sql_query_workbench.field_sql_query_param__model_id
+msgid "Model of the record picker for Record and Record list parameters."
+msgstr ""
+"Modell der Datensatzauswahl für die Parameter Datensatz und Datensatzliste."
+
+#. module: sql_query_workbench
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query__digest_interval__monthly
+msgid "Monthly"
+msgstr "Monatlich"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/result_grid.xml:0
+msgid "Move left"
+msgstr "Nach links verschieben"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/result_grid.xml:0
+msgid "Move right"
+msgstr "Nach rechts verschieben"
+
+#. module: sql_query_workbench
+#: model:ir.actions.act_window,name:sql_query_workbench.action_sql_query_run_mine
+#: model:ir.ui.menu,name:sql_query_workbench.menu_sqlw_history
+msgid "My History"
+msgstr "Mein Verlauf"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_search
+msgid "My queries"
+msgstr "Meine Abfragen"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_run_view_search
+msgid "My runs"
+msgstr "Meine Ausführungen"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/result_grid.xml:0
+msgid "NULL"
+msgstr "NULL"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/dialogs.xml:0
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__name
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_print__name
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_tag__name
+msgid "Name"
+msgstr "Name"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#. odoo-python
+#: code:addons/sql_query_workbench/models/sql_workbench.py:0
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.xml:0
+msgid "New query"
+msgstr "Neue Abfrage"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__digest_next
+msgid "Next digest"
+msgstr "Nächste Zusammenfassung"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/result_grid.xml:0
+msgid "Next page"
+msgstr "Nächste Seite"
+
+#. module: sql_query_workbench
+#: model:res.groups.privilege,placeholder:sql_query_workbench.res_groups_privilege_sql_workbench
+msgid "No"
+msgstr "Nein"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query_param__default_kind__none
+msgid "No default"
+msgstr "Kein Standard"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.xml:0
+msgid "No history yet"
+msgstr "Noch kein Verlauf"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/result_grid.xml:0
+msgid "No rows"
+msgstr "Keine Zeilen"
+
+#. module: sql_query_workbench
+#: model_terms:ir.actions.act_window,help:sql_query_workbench.action_sql_query_run
+msgid "No runs yet"
+msgstr "Noch keine Ausführungen"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.xml:0
+msgid "No saved queries"
+msgstr "Keine gespeicherten Abfragen"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.xml:0
+msgid "Not run"
+msgstr "Nicht ausgeführt"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__description
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_form
+msgid "Notes"
+msgstr "Notizen"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__message_needaction_counter
+msgid "Number of Actions"
+msgstr "Anzahl Aktionen"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__message_has_error_counter
+msgid "Number of errors"
+msgstr "Anzahl Fehler"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,help:sql_query_workbench.field_sql_query__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr "Anzahl der Nachrichten, die eine Aktion erfordern"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,help:sql_query_workbench.field_sql_query__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "Anzahl Nachrichten mit Zustellungsfehler"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_form
+msgid ""
+"One SELECT, WITH or EXPLAIN statement. Placeholders such as <code>:date_from</code> are bound\n"
+"                                as driver parameters. Built-in values: <code>:user_id</code>, <code>:company_id</code>,\n"
+"                                <code>:company_ids</code> (use <code>= ANY(:company_ids)</code>), <code>:today</code>, <code>:lang</code>.\n"
+"                                Changing the SQL of a shared query validates it again; an unshared query goes back to draft."
+msgstr ""
+"Eine SELECT-, WITH- oder EXPLAIN-Anweisung. Platzhalter wie <code>:date_from</code> werden\n"
+"                                als Treiberparameter gebunden. Eingebaute Werte: <code>:user_id</code>, <code>:company_id</code>,\n"
+"                                <code>:company_ids</code> (verwenden Sie <code>= ANY(:company_ids)</code>), <code>:today</code>, <code>:lang</code>.\n"
+"                                Die Änderung des SQL einer geteilten Abfrage validiert sie erneut; eine nicht geteilte Abfrage wird wieder zum Entwurf."
+
+#. module: sql_query_workbench
+#: model:ir.model.constraint,message:sql_query_workbench.constraint_sql_query_limit_group_uniq
+msgid "One limit line per group."
+msgstr "Eine Limitzeile pro Gruppe."
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,help:sql_query_workbench.field_sql_query_param__selection_options
+msgid "One option per line, as value or value:Label."
+msgstr "Eine Option pro Zeile, als Wert oder Wert:Bezeichnung."
+
+#. module: sql_query_workbench
+#. odoo-python
+#: code:addons/sql_query_workbench/models/sql_workbench.py:0
+msgid "Only SQL Workbench users can do this."
+msgstr "Nur Benutzer der SQL-Werkbank können dies tun."
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.xml:0
+msgid "Open"
+msgstr "Offen"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_run_view_form
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_form
+msgid "Open in Workbench"
+msgstr "In der Werkbank öffnen"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,help:sql_query_workbench.field_sql_query__column_model_ids
+msgid ""
+"Open records from a result column: column name -> model. Columns read "
+"straight from a table are detected automatically."
+msgstr ""
+"Datensätze aus einer Ergebnisspalte öffnen: Spaltenname -> Modell. Direkt "
+"aus einer Tabelle gelesene Spalten werden automatisch erkannt."
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_column_model__model_id
+msgid "Opens"
+msgstr "Öffnungen"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_param__selection_options
+msgid "Options"
+msgstr "Optionen"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_print__orientation
+msgid "Orientation"
+msgstr "Ausrichtung"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_run__origin
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_run_view_search
+msgid "Origin"
+msgstr "Herkunft"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__user_id
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_search
+msgid "Owner"
+msgstr "Besitzer"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query_run__origin__print
+msgid "PDF"
+msgstr "PDF"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.xml:0
+msgid "PDF landscape"
+msgstr "PDF Querformat"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.xml:0
+msgid "PDF portrait"
+msgstr "PDF Hochformat"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__param_signature
+msgid "Parameter definition"
+msgstr "Parameterdefinition"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__param_ids
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_run__params_text
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_run_view_form
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_form
+msgid "Parameters"
+msgstr "Parameter"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_print__params_text
+msgid "Params Text"
+msgstr "Parametertext"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/dialogs.xml:0
+msgid "Pipe |"
+msgstr "Pipe |"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_param__name
+msgid "Placeholder"
+msgstr "Platzhalter"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.xml:0
+msgid "Plan (estimates)"
+msgstr "Plan (Schätzungen)"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.js:0
+msgid "Plan in %s ms"
+msgstr "Plan in %s ms"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.xml:0
+msgid "Plan with actual times (EXPLAIN ANALYZE)"
+msgstr "Plan mit tatsächlichen Zeiten (EXPLAIN ANALYZE)"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/plan_view.xml:0
+msgid "Planning"
+msgstr "Planung"
+
+#. module: sql_query_workbench
+#. odoo-python
+#: code:addons/sql_query_workbench/models/sql_workbench.py:0
+msgid "Please give a value for: %s"
+msgstr "Bitte geben Sie einen Wert an für: %s"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query_print__orientation__portrait
+msgid "Portrait"
+msgstr "Hochformat"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.xml:0
+msgid "PostgreSQL error"
+msgstr "PostgreSQL-Fehler"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/result_grid.xml:0
+msgid "Previous page"
+msgstr "Vorherige Seite"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.res_config_settings_view_form_sqlw
+msgid "Protection"
+msgstr "Schutz"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_form
+msgid "Publish as menu"
+msgstr "Als Menü veröffentlichen"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_form
+msgid ""
+"Publish as menu adds an entry for the shared groups. It opens a run screen with the\n"
+"                                        parameter form and export buttons; members can run, not edit."
+msgstr ""
+"Als Menü veröffentlichen fügt einen Eintrag für die freigegebenen Gruppen hinzu. Er öffnet einen Ausführungsbildschirm mit dem\n"
+"                                        Parameterformular und Export-Schaltflächen; Mitglieder können ausführen, nicht bearbeiten."
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_search
+msgid "Published as menu"
+msgstr "Als Menü veröffentlicht"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query_run__origin__menu
+msgid "Published menu"
+msgstr "Veröffentlichtes Menü"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_library__query_ids
+msgid "Queries"
+msgstr "Abfragen"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.res_config_settings_view_form_sqlw
+msgid ""
+"Queries that name one of these columns are refused, and their values read as"
+" ******** in every query (whole-row and JSON reads included). Write "
+"table.column to protect one table only. Login passwords, two-factor and API "
+"key secrets are always protected."
+msgstr ""
+"Abfragen, die eine dieser Spalten nennen, werden abgelehnt, und ihre Werte "
+"erscheinen in jeder Abfrage als ******** (auch bei Ganzzeilen- und JSON-"
+"Lesezugriffen). Schreiben Sie Tabelle.Spalte, um nur eine Tabelle zu "
+"schützen. Anmeldepasswörter sowie Zwei-Faktor- und API-Schlüssel-Geheimnisse"
+" sind immer geschützt."
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.res_config_settings_view_form_sqlw
+msgid ""
+"Queries that name one of these tables are refused. Separate with commas."
+msgstr ""
+"Abfragen, die eine dieser Tabellen nennen, werden abgelehnt. Mit Kommas "
+"trennen."
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_column_model__query_id
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_param__query_id
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_run__query_id
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_run_view_search
+msgid "Query"
+msgstr "Abfrage"
+
+#. module: sql_query_workbench
+#: model:ir.actions.act_window,name:sql_query_workbench.action_sql_query_tag
+#: model:ir.ui.menu,name:sql_query_workbench.menu_sqlw_tags
+msgid "Query Tags"
+msgstr "Abfrage-Tags"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_run__source_label
+msgid "Query name"
+msgstr "Abfragename"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,help:sql_query_workbench.field_sql_query_run__source_label
+msgid "Query name at run time."
+msgstr "Abfragename zur Laufzeit."
+
+#. module: sql_query_workbench
+#. odoo-python
+#: code:addons/sql_query_workbench/models/sql_workbench.py:0
+msgid "Query result"
+msgstr "Abfrageergebnis"
+
+#. module: sql_query_workbench
+#. odoo-python
+#: code:addons/sql_query_workbench/models/sql_query.py:0
+msgid "Query validated: it can be shared now."
+msgstr "Abfrage validiert: Sie kann jetzt geteilt werden."
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/dialogs.xml:0
+msgid "Quote character"
+msgstr "Anführungszeichen"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__rating_ids
+msgid "Ratings"
+msgstr "Bewertungen"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.xml:0
+msgid "Raw data: record rules and access rights do not apply"
+msgstr "Rohdaten: Datensatzregeln und Zugriffsrechte gelten nicht"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.xml:0
+msgid "Read-only · timeout"
+msgstr "Schreibgeschützt · Zeitlimit"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.xml:0
+msgid "Recent"
+msgstr "Neueste"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query_param__ptype__many2one
+msgid "Record"
+msgstr "Datensatz"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query_param__ptype__many2many
+msgid "Record list"
+msgstr "Datensatzliste"
+
+#. module: sql_query_workbench
+#. odoo-python
+#: code:addons/sql_query_workbench/models/sql_workbench.py:0
+msgid "Remove EXPLAIN from the query to use the plan view."
+msgstr ""
+"Entfernen Sie EXPLAIN aus der Abfrage, um die Planansicht zu verwenden."
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_form
+msgid "Remove menu"
+msgstr "Menü entfernen"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_param__required
+msgid "Required"
+msgstr "Erforderlich"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,help:sql_query_workbench.field_sql_query_column_model__column_name
+msgid "Result column name, as shown in the grid header."
+msgstr "Name der Ergebnisspalte, wie in der Rasterkopfzeile angezeigt."
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_print__row_count
+msgid "Row Count"
+msgstr "Zeilenanzahl"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_res_config_settings__sqlw_row_limit
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_limit__row_limit
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.res_config_settings_view_form_sqlw
+msgid "Row cap"
+msgstr "Zeilenobergrenze"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_run__truncated
+msgid "Row cap hit"
+msgstr "Zeilenobergrenze erreicht"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_run__row_count
+msgid "Rows"
+msgstr "Zeilen"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_print__rows_json
+msgid "Rows Json"
+msgstr "Zeilen-JSON"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.res_config_settings_view_form_sqlw
+msgid "Rows fetched per run in the grid. Larger results are cut and flagged."
+msgstr ""
+"Pro Ausführung im Raster abgerufene Zeilen. Größere Ergebnisse werden "
+"abgeschnitten und markiert."
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.res_config_settings_view_form_sqlw
+msgid "Rows written to CSV, Excel and digest files."
+msgstr "In CSV-, Excel- und Zusammenfassungsdateien geschriebene Zeilen."
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.xml:0
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_form
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_list
+msgid "Run"
+msgstr "Ausführen"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.xml:0
+msgid ""
+"Run (Ctrl+Enter). Runs only the selected text when there is a selection."
+msgstr ""
+"Ausführen (Strg+Eingabe). Führt nur den markierten Text aus, wenn eine "
+"Auswahl besteht."
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__run_count
+msgid "Run Count"
+msgstr "Anzahl Ausführungen"
+
+#. module: sql_query_workbench
+#: model:ir.actions.act_window,name:sql_query_workbench.action_sql_query_run
+#: model:ir.ui.menu,name:sql_query_workbench.menu_sqlw_runs
+#: model:ir.ui.menu,name:sql_query_workbench.menu_sqlw_technical_runs
+msgid "Run Log"
+msgstr "Ausführungsprotokoll"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_run_view_pivot
+msgid "Run analysis"
+msgstr "Analyse ausführen"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_run_view_form
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_run_view_list
+msgid "Run at"
+msgstr "Ausgeführt um"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_run_view_search
+msgid "Run date"
+msgstr "Ausführungsdatum"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.res_config_settings_view_form_sqlw
+msgid "Run log and plans"
+msgstr "Ausführungsprotokoll und Pläne"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__run_ids
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_run_view_graph
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_form
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_list
+msgid "Runs"
+msgstr "Ausführungen"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.res_config_settings_view_form_sqlw
+msgid "Runs older than this are deleted every night. 0 keeps them forever."
+msgstr ""
+"Ältere Ausführungen werden jede Nacht gelöscht. 0 behält sie für immer."
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__sql
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_run__sql
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_run_view_form
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_form
+msgid "SQL"
+msgstr "SQL"
+
+#. module: sql_query_workbench
+#: model:res.groups.privilege,name:sql_query_workbench.res_groups_privilege_sql_workbench
+msgid "SQL Query Workbench"
+msgstr "SQL-Abfrage-Werkbank"
+
+#. module: sql_query_workbench
+#: model:ir.model,name:sql_query_workbench.model_sql_workbench
+msgid "SQL Query Workbench engine"
+msgstr "Engine der SQL-Abfrage-Werkbank"
+
+#. module: sql_query_workbench
+#: model:ir.module.module,shortdesc:base.module_sql_query_workbench
+msgid ""
+"SQL Query Workbench: Read-only SQL Console, Saved Queries, Export CSV Excel "
+"PDF"
+msgstr ""
+"SQL-Abfrage-Werkbank: Schreibgeschützte SQL-Konsole, gespeicherte Abfragen, "
+"Export CSV Excel PDF"
+
+#. module: sql_query_workbench
+#: model:ir.ui.menu,name:sql_query_workbench.menu_sql_reports_root
+msgid "SQL Reports"
+msgstr "SQL-Berichte"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#. odoo-python
+#: code:addons/sql_query_workbench/models/sql_query.py:0
+#: code:addons/sql_query_workbench/models/sql_query_run.py:0
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.js:0
+#: model:ir.actions.client,name:sql_query_workbench.action_sql_workbench_console
+#: model:ir.ui.menu,name:sql_query_workbench.menu_sqlw_root
+#: model:ir.ui.menu,name:sql_query_workbench.menu_sqlw_technical
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.res_config_settings_view_form_sqlw
+msgid "SQL Workbench"
+msgstr "SQL-Werkbank"
+
+#. module: sql_query_workbench
+#: model:ir.model,name:sql_query_workbench.model_sql_query_limit
+msgid "SQL Workbench limits per group"
+msgstr "Limits der SQL-Werkbank pro Gruppe"
+
+#. module: sql_query_workbench
+#: model:ir.actions.server,name:sql_query_workbench.ir_cron_sqlw_purge_ir_actions_server
+msgid "SQL Workbench: purge old run log"
+msgstr "SQL-Werkbank: altes Ausführungsprotokoll bereinigen"
+
+#. module: sql_query_workbench
+#: model:ir.actions.server,name:sql_query_workbench.ir_cron_sqlw_digests_ir_actions_server
+msgid "SQL Workbench: send email digests"
+msgstr "SQL-Werkbank: E-Mail-Zusammenfassungen senden"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.js:0
+msgid "SQL copied."
+msgstr "SQL kopiert."
+
+#. module: sql_query_workbench
+#: model:ir.model,name:sql_query_workbench.model_sql_query_column_model
+msgid "SQL query column link"
+msgstr "Spaltenlink der SQL-Abfrage"
+
+#. module: sql_query_workbench
+#: model:ir.model,name:sql_query_workbench.model_sql_query_param
+msgid "SQL query parameter"
+msgstr "Parameter der SQL-Abfrage"
+
+#. module: sql_query_workbench
+#: model:ir.model,name:sql_query_workbench.model_sql_query_run
+msgid "SQL query run"
+msgstr "Ausführung der SQL-Abfrage"
+
+#. module: sql_query_workbench
+#: model:ir.model,name:sql_query_workbench.model_sql_query_tag
+msgid "SQL query tag"
+msgstr "Tag der SQL-Abfrage"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.xml:0
+msgid ""
+"SQL reads the database directly: Odoo record rules, field groups and multi-"
+"company filters are not applied. Only the blocked tables, protected columns "
+"and masking settings protect data."
+msgstr ""
+"SQL liest die Datenbank direkt: Datensatzregeln, Feldgruppen und "
+"Mehrunternehmensfilter von Odoo werden nicht angewendet. Nur die gesperrten "
+"Tabellen, geschützten Spalten und Maskierungseinstellungen schützen Daten."
+
+#. module: sql_query_workbench
+#: model:ir.actions.report,name:sql_query_workbench.action_report_result_portrait
+msgid "SQL result"
+msgstr "SQL-Ergebnis"
+
+#. module: sql_query_workbench
+#: model:ir.actions.report,name:sql_query_workbench.action_report_result_landscape
+msgid "SQL result (landscape)"
+msgstr "SQL-Ergebnis (Querformat)"
+
+#. module: sql_query_workbench
+#: model:ir.model,name:sql_query_workbench.model_sql_query_print
+msgid "SQL result to print"
+msgstr "Zu druckendes SQL-Ergebnis"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/dialogs.xml:0
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.xml:0
+msgid "Save"
+msgstr "Speichern"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/dialogs.xml:0
+msgid "Save query"
+msgstr "Abfrage speichern"
+
+#. module: sql_query_workbench
+#: model_terms:ir.actions.act_window,help:sql_query_workbench.action_sql_query
+msgid "Save your first query"
+msgstr "Speichern Sie Ihre erste Abfrage"
+
+#. module: sql_query_workbench
+#: model:ir.actions.act_window,name:sql_query_workbench.action_sql_query
+#: model:ir.ui.menu,name:sql_query_workbench.menu_sqlw_queries
+#: model:ir.ui.menu,name:sql_query_workbench.menu_sqlw_technical_queries
+msgid "Saved Queries"
+msgstr "Gespeicherte Abfragen"
+
+#. module: sql_query_workbench
+#: model:ir.model,name:sql_query_workbench.model_sql_query
+msgid "Saved SQL query"
+msgstr "Gespeicherte SQL-Abfrage"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.js:0
+msgid "Saved as draft “%s”."
+msgstr "Als Entwurf „%s“ gespeichert."
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/dialogs.xml:0
+msgid "Saved as your draft. Validate it from the saved query to share it."
+msgstr ""
+"Als Ihr Entwurf gespeichert. Validieren Sie ihn in der gespeicherten "
+"Abfrage, um ihn zu teilen."
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.xml:0
+msgid "Saved queries"
+msgstr "Gespeicherte Abfragen"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query_run__origin__saved
+msgid "Saved query"
+msgstr "Gespeicherte Abfrage"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.js:0
+msgid "Saved to “%s”."
+msgstr "Unter „%s“ gespeichert."
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.res_config_settings_view_form_sqlw
+msgid ""
+"Seconds before PostgreSQL cancels a query (also used for EXPLAIN ANALYZE)."
+msgstr ""
+"Sekunden, bevor PostgreSQL eine Abfrage abbricht (auch für EXPLAIN ANALYZE "
+"verwendet)."
+
+#. module: sql_query_workbench
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query_param__ptype__selection
+msgid "Selection"
+msgstr "Auswahl"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/dialogs.xml:0
+msgid "Semicolon ;"
+msgstr "Semikolon ;"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_form
+msgid "Send digest now"
+msgstr "Zusammenfassung jetzt senden"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__digest_partner_ids
+msgid "Send to contacts"
+msgstr "An Kontakte senden"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__digest_user_ids
+msgid "Send to users"
+msgstr "An Benutzer senden"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.digest_mail_body
+msgid ""
+"Sent by SQL Workbench. Ask the query owner to change the schedule or the "
+"recipients."
+msgstr ""
+"Von der SQL-Werkbank gesendet. Bitten Sie den Abfrageeigentümer, den "
+"Zeitplan oder die Empfänger zu ändern."
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/dialogs.xml:0
+msgid "Separator"
+msgstr "Trennzeichen"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__sequence
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_param__sequence
+msgid "Sequence"
+msgstr "Sequenz"
+
+#. module: sql_query_workbench
+#: model:ir.actions.act_window,name:sql_query_workbench.action_sqlw_settings
+#: model:ir.ui.menu,name:sql_query_workbench.menu_sqlw_settings
+msgid "Settings"
+msgstr "Einstellungen"
+
+#. module: sql_query_workbench
+#. odoo-python
+#: code:addons/sql_query_workbench/models/sql_query.py:0
+msgid ""
+"Share the query with at least one group first: the menu is shown to those "
+"groups."
+msgstr ""
+"Teilen Sie die Abfrage zuerst mit mindestens einer Gruppe: Das Menü wird "
+"diesen Gruppen angezeigt."
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_search
+msgid "Shared"
+msgstr "Geteilt"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__group_ids
+msgid "Shared with groups"
+msgstr "Mit Gruppen geteilt"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__user_ids
+msgid "Shared with users"
+msgstr "Mit Benutzern geteilt"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_form
+msgid "Sharing"
+msgstr "Freigabe"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/schema_browser.xml:0
+msgid "Show all"
+msgstr "Alle anzeigen"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/result_grid.xml:0
+msgid "Show all in original order"
+msgstr "Alle in ursprünglicher Reihenfolge anzeigen"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.xml:0
+msgid "Show or hide the schema browser"
+msgstr "Schema-Browser ein- oder ausblenden"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,help:sql_query_workbench.field_sql_query_param__label
+msgid "Shown on the parameter form."
+msgstr "Im Parameterformular angezeigt."
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/dialogs.xml:0
+msgid "Single quote '"
+msgstr "Einfaches Anführungszeichen '"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__digest_skip_empty
+msgid "Skip empty results"
+msgstr "Leere Ergebnisse überspringen"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_run_view_search
+msgid "Slower than 1 s"
+msgstr "Langsamer als 1 s"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_run__max_duration_ms
+msgid "Slowest (ms)"
+msgstr "Langsamste (ms)"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query_param__default_kind__start_of_fiscal_year
+msgid "Start of the fiscal year"
+msgstr "Beginn des Geschäftsjahres"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query_param__default_kind__start_of_month
+msgid "Start of this month"
+msgstr "Beginn dieses Monats"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query_param__default_kind__start_of_week
+msgid "Start of this week"
+msgstr "Beginn dieser Woche"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query_param__default_kind__start_of_year
+msgid "Start of this year"
+msgstr "Beginn dieses Jahres"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__state
+msgid "State"
+msgstr "Status"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.res_config_settings_view_form_sqlw
+msgid "Statement timeout"
+msgstr "Anweisungs-Timeout"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_res_config_settings__sqlw_timeout
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_limit__timeout
+msgid "Statement timeout (s)"
+msgstr "Anweisungs-Timeout (s)"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_run__status
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_run_view_search
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_search
+msgid "Status"
+msgstr "Status"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/plan_view.xml:0
+msgid "Step"
+msgstr "Schritt"
+
+#. module: sql_query_workbench
+#: model:ir.module.module,summary:base.module_sql_query_workbench
+msgid ""
+"Strictly read-only SQL console for administrators: saved queries with typed "
+"parameters, schema browser, EXPLAIN plans, CSV/Excel/PDF export, sharing, "
+"query menus and email digests. Keywords: SQL, SQL queries, SQL console, SQL "
+"editor, run SQL, execute SQL, database queries, read-only SQL, read only "
+"SQL, SQL reports, SQL to Excel, schema browser, EXPLAIN."
+msgstr ""
+"Streng schreibgeschützte SQL-Konsole für Administratoren: gespeicherte "
+"Abfragen mit typisierten Parametern, Schema-Browser, EXPLAIN-Pläne, "
+"CSV-/Excel-/PDF-Export, Freigabe, Abfragemenüs und E-Mail-Zusammenfassungen."
+" Stichwörter: SQL, SQL-Abfragen, SQL-Konsole, SQL-Editor, SQL ausführen, "
+"Datenbankabfragen, schreibgeschütztes SQL, SQL-Berichte, SQL nach Excel, "
+"Schema-Browser, EXPLAIN."
+
+#. module: sql_query_workbench
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query_run__status__success
+msgid "Success"
+msgstr "Erfolg"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/result_grid.xml:0
+msgid "Sum"
+msgstr "Summe"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/dialogs.xml:0
+msgid "Tab"
+msgstr "Tab"
+
+#. module: sql_query_workbench
+#. odoo-python
+#: code:addons/sql_query_workbench/models/sql_workbench.py:0
+msgid "Table %s not found."
+msgstr "Tabelle %s nicht gefunden."
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/plan_view.xml:0
+msgid "Table / index"
+msgstr "Tabelle / Index"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/schema_browser.xml:0
+msgid "Table or model..."
+msgstr "Tabelle oder Modell..."
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__tag_ids
+msgid "Tags"
+msgstr "Stichwörter"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query_param__ptype__char
+msgid "Text"
+msgstr "Text"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.res_config_settings_view_form_sqlw
+msgid ""
+"Text columns whose name contains one of these words read as ******** inside "
+"every query, and result columns named like them are shown and exported as "
+"********."
+msgstr ""
+"Textspalten, deren Name eines dieser Wörter enthält, erscheinen in jeder "
+"Abfrage als ********, und Ergebnisspalten mit solchen Namen werden als "
+"******** angezeigt und exportiert."
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_form
+msgid ""
+"The digest runs as the owner with the parameter defaults and attaches the "
+"result file."
+msgstr ""
+"Die Zusammenfassung läuft als Eigentümer mit den Parameter-Standardwerten "
+"und hängt die Ergebnisdatei an."
+
+#. module: sql_query_workbench
+#. odoo-python
+#: code:addons/sql_query_workbench/wizard/sql_query_library.py:0
+msgid "The file is not valid JSON."
+msgstr "Die Datei ist kein gültiges JSON."
+
+#. module: sql_query_workbench
+#. odoo-python
+#: code:addons/sql_query_workbench/models/sql_workbench.py:0
+msgid "The placeholder :%s is not declared. Add it in the Parameters tab."
+msgstr ""
+"Der Platzhalter :%s ist nicht deklariert. Fügen Sie ihn im Reiter Parameter "
+"hinzu."
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.res_config_settings_view_form_sqlw
+msgid ""
+"The plan view highlights a sequential scan on a table with at least this "
+"many rows."
+msgstr ""
+"Die Planansicht hebt einen sequenziellen Scan einer Tabelle mit mindestens "
+"dieser Zeilenanzahl hervor."
+
+#. module: sql_query_workbench
+#. odoo-python
+#: code:addons/sql_query_workbench/models/sql_query.py:0
+msgid ""
+"The query does not run:\n"
+"%s"
+msgstr ""
+"Die Abfrage läuft nicht:\n"
+"%s"
+
+#. module: sql_query_workbench
+#. odoo-python
+#: code:addons/sql_query_workbench/models/sql_query.py:0
+#: code:addons/sql_query_workbench/wizard/sql_query_library.py:0
+msgid "This is not a SQL Workbench library file."
+msgstr "Dies ist keine Bibliotheksdatei der SQL-Werkbank."
+
+#. module: sql_query_workbench
+#. odoo-python
+#: code:addons/sql_query_workbench/models/sql_query.py:0
+#: code:addons/sql_query_workbench/models/sql_workbench.py:0
+msgid "This query is not validated yet."
+msgstr "Diese Abfrage ist noch nicht validiert."
+
+#. module: sql_query_workbench
+#: model:ir.model.constraint,message:sql_query_workbench.constraint_sql_query_tag_name_uniq
+msgid "This tag already exists."
+msgstr "Dieser Tag existiert bereits."
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/plan_view.xml:0
+msgid "Time (ms)"
+msgstr "Zeit (ms)"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.xml:0
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query_run__status__timeout
+msgid "Timeout"
+msgstr "Timeout"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query_param__default_kind__today
+msgid "Today"
+msgstr "Heute"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_run_view_list
+msgid "Total"
+msgstr "Gesamt"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/plan_view.xml:0
+msgid "Total cost"
+msgstr "Gesamtkosten"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_print__truncated
+msgid "Truncated"
+msgstr "Abgeschnitten"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_param__ptype
+msgid "Type"
+msgstr "Typ"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/dialogs.xml:0
+msgid "UTF-8 BOM (for Excel)"
+msgstr "UTF-8-BOM (für Excel)"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/dialogs.xml:0
+msgid "Unix (LF)"
+msgstr "Unix (LF)"
+
+#. module: sql_query_workbench
+#. odoo-python
+#: code:addons/sql_query_workbench/models/sql_workbench.py:0
+msgid "Unknown mode."
+msgstr "Unbekannter Modus."
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,help:sql_query_workbench.field_sql_query_param__name
+msgid "Used in the SQL as :name"
+msgstr "Im SQL als :name verwendet"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_run__user_id
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_run_view_search
+msgid "User"
+msgstr "Benutzer"
+
+#. module: sql_query_workbench
+#: model:res.groups,name:sql_query_workbench.group_sqlw_user
+msgid "User: run read-only SQL"
+msgstr "Benutzer: schreibgeschütztes SQL ausführen"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_form
+msgid "Validate"
+msgstr "Validieren"
+
+#. module: sql_query_workbench
+#. odoo-python
+#: code:addons/sql_query_workbench/models/sql_query.py:0
+msgid "Validate the query '%s' before sharing, publishing or scheduling it."
+msgstr ""
+"Validieren Sie die Abfrage \"%s\", bevor Sie sie teilen, veröffentlichen "
+"oder planen."
+
+#. module: sql_query_workbench
+#. odoo-python
+#: code:addons/sql_query_workbench/models/sql_query.py:0
+msgid "Validate the query before publishing it."
+msgstr "Validieren Sie die Abfrage, bevor Sie sie veröffentlichen."
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_form
+msgid ""
+"Validate the query to share it, publish it as a menu or send it as a digest."
+msgstr ""
+"Validieren Sie die Abfrage, um sie zu teilen, als Menü zu veröffentlichen "
+"oder als Zusammenfassung zu senden."
+
+#. module: sql_query_workbench
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query__state__valid
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_search
+msgid "Validated"
+msgstr "Validiert"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__validated_on
+msgid "Validated On"
+msgstr "Validiert am"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query_run__origin__validate
+msgid "Validation"
+msgstr "Validierung"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query__digest_interval__weekly
+msgid "Weekly"
+msgstr "Wöchentlich"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,help:sql_query_workbench.field_sql_query__description
+msgid "What the query answers, how to read it, caveats."
+msgstr "Was die Abfrage beantwortet, wie sie zu lesen ist, Einschränkungen."
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_form
+msgid "What the query answers, how to read the result, caveats."
+msgstr ""
+"Was die Abfrage beantwortet, wie das Ergebnis zu lesen ist, Einschränkungen."
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_form
+msgid "Who can run it"
+msgstr "Wer es ausführen darf"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/dialogs.xml:0
+msgid "Windows (CRLF)"
+msgstr "Windows (CRLF)"
+
+#. module: sql_query_workbench
+#: model:ir.ui.menu,name:sql_query_workbench.menu_sqlw_console
+#: model:ir.ui.menu,name:sql_query_workbench.menu_sqlw_technical_console
+msgid "Workbench"
+msgstr "Werkbank"
+
+#. module: sql_query_workbench
+#. odoo-python
+#: code:addons/sql_query_workbench/models/sql_workbench.py:0
+msgid "Workbench (ad hoc)"
+msgstr "Werkbank (ad hoc)"
+
+#. module: sql_query_workbench
+#: model_terms:ir.actions.act_window,help:sql_query_workbench.action_sql_query
+msgid ""
+"Write SQL in the Workbench and press Save, or create a query here. Validate "
+"it to share it with groups."
+msgstr ""
+"Schreiben Sie SQL in der Werkbank und klicken Sie auf Speichern, oder "
+"erstellen Sie hier eine Abfrage. Validieren Sie sie, um sie mit Gruppen zu "
+"teilen."
+
+#. module: sql_query_workbench
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query_param__ptype__boolean
+msgid "Yes / No"
+msgstr "Ja / Nein"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query_param__default_kind__yesterday
+msgid "Yesterday"
+msgstr "Gestern"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/result_grid.js:0
+msgid "ascending"
+msgstr "aufsteigend"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/result_grid.js:0
+msgid "descending"
+msgstr "absteigend"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.xml:0
+msgid "draft"
+msgstr "draft"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_form
+msgid "e.g. Open quotations by salesperson"
+msgstr "z. B. Offene Angebote nach Verkäufer"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/dialogs.xml:0
+msgid "e.g. Partners created this month"
+msgstr "z. B. Diesen Monat erstellte Partner"
+
+#. module: sql_query_workbench
+#. odoo-python
+#: code:addons/sql_query_workbench/wizard/sql_query_library.py:0
+msgid "id"
+msgstr "ID"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/plan_view.xml:0
+msgid "ms"
+msgstr "ms"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/result_grid.xml:0
+msgid "of"
+msgstr "von"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/plan_view.xml:0
+#: code:addons/sql_query_workbench/static/src/workbench/result_grid.xml:0
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.xml:0
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.digest_mail_body
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.report_sql_result
+msgid "rows"
+msgstr "Zeilen"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/schema_browser.xml:0
+msgid "rows ·"
+msgstr "Zeilen ·"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.xml:0
+msgid "s · up to"
+msgstr "s · bis zu"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/plan_view.xml:0
+msgid "sequential scan(s) on large tables"
+msgstr "sequenzielle(r) Scan(s) auf großen Tabellen"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/schema_browser.xml:0
+msgid "tables"
+msgstr "Tabellen"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.xml:0
+msgid "· line"
+msgstr "· Zeile"

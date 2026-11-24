@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form_sqlw" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.sql.query.workbench</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="95"/>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="inside">
+                <app data-string="SQL Workbench" string="SQL Workbench" name="sql_query_workbench" groups="sql_query_workbench.group_sqlw_manager">
+                    <block title="Limits" name="sqlw_limits">
+                        <setting string="Row cap" help="Rows fetched per run in the grid. Larger results are cut and flagged.">
+                            <field name="sqlw_row_limit"/>
+                        </setting>
+                        <setting string="Statement timeout" help="Seconds before PostgreSQL cancels a query (also used for EXPLAIN ANALYZE).">
+                            <field name="sqlw_timeout"/> <span class="ms-1">seconds</span>
+                        </setting>
+                        <setting string="Max export rows" help="Rows written to CSV, Excel and digest files.">
+                            <field name="sqlw_export_limit"/>
+                        </setting>
+                        <setting string="Limits per group" help="Give some groups other limits. Members get the largest value among their groups.">
+                            <button name="action_sqlw_group_limits" type="object" string="Limits per group" icon="oi-arrow-right" class="btn-link"/>
+                        </setting>
+                    </block>
+                    <block title="Protection" name="sqlw_protection">
+                        <setting string="Blocked tables" help="Queries that name one of these tables are refused. Separate with commas.">
+                            <field name="sqlw_denied_tables" class="w-100"/>
+                        </setting>
+                        <setting string="Blocked columns" help="Queries that name one of these columns are refused, and their values read as ******** in every query (whole-row and JSON reads included). Write table.column to protect one table only. Login passwords, two-factor and API key secrets are always protected.">
+                            <field name="sqlw_denied_columns" class="w-100"/>
+                        </setting>
+                        <setting string="Mask credential-like columns" help="Text columns whose name contains one of these words read as ******** inside every query, and result columns named like them are shown and exported as ********.">
+                            <field name="sqlw_mask_enabled"/>
+                            <div class="mt-2" invisible="not sqlw_mask_enabled">
+                                <field name="sqlw_mask_patterns" class="w-100"/>
+                            </div>
+                        </setting>
+                    </block>
+                    <block title="Run log and plans" name="sqlw_log">
+                        <setting string="Keep run log" help="Runs older than this are deleted every night. 0 keeps them forever.">
+                            <field name="sqlw_retention_days"/> <span class="ms-1">days</span>
+                        </setting>
+                        <setting string="Flag sequential scans" help="The plan view highlights a sequential scan on a table with at least this many rows.">
+                            <field name="sqlw_seq_scan_rows"/> <span class="ms-1">rows</span>
+                        </setting>
+                    </block>
+                </app>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="action_sqlw_settings" model="ir.actions.act_window">
+        <field name="name">Settings</field>
+        <field name="res_model">res.config.settings</field>
+        <field name="view_mode">form</field>
+        <field name="context">{'module': 'sql_query_workbench', 'bin_size': False}</field>
+    </record>
+</odoo>

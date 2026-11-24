@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- client actions -->
+    <record id="action_sql_workbench_console" model="ir.actions.client">
+        <field name="name">SQL Workbench</field>
+        <field name="tag">sql_query_workbench.console</field>
+    </record>
+
+    <!-- tags -->
+    <record id="sql_query_tag_view_list" model="ir.ui.view">
+        <field name="name">sql.query.tag.list</field>
+        <field name="model">sql.query.tag</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="name"/>
+                <field name="color" widget="color_picker"/>
+            </list>
+        </field>
+    </record>
+    <record id="action_sql_query_tag" model="ir.actions.act_window">
+        <field name="name">Query Tags</field>
+        <field name="res_model">sql.query.tag</field>
+        <field name="view_mode">list</field>
+    </record>
+
+    <!-- saved queries -->
+    <record id="sql_query_view_list" model="ir.ui.view">
+        <field name="name">sql.query.list</field>
+        <field name="model">sql.query</field>
+        <field name="arch" type="xml">
+            <list decoration-muted="state == 'draft'">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}" optional="show"/>
+                <field name="user_id" widget="many2one_avatar_user" optional="show"/>
+                <field name="group_ids" widget="many2many_tags" optional="show"/>
+                <field name="menu_id" string="Menu" optional="hide"/>
+                <field name="digest_active" optional="hide"/>
+                <field name="company_id" groups="base.group_multi_company" optional="show"/>
+                <field name="run_count" string="Runs" optional="show"/>
+                <field name="state" widget="badge" decoration-success="state == 'valid'" decoration-info="state == 'draft'"/>
+                <button name="action_open_run_screen" type="object" string="Run" icon="fa-play" class="btn-link"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="sql_query_view_search" model="ir.ui.view">
+        <field name="name">sql.query.search</field>
+        <field name="model">sql.query</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="tag_ids"/>
+                <field name="description"/>
+                <field name="user_id"/>
+                <filter name="mine" string="My queries" domain="[('user_id', '=', uid)]"/>
+                <filter name="valid" string="Validated" domain="[('state', '=', 'valid')]"/>
+                <filter name="draft" string="Draft" domain="[('state', '=', 'draft')]"/>
+                <separator/>
+                <filter name="shared" string="Shared" domain="['|', ('group_ids', '!=', False), ('user_ids', '!=', False)]"/>
+                <filter name="published" string="Published as menu" domain="[('menu_id', '!=', False)]"/>
+                <filter name="digest" string="Email digest" domain="[('digest_active', '=', True)]"/>
+                <filter name="examples" string="Examples" domain="[('example', '=', True)]"/>
+                <separator/>
+                <filter name="archived" string="Archived" domain="[('active', '=', False)]"/>
+                <group>
+                    <filter name="group_owner" string="Owner" context="{'group_by': 'user_id'}"/>
+                    <filter name="group_state" string="Status" context="{'group_by': 'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="sql_query_view_form" model="ir.ui.view">
+        <field name="name">sql.query.form</field>
+        <field name="model">sql.query</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_open_run_screen" type="object" string="Run" class="btn-primary" icon="fa-play"/>
+                    <button name="action_open_in_console" type="object" string="Open in Workbench" groups="sql_query_workbench.group_sqlw_user" invisible="not can_edit"/>
+                    <button name="action_validate" type="object" string="Validate" invisible="state == 'valid' or not can_edit" class="btn-secondary"/>
+                    <button name="action_publish_menu" type="object" string="Publish as menu" invisible="state != 'valid' or menu_id or not can_edit or not group_ids"/>
+                    <button name="action_unpublish_menu" type="object" string="Remove menu" invisible="not menu_id or not can_edit"/>
+                    <button name="action_send_digest_now" type="object" string="Send digest now" invisible="not digest_active or not can_edit"/>
+                    <button name="action_duplicate_draft" type="object" string="Duplicate as my draft" groups="sql_query_workbench.group_sqlw_user" invisible="can_edit"/>
+                    <button name="action_reset_draft" type="object" string="Back to draft" invisible="state != 'valid' or not can_edit"
+                            confirm="Back to draft removes sharing, the published menu and the digest. Continue?"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_runs" type="object" class="oe_stat_button" icon="fa-history" groups="sql_query_workbench.group_sqlw_user">
+                            <field name="run_count" widget="statinfo" string="Runs"/>
+                        </button>
+                    </div>
+                    <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger" invisible="active"/>
+                    <field name="active" invisible="1"/>
+                    <field name="can_edit" invisible="1"/>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1><field name="name" placeholder="e.g. Open quotations by salesperson" readonly="not can_edit"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color', 'no_create_edit': True}" readonly="not can_edit"/>
+                            <field name="user_id" widget="many2one_avatar_user" readonly="not can_edit"/>
+                            <field name="company_id" groups="base.group_multi_company" readonly="not can_edit"/>
+                        </group>
+                        <group>
+                            <field name="validated_on" invisible="state != 'valid' or not validated_on"/>
+                            <field name="last_run_date" invisible="not last_run_date"/>
+                            <field name="last_run_status" invisible="not last_run_date"/>
+                            <field name="menu_id" invisible="not menu_id"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="SQL" name="sql" groups="sql_query_workbench.group_sqlw_user">
+                            <field name="sql" widget="code" options="{'mode': 'sql'}" readonly="not can_edit" nolabel="1"/>
+                            <div class="text-muted small mt-2">
+                                One SELECT, WITH or EXPLAIN statement. Placeholders such as <code>:date_from</code> are bound
+                                as driver parameters. Built-in values: <code>:user_id</code>, <code>:company_id</code>,
+                                <code>:company_ids</code> (use <code>= ANY(:company_ids)</code>), <code>:today</code>, <code>:lang</code>.
+                                Changing the SQL of a shared query validates it again; an unshared query goes back to draft.
+                            </div>
+                        </page>
+                        <page string="Parameters" name="params">
+                            <div groups="sql_query_workbench.group_sqlw_user" invisible="not can_edit">
+                                <button name="action_detect_params" type="object" string="Detect placeholders" class="btn-link ps-0" icon="fa-magic"/>
+                            </div>
+                            <field name="param_ids" readonly="not can_edit">
+                                <list editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="name"/>
+                                    <field name="label"/>
+                                    <field name="ptype"/>
+                                    <field name="model_id" required="ptype in ('many2one', 'many2many')" invisible="ptype not in ('many2one', 'many2many')" options="{'no_create': True}"/>
+                                    <field name="selection_options" invisible="ptype != 'selection'" required="ptype == 'selection'"/>
+                                    <field name="required"/>
+                                    <field name="default_kind"/>
+                                    <field name="default_value" invisible="default_kind != 'fixed'"/>
+                                    <field name="help" optional="hide"/>
+                                </list>
+                            </field>
+                            <field name="param_signature" invisible="1"/>
+                        </page>
+                        <page string="Notes" name="notes">
+                            <field name="description" placeholder="What the query answers, how to read the result, caveats." readonly="not can_edit"/>
+                        </page>
+                        <page string="Sharing" name="sharing" invisible="not can_edit">
+                            <div class="alert alert-info" role="status" invisible="state == 'valid'">
+                                Validate the query to share it, publish it as a menu or send it as a digest.
+                            </div>
+                            <group>
+                                <group string="Who can run it">
+                                    <field name="group_ids" widget="many2many_tags" readonly="state != 'valid'" options="{'no_create': True}"/>
+                                    <field name="user_ids" widget="many2many_tags_avatar" readonly="state != 'valid'" options="{'no_create': True}"/>
+                                </group>
+                                <group string="Menu">
+                                    <field name="menu_parent_id" options="{'no_create': True}"/>
+                                    <div class="text-muted small" colspan="2">
+                                        Publish as menu adds an entry for the shared groups. It opens a run screen with the
+                                        parameter form and export buttons; members can run, not edit.
+                                    </div>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Email digest" name="digest" invisible="not can_edit">
+                            <group>
+                                <group>
+                                    <field name="digest_active" readonly="state != 'valid'"/>
+                                    <field name="digest_interval" invisible="not digest_active" required="digest_active"/>
+                                    <field name="digest_format" invisible="not digest_active" required="digest_active"/>
+                                    <field name="digest_skip_empty" invisible="not digest_active"/>
+                                </group>
+                                <group invisible="not digest_active">
+                                    <field name="digest_user_ids" widget="many2many_tags_avatar" options="{'no_create': True}"/>
+                                    <field name="digest_partner_ids" widget="many2many_tags" options="{'no_create': True}"/>
+                                    <field name="digest_next"/>
+                                    <field name="digest_last"/>
+                                </group>
+                            </group>
+                            <div class="text-muted small">The digest runs as the owner with the parameter defaults and attaches the result file.</div>
+                        </page>
+                        <page string="Column links" name="links" invisible="not can_edit">
+                            <field name="column_model_ids">
+                                <list editable="bottom">
+                                    <field name="column_name"/>
+                                    <field name="model_id" options="{'no_create': True}"/>
+                                </list>
+                            </field>
+                            <div class="text-muted small mt-2">
+                                Columns read straight from a table (an id or a many2one column) already open their record.
+                                Add a line for computed or aliased columns, for example <code>customer</code> opens Contact.
+                            </div>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_sql_query" model="ir.actions.act_window">
+        <field name="name">Saved Queries</field>
+        <field name="res_model">sql.query</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_mine': 0}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Save your first query</p>
+            <p>Write SQL in the Workbench and press Save, or create a query here. Validate it to share it with groups.</p>
+        </field>
+    </record>
+
+    <!-- run log -->
+    <record id="sql_query_run_view_list" model="ir.ui.view">
+        <field name="name">sql.query.run.list</field>
+        <field name="model">sql.query.run</field>
+        <field name="arch" type="xml">
+            <list create="0" edit="0" decoration-danger="status in ('error', 'timeout')" decoration-warning="status == 'blocked'">
+                <field name="create_date" string="Run at"/>
+                <field name="source_label"/>
+                <field name="user_id" widget="many2one_avatar_user"/>
+                <field name="origin"/>
+                <field name="status" widget="badge" decoration-success="status == 'success'" decoration-danger="status in ('error', 'timeout')" decoration-warning="status == 'blocked'"/>
+                <field name="duration_ms" sum="Total"/>
+                <field name="row_count"/>
+                <field name="truncated" optional="hide"/>
+                <field name="company_id" groups="base.group_multi_company" optional="hide"/>
+                <field name="error" optional="show"/>
+                <field name="max_duration_ms" column_invisible="1"/>
+                <field name="failed" column_invisible="1"/>
+            </list>
+        </field>
+    </record>
+    <record id="sql_query_run_view_form" model="ir.ui.view">
+        <field name="name">sql.query.run.form</field>
+        <field name="model">sql.query.run</field>
+        <field name="arch" type="xml">
+            <form create="0" edit="0">
+                <header>
+                    <button name="action_open_in_console" type="object" string="Open in Workbench" class="btn-primary"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="query_id"/>
+                            <field name="user_id"/>
+                            <field name="origin"/>
+                            <field name="status"/>
+                        </group>
+                        <group>
+                            <field name="create_date" string="Run at"/>
+                            <field name="duration_ms"/>
+                            <field name="row_count"/>
+                            <field name="truncated"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                    </group>
+                    <group string="Parameters" invisible="not params_text">
+                        <field name="params_text" nolabel="1" colspan="2"/>
+                    </group>
+                    <group string="Error" invisible="not error">
+                        <field name="error" nolabel="1" colspan="2" class="text-danger"/>
+                    </group>
+                    <group string="SQL">
+                        <field name="sql" widget="code" options="{'mode': 'sql'}" nolabel="1" colspan="2"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="sql_query_run_view_pivot" model="ir.ui.view">
+        <field name="name">sql.query.run.pivot</field>
+        <field name="model">sql.query.run</field>
+        <field name="arch" type="xml">
+            <pivot string="Run analysis" sample="1">
+                <field name="source_label" type="row"/>
+                <field name="duration_ms" type="measure"/>
+                <field name="max_duration_ms" type="measure"/>
+                <field name="failed" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+    <record id="sql_query_run_view_graph" model="ir.ui.view">
+        <field name="name">sql.query.run.graph</field>
+        <field name="model">sql.query.run</field>
+        <field name="arch" type="xml">
+            <graph string="Runs" type="bar" sample="1">
+                <field name="create_date" interval="day"/>
+                <field name="status" type="col"/>
+            </graph>
+        </field>
+    </record>
+    <record id="sql_query_run_view_search" model="ir.ui.view">
+        <field name="name">sql.query.run.search</field>
+        <field name="model">sql.query.run</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="query_id"/>
+                <field name="user_id"/>
+                <field name="sql"/>
+                <field name="error"/>
+                <filter name="mine" string="My runs" domain="[('user_id', '=', uid)]"/>
+                <separator/>
+                <filter name="failed" string="Failed" domain="[('status', '!=', 'success')]"/>
+                <filter name="slow" string="Slower than 1 s" domain="[('duration_ms', '>=', 1000)]"/>
+                <filter name="console" string="Console" domain="[('origin', '=', 'console')]"/>
+                <separator/>
+                <filter name="create_date" string="Run date" date="create_date"/>
+                <group>
+                    <filter name="group_query" string="Query" context="{'group_by': 'source_label'}"/>
+                    <filter name="group_user" string="User" context="{'group_by': 'user_id'}"/>
+                    <filter name="group_status" string="Status" context="{'group_by': 'status'}"/>
+                    <filter name="group_origin" string="Origin" context="{'group_by': 'origin'}"/>
+                    <filter name="group_day" string="Day" context="{'group_by': 'create_date:day'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <record id="action_sql_query_run" model="ir.actions.act_window">
+        <field name="name">Run Log</field>
+        <field name="res_model">sql.query.run</field>
+        <field name="view_mode">list,pivot,graph,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_empty_folder">No runs yet</p>
+            <p>Every run, export, validation and digest is logged here with duration, rows and status.</p>
+        </field>
+    </record>
+    <record id="action_sql_query_run_mine" model="ir.actions.act_window">
+        <field name="name">My History</field>
+        <field name="res_model">sql.query.run</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('user_id', '=', uid)]</field>
+    </record>
+
+    <!-- per-group limits -->
+    <record id="sql_query_limit_view_list" model="ir.ui.view">
+        <field name="name">sql.query.limit.list</field>
+        <field name="model">sql.query.limit</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="group_id" options="{'no_create': True}"/>
+                <field name="row_limit"/>
+                <field name="timeout"/>
+                <field name="export_limit"/>
+            </list>
+        </field>
+    </record>
+    <record id="action_sql_query_limit" model="ir.actions.act_window">
+        <field name="name">Limits per Group</field>
+        <field name="res_model">sql.query.limit</field>
+        <field name="view_mode">list</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Give a group higher or lower limits</p>
+            <p>Members get the largest value among their groups; 0 keeps the global setting.</p>
+        </field>
+    </record>
+
+    <!-- library wizard -->
+    <record id="sql_query_library_view_form" model="ir.ui.view">
+        <field name="name">sql.query.library.form</field>
+        <field name="model">sql.query.library</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="mode" widget="radio" options="{'horizontal': true}"/>
+                    <field name="query_ids" widget="many2many_tags" invisible="mode != 'export'" placeholder="All queries I can see"/>
+                    <field name="filename" invisible="1"/>
+                    <field name="file" filename="filename" invisible="mode == 'export' and not file" readonly="mode == 'export'"/>
+                </group>
+                <p class="text-muted" invisible="mode != 'import'">Imported queries are created as your drafts. Sharing groups found in this database are applied once the query validates.</p>
+                <footer>
+                    <button name="action_export" type="object" string="Build file" class="btn-primary" invisible="mode != 'export'"/>
+                    <button name="action_import" type="object" string="Import" class="btn-primary" invisible="mode != 'import'"/>
+                    <button special="cancel" string="Close"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="action_sql_query_library" model="ir.actions.act_window">
+        <field name="name">Import / Export Library</field>
+        <field name="res_model">sql.query.library</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="model_sql_query"/>
+        <field name="binding_view_types">list</field>
+    </record>
+
+    <!-- menus -->
+    <menuitem id="menu_sqlw_root" name="SQL Workbench" sequence="200"
+              web_icon="sql_query_workbench,static/description/icon.png"
+              groups="sql_query_workbench.group_sqlw_user"/>
+    <menuitem id="menu_sqlw_console" name="Workbench" parent="menu_sqlw_root" action="action_sql_workbench_console" sequence="1" groups="sql_query_workbench.group_sqlw_user"/>
+    <menuitem id="menu_sqlw_queries" name="Saved Queries" parent="menu_sqlw_root" action="action_sql_query" sequence="2" groups="sql_query_workbench.group_sqlw_user"/>
+    <menuitem id="menu_sqlw_history" name="My History" parent="menu_sqlw_root" action="action_sql_query_run_mine" sequence="3" groups="sql_query_workbench.group_sqlw_user"/>
+    <menuitem id="menu_sqlw_runs" name="Run Log" parent="menu_sqlw_root" action="action_sql_query_run" sequence="4"
+              groups="sql_query_workbench.group_sqlw_manager"/>
+    <menuitem id="menu_sqlw_config" name="Configuration" parent="menu_sqlw_root" sequence="9"
+              groups="sql_query_workbench.group_sqlw_manager"/>
+    <menuitem id="menu_sqlw_settings" name="Settings" parent="menu_sqlw_config" action="action_sqlw_settings" sequence="1" groups="sql_query_workbench.group_sqlw_manager"/>
+    <menuitem id="menu_sqlw_limits" name="Limits per Group" parent="menu_sqlw_config" action="action_sql_query_limit" sequence="2" groups="sql_query_workbench.group_sqlw_manager"/>
+    <menuitem id="menu_sqlw_tags" name="Query Tags" parent="menu_sqlw_config" action="action_sql_query_tag" sequence="3" groups="sql_query_workbench.group_sqlw_manager"/>
+    <menuitem id="menu_sqlw_library" name="Import / Export Library" parent="menu_sqlw_config" action="action_sql_query_library" sequence="4" groups="sql_query_workbench.group_sqlw_manager"/>
+
+    <menuitem id="menu_sqlw_technical" name="SQL Workbench" parent="base.menu_custom" sequence="200"
+              groups="sql_query_workbench.group_sqlw_manager"/>
+    <menuitem id="menu_sqlw_technical_console" name="Workbench" parent="menu_sqlw_technical" action="action_sql_workbench_console" sequence="1" groups="sql_query_workbench.group_sqlw_manager"/>
+    <menuitem id="menu_sqlw_technical_queries" name="Saved Queries" parent="menu_sqlw_technical" action="action_sql_query" sequence="2" groups="sql_query_workbench.group_sqlw_manager"/>
+    <menuitem id="menu_sqlw_technical_runs" name="Run Log" parent="menu_sqlw_technical" action="action_sql_query_run" sequence="3" groups="sql_query_workbench.group_sqlw_manager"/>
+
+    <!-- parent of published query menus: visible only when the user can see one of them -->
+    <menuitem id="menu_sql_reports_root" name="SQL Reports" sequence="201"
+              web_icon="sql_query_workbench,static/description/icon.png"/>
+</odoo>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="demo_tag_ops" model="sql.query.tag">
+        <field name="name">Operations</field>
+        <field name="color">3</field>
+    </record>
+
+    <record id="demo_query_company_contacts" model="sql.query">
+        <field name="name">Companies with the most contacts</field>
+        <field name="sequence">20</field>
+        <field name="user_id" ref="base.user_admin"/>
+        <field name="company_id" eval="False"/>
+        <field name="state">valid</field>
+        <field name="tag_ids" eval="[(6, 0, [ref('demo_tag_ops'), ref('tag_contacts')])]"/>
+        <field name="description">Customer companies ranked by the number of active contacts, with the date the last one was added.</field>
+        <field name="sql">SELECT parent.id,
+       parent.name AS company,
+       COUNT(child.id) AS contacts,
+       MAX(child.create_date) AS last_added
+  FROM res_partner parent
+  JOIN res_partner child ON child.parent_id = parent.id
+ WHERE parent.is_company
+   AND child.active
+   AND (parent.company_id IS NULL OR parent.company_id = ANY(:company_ids))
+ GROUP BY parent.id, parent.name
+HAVING COUNT(child.id) >= :min_contacts
+ ORDER BY contacts DESC, company</field>
+        <field name="group_ids" eval="[(6, 0, [ref('base.group_user')])]"/>
+        <field name="param_ids" eval="[(0, 0, {'name': 'min_contacts', 'label': 'At least this many contacts', 'ptype': 'integer', 'required': True, 'default_kind': 'fixed', 'default_value': '1'})]"/>
+    </record>
+    <function model="sql.query" name="action_publish_menu" eval="[[ref('demo_query_company_contacts')]]"/>
+
+    <record id="demo_query_missing_email" model="sql.query">
+        <field name="name">Contacts without an email address</field>
+        <field name="sequence">21</field>
+        <field name="user_id" ref="base.user_admin"/>
+        <field name="tag_ids" eval="[(6, 0, [ref('demo_tag_ops')])]"/>
+        <field name="description">Draft: data quality check before a mailing.</field>
+        <field name="sql">SELECT p.id, p.name, p.parent_id, p.phone
+  FROM res_partner p
+ WHERE p.active
+   AND p.type = 'contact'
+   AND COALESCE(p.email, '') = ''
+ ORDER BY p.name</field>
+    </record>
+
+    <record id="demo_query_weekly_contacts" model="sql.query">
+        <field name="name">Weekly new contacts</field>
+        <field name="sequence">22</field>
+        <field name="user_id" ref="base.user_admin"/>
+        <field name="company_id" eval="False"/>
+        <field name="state">valid</field>
+        <field name="tag_ids" eval="[(6, 0, [ref('demo_tag_ops'), ref('tag_contacts')])]"/>
+        <field name="sql">SELECT p.id, p.name, p.email, p.create_date
+  FROM res_partner p
+ WHERE p.create_date >= :since
+ ORDER BY p.create_date DESC</field>
+        <field name="param_ids" eval="[(0, 0, {'name': 'since', 'label': 'Since', 'ptype': 'date', 'required': True, 'default_kind': 'start_of_week'})]"/>
+        <field name="digest_active" eval="True"/>
+        <field name="digest_interval">weekly</field>
+        <field name="digest_format">xlsx</field>
+        <field name="digest_user_ids" eval="[(6, 0, [ref('base.user_admin')])]"/>
+        <field name="digest_next" eval="(DateTime.today() + relativedelta(days=7)).strftime('%Y-%m-%d 07:00:00')"/>
+    </record>
+    <record id="demo_query_contacts_period" model="sql.query">
+        <field name="name">Contacts by country and period</field>
+        <field name="sequence">23</field>
+        <field name="user_id" ref="base.user_admin"/>
+        <field name="company_id" eval="False"/>
+        <field name="state">valid</field>
+        <field name="tag_ids" eval="[(6, 0, [ref('demo_tag_ops'), ref('tag_contacts')])]"/>
+        <field name="description">Contacts created in a period, optionally limited to some countries, companies or one address type.</field>
+        <field name="sql">SELECT p.id,
+       p.name,
+       p.type,
+       COALESCE(c.name ->> :lang, c.name ->> 'en_US') AS country,
+       p.is_company,
+       p.create_date
+  FROM res_partner p
+  LEFT JOIN res_country c ON c.id = p.country_id
+ WHERE p.create_date &gt;= :date_from
+   AND p.create_date &lt; :date_to + 1
+   AND (cardinality(:countries::int[]) = 0 OR p.country_id = ANY(:countries))
+   AND (NOT :companies_only OR p.is_company)
+   AND (COALESCE(:address_type, '') = '' OR p.type = :address_type)
+ ORDER BY p.create_date DESC</field>
+        <field name="param_ids" eval="[
+            (0, 0, {'sequence': 1, 'name': 'date_from', 'label': 'From', 'ptype': 'date', 'required': True, 'default_kind': 'start_of_year'}),
+            (0, 0, {'sequence': 2, 'name': 'date_to', 'label': 'To', 'ptype': 'date', 'required': True, 'default_kind': 'today'}),
+            (0, 0, {'sequence': 3, 'name': 'countries', 'label': 'Countries', 'ptype': 'many2many', 'model_id': ref('base.model_res_country'), 'help': 'Empty = all countries'}),
+            (0, 0, {'sequence': 4, 'name': 'companies_only', 'label': 'Companies only', 'ptype': 'boolean', 'default_kind': 'fixed', 'default_value': 'false'}),
+            (0, 0, {'sequence': 5, 'name': 'address_type', 'label': 'Address type', 'ptype': 'selection', 'selection_options': 'contact:Contact\ninvoice:Invoice address\ndelivery:Delivery address', 'help': 'Empty = all types'}),
+        ]"/>
+        <field name="column_model_ids" eval="[(0, 0, {'column_name': 'id', 'model_id': ref('base.model_res_partner')})]"/>
+    </record>
+</odoo>

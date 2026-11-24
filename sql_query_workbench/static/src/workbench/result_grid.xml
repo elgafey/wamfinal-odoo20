@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="sql_query_workbench.ResultGrid">
+        <div class="o_sqlw_grid d-flex flex-column h-100">
+            <div class="o_sqlw_grid_toolbar d-flex flex-wrap align-items-center gap-2 py-2">
+                <input type="search" class="form-control form-control-sm o_sqlw_filter" placeholder="Filter rows..."
+                       t-att-value="this.state.filter" t-on-input="this.onFilter"/>
+                <Dropdown>
+                    <button class="btn btn-sm btn-secondary"><i class="fa fa-columns me-1"/>Columns</button>
+                    <t t-set-slot="content">
+                        <div class="o_sqlw_colmenu px-2 py-1">
+                            <t t-foreach="this.state.order" t-as="c" t-key="c">
+                                <div class="d-flex align-items-center gap-1 py-1">
+                                    <input type="checkbox" class="form-check-input mt-0" t-att-checked="!this.state.hidden[c]" t-on-change="() => this.toggleColumn(c)"/>
+                                    <span class="flex-grow-1 text-truncate" t-out="this.props.result.columns[c].name"/>
+                                    <button class="btn btn-link btn-sm p-0" title="Move left" t-on-click="() => this.moveColumn(c, -1)"><i class="fa fa-arrow-up"/></button>
+                                    <button class="btn btn-link btn-sm p-0" title="Move right" t-on-click="() => this.moveColumn(c, 1)"><i class="fa fa-arrow-down"/></button>
+                                </div>
+                            </t>
+                            <button class="btn btn-link btn-sm px-0" t-on-click="this.showAll">Show all in original order</button>
+                        </div>
+                    </t>
+                </Dropdown>
+                <div class="form-check form-switch mb-0">
+                    <input class="form-check-input" type="checkbox" id="sqlw_null_toggle" t-att-checked="this.state.highlightNull" t-on-change="() => this.state.highlightNull = !this.state.highlightNull"/>
+                    <label class="form-check-label small" for="sqlw_null_toggle">Highlight NULL</label>
+                </div>
+                <button class="btn btn-sm btn-secondary o_sqlw_copy_result" t-on-click="this.copyResult"><i class="fa fa-clipboard me-1"/>Copy</button>
+                <div class="ms-auto d-flex align-items-center gap-2 small text-muted">
+                    <span><t t-out="this.filteredRows.length"/> of <t t-out="this.props.result.rows.length"/> rows</span>
+                    <select class="form-select form-select-sm w-auto" t-on-change="this.setPageSize">
+                        <t t-foreach="this.pageSizes" t-as="size" t-key="size">
+                            <option t-att-value="size" t-att-selected="size === this.state.pageSize"><t t-out="size"/> / page</option>
+                        </t>
+                    </select>
+                    <button class="btn btn-sm btn-light" t-att-disabled="this.state.page === 0" t-on-click="() => this.setPage(this.state.page - 1)" title="Previous page"><i class="fa fa-chevron-left"/></button>
+                    <span class="o_sqlw_pager"><t t-out="this.state.page + 1"/> / <t t-out="this.pageCount"/></span>
+                    <button class="btn btn-sm btn-light" t-att-disabled="this.state.page + 1 >= this.pageCount" t-on-click="() => this.setPage(this.state.page + 1)" title="Next page"><i class="fa fa-chevron-right"/></button>
+                </div>
+            </div>
+            <div class="o_sqlw_table_wrap flex-grow-1">
+                <table class="table table-sm table-hover o_sqlw_table mb-0">
+                    <thead>
+                        <tr>
+                            <th class="o_sqlw_rownum">#</th>
+                            <t t-foreach="this.visibleColumns" t-as="c" t-key="c">
+                                <t t-set="col" t-value="this.props.result.columns[c]"/>
+                                <th t-att-class="{'text-end': col.numeric}" t-on-click="() => this.sortBy(c)" t-att-title="col.type">
+                                    <span t-out="col.name"/>
+                                    <i t-if="this.state.sortCol === c" t-attf-class="fa ms-1 {{ this.state.sortDir === 1 ? 'fa-sort-asc' : 'fa-sort-desc' }}" t-att-title="this.sortLabel"/>
+                                    <i t-if="col.masked" class="fa fa-eye-slash ms-1 text-warning" title="Masked"/>
+                                    <i t-if="col.model" class="fa fa-external-link ms-1 text-info" t-att-title="col.model"/>
+                                    <div class="o_sqlw_coltype" t-out="col.type"/>
+                                </th>
+                            </t>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr t-foreach="this.pageRows" t-as="item" t-key="item.idx">
+                            <td class="o_sqlw_rownum" t-out="this.pageStart + item_index + 1"/>
+                            <t t-foreach="this.visibleColumns" t-as="c" t-key="c">
+                                <t t-set="col" t-value="this.props.result.columns[c]"/>
+                                <t t-set="value" t-value="item.row[c]"/>
+                                <td t-if="value === null" class="o_sqlw_null" t-att-class="{'o_sqlw_null_on': this.state.highlightNull}">NULL</td>
+                                <td t-else="" t-att-class="{'text-end': col.numeric, 'o_sqlw_long': this.isLong(value)}" t-att-title="this.isLong(value) ? value : ''">
+                                    <t t-set="url" t-value="this.recordUrl(col, value)"/>
+                                    <a t-if="url" t-att-href="url" target="_blank" rel="noopener" t-out="value"/>
+                                    <t t-elif="col.numeric" t-out="this.formatNumber(value)"/>
+                                    <t t-else="" t-out="this.text(value)"/>
+                                </td>
+                            </t>
+                        </tr>
+                        <tr t-if="!this.pageRows.length">
+                            <td t-att-colspan="this.visibleColumns.length + 1" class="text-muted text-center py-4">No rows</td>
+                        </tr>
+                    </tbody>
+                    <tfoot t-if="this.hasFooter">
+                        <t t-set="foot" t-value="this.footer"/>
+                        <tr class="o_sqlw_total">
+                            <td class="o_sqlw_rownum">Sum</td>
+                            <t t-foreach="this.visibleColumns" t-as="c" t-key="c">
+                                <td class="text-end"><t t-if="foot[c]" t-out="this.formatNumber(foot[c].sum)"/></td>
+                            </t>
+                        </tr>
+                        <tr class="o_sqlw_total">
+                            <td class="o_sqlw_rownum">Avg</td>
+                            <t t-foreach="this.visibleColumns" t-as="c" t-key="c">
+                                <td class="text-end"><t t-if="foot[c]" t-out="this.formatNumber(foot[c].avg)"/></td>
+                            </t>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </t>
+</templates>

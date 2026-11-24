@@ -1,0 +1,2429 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* sql_query_workbench
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 20.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-09 16:39+0000\n"
+"PO-Revision-Date: 2026-10-09 00:00+0000\n"
+"Last-Translator: Viyug Infotech\n"
+"Language-Team: Arabic\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 ? 4 : 5);\n"
+
+#. module: sql_query_workbench
+#: model:ir.module.module,description:base.module_sql_query_workbench
+msgid ""
+"\n"
+"SQL Query Workbench (read-only)\n"
+"===============================\n"
+"\n"
+"Run SQL against your Odoo database from the browser, without ever writing to it.\n"
+"\n"
+"* Read-only by design: one SELECT, WITH or EXPLAIN statement, run on a separate connection\n"
+"  in a READ ONLY transaction with a statement timeout and a row cap, always rolled back.\n"
+"  Write keywords, server-side file and backend functions and denylisted tables are refused.\n"
+"* Console with SQL highlighting, Ctrl+Enter to run, run the selected text only, recent\n"
+"  queries, saved-query quick pick by tag and a draft kept per user.\n"
+"* Results grid: row numbers, sticky header, sorting, pagination, filter box, hide and\n"
+"  reorder columns, NULL highlighting, sum and average of numeric columns, links to the\n"
+"  Odoo records behind id and many2one columns.\n"
+"* Schema browser from the PostgreSQL catalog joined to Odoo models: tables, row estimates,\n"
+"  sizes, columns with SQL type and Odoo field label, indexes and foreign keys.\n"
+"* EXPLAIN plan view with cost share and sequential scans on large tables flagged;\n"
+"  EXPLAIN ANALYZE inside the same read-only, timed-out, rolled-back transaction.\n"
+"* Saved queries with notes, tags and typed parameters (date, date and time, number, text,\n"
+"  yes/no, selection, record, record list) with dynamic defaults; values are bound by the\n"
+"  database driver, never pasted into the SQL. Built-in :user_id, :company_id,\n"
+"  :company_ids, :today and :lang.\n"
+"* Validation (dry run) before sharing. Share with groups or users: they run, they do not\n"
+"  edit. Publish a query as a menu entry with a parameter form and export buttons.\n"
+"* Export CSV (separator, quote, header, BOM, line endings, file name), Excel with typed\n"
+"  cells, frozen header and autofilter, PDF portrait or landscape. Copy result or SQL.\n"
+"* Scheduled email digests (daily, weekly, monthly) with the CSV or Excel file.\n"
+"* Run log with user, duration, rows, status, error and parameters; list, pivot and graph\n"
+"  analysis; retention job. SQL changes tracked in the chatter.\n"
+"* Settings: row cap, timeout, export limit, limits per group, blocked tables and columns,\n"
+"  masking of credential-like columns. Administrators only by default.\n"
+"* Query library import and export as JSON. Ten example queries included.\n"
+msgstr ""
+"\n"
+"مختبر استعلامات SQL (للقراءة فقط)\n"
+"===============================\n"
+"\n"
+"نفّذ استعلامات SQL على قاعدة بيانات Odoo من المتصفح، دون الكتابة فيها أبدًا.\n"
+"\n"
+"* للقراءة فقط بالتصميم: عبارة SELECT أو WITH أو EXPLAIN واحدة، تُنفَّذ باتصال منفصل\n"
+"  في معاملة READ ONLY مع مهلة للعبارة وحد أقصى للصفوف، وتُلغى دائمًا.\n"
+"  تُرفض كلمات الكتابة ودوال الملفات والواجهة الخلفية على الخادم والجداول المحظورة.\n"
+"* وحدة تحكم مع تلوين SQL، وCtrl+Enter للتنفيذ، وتنفيذ النص المحدد فقط، والاستعلامات\n"
+"  الأخيرة، واختيار سريع للاستعلامات المحفوظة حسب الوسم، ومسودة محفوظة لكل مستخدم.\n"
+"* شبكة النتائج: أرقام الصفوف، ورأس ثابت، وفرز، وترقيم الصفحات، ومربع فلترة، وإخفاء الأعمدة\n"
+"  وإعادة ترتيبها، وتمييز NULL، ومجموع ومتوسط الأعمدة الرقمية، وروابط إلى\n"
+"  سجلات Odoo خلف أعمدة المعرّف وmany2one.\n"
+"* متصفح المخطط من فهرس PostgreSQL مرتبطًا بنماذج Odoo: الجداول وتقديرات الصفوف\n"
+"  والأحجام والأعمدة مع نوع SQL وتسمية حقل Odoo والفهارس والمفاتيح الخارجية.\n"
+"* عرض خطة EXPLAIN مع حصة التكلفة وتمييز المسح التسلسلي للجداول الكبيرة؛\n"
+"  وEXPLAIN ANALYZE داخل نفس المعاملة للقراءة فقط ذات المهلة والتي تُلغى.\n"
+"* استعلامات محفوظة مع ملاحظات ووسوم ومعاملات مكتوبة (تاريخ، تاريخ ووقت، رقم، نص،\n"
+"  نعم/لا، اختيار، سجل، قائمة سجلات) مع قيم افتراضية ديناميكية؛ تُربط القيم\n"
+"  بواسطة مشغّل قاعدة البيانات ولا تُلصق في SQL أبدًا. مضمّن :user_id و:company_id\n"
+"  و:company_ids و:today و:lang.\n"
+"* التحقق (تشغيل تجريبي) قبل المشاركة. المشاركة مع مجموعات أو مستخدمين: يشغّلون ولا\n"
+"  يعدّلون. نشر استعلام كعنصر قائمة مع نموذج معاملات وأزرار تصدير.\n"
+"* تصدير CSV (الفاصل، الاقتباس، الرأس، BOM، نهايات الأسطر، اسم الملف)، وExcel بخلايا\n"
+"  مكتوبة ورأس مجمّد ومرشح تلقائي، وPDF عمودي أو أفقي. نسخ النتيجة أو SQL.\n"
+"* ملخصات بريد إلكتروني مجدولة (يومية وأسبوعية وشهرية) مع ملف CSV أو Excel.\n"
+"* سجل التشغيل مع المستخدم والمدة والصفوف والحالة والخطأ والمعاملات؛ تحليل بالقائمة والجدول المحوري\n"
+"  والرسم البياني؛ مهمة الاحتفاظ. تتبع تغييرات SQL في الدردشة.\n"
+"* الإعدادات: الحد الأقصى للصفوف، والمهلة، وحد التصدير، وحدود لكل مجموعة، والجداول والأعمدة المحظورة،\n"
+"  وإخفاء الأعمدة الشبيهة ببيانات الاعتماد. للمسؤولين فقط افتراضيًا.\n"
+"* استيراد وتصدير مكتبة الاستعلامات بصيغة JSON. تتضمن عشرة استعلامات نموذجية.\n"
+
+#. module: sql_query_workbench
+#. odoo-python
+#: code:addons/sql_query_workbench/models/sql_query.py:0
+msgid "%(name)s - %(date)s"
+msgstr "%(name)s - %(date)s"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.js:0
+msgid "%(rows)s rows in %(ms)s ms"
+msgstr "%(rows)s صف في %(ms)s مللي ثانية"
+
+#. module: sql_query_workbench
+#. odoo-python
+#: code:addons/sql_query_workbench/models/sql_query.py:0
+msgid "%s (copy)"
+msgstr "%s (نسخة)"
+
+#. module: sql_query_workbench
+#. odoo-python
+#: code:addons/sql_query_workbench/models/sql_query.py:0
+msgid "%s (my draft)"
+msgstr "%s (مسودتي)"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/result_grid.js:0
+msgid "%s rows copied (tab separated)."
+msgstr "تم نسخ %s صف (مفصولة بعلامات جدولة)."
+
+#. module: sql_query_workbench
+#. odoo-python
+#: code:addons/sql_query_workbench/models/sql_workbench.py:0
+msgid "'%(value)s' is not a valid %(type)s for %(param)s."
+msgstr "'%(value)s' ليس %(type)s صالحًا للمعامل %(param)s."
+
+#. module: sql_query_workbench
+#. odoo-python
+#: code:addons/sql_query_workbench/models/sql_query.py:0
+msgid "'%s' is not a valid placeholder name (letters, digits, _)."
+msgstr "'%s' ليس اسم عنصر نائب صالحًا (حروف وأرقام و_)."
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.digest_mail_body
+msgid "(cut at the export limit)"
+msgstr "(مقطوع عند حد التصدير)"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.report_sql_result
+msgid "(cut at the row cap)"
+msgstr "(مقطوع عند حد الصفوف)"
+
+#. module: sql_query_workbench
+#: model:ir.actions.report,print_report_name:sql_query_workbench.action_report_result_landscape
+#: model:ir.actions.report,print_report_name:sql_query_workbench.action_report_result_portrait
+msgid "(object.name or 'SQL result')"
+msgstr "(object.name or 'نتيجة SQL')"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.xml:0
+msgid "(read only)"
+msgstr "(للقراءة فقط)"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.digest_mail_body
+msgid ". The file is attached."
+msgstr ". الملف مرفق."
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/result_grid.xml:0
+msgid "/ page"
+msgstr "/ صفحة"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,help:sql_query_workbench.field_sql_query_limit__export_limit
+#: model:ir.model.fields,help:sql_query_workbench.field_sql_query_limit__row_limit
+#: model:ir.model.fields,help:sql_query_workbench.field_sql_query_limit__timeout
+msgid "0 = use the global setting."
+msgstr "0 = استخدام الإعداد العام."
+
+#. module: sql_query_workbench
+#. odoo-python
+#: code:addons/sql_query_workbench/models/sql_query.py:0
+msgid ":%s is a built-in value and cannot be redeclared."
+msgstr ":%s قيمة مضمّنة ولا يمكن إعادة تعريفها."
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.res_config_settings_view_form_sqlw
+msgid "<span class=\"ms-1\">days</span>"
+msgstr "<span class=\"ms-1\">أيام</span>"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.res_config_settings_view_form_sqlw
+msgid "<span class=\"ms-1\">rows</span>"
+msgstr "<span class=\"ms-1\">صفوف</span>"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.res_config_settings_view_form_sqlw
+msgid "<span class=\"ms-1\">seconds</span>"
+msgstr "<span class=\"ms-1\">ثوانٍ</span>"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.report_sql_result
+msgid "<span class=\"text-muted\">NULL</span>"
+msgstr "<span class=\"text-muted\">NULL</span>"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__message_needaction
+msgid "Action Needed"
+msgstr "إجراء مطلوب"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__active
+msgid "Active"
+msgstr "نشط"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/plan_view.xml:0
+msgid "Actual rows"
+msgstr "الصفوف الفعلية"
+
+#. module: sql_query_workbench
+#. odoo-python
+#: code:addons/sql_query_workbench/models/sql_query.py:0
+msgid "Add at least one option to the selection parameter :%s."
+msgstr "أضف خيارًا واحدًا على الأقل إلى معامل الاختيار :%s."
+
+#. module: sql_query_workbench
+#: model:sql.query.tag,name:sql_query_workbench.tag_admin
+msgid "Administration"
+msgstr "الإدارة"
+
+#. module: sql_query_workbench
+#: model:res.groups,name:sql_query_workbench.group_sqlw_manager
+msgid "Administrator"
+msgstr "مسؤول"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_library_view_form
+msgid "All queries I can see"
+msgstr "جميع الاستعلامات التي يمكنني رؤيتها"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/schema_browser.xml:0
+msgid "All tables"
+msgstr "جميع الجداول"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.xml:0
+msgid "All tags"
+msgstr "جميع الوسوم"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_form
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_search
+msgid "Archived"
+msgstr "مؤرشف"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__message_attachment_count
+msgid "Attachment Count"
+msgstr "عدد المرفقات"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/result_grid.xml:0
+msgid "Avg"
+msgstr "المتوسط"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_form
+msgid "Back to draft"
+msgstr "العودة إلى مسودة"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_form
+msgid ""
+"Back to draft removes sharing, the published menu and the digest. Continue?"
+msgstr ""
+"العودة إلى مسودة تزيل المشاركة والقائمة المنشورة والملخص. هل تريد المتابعة؟"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query_run__status__blocked
+msgid "Blocked"
+msgstr "محظور"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/schema_browser.xml:0
+msgid "Blocked by the denylist"
+msgstr "محظور بسبب قائمة الحظر"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_res_config_settings__sqlw_denied_columns
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.res_config_settings_view_form_sqlw
+msgid "Blocked columns"
+msgstr "الأعمدة المحظورة"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_res_config_settings__sqlw_denied_tables
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.res_config_settings_view_form_sqlw
+msgid "Blocked tables"
+msgstr "الجداول المحظورة"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_library_view_form
+msgid "Build file"
+msgstr "ملف البناء"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query__digest_format__csv
+msgid "CSV"
+msgstr "CSV"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.xml:0
+msgid "CSV..."
+msgstr "CSV..."
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__can_edit
+msgid "Can Edit"
+msgstr "يمكنه التعديل"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/dialogs.xml:0
+msgid "Cancel"
+msgstr "إلغاء"
+
+#. module: sql_query_workbench
+#. odoo-python
+#: code:addons/sql_query_workbench/wizard/sql_query_library.py:0
+msgid "Choose a library file to import."
+msgstr "اختر ملف مكتبة للاستيراد."
+
+#. module: sql_query_workbench
+#. odoo-python
+#: code:addons/sql_query_workbench/models/sql_query.py:0
+msgid "Choose the model of the record parameter :%s."
+msgstr "اختر نموذج معامل السجل :%s."
+
+#. module: sql_query_workbench
+#. odoo-python
+#: code:addons/sql_query_workbench/models/sql_query.py:0
+msgid "Choose who receives the email digest."
+msgstr "اختر من يتلقى ملخص البريد الإلكتروني."
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__client_action_id
+msgid "Client Action"
+msgstr "إجراء العميل"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_library_view_form
+msgid "Close"
+msgstr "إغلاق"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_tag__color
+msgid "Color"
+msgstr "اللون"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_column_model__column_name
+msgid "Column"
+msgstr "العمود"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__column_model_ids
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_form
+msgid "Column links"
+msgstr "روابط الأعمدة"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/result_grid.xml:0
+#: code:addons/sql_query_workbench/static/src/workbench/schema_browser.xml:0
+msgid "Columns"
+msgstr "الأعمدة"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_print__columns_json
+msgid "Columns Json"
+msgstr "أعمدة Json"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_form
+msgid ""
+"Columns read straight from a table (an id or a many2one column) already open their record.\n"
+"                                Add a line for computed or aliased columns, for example <code>customer</code> opens Contact."
+msgstr ""
+"الأعمدة المقروءة مباشرة من جدول (معرّف أو عمود many2one) تفتح سجلها تلقائيًا.\n"
+"                                أضف سطرًا للأعمدة المحسوبة أو ذات الأسماء المستعارة، مثلًا <code>customer</code> يفتح جهة الاتصال."
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/dialogs.xml:0
+msgid "Comma ,"
+msgstr "فاصلة ,"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__company_id
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_run__company_id
+msgid "Company"
+msgstr "الشركة"
+
+#. module: sql_query_workbench
+#: model:ir.model,name:sql_query_workbench.model_res_config_settings
+msgid "Config Settings"
+msgstr "تهيئة الإعدادات"
+
+#. module: sql_query_workbench
+#: model:ir.ui.menu,name:sql_query_workbench.menu_sqlw_config
+msgid "Configuration"
+msgstr "التهيئة"
+
+#. module: sql_query_workbench
+#. odoo-python
+#: code:addons/sql_query_workbench/models/sql_query_run.py:0
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query_run__origin__console
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_run_view_search
+msgid "Console"
+msgstr "وحدة التحكم"
+
+#. module: sql_query_workbench
+#: model:res.groups,comment:sql_query_workbench.group_sqlw_user
+msgid ""
+"Console, schema browser and own saved queries. SQL reads every table outside"
+" the denylist, record rules do not apply: grant to trusted people only."
+msgstr ""
+"وحدة التحكم ومتصفح المخطط والاستعلامات المحفوظة الخاصة. يقرأ SQL كل جدول "
+"خارج قائمة الحظر، ولا تنطبق قواعد السجلات: امنح الصلاحية للموثوق بهم فقط."
+
+#. module: sql_query_workbench
+#: model:sql.query.tag,name:sql_query_workbench.tag_contacts
+msgid "Contacts"
+msgstr "جهات الاتصال"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/result_grid.xml:0
+msgid "Copy"
+msgstr "نسخ"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.xml:0
+msgid "Copy SQL"
+msgstr "نسخ SQL"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/plan_view.xml:0
+msgid "Cost"
+msgstr "التكلفة"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/plan_view.xml:0
+msgid "Cost share"
+msgstr "حصة التكلفة"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_library__created_count
+msgid "Created Count"
+msgstr "عدد المنشأ"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__create_uid
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_column_model__create_uid
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_library__create_uid
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_limit__create_uid
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_param__create_uid
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_print__create_uid
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_run__create_uid
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_tag__create_uid
+msgid "Created by"
+msgstr "أنشئ بواسطة"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__create_date
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_column_model__create_date
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_library__create_date
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_limit__create_date
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_param__create_date
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_print__create_date
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_run__create_date
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_tag__create_date
+msgid "Created on"
+msgstr "أنشئ في"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.xml:0
+msgid "Ctrl+Enter runs, selection runs alone"
+msgstr "Ctrl+Enter للتنفيذ، والتحديد يُنفَّذ وحده"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query_param__default_kind__current_company
+msgid "Current company"
+msgstr "الشركة الحالية"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query_param__default_kind__current_user
+msgid "Current user"
+msgstr "المستخدم الحالي"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.xml:0
+msgid "Cut at the row cap ("
+msgstr "مقطوع عند حد الصفوف ("
+
+#. module: sql_query_workbench
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query__digest_interval__daily
+msgid "Daily"
+msgstr "يوميًا"
+
+#. module: sql_query_workbench
+#: model:sql.query.tag,name:sql_query_workbench.tag_database
+msgid "Database"
+msgstr "قاعدة البيانات"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query_param__ptype__date
+msgid "Date"
+msgstr "التاريخ"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query_param__ptype__datetime
+msgid "Date and time"
+msgstr "التاريخ والوقت"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,help:sql_query_workbench.field_sql_query_param__default_value
+msgid ""
+"Date as YYYY-MM-DD, numbers as 12.5, records as an ID (record lists: 3,7,9),"
+" booleans as true/false."
+msgstr ""
+"التاريخ بصيغة YYYY-MM-DD، والأرقام مثل 12.5، والسجلات كمعرّف (قوائم السجلات:"
+" 3,7,9)، والقيم المنطقية true/false."
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_run_view_search
+msgid "Day"
+msgstr "اليوم"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query_param__ptype__float
+msgid "Decimal number"
+msgstr "رقم عشري"
+
+#. module: sql_query_workbench
+#. odoo-python
+#: code:addons/sql_query_workbench/models/sql_query.py:0
+msgid "Declare these parameters first: %s"
+msgstr "عرّف هذه المعاملات أولًا: %s"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_param__default_kind
+msgid "Default"
+msgstr "افتراضي"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_form
+msgid "Detect placeholders"
+msgstr "اكتشاف العناصر النائبة"
+
+#. module: sql_query_workbench
+#. odoo-python
+#: code:addons/sql_query_workbench/models/sql_query.py:0
+msgid "Digest queued for sending."
+msgstr "الملخص في قائمة الإرسال."
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_run__display_label
+msgid "Display Label"
+msgstr "تسمية العرض"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_res_config_settings__display_name
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__display_name
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_column_model__display_name
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_library__display_name
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_limit__display_name
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_param__display_name
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_print__display_name
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_run__display_name
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_tag__display_name
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_workbench__display_name
+msgid "Display Name"
+msgstr "اسم العرض"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/dialogs.xml:0
+msgid "Double quote \""
+msgstr "علامة اقتباس مزدوجة \""
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/dialogs.xml:0
+msgid "Download"
+msgstr "تنزيل"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query__state__draft
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_search
+msgid "Draft"
+msgstr "مسودة"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_form
+msgid "Duplicate as my draft"
+msgstr "تكرار كمسودتي"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_run__duration_ms
+msgid "Duration (ms)"
+msgstr "المدة (مللي ثانية)"
+
+#. module: sql_query_workbench
+#: model:ir.model.constraint,message:sql_query_workbench.constraint_sql_query_column_model_column_uniq
+msgid "Each column can be linked once."
+msgstr "يمكن ربط كل عمود مرة واحدة."
+
+#. module: sql_query_workbench
+#: model:ir.model.constraint,message:sql_query_workbench.constraint_sql_query_param_name_uniq
+msgid "Each placeholder can be declared once per query."
+msgstr "يمكن تعريف كل عنصر نائب مرة واحدة لكل استعلام."
+
+#. module: sql_query_workbench
+#. odoo-python
+#: code:addons/sql_query_workbench/models/sql_query.py:0
+msgid "Each query needs a name and SQL."
+msgstr "يحتاج كل استعلام إلى اسم وSQL."
+
+#. module: sql_query_workbench
+#: model:res.groups,comment:sql_query_workbench.group_sqlw_manager
+msgid ""
+"Edit every saved query, share and publish queries, schedule digests, see the"
+" full run log and the settings."
+msgstr ""
+"تعديل كل الاستعلامات المحفوظة، ومشاركة الاستعلامات ونشرها، وجدولة الملخصات، "
+"ورؤية سجل التشغيل الكامل والإعدادات."
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.xml:0
+msgid "Editing:"
+msgstr "جارٍ التعديل:"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__digest_active
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query_run__origin__digest
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_form
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_search
+msgid "Email digest"
+msgstr "ملخص البريد الإلكتروني"
+
+#. module: sql_query_workbench
+#. odoo-python
+#: code:addons/sql_query_workbench/models/sql_query.py:0
+msgid "Email digest not sent: %s"
+msgstr "لم يُرسل ملخص البريد الإلكتروني: %s"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query_param__default_kind__end_of_month
+msgid "End of this month"
+msgstr "نهاية هذا الشهر"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_run__error
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query_run__status__error
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_run_view_form
+msgid "Error"
+msgstr "خطأ"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/plan_view.xml:0
+msgid "Est. rows"
+msgstr "الصفوف التقديرية"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__digest_interval
+msgid "Every"
+msgstr "كل"
+
+#. module: sql_query_workbench
+#: model_terms:ir.actions.act_window,help:sql_query_workbench.action_sql_query_run
+msgid ""
+"Every run, export, validation and digest is logged here with duration, rows "
+"and status."
+msgstr "يُسجَّل هنا كل تشغيل وتصدير وتحقق وملخص مع المدة والصفوف والحالة."
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__example
+msgid "Example"
+msgstr "مثال"
+
+#. module: sql_query_workbench
+#: model:sql.query.tag,name:sql_query_workbench.tag_examples
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_search
+msgid "Examples"
+msgstr "أمثلة"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.xml:0
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query__digest_format__xlsx
+msgid "Excel (XLSX)"
+msgstr "Excel (XLSX)"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/plan_view.xml:0
+msgid "Execution"
+msgstr "التنفيذ"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.xml:0
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query_run__origin__explain
+msgid "Explain"
+msgstr "شرح"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.xml:0
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query_library__mode__export
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query_run__origin__export
+msgid "Export"
+msgstr "تصدير"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/dialogs.xml:0
+msgid "Export CSV"
+msgstr "تصدير CSV"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.js:0
+msgid "Export failed."
+msgstr "فشل التصدير."
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_run_view_search
+msgid "Failed"
+msgstr "فشل"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_run__failed
+msgid "Failures"
+msgstr "حالات الفشل"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__digest_format
+msgid "File"
+msgstr "الملف"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/dialogs.xml:0
+msgid "File name"
+msgstr "اسم الملف"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_library__filename
+msgid "Filename"
+msgstr "اسم الملف"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.xml:0
+msgid "Fill in the parameters and press Run."
+msgstr "املأ المعاملات واضغط تشغيل."
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/result_grid.xml:0
+msgid "Filter rows..."
+msgstr "فلترة الصفوف..."
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_param__default_value
+msgid "Fixed default"
+msgstr "افتراضي ثابت"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query_param__default_kind__fixed
+msgid "Fixed value"
+msgstr "قيمة ثابتة"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.res_config_settings_view_form_sqlw
+msgid "Flag sequential scans"
+msgstr "تمييز المسح التسلسلي"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_res_config_settings__sqlw_seq_scan_rows
+msgid "Flag sequential scans from (rows)"
+msgstr "تمييز المسح التسلسلي من (صفوف)"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__message_follower_ids
+msgid "Followers"
+msgstr "المتابعين"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "المتابعين (الشركاء)"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/schema_browser.xml:0
+msgid "Foreign keys"
+msgstr "المفاتيح الخارجية"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/plan_view.xml:0
+msgid "Full scan of ~"
+msgstr "مسح كامل لنحو"
+
+#. module: sql_query_workbench
+#: model_terms:ir.actions.act_window,help:sql_query_workbench.action_sql_query_limit
+msgid "Give a group higher or lower limits"
+msgstr "امنح مجموعة حدودًا أعلى أو أقل"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.res_config_settings_view_form_sqlw
+msgid ""
+"Give some groups other limits. Members get the largest value among their "
+"groups."
+msgstr ""
+"امنح بعض المجموعات حدودًا أخرى. يحصل الأعضاء على أكبر قيمة بين مجموعاتهم."
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_limit__group_id
+msgid "Group"
+msgstr "المجموعة"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__has_message
+msgid "Has Message"
+msgstr "يحتوي على رسالة"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/dialogs.xml:0
+msgid "Header row"
+msgstr "صف الرأس"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.digest_mail_body
+msgid "Hello,"
+msgstr "مرحبًا،"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.digest_mail_body
+msgid "Here is the result of"
+msgstr "إليك نتيجة"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/result_grid.xml:0
+msgid "Highlight NULL"
+msgstr "تمييز NULL"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_param__help
+msgid "Hint"
+msgstr "تلميح"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_res_config_settings__id
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__id
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_column_model__id
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_library__id
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_limit__id
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_param__id
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_print__id
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_run__id
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_tag__id
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_workbench__id
+msgid "ID"
+msgstr "المُعرف"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,help:sql_query_workbench.field_sql_query__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "إذا كان محددًا، فهناك رسائل جديدة عليك رؤيتها."
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,help:sql_query_workbench.field_sql_query__message_has_error
+msgid "If checked, some messages have a delivery error."
+msgstr "إذا كان محددًا، فقد حدث خطأ في تسليم بعض الرسائل."
+
+#. module: sql_query_workbench
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query_library__mode__import
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_library_view_form
+msgid "Import"
+msgstr "استيراد"
+
+#. module: sql_query_workbench
+#: model:ir.actions.act_window,name:sql_query_workbench.action_sql_query_library
+#: model:ir.ui.menu,name:sql_query_workbench.menu_sqlw_library
+msgid "Import / Export Library"
+msgstr "استيراد / تصدير المكتبة"
+
+#. module: sql_query_workbench
+#: model:ir.model,name:sql_query_workbench.model_sql_query_library
+msgid "Import or export saved SQL queries"
+msgstr "استيراد أو تصدير استعلامات SQL المحفوظة"
+
+#. module: sql_query_workbench
+#. odoo-python
+#: code:addons/sql_query_workbench/wizard/sql_query_library.py:0
+msgid "Imported queries"
+msgstr "الاستعلامات المستوردة"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_library_view_form
+msgid ""
+"Imported queries are created as your drafts. Sharing groups found in this "
+"database are applied once the query validates."
+msgstr ""
+"تُنشأ الاستعلامات المستوردة كمسودات خاصة بك. تُطبَّق مجموعات المشاركة "
+"الموجودة في قاعدة البيانات هذه بعد نجاح التحقق من الاستعلام."
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/schema_browser.xml:0
+msgid "Indexes"
+msgstr "الفهارس"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/schema_browser.xml:0
+msgid "Insert SELECT"
+msgstr "إدراج SELECT"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/schema_browser.xml:0
+msgid "Insert into the editor"
+msgstr "إدراج في المحرر"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/schema_browser.xml:0
+msgid "Insert name"
+msgstr "إدراج الاسم"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/schema_browser.xml:0
+msgid "Insert the table name"
+msgstr "إدراج اسم الجدول"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query_param__ptype__integer
+msgid "Integer"
+msgstr "عدد صحيح"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__message_is_follower
+msgid "Is Follower"
+msgstr "متابع"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.res_config_settings_view_form_sqlw
+msgid "Keep run log"
+msgstr "الاحتفاظ بسجل التشغيل"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_res_config_settings__sqlw_retention_days
+msgid "Keep run log (days)"
+msgstr "الاحتفاظ بسجل التشغيل (أيام)"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_param__label
+msgid "Label"
+msgstr "بطاقة عنوان"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query_print__orientation__landscape
+msgid "Landscape"
+msgstr "أفقي"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__last_run_date
+msgid "Last Run Date"
+msgstr "تاريخ آخر تشغيل"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__last_run_status
+msgid "Last Run Status"
+msgstr "حالة آخر تشغيل"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__write_uid
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_column_model__write_uid
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_library__write_uid
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_limit__write_uid
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_param__write_uid
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_print__write_uid
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_run__write_uid
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_tag__write_uid
+msgid "Last Updated by"
+msgstr "آخر تحديث بواسطة"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__write_date
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_column_model__write_date
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_library__write_date
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_limit__write_date
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_param__write_date
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_print__write_date
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_run__write_date
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_tag__write_date
+msgid "Last Updated on"
+msgstr "آخر تحديث في"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__digest_last
+msgid "Last digest"
+msgstr "آخر ملخص"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,help:sql_query_workbench.field_sql_query__company_id
+msgid "Leave empty to make the query available in every company."
+msgstr "اتركه فارغًا لإتاحة الاستعلام في كل شركة."
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_library__file
+msgid "Library file"
+msgstr "ملف المكتبة"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.res_config_settings_view_form_sqlw
+msgid "Limits"
+msgstr "الحدود"
+
+#. module: sql_query_workbench
+#: model:ir.model.constraint,message:sql_query_workbench.constraint_sql_query_limit_positive
+msgid "Limits cannot be negative."
+msgstr "لا يمكن أن تكون الحدود سالبة."
+
+#. module: sql_query_workbench
+#: model:ir.actions.act_window,name:sql_query_workbench.action_sql_query_limit
+#: model:ir.ui.menu,name:sql_query_workbench.menu_sqlw_limits
+msgid "Limits per Group"
+msgstr "الحدود لكل مجموعة"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.res_config_settings_view_form_sqlw
+msgid "Limits per group"
+msgstr "الحدود لكل مجموعة"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/dialogs.xml:0
+msgid "Line endings"
+msgstr "نهايات الأسطر"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_res_config_settings__sqlw_mask_enabled
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.res_config_settings_view_form_sqlw
+msgid "Mask credential-like columns"
+msgstr "إخفاء الأعمدة الشبيهة ببيانات الاعتماد"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/result_grid.xml:0
+msgid "Masked"
+msgstr "مخفي"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_res_config_settings__sqlw_mask_patterns
+msgid "Masked column names"
+msgstr "أسماء الأعمدة المخفية"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_res_config_settings__sqlw_export_limit
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_limit__export_limit
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.res_config_settings_view_form_sqlw
+msgid "Max export rows"
+msgstr "أقصى عدد لصفوف التصدير"
+
+#. module: sql_query_workbench
+#: model_terms:ir.actions.act_window,help:sql_query_workbench.action_sql_query_limit
+msgid ""
+"Members get the largest value among their groups; 0 keeps the global "
+"setting."
+msgstr "يحصل الأعضاء على أكبر قيمة بين مجموعاتهم؛ و0 يُبقي الإعداد العام."
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,help:sql_query_workbench.field_sql_query__group_ids
+msgid "Members of these groups can run the query (not edit it)."
+msgstr "يمكن لأعضاء هذه المجموعات تشغيل الاستعلام (دون تعديله)."
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__menu_id
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_form
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_list
+msgid "Menu"
+msgstr "القائمة"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__menu_parent_id
+msgid "Menu under"
+msgstr "القائمة تحت"
+
+#. module: sql_query_workbench
+#. odoo-python
+#: code:addons/sql_query_workbench/models/sql_query.py:0
+msgid "Menus are shown per group: add a group in Sharing."
+msgstr "تُعرض القوائم لكل مجموعة: أضف مجموعة في المشاركة."
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__message_has_error
+msgid "Message Delivery error"
+msgstr "خطأ في تسليم الرسائل"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__message_ids
+msgid "Messages"
+msgstr "الرسائل"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_library__mode
+msgid "Mode"
+msgstr "الوضع"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_param__model_id
+msgid "Model"
+msgstr "النموذج"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,help:sql_query_workbench.field_sql_query_param__model_id
+msgid "Model of the record picker for Record and Record list parameters."
+msgstr "نموذج منتقي السجلات لمعاملات السجل وقائمة السجلات."
+
+#. module: sql_query_workbench
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query__digest_interval__monthly
+msgid "Monthly"
+msgstr "شهريًا"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/result_grid.xml:0
+msgid "Move left"
+msgstr "نقل لليسار"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/result_grid.xml:0
+msgid "Move right"
+msgstr "نقل لليمين"
+
+#. module: sql_query_workbench
+#: model:ir.actions.act_window,name:sql_query_workbench.action_sql_query_run_mine
+#: model:ir.ui.menu,name:sql_query_workbench.menu_sqlw_history
+msgid "My History"
+msgstr "سجلي"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_search
+msgid "My queries"
+msgstr "استعلاماتي"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_run_view_search
+msgid "My runs"
+msgstr "تشغيلاتي"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/result_grid.xml:0
+msgid "NULL"
+msgstr "NULL"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/dialogs.xml:0
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__name
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_print__name
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_tag__name
+msgid "Name"
+msgstr "الاسم"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#. odoo-python
+#: code:addons/sql_query_workbench/models/sql_workbench.py:0
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.xml:0
+msgid "New query"
+msgstr "استعلام جديد"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__digest_next
+msgid "Next digest"
+msgstr "الملخص التالي"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/result_grid.xml:0
+msgid "Next page"
+msgstr "الصفحة التالية"
+
+#. module: sql_query_workbench
+#: model:res.groups.privilege,placeholder:sql_query_workbench.res_groups_privilege_sql_workbench
+msgid "No"
+msgstr "لا"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query_param__default_kind__none
+msgid "No default"
+msgstr "لا يوجد افتراضي"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.xml:0
+msgid "No history yet"
+msgstr "لا يوجد سجل بعد"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/result_grid.xml:0
+msgid "No rows"
+msgstr "لا توجد صفوف"
+
+#. module: sql_query_workbench
+#: model_terms:ir.actions.act_window,help:sql_query_workbench.action_sql_query_run
+msgid "No runs yet"
+msgstr "لا توجد تشغيلات بعد"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.xml:0
+msgid "No saved queries"
+msgstr "لا توجد استعلامات محفوظة"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.xml:0
+msgid "Not run"
+msgstr "لم يُشغَّل"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__description
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_form
+msgid "Notes"
+msgstr "ملاحظات"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__message_needaction_counter
+msgid "Number of Actions"
+msgstr "عدد الإجراءات"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__message_has_error_counter
+msgid "Number of errors"
+msgstr "عدد الأخطاء"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,help:sql_query_workbench.field_sql_query__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr "عدد الرسائل التي تتطلب اتخاذ إجراء"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,help:sql_query_workbench.field_sql_query__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "عدد الرسائل الحادث بها خطأ في التسليم"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_form
+msgid ""
+"One SELECT, WITH or EXPLAIN statement. Placeholders such as <code>:date_from</code> are bound\n"
+"                                as driver parameters. Built-in values: <code>:user_id</code>, <code>:company_id</code>,\n"
+"                                <code>:company_ids</code> (use <code>= ANY(:company_ids)</code>), <code>:today</code>, <code>:lang</code>.\n"
+"                                Changing the SQL of a shared query validates it again; an unshared query goes back to draft."
+msgstr ""
+"عبارة SELECT أو WITH أو EXPLAIN واحدة. تُربط العناصر النائبة مثل <code>:date_from</code>\n"
+"                                كمعاملات للمشغّل. القيم المضمّنة: <code>:user_id</code> و<code>:company_id</code> و\n"
+"                                <code>:company_ids</code> (استخدم <code>= ANY(:company_ids)</code>) و<code>:today</code> و<code>:lang</code>.\n"
+"                                تغيير SQL لاستعلام مشترك يعيد التحقق منه؛ والاستعلام غير المشترك يعود إلى مسودة."
+
+#. module: sql_query_workbench
+#: model:ir.model.constraint,message:sql_query_workbench.constraint_sql_query_limit_group_uniq
+msgid "One limit line per group."
+msgstr "سطر حد واحد لكل مجموعة."
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,help:sql_query_workbench.field_sql_query_param__selection_options
+msgid "One option per line, as value or value:Label."
+msgstr "خيار واحد في كل سطر، بصيغة قيمة أو قيمة:تسمية."
+
+#. module: sql_query_workbench
+#. odoo-python
+#: code:addons/sql_query_workbench/models/sql_workbench.py:0
+msgid "Only SQL Workbench users can do this."
+msgstr "مستخدمو مختبر SQL فقط يمكنهم القيام بذلك."
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.xml:0
+msgid "Open"
+msgstr "فتح"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_run_view_form
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_form
+msgid "Open in Workbench"
+msgstr "فتح في المختبر"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,help:sql_query_workbench.field_sql_query__column_model_ids
+msgid ""
+"Open records from a result column: column name -> model. Columns read "
+"straight from a table are detected automatically."
+msgstr ""
+"افتح السجلات من عمود النتيجة: اسم العمود -> النموذج. تُكتشف الأعمدة المقروءة"
+" مباشرة من جدول تلقائيًا."
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_column_model__model_id
+msgid "Opens"
+msgstr "مرات الفتح"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_param__selection_options
+msgid "Options"
+msgstr "الخيارات"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_print__orientation
+msgid "Orientation"
+msgstr "الاتجاه"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_run__origin
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_run_view_search
+msgid "Origin"
+msgstr "المصدر"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__user_id
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_search
+msgid "Owner"
+msgstr "المالك"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query_run__origin__print
+msgid "PDF"
+msgstr "PDF"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.xml:0
+msgid "PDF landscape"
+msgstr "PDF أفقي"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.xml:0
+msgid "PDF portrait"
+msgstr "PDF عمودي"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__param_signature
+msgid "Parameter definition"
+msgstr "تعريف المعامل"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__param_ids
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_run__params_text
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_run_view_form
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_form
+msgid "Parameters"
+msgstr "المعاملات"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_print__params_text
+msgid "Params Text"
+msgstr "نص المعاملات"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/dialogs.xml:0
+msgid "Pipe |"
+msgstr "شرطة رأسية |"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_param__name
+msgid "Placeholder"
+msgstr "عنصر نائب"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.xml:0
+msgid "Plan (estimates)"
+msgstr "الخطة (تقديرات)"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.js:0
+msgid "Plan in %s ms"
+msgstr "الخطة في %s مللي ثانية"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.xml:0
+msgid "Plan with actual times (EXPLAIN ANALYZE)"
+msgstr "الخطة بالأوقات الفعلية (EXPLAIN ANALYZE)"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/plan_view.xml:0
+msgid "Planning"
+msgstr "التخطيط"
+
+#. module: sql_query_workbench
+#. odoo-python
+#: code:addons/sql_query_workbench/models/sql_workbench.py:0
+msgid "Please give a value for: %s"
+msgstr "يرجى إدخال قيمة لـ: %s"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query_print__orientation__portrait
+msgid "Portrait"
+msgstr "عمودي"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.xml:0
+msgid "PostgreSQL error"
+msgstr "خطأ PostgreSQL"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/result_grid.xml:0
+msgid "Previous page"
+msgstr "الصفحة السابقة"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.res_config_settings_view_form_sqlw
+msgid "Protection"
+msgstr "الحماية"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_form
+msgid "Publish as menu"
+msgstr "نشر كقائمة"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_form
+msgid ""
+"Publish as menu adds an entry for the shared groups. It opens a run screen with the\n"
+"                                        parameter form and export buttons; members can run, not edit."
+msgstr ""
+"يضيف \"نشر كقائمة\" عنصرًا للمجموعات المشارَكة. يفتح شاشة تشغيل مع\n"
+"                                        نموذج المعاملات وأزرار التصدير؛ ويمكن للأعضاء التشغيل دون التعديل."
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_search
+msgid "Published as menu"
+msgstr "منشور كقائمة"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query_run__origin__menu
+msgid "Published menu"
+msgstr "القائمة المنشورة"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_library__query_ids
+msgid "Queries"
+msgstr "الاستعلامات"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.res_config_settings_view_form_sqlw
+msgid ""
+"Queries that name one of these columns are refused, and their values read as"
+" ******** in every query (whole-row and JSON reads included). Write "
+"table.column to protect one table only. Login passwords, two-factor and API "
+"key secrets are always protected."
+msgstr ""
+"تُرفض الاستعلامات التي تذكر أيًا من هذه الأعمدة، وتظهر قيمها ******** في كل "
+"استعلام (بما في ذلك قراءات الصف الكامل وJSON). اكتب table.column لحماية جدول"
+" واحد فقط. كلمات مرور تسجيل الدخول وأسرار المصادقة الثنائية ومفاتيح API "
+"محمية دائمًا."
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.res_config_settings_view_form_sqlw
+msgid ""
+"Queries that name one of these tables are refused. Separate with commas."
+msgstr "تُرفض الاستعلامات التي تذكر أيًا من هذه الجداول. افصل بفواصل."
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_column_model__query_id
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_param__query_id
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_run__query_id
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_run_view_search
+msgid "Query"
+msgstr "استعلام"
+
+#. module: sql_query_workbench
+#: model:ir.actions.act_window,name:sql_query_workbench.action_sql_query_tag
+#: model:ir.ui.menu,name:sql_query_workbench.menu_sqlw_tags
+msgid "Query Tags"
+msgstr "وسوم الاستعلام"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_run__source_label
+msgid "Query name"
+msgstr "اسم الاستعلام"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,help:sql_query_workbench.field_sql_query_run__source_label
+msgid "Query name at run time."
+msgstr "اسم الاستعلام وقت التشغيل."
+
+#. module: sql_query_workbench
+#. odoo-python
+#: code:addons/sql_query_workbench/models/sql_workbench.py:0
+msgid "Query result"
+msgstr "نتيجة الاستعلام"
+
+#. module: sql_query_workbench
+#. odoo-python
+#: code:addons/sql_query_workbench/models/sql_query.py:0
+msgid "Query validated: it can be shared now."
+msgstr "تم التحقق من الاستعلام: يمكن مشاركته الآن."
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/dialogs.xml:0
+msgid "Quote character"
+msgstr "حرف الاقتباس"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__rating_ids
+msgid "Ratings"
+msgstr "التقييمات"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.xml:0
+msgid "Raw data: record rules and access rights do not apply"
+msgstr "بيانات خام: لا تنطبق قواعد السجلات ولا صلاحيات الوصول"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.xml:0
+msgid "Read-only · timeout"
+msgstr "للقراءة فقط · المهلة"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.xml:0
+msgid "Recent"
+msgstr "حديث"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query_param__ptype__many2one
+msgid "Record"
+msgstr "السجل"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query_param__ptype__many2many
+msgid "Record list"
+msgstr "قائمة السجلات"
+
+#. module: sql_query_workbench
+#. odoo-python
+#: code:addons/sql_query_workbench/models/sql_workbench.py:0
+msgid "Remove EXPLAIN from the query to use the plan view."
+msgstr "أزل EXPLAIN من الاستعلام لاستخدام عرض الخطة."
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_form
+msgid "Remove menu"
+msgstr "إزالة القائمة"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_param__required
+msgid "Required"
+msgstr "مطلوب"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,help:sql_query_workbench.field_sql_query_column_model__column_name
+msgid "Result column name, as shown in the grid header."
+msgstr "اسم عمود النتيجة، كما يظهر في رأس الشبكة."
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_print__row_count
+msgid "Row Count"
+msgstr "عدد الصفوف"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_res_config_settings__sqlw_row_limit
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_limit__row_limit
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.res_config_settings_view_form_sqlw
+msgid "Row cap"
+msgstr "حد الصفوف"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_run__truncated
+msgid "Row cap hit"
+msgstr "بلوغ حد الصفوف"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_run__row_count
+msgid "Rows"
+msgstr "الصفوف"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_print__rows_json
+msgid "Rows Json"
+msgstr "صفوف Json"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.res_config_settings_view_form_sqlw
+msgid "Rows fetched per run in the grid. Larger results are cut and flagged."
+msgstr "الصفوف المجلوبة لكل تشغيل في الشبكة. تُقطع النتائج الأكبر وتُعلَّم."
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.res_config_settings_view_form_sqlw
+msgid "Rows written to CSV, Excel and digest files."
+msgstr "الصفوف المكتوبة في ملفات CSV وExcel والملخصات."
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.xml:0
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_form
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_list
+msgid "Run"
+msgstr "تشغيل"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.xml:0
+msgid ""
+"Run (Ctrl+Enter). Runs only the selected text when there is a selection."
+msgstr "تشغيل (Ctrl+Enter). يشغّل النص المحدد فقط عند وجود تحديد."
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__run_count
+msgid "Run Count"
+msgstr "عدد التشغيلات"
+
+#. module: sql_query_workbench
+#: model:ir.actions.act_window,name:sql_query_workbench.action_sql_query_run
+#: model:ir.ui.menu,name:sql_query_workbench.menu_sqlw_runs
+#: model:ir.ui.menu,name:sql_query_workbench.menu_sqlw_technical_runs
+msgid "Run Log"
+msgstr "سجل التشغيل"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_run_view_pivot
+msgid "Run analysis"
+msgstr "تشغيل التحليل"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_run_view_form
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_run_view_list
+msgid "Run at"
+msgstr "وقت التشغيل"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_run_view_search
+msgid "Run date"
+msgstr "تاريخ التشغيل"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.res_config_settings_view_form_sqlw
+msgid "Run log and plans"
+msgstr "سجل التشغيل والخطط"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__run_ids
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_run_view_graph
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_form
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_list
+msgid "Runs"
+msgstr "التشغيلات"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.res_config_settings_view_form_sqlw
+msgid "Runs older than this are deleted every night. 0 keeps them forever."
+msgstr ""
+"تُحذف التشغيلات الأقدم من هذه المدة كل ليلة. 0 يعني الاحتفاظ بها إلى الأبد."
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__sql
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_run__sql
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_run_view_form
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_form
+msgid "SQL"
+msgstr "SQL"
+
+#. module: sql_query_workbench
+#: model:res.groups.privilege,name:sql_query_workbench.res_groups_privilege_sql_workbench
+msgid "SQL Query Workbench"
+msgstr "مختبر استعلامات SQL"
+
+#. module: sql_query_workbench
+#: model:ir.model,name:sql_query_workbench.model_sql_workbench
+msgid "SQL Query Workbench engine"
+msgstr "محرك مختبر استعلامات SQL"
+
+#. module: sql_query_workbench
+#: model:ir.module.module,shortdesc:base.module_sql_query_workbench
+msgid ""
+"SQL Query Workbench: Read-only SQL Console, Saved Queries, Export CSV Excel "
+"PDF"
+msgstr ""
+"مختبر استعلامات SQL: وحدة تحكم SQL للقراءة فقط، استعلامات محفوظة، تصدير CSV "
+"وExcel وPDF"
+
+#. module: sql_query_workbench
+#: model:ir.ui.menu,name:sql_query_workbench.menu_sql_reports_root
+msgid "SQL Reports"
+msgstr "تقارير SQL"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#. odoo-python
+#: code:addons/sql_query_workbench/models/sql_query.py:0
+#: code:addons/sql_query_workbench/models/sql_query_run.py:0
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.js:0
+#: model:ir.actions.client,name:sql_query_workbench.action_sql_workbench_console
+#: model:ir.ui.menu,name:sql_query_workbench.menu_sqlw_root
+#: model:ir.ui.menu,name:sql_query_workbench.menu_sqlw_technical
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.res_config_settings_view_form_sqlw
+msgid "SQL Workbench"
+msgstr "مختبر SQL"
+
+#. module: sql_query_workbench
+#: model:ir.model,name:sql_query_workbench.model_sql_query_limit
+msgid "SQL Workbench limits per group"
+msgstr "حدود مختبر SQL لكل مجموعة"
+
+#. module: sql_query_workbench
+#: model:ir.actions.server,name:sql_query_workbench.ir_cron_sqlw_purge_ir_actions_server
+msgid "SQL Workbench: purge old run log"
+msgstr "مختبر SQL: تنظيف سجل التشغيل القديم"
+
+#. module: sql_query_workbench
+#: model:ir.actions.server,name:sql_query_workbench.ir_cron_sqlw_digests_ir_actions_server
+msgid "SQL Workbench: send email digests"
+msgstr "مختبر SQL: إرسال ملخصات البريد الإلكتروني"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.js:0
+msgid "SQL copied."
+msgstr "تم نسخ SQL."
+
+#. module: sql_query_workbench
+#: model:ir.model,name:sql_query_workbench.model_sql_query_column_model
+msgid "SQL query column link"
+msgstr "رابط عمود استعلام SQL"
+
+#. module: sql_query_workbench
+#: model:ir.model,name:sql_query_workbench.model_sql_query_param
+msgid "SQL query parameter"
+msgstr "معامل استعلام SQL"
+
+#. module: sql_query_workbench
+#: model:ir.model,name:sql_query_workbench.model_sql_query_run
+msgid "SQL query run"
+msgstr "تشغيل استعلام SQL"
+
+#. module: sql_query_workbench
+#: model:ir.model,name:sql_query_workbench.model_sql_query_tag
+msgid "SQL query tag"
+msgstr "وسم استعلام SQL"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.xml:0
+msgid ""
+"SQL reads the database directly: Odoo record rules, field groups and multi-"
+"company filters are not applied. Only the blocked tables, protected columns "
+"and masking settings protect data."
+msgstr ""
+"يقرأ SQL قاعدة البيانات مباشرة: لا تنطبق قواعد سجلات Odoo ومجموعات الحقول "
+"وفلاتر تعدد الشركات. لا يحمي البيانات سوى الجداول المحظورة والأعمدة المحمية "
+"وإعدادات الإخفاء."
+
+#. module: sql_query_workbench
+#: model:ir.actions.report,name:sql_query_workbench.action_report_result_portrait
+msgid "SQL result"
+msgstr "نتيجة SQL"
+
+#. module: sql_query_workbench
+#: model:ir.actions.report,name:sql_query_workbench.action_report_result_landscape
+msgid "SQL result (landscape)"
+msgstr "نتيجة SQL (أفقي)"
+
+#. module: sql_query_workbench
+#: model:ir.model,name:sql_query_workbench.model_sql_query_print
+msgid "SQL result to print"
+msgstr "نتيجة SQL للطباعة"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/dialogs.xml:0
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.xml:0
+msgid "Save"
+msgstr "حفظ"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/dialogs.xml:0
+msgid "Save query"
+msgstr "حفظ الاستعلام"
+
+#. module: sql_query_workbench
+#: model_terms:ir.actions.act_window,help:sql_query_workbench.action_sql_query
+msgid "Save your first query"
+msgstr "احفظ أول استعلام لك"
+
+#. module: sql_query_workbench
+#: model:ir.actions.act_window,name:sql_query_workbench.action_sql_query
+#: model:ir.ui.menu,name:sql_query_workbench.menu_sqlw_queries
+#: model:ir.ui.menu,name:sql_query_workbench.menu_sqlw_technical_queries
+msgid "Saved Queries"
+msgstr "الاستعلامات المحفوظة"
+
+#. module: sql_query_workbench
+#: model:ir.model,name:sql_query_workbench.model_sql_query
+msgid "Saved SQL query"
+msgstr "استعلام SQL محفوظ"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.js:0
+msgid "Saved as draft “%s”."
+msgstr "تم الحفظ كمسودة “%s”."
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/dialogs.xml:0
+msgid "Saved as your draft. Validate it from the saved query to share it."
+msgstr "تم الحفظ كمسودتك. تحقق منها من الاستعلام المحفوظ لمشاركتها."
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.xml:0
+msgid "Saved queries"
+msgstr "الاستعلامات المحفوظة"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query_run__origin__saved
+msgid "Saved query"
+msgstr "استعلام محفوظ"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.js:0
+msgid "Saved to “%s”."
+msgstr "تم الحفظ في “%s”."
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.res_config_settings_view_form_sqlw
+msgid ""
+"Seconds before PostgreSQL cancels a query (also used for EXPLAIN ANALYZE)."
+msgstr ""
+"ثوانٍ قبل أن تلغي PostgreSQL الاستعلام (تُستخدم أيضًا لـ EXPLAIN ANALYZE)."
+
+#. module: sql_query_workbench
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query_param__ptype__selection
+msgid "Selection"
+msgstr "قائمة خيارات"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/dialogs.xml:0
+msgid "Semicolon ;"
+msgstr "فاصلة منقوطة ;"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_form
+msgid "Send digest now"
+msgstr "إرسال الملخص الآن"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__digest_partner_ids
+msgid "Send to contacts"
+msgstr "إرسال إلى جهات الاتصال"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__digest_user_ids
+msgid "Send to users"
+msgstr "إرسال إلى المستخدمين"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.digest_mail_body
+msgid ""
+"Sent by SQL Workbench. Ask the query owner to change the schedule or the "
+"recipients."
+msgstr ""
+"أُرسل بواسطة مختبر SQL. اطلب من مالك الاستعلام تغيير الجدولة أو المستلمين."
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/dialogs.xml:0
+msgid "Separator"
+msgstr "الفاصل"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__sequence
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_param__sequence
+msgid "Sequence"
+msgstr "تسلسل"
+
+#. module: sql_query_workbench
+#: model:ir.actions.act_window,name:sql_query_workbench.action_sqlw_settings
+#: model:ir.ui.menu,name:sql_query_workbench.menu_sqlw_settings
+msgid "Settings"
+msgstr "الإعدادات"
+
+#. module: sql_query_workbench
+#. odoo-python
+#: code:addons/sql_query_workbench/models/sql_query.py:0
+msgid ""
+"Share the query with at least one group first: the menu is shown to those "
+"groups."
+msgstr ""
+"شارك الاستعلام مع مجموعة واحدة على الأقل أولًا: تُعرض القائمة لتلك "
+"المجموعات."
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_search
+msgid "Shared"
+msgstr "مشارك"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__group_ids
+msgid "Shared with groups"
+msgstr "مشارك مع المجموعات"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__user_ids
+msgid "Shared with users"
+msgstr "مشارك مع المستخدمين"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_form
+msgid "Sharing"
+msgstr "المشاركة"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/schema_browser.xml:0
+msgid "Show all"
+msgstr "إظهار الكل"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/result_grid.xml:0
+msgid "Show all in original order"
+msgstr "إظهار الكل بالترتيب الأصلي"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.xml:0
+msgid "Show or hide the schema browser"
+msgstr "إظهار أو إخفاء متصفح المخطط"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,help:sql_query_workbench.field_sql_query_param__label
+msgid "Shown on the parameter form."
+msgstr "يظهر في نموذج المعاملات."
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/dialogs.xml:0
+msgid "Single quote '"
+msgstr "علامة اقتباس مفردة '"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__digest_skip_empty
+msgid "Skip empty results"
+msgstr "تخطي النتائج الفارغة"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_run_view_search
+msgid "Slower than 1 s"
+msgstr "أبطأ من ثانية واحدة"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_run__max_duration_ms
+msgid "Slowest (ms)"
+msgstr "الأبطأ (مللي ثانية)"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query_param__default_kind__start_of_fiscal_year
+msgid "Start of the fiscal year"
+msgstr "بداية السنة المالية"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query_param__default_kind__start_of_month
+msgid "Start of this month"
+msgstr "بداية هذا الشهر"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query_param__default_kind__start_of_week
+msgid "Start of this week"
+msgstr "بداية هذا الأسبوع"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query_param__default_kind__start_of_year
+msgid "Start of this year"
+msgstr "بداية هذه السنة"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__state
+msgid "State"
+msgstr "الحالة"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.res_config_settings_view_form_sqlw
+msgid "Statement timeout"
+msgstr "مهلة العبارة"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_res_config_settings__sqlw_timeout
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_limit__timeout
+msgid "Statement timeout (s)"
+msgstr "مهلة العبارة (ثانية)"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_run__status
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_run_view_search
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_search
+msgid "Status"
+msgstr "الحالة"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/plan_view.xml:0
+msgid "Step"
+msgstr "خطوة"
+
+#. module: sql_query_workbench
+#: model:ir.module.module,summary:base.module_sql_query_workbench
+msgid ""
+"Strictly read-only SQL console for administrators: saved queries with typed "
+"parameters, schema browser, EXPLAIN plans, CSV/Excel/PDF export, sharing, "
+"query menus and email digests. Keywords: SQL, SQL queries, SQL console, SQL "
+"editor, run SQL, execute SQL, database queries, read-only SQL, read only "
+"SQL, SQL reports, SQL to Excel, schema browser, EXPLAIN."
+msgstr ""
+"وحدة تحكم SQL للقراءة فقط بصرامة للمسؤولين: استعلامات محفوظة بمعاملات "
+"مكتوبة، ومتصفح مخطط، وخطط EXPLAIN، وتصدير CSV/Excel/PDF، ومشاركة، وقوائم "
+"استعلامات، وملخصات بريد إلكتروني. الكلمات المفتاحية: SQL, SQL queries, SQL "
+"console, SQL editor, run SQL, execute SQL, database queries, read-only SQL, "
+"read only SQL, SQL reports, SQL to Excel, schema browser, EXPLAIN."
+
+#. module: sql_query_workbench
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query_run__status__success
+msgid "Success"
+msgstr "نجاح"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/result_grid.xml:0
+msgid "Sum"
+msgstr "المجموع"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/dialogs.xml:0
+msgid "Tab"
+msgstr "تبويب"
+
+#. module: sql_query_workbench
+#. odoo-python
+#: code:addons/sql_query_workbench/models/sql_workbench.py:0
+msgid "Table %s not found."
+msgstr "الجدول %s غير موجود."
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/plan_view.xml:0
+msgid "Table / index"
+msgstr "الجدول / الفهرس"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/schema_browser.xml:0
+msgid "Table or model..."
+msgstr "جدول أو نموذج..."
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__tag_ids
+msgid "Tags"
+msgstr "علامات التصنيف"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query_param__ptype__char
+msgid "Text"
+msgstr "النص"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.res_config_settings_view_form_sqlw
+msgid ""
+"Text columns whose name contains one of these words read as ******** inside "
+"every query, and result columns named like them are shown and exported as "
+"********."
+msgstr ""
+"الأعمدة النصية التي يحتوي اسمها على إحدى هذه الكلمات تظهر ******** داخل كل "
+"استعلام، وتُعرض وتُصدَّر أعمدة النتائج التي تحمل أسماءً مشابهة بالشكل "
+"********."
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_form
+msgid ""
+"The digest runs as the owner with the parameter defaults and attaches the "
+"result file."
+msgstr ""
+"يعمل الملخص باسم المالك بالقيم الافتراضية للمعاملات ويرفق ملف النتيجة."
+
+#. module: sql_query_workbench
+#. odoo-python
+#: code:addons/sql_query_workbench/wizard/sql_query_library.py:0
+msgid "The file is not valid JSON."
+msgstr "الملف ليس JSON صالحًا."
+
+#. module: sql_query_workbench
+#. odoo-python
+#: code:addons/sql_query_workbench/models/sql_workbench.py:0
+msgid "The placeholder :%s is not declared. Add it in the Parameters tab."
+msgstr "العنصر النائب :%s غير معرَّف. أضفه في تبويب المعاملات."
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.res_config_settings_view_form_sqlw
+msgid ""
+"The plan view highlights a sequential scan on a table with at least this "
+"many rows."
+msgstr ""
+"يميّز عرض الخطة المسح التسلسلي لجدول فيه هذا العدد من الصفوف على الأقل."
+
+#. module: sql_query_workbench
+#. odoo-python
+#: code:addons/sql_query_workbench/models/sql_query.py:0
+msgid ""
+"The query does not run:\n"
+"%s"
+msgstr ""
+"الاستعلام لا يعمل:\n"
+"%s"
+
+#. module: sql_query_workbench
+#. odoo-python
+#: code:addons/sql_query_workbench/models/sql_query.py:0
+#: code:addons/sql_query_workbench/wizard/sql_query_library.py:0
+msgid "This is not a SQL Workbench library file."
+msgstr "هذا ليس ملف مكتبة لمختبر SQL."
+
+#. module: sql_query_workbench
+#. odoo-python
+#: code:addons/sql_query_workbench/models/sql_query.py:0
+#: code:addons/sql_query_workbench/models/sql_workbench.py:0
+msgid "This query is not validated yet."
+msgstr "لم يتم التحقق من هذا الاستعلام بعد."
+
+#. module: sql_query_workbench
+#: model:ir.model.constraint,message:sql_query_workbench.constraint_sql_query_tag_name_uniq
+msgid "This tag already exists."
+msgstr "هذا الوسم موجود بالفعل."
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/plan_view.xml:0
+msgid "Time (ms)"
+msgstr "الوقت (مللي ثانية)"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.xml:0
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query_run__status__timeout
+msgid "Timeout"
+msgstr "المهلة"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query_param__default_kind__today
+msgid "Today"
+msgstr "اليوم"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_run_view_list
+msgid "Total"
+msgstr "الإجمالي"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/plan_view.xml:0
+msgid "Total cost"
+msgstr "التكلفة الإجمالية"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_print__truncated
+msgid "Truncated"
+msgstr "مقطوع"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_param__ptype
+msgid "Type"
+msgstr "النوع"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/dialogs.xml:0
+msgid "UTF-8 BOM (for Excel)"
+msgstr "UTF-8 BOM (لبرنامج Excel)"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/dialogs.xml:0
+msgid "Unix (LF)"
+msgstr "Unix (LF)"
+
+#. module: sql_query_workbench
+#. odoo-python
+#: code:addons/sql_query_workbench/models/sql_workbench.py:0
+msgid "Unknown mode."
+msgstr "وضع غير معروف."
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,help:sql_query_workbench.field_sql_query_param__name
+msgid "Used in the SQL as :name"
+msgstr "يُستخدم في SQL بالصيغة :name"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query_run__user_id
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_run_view_search
+msgid "User"
+msgstr "المستخدم"
+
+#. module: sql_query_workbench
+#: model:res.groups,name:sql_query_workbench.group_sqlw_user
+msgid "User: run read-only SQL"
+msgstr "مستخدم: تشغيل SQL للقراءة فقط"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_form
+msgid "Validate"
+msgstr "تحقق"
+
+#. module: sql_query_workbench
+#. odoo-python
+#: code:addons/sql_query_workbench/models/sql_query.py:0
+msgid "Validate the query '%s' before sharing, publishing or scheduling it."
+msgstr "تحقق من الاستعلام '%s' قبل مشاركته أو نشره أو جدولته."
+
+#. module: sql_query_workbench
+#. odoo-python
+#: code:addons/sql_query_workbench/models/sql_query.py:0
+msgid "Validate the query before publishing it."
+msgstr "تحقق من الاستعلام قبل نشره."
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_form
+msgid ""
+"Validate the query to share it, publish it as a menu or send it as a digest."
+msgstr "تحقق من الاستعلام لمشاركته أو نشره كقائمة أو إرساله كملخص."
+
+#. module: sql_query_workbench
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query__state__valid
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_search
+msgid "Validated"
+msgstr "تم التحقق"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,field_description:sql_query_workbench.field_sql_query__validated_on
+msgid "Validated On"
+msgstr "تاريخ التحقق"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query_run__origin__validate
+msgid "Validation"
+msgstr "التحقق"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query__digest_interval__weekly
+msgid "Weekly"
+msgstr "أسبوعيًا"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields,help:sql_query_workbench.field_sql_query__description
+msgid "What the query answers, how to read it, caveats."
+msgstr "ما يجيب عنه الاستعلام، وكيفية قراءته، والتنبيهات."
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_form
+msgid "What the query answers, how to read the result, caveats."
+msgstr "ما يجيب عنه الاستعلام، وكيفية قراءة النتيجة، والتنبيهات."
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_form
+msgid "Who can run it"
+msgstr "من يمكنه تشغيله"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/dialogs.xml:0
+msgid "Windows (CRLF)"
+msgstr "Windows (CRLF)"
+
+#. module: sql_query_workbench
+#: model:ir.ui.menu,name:sql_query_workbench.menu_sqlw_console
+#: model:ir.ui.menu,name:sql_query_workbench.menu_sqlw_technical_console
+msgid "Workbench"
+msgstr "المختبر"
+
+#. module: sql_query_workbench
+#. odoo-python
+#: code:addons/sql_query_workbench/models/sql_workbench.py:0
+msgid "Workbench (ad hoc)"
+msgstr "المختبر (مخصص)"
+
+#. module: sql_query_workbench
+#: model_terms:ir.actions.act_window,help:sql_query_workbench.action_sql_query
+msgid ""
+"Write SQL in the Workbench and press Save, or create a query here. Validate "
+"it to share it with groups."
+msgstr ""
+"اكتب SQL في المختبر واضغط حفظ، أو أنشئ استعلامًا هنا. تحقق منه لمشاركته مع "
+"المجموعات."
+
+#. module: sql_query_workbench
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query_param__ptype__boolean
+msgid "Yes / No"
+msgstr "نعم / لا"
+
+#. module: sql_query_workbench
+#: model:ir.model.fields.selection,name:sql_query_workbench.selection__sql_query_param__default_kind__yesterday
+msgid "Yesterday"
+msgstr "البارحة"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/result_grid.js:0
+msgid "ascending"
+msgstr "تصاعدي"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/result_grid.js:0
+msgid "descending"
+msgstr "تنازلي"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.xml:0
+msgid "draft"
+msgstr "مسودة"
+
+#. module: sql_query_workbench
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.sql_query_view_form
+msgid "e.g. Open quotations by salesperson"
+msgstr "مثال: عروض الأسعار المفتوحة حسب مندوب المبيعات"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/dialogs.xml:0
+msgid "e.g. Partners created this month"
+msgstr "مثال: الشركاء المنشأون هذا الشهر"
+
+#. module: sql_query_workbench
+#. odoo-python
+#: code:addons/sql_query_workbench/wizard/sql_query_library.py:0
+msgid "id"
+msgstr "المعرف"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/plan_view.xml:0
+msgid "ms"
+msgstr "ms"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/result_grid.xml:0
+msgid "of"
+msgstr "من"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/plan_view.xml:0
+#: code:addons/sql_query_workbench/static/src/workbench/result_grid.xml:0
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.xml:0
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.digest_mail_body
+#: model_terms:ir.ui.view,arch_db:sql_query_workbench.report_sql_result
+msgid "rows"
+msgstr "صفوف"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/schema_browser.xml:0
+msgid "rows ·"
+msgstr "صفوف ·"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.xml:0
+msgid "s · up to"
+msgstr "ث · حتى"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/plan_view.xml:0
+msgid "sequential scan(s) on large tables"
+msgstr "مسح تسلسلي على جداول كبيرة"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/schema_browser.xml:0
+msgid "tables"
+msgstr "جداول"
+
+#. module: sql_query_workbench
+#. odoo-javascript
+#: code:addons/sql_query_workbench/static/src/workbench/workbench.xml:0
+msgid "· line"
+msgstr "· سطر"

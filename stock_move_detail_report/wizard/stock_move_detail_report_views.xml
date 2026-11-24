@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Wizard: choose a location / a period and display the moves -->
+    <record id="view_stock_move_detail_report_form" model="ir.ui.view">
+        <field name="name">stock.move.detail.report.form</field>
+        <field name="model">stock.move.detail.report</field>
+        <field name="arch" type="xml">
+            <form string="Stock Move Detail Report" create="false">
+                <header>
+                    <button name="action_show" type="object" string="Show Report"
+                            class="btn-primary" icon="fa-list-alt"/>
+                    <button name="action_print_pdf" type="object" string="Print PDF"
+                            icon="fa-file-pdf-o" invisible="not line_ids"/>
+                    <button name="action_open_list" type="object"
+                            string="Open as List (Excel Export)" icon="fa-list"
+                            invisible="not line_ids"/>
+                </header>
+                <sheet>
+                    <div class="alert alert-info" role="alert" invisible="line_ids">
+                        Choose the location and the period then click on "Show Report".
+                    </div>
+                    <group>
+                        <group string="Filters">
+                            <field name="location_id" required="1"/>
+                            <field name="product_id"/>
+                            <field name="date_from"/>
+                            <field name="date_to"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                        <group string="Totals">
+                            <field name="product_count"/>
+                            <field name="move_count"/>
+                            <field name="total_opening"/>
+                            <field name="total_in"/>
+                            <field name="total_out"/>
+                            <field name="total_closing"/>
+                        </group>
+                    </group>
+                    <field name="line_ids">
+                        <list string="Lines" create="false" delete="false" edit="false">
+                            <field name="date"/>
+                            <field name="name"/>
+                            <field name="product_id"/>
+                            <field name="default_code"/>
+                            <field name="uom_id"/>
+                            <field name="qty_in" sum="Total"/>
+                            <field name="qty_out" sum="Total"/>
+                            <field name="counterpart"/>
+                            <field name="balance"/>
+                        </list>
+                    </field>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Standalone list (opened by "Open as List"), with Odoo's Export button -->
+    <record id="view_stock_move_detail_report_line_list" model="ir.ui.view">
+        <field name="name">stock.move.detail.report.line.list</field>
+        <field name="model">stock.move.detail.report.line</field>
+        <field name="arch" type="xml">
+            <list string="Stock Move Detail" create="false" delete="false" edit="false">
+                <field name="date"/>
+                <field name="name"/>
+                <field name="product_id"/>
+                <field name="default_code"/>
+                <field name="uom_id"/>
+                <field name="qty_in" sum="Total"/>
+                <field name="qty_out" sum="Total"/>
+                <field name="counterpart"/>
+                <field name="balance"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_stock_move_detail_report_line_form" model="ir.ui.view">
+        <field name="name">stock.move.detail.report.line.form</field>
+        <field name="model">stock.move.detail.report.line</field>
+        <field name="arch" type="xml">
+            <form string="Stock Move Detail" create="false" edit="false">
+                <sheet>
+                    <group>
+                        <field name="date"/>
+                        <field name="name"/>
+                        <field name="product_id"/>
+                        <field name="default_code"/>
+                        <field name="uom_id"/>
+                    </group>
+                    <group>
+                        <field name="qty_in"/>
+                        <field name="qty_out"/>
+                        <field name="counterpart"/>
+                        <field name="balance"/>
+                        <field name="is_opening"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+</odoo>

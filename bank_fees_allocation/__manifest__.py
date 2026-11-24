@@ -100,7 +100,7 @@ It depends on ``account`` (and on ``mail``, which ``account`` already
 brings) **only**: it installs and runs on the Community *and* on the
 Enterprise edition.
     """,
-    'author': 'Custom Development',
+    'author': 'Islam Elgafey',
     'website': '',
     'license': 'LGPL-3',
     'depends': ['account', 'mail'],

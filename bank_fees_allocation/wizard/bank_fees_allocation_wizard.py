@@ -71,6 +71,39 @@ class BankFeesAllocationWizard(models.TransientModel):
     )
 
     # ------------------------------------------------------------------
+    # Accounts the user may pick
+    #
+    # The domains of the account fields are **not** written in the field
+    # definition: a dynamic domain would reach the web client as a
+    # Python expression, and the client would evaluate it into a flat
+    # list instead of a list of tuples ("Invalid domain representation").
+    # The allowed accounts are therefore computed here, and the view
+    # filters on them with a plain list of tuples.
+    # ------------------------------------------------------------------
+    allowed_bank_account_ids = fields.Many2many(
+        comodel_name='account.account',
+        string='Allowed Bank Accounts',
+        compute='_compute_allowed_accounts',
+        help='Bank accounts the user may pick, for the drop-down of the '
+             'bank account.',
+    )
+
+    allowed_fee_account_ids = fields.Many2many(
+        comodel_name='account.account',
+        string='Allowed Fee Accounts',
+        compute='_compute_allowed_accounts',
+        help='Expense accounts the user may pick, for the drop-down of the '
+             'fee account.',
+    )
+
+    allowed_journal_ids = fields.Many2many(
+        comodel_name='account.journal',
+        string='Allowed Journals',
+        compute='_compute_allowed_accounts',
+        help='Journals the user may pick, for the drop-down of the journal.',
+    )
+
+    # ------------------------------------------------------------------
     # Amounts
     # ------------------------------------------------------------------
     total_amount = fields.Monetary(
@@ -110,17 +143,16 @@ class BankFeesAllocationWizard(models.TransientModel):
         comodel_name='account.account',
         string='Bank Account',
         check_company=True,
-        domain="[('id', 'in', company_id.bank_fees_bank_account_ids)]",
-        help='Bank account the aggregated settlement is credited to.',
+        help='Bank account the aggregated settlement is credited to. Only '
+             'the bank accounts configured in the settings are proposed.',
     )
 
     fee_account_id = fields.Many2one(
         comodel_name='account.account',
         string='Fee Account',
         check_company=True,
-        domain="[('account_type', 'in', ['expense', 'expense_other']), "
-               "('company_ids', 'parent_of', company_id)]",
-        help='Account where the bank fees are booked. Pre-filled from the '
+        help='Account where the bank fees are booked. Only the expense '
+             'accounts of the company are proposed. Pre-filled from the '
              'company settings.',
     )
 
@@ -128,7 +160,6 @@ class BankFeesAllocationWizard(models.TransientModel):
         comodel_name='account.journal',
         string='Journal',
         check_company=True,
-        domain="[('type', '=', 'general'), ('company_id', 'parent_of', company_id)]",
         default=lambda self: self._default_journal_id(),
     )
 
@@ -198,6 +229,49 @@ class BankFeesAllocationWizard(models.TransientModel):
     def _compute_company_id(self):
         for wizard in self:
             wizard.company_id = wizard.line_ids[:1].company_id or self.env.company
+
+    @api.depends('company_id', 'company_id.bank_fees_bank_account_ids',
+                 'company_id.bank_fees_expense_account_id')
+    def _compute_allowed_accounts(self):
+        """ The accounts the user may pick.
+
+        The **bank accounts** are the ones configured for the company (the
+        *Bank Accounts* setting).  When the company has none configured,
+        every *Bank and Cash* account of the company is proposed, so the
+        wizard stays usable.
+
+        The **fee accounts** are the *expense* accounts of the company, and
+        the account configured as the *Bank Fees Expense Account* is always
+        proposed (even when it is not an expense account, so that the
+        administrator is not blocked by a wrong configuration).
+        """
+        for wizard in self:
+            company = wizard.company_id or self.env.company
+            accounts_model = self.env['account.account']
+
+            bank_accounts = company.bank_fees_bank_account_ids
+            if not bank_accounts:
+                bank_accounts = accounts_model.search([
+                    ('company_ids', 'in', company.ids),
+                    ('account_type', '=', 'asset_cash'),
+                ])
+            wizard.allowed_bank_account_ids = bank_accounts
+
+            fee_accounts = accounts_model.search([
+                ('company_ids', 'in', company.ids),
+                ('account_type', 'in', ('expense', 'expense_other')),
+            ])
+            if company.bank_fees_expense_account_id:
+                fee_accounts |= company.bank_fees_expense_account_id
+            wizard.allowed_fee_account_ids = fee_accounts
+
+            journals = self.env['account.journal'].search([
+                ('company_id', '=', company.id),
+                ('type', '=', 'general'),
+            ])
+            if wizard.journal_id:
+                journals |= wizard.journal_id
+            wizard.allowed_journal_ids = journals
 
     @api.depends('line_ids', 'line_ids.balance', 'line_ids.currency_id',
                  'line_ids.company_currency_id', 'line_ids.amount_residual')

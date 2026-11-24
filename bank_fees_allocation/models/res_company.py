@@ -2,9 +2,14 @@
 """Per-company configuration of the bank fees allocation.
 
 The configuration lives on ``res.company`` so that it is naturally
-multi-company, and it is exposed through the Accounting settings page
-(``res.config.settings``) where only the *Bank Fees Allocation /
-Administrator* group may change it.
+multi-company, and it is exposed through the settings page of the
+application where only the *Bank Fees Allocation / Administrator* group
+may change it.
+
+The domains of the account fields are plain **lists of tuples** with
+literal values only: they are evaluated by the server and never reach the
+web client as a Python expression.  The company restriction is enforced by
+``check_company`` and, in the views, by the computed ``allowed_*`` fields.
 """
 
 from odoo import api, fields, models
